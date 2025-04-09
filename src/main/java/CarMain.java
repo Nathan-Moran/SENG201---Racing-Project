@@ -3,9 +3,9 @@ public class CarMain {
     public static void main(String[] args) {
 
         //Setup Shop
-        Car Mustang = new Car("Mustang", 7, 8, 6, 3, 220000);
-        Car Ferrari = new Car("Ferrari", 8, 10, 7, 5, 320000);
-        Car Bugatti = new Car("Bugatti", 10, 7, 5, 1, 3900000);
+        Car Mustang = new Car("Mustang", 250, 6, 6, 300, 89000);
+        Car Ferrari = new Car("Ferrari", 330, 8, 7, 200, 485000);
+        Car Bugatti = new Car("Bugatti", 420, 7, 5, 150, 4750000);
 
         Shop shop = new Shop();
         shop.addCarsForPurchase(Mustang);
@@ -29,7 +29,7 @@ public class CarMain {
 
         //Setup Garage
         Garage garage = new Garage();
-        Car Honda = new Car("Honda", 120, 8, 9, 7, 45000);
+        Car Honda = new Car("Honda", 180, 7, 8, 500, 32000);
         garage.setSelectedCar(Honda);
     }
 }
