@@ -1,4 +1,4 @@
-public class CarMain {
+public class OriginalSetup {
 
     public static void main(String[] args) {
 
