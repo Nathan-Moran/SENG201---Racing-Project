@@ -1,37 +1,25 @@
 public enum Route {
-    DESERT_DRIFT("Desert Fast"),
-    DESERT_LONG("Desert Long"),
-    MOUNTAIN_STEEP("Mountain Circuit"),
-    MOUNTAIN_CURVY("Mountain Rapid"),
-    COUNTRYSIDE_LONG_STRAIGHT("Countryside Straight"),
-    COUNTRYSIDE_SHORT_CURVES("Countryside Twisty"),
-    CITY_WIDE_LINE("City Sprint"),
-    CITY_CUT_LINE("City Cross");
+    DESERT_DRIFT("Desert Drift", 2, new RouteAttributes(0.5, 1.5, 1.2)),
+    DESERT_LONG("Desert Long",3 , new RouteAttributes(1.5, 0.6, 1)),
+    MOUNTAIN_STEEP("Mountain Steep", 2, new RouteAttributes(1, 1, 1.2)),
+    MOUNTAIN_CURVY("Mountain Curvy", 2, new RouteAttributes(0.8, 1.3, 1.2)),
+    COUNTRYSIDE_STRAIGHT("Countryside Straight", 4, new RouteAttributes(1.6, 0.5, 1.1)),
+    COUNTRYSIDE_TWISTY("Countryside Twisty", 3, new RouteAttributes(0.8, 1.3, 1.2)),
+    CITY_WIDE_LINE("City Wide Line", 5, new RouteAttributes(1.2, 0.8, 1)),
+    CITY_CUT_LINE("City Cut Line", 5, new RouteAttributes(0.8, 1.2, 1));
 
-    private String description;
-    private Course course;
+    private String routeName;
     private int fuelStops;
-    private double speedAdvantage;
-    private double handlingAdvantage;
-    private double reliabilityAdvantage;
+    private RouteAttributes attributes;
 
-    public Route(String description, Course course, int fuelStops) {
-        this.description = description;
-        this.course = course;
+    Route(String routeName, int fuelStops, RouteAttributes attributes) {
+        this.routeName = routeName;
         this.fuelStops = fuelStops;
+        this.attributes = attributes;
     }
 
-    public double getReliabilityAdvantage() {
-        return reliabilityAdvantage;
+    public RouteAttributes getAttributes() {
+        return attributes;
     }
-
-    public double getSpeedAdvantage() {
-        return speedAdvantage;
-    }
-
-    public double getHandlingAdvantage() {
-        return handlingAdvantage;
-    }
-
 
 }
