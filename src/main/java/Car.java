@@ -1,55 +1,63 @@
 import java.util.ArrayList;
 
 public class Car extends Purchasable {
-    private int speed;
-    private int handling; // influences how well the car can navigate turns and maintain control
-    private int reliability; // a percentage. Higher reliability means the car will be less likely to breakdown during a race (random event)
-    private int fuelEconomy; // max distance in km achievable with full tank of fuel
-    private ArrayList<TuningParts> upgrades = new ArrayList<>();
+    private double basespeed;
+    private double basehandling; // influences how well the car can navigate turns and maintain control
+    private int basereliability; // a percentage. Higher reliability means the car will be less likely to breakdown during a race (random event)
+    private int basefuelEconomy; // max distance in km achievable with full tank of fuel
+    private TuningPart[] upgrades = new TuningPart[2];
 
-    public Car(int speed, int handling, int reliability, int fuelEconomy, int price, String name, String description) {
-        super(name, price, description);
-        this.speed = speed;
-        this.handling = handling;
-        this.reliability = reliability;
-        this.fuelEconomy = fuelEconomy;
+    public Car(String name, double speed, double handling, int reliability, int fuelEconomy, int price) {
+        super(name, price);
+        this.basespeed = speed;     // Can be changed using tuning parts
+        this.basehandling = handling;   // Can be changed using tuning parts
+        this.basereliability = reliability; // Dependant on Car model
+        this.basefuelEconomy = fuelEconomy; // Dependant on Car model
     }
 
-    public int getSpeed() {
-        return speed;
+    public double getSpeed() {
+        if (upgrades[0] != null) {
+            double speedBoost = upgrades[0].getBoost();
+            return basespeed * speedBoost;
+        } else {
+            return basespeed;
+        }
     }
 
-    public int getHandling() {
-        return handling;
+    public double getHandling() {
+        if (upgrades[1] != null) {
+            double handlingBoost = upgrades[1].getBoost();
+            return basehandling * handlingBoost;
+        } else {
+            return basehandling;
+        }
     }
 
     public int getReliability() {
-        return reliability;
+        return basereliability;
     }
 
     public int getFuelEconomy() {
-        return fuelEconomy;
+        return basefuelEconomy;
     }
 
-    public ArrayList<TuningParts> getUpgrades() {
-        if (upgrades.isEmpty()) {
-            // figure out what to say
-        }
+    public TuningPart[] getUpgrades() {
         return upgrades;
     }
 
-    public void addUpgrade(TuningParts parts) {
-        upgrades.add(parts);
+    public void addSpeedUpgrade(TuningPart part) {
+        upgrades[0] = part;
     }
 
-    public void removeUpgrade(TuningParts parts) {
-        upgrades.remove(parts);
+    public void addHandlingUpgrade(TuningPart part) {
+        upgrades[1] = part;
     }
 
+    public TuningPart getSpeedUpgrade() {
+        return upgrades[0];
+    }
 
-
-//    public void setUpgrades(ArrayList<TuningParts> upgrades) {
-//        this.upgrades = upgrades;
-//    }
-
+    public TuningPart getHandlingUpgrade() {
+        return upgrades[1];
+    }
 }
