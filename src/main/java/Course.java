@@ -1,22 +1,22 @@
 import java.util.List;
 
 public enum Course {
-    DESERT("Desert Rally", new CourseAttributes(1.2, 0.8, 1.0), 100, 300, List.of(Route.DESERT_DRIFT, Route.DESERT_LONG)),
-    MOUNTAIN("Mountain Pass", new CourseAttributes(0.9, 1.5, 1.1), 200, 600, List.of(Route.MOUNTAIN_STEEP, Route.MOUNTAIN_CURVY)),
-    COUNTRYSIDE("Country Straight", new CourseAttributes(1.1, 1.0, 0.9), 300, 900, List.of(Route.COUNTRYSIDE_STRAIGHT, Route.COUNTRYSIDE_TWISTY)),
-    CITY("City Track", new CourseAttributes(1.5, 1.2, 0.5), 500, 1500, List.of(Route.CITY_WIDE_LINE, Route.CITY_CUT_LINE));
+    DESERT("Desert", new CourseAttributes(1.2, 0.8, 1.0), 100, new CoursePrizes(300, 200, 150), List.of(Route.DESERT_DRIFT, Route.DESERT_LONG)),
+    MOUNTAIN("Mountain", new CourseAttributes(0.9, 1.5, 1.1), 200, new CoursePrizes(600, 400, 300), List.of(Route.MOUNTAIN_STEEP, Route.MOUNTAIN_CURVES)),
+    COUNTRYSIDE("Country", new CourseAttributes(1.1, 1.0, 0.9), 300, new CoursePrizes(900, 600, 450), List.of(Route.COUNTRY_STRAIGHT, Route.COUNTRY_TWISTY)),
+    CITY("City", new CourseAttributes(1.5, 1.2, 0.5), 500, new CoursePrizes(1500, 1000, 750), List.of(Route.CITY_ALLEYS, Route.CITY_TRAFFIC));
 
     private String name;
     private CourseAttributes attributes;
     private int entryFee;
-    private int prizeMoney;
+    private CoursePrizes prizes;
     private List<Route> availableRoutes;
 
-    Course(String name, CourseAttributes attributes, int entryFee, int prizeMoney, List<Route> availableRoutes) {
+    Course(String name, CourseAttributes attributes, int entryFee, CoursePrizes prizes, List<Route> availableRoutes) {
         this.name = name;
         this.attributes = attributes;
         this.entryFee = entryFee;
-        this.prizeMoney = prizeMoney;
+        this.prizes = prizes;
         this.availableRoutes = availableRoutes;
     }
 
@@ -32,8 +32,8 @@ public enum Course {
         return entryFee;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public CoursePrizes getPrizes() {
+        return prizes;
     }
 
     public List<Route> getAvailableRoutes() {
