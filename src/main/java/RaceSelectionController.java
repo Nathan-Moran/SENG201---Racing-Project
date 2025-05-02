@@ -1,55 +1,54 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+
+import java.awt.event.ActionEvent;
 
 public class RaceSelectionController {
 
-    @FXML
-    private ComboBox<Course> courseComboBox;
+    @FXML private VBox courseSelectionMenu;
+    @FXML private VBox desertRouteMenu;
+    @FXML private VBox mountainRouteMenu;
+    @FXML private VBox countryRouteMenu;
+    @FXML private VBox cityRouteMenu;
 
     @FXML
-    private ComboBox<Route> routeComboBox;
-
-    @FXML
-    private Button startRaceButton;
-
-    @FXML
-    private Label summaryLabel;
-
-    @FXML
-    private void initialize() {
-        // Populate course options on startup
-        courseComboBox.getItems().addAll(Course.values());
-
-        // Listen for course selection and update routes
-        courseComboBox.setOnAction(event -> onCourseSelected());
-    }
-
-    private void onCourseSelected() {
-        Course selectedCourse = courseComboBox.getValue();
-        if (selectedCourse != null) {
-            routeComboBox.getItems().setAll(selectedCourse.getAvailableRoutes());
-            routeComboBox.setValue(null); // Clear any previous route selection
-        }
+    private void onDesertSelected(ActionEvent event) {
+        showRouteMenu(desertRouteMenu);
     }
 
     @FXML
-    private void onStartRaceClicked() {
-        Course selectedCourse = courseComboBox.getValue();
-        Route selectedRoute = routeComboBox.getValue();
+    private void onMountainSelected(ActionEvent event) {
+        showRouteMenu(mountainRouteMenu);
+    }
 
-        if (selectedCourse == null || selectedRoute == null) {
-            summaryLabel.setText("Please select both a course and a route.");
-            return;
-        }
+    @FXML
+    private void onCountrySelected(ActionEvent event) {
+        showRouteMenu(countryRouteMenu);
+    }
 
-        if (!selectedCourse.getAvailableRoutes().contains(selectedRoute)) {
-            summaryLabel.setText("Invalid route for the selected course.");
-            return;
-        }
+    @FXML
+    private void onCitySelected(ActionEvent event) {
+        showRouteMenu(cityRouteMenu);
+    }
 
-        Race race = new Race(selectedCourse, selectedRoute);
-        summaryLabel.setText("Race selected: " + race.toString());
+    private void showRouteMenu(VBox routeMenu) {
+        courseSelectionMenu.setVisible(false);
+        courseSelectionMenu.setManaged(false);
+
+        desertRouteMenu.setVisible(false);
+        desertRouteMenu.setManaged(false);
+
+        mountainRouteMenu.setVisible(false);
+        mountainRouteMenu.setManaged(false);
+
+        countryRouteMenu.setVisible(false);
+        countryRouteMenu.setManaged(false);
+
+        cityRouteMenu.setVisible(false);
+        cityRouteMenu.setManaged(false);
+
+        // Show the selected one
+        routeMenu.setVisible(true);
+        routeMenu.setManaged(true);
     }
 }
