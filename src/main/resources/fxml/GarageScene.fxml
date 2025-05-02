@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="seng201.team0.gui.MainController">
+
+    <TableView fx:id="carTable">
+        <columns>
+            <TableColumn fx:id="modelColumn" text="Model" />
+            <TableColumn fx:id="speedColumn" text="Speed" />
+            <TableColumn fx:id="handlingColumn" text="Handling" />
+            <TableColumn fx:id="ReliabilityColumn" text="Reliability" />
+            <TableColumn fx:id="fuelColumn" text="Fuel Economy" />
+            <TableColumn fx:id="handlingupgradeColumn" text="Handling Upgrade" />
+            <TableColumn fx:id="speedupgradeColumn" text="Speed Upgrade" />
+        </columns>
+    </TableView>
+</VBox>

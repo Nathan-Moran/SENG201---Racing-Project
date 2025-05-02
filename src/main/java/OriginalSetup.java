@@ -3,33 +3,41 @@ public class OriginalSetup {
     public static void main(String[] args) {
 
         //Setup Shop
-        Car Mustang = new Car("Mustang", 250, 6, 6, 300, 89000);
-        Car Ferrari = new Car("Ferrari", 330, 8, 7, 200, 485000);
-        Car Bugatti = new Car("Bugatti", 420, 7, 5, 150, 4750000);
+        Car ToyotaSupra = new Car("Toyota Supra", 180, 6, 8, 538, 67000);
+        Car Mustang = new Car("Mustang", 250, 6, 6, 400, 89000);
+        Car Ferrari458 = new Car("Ferrari 458", 330, 8, 7, 300, 485000);
+
+
+        //Car Bugatti = new Car("Bugatti", 420, 7, 5, 150, 4750000);
 
         Shop shop = new Shop();
+        shop.addCarsForPurchase(ToyotaSupra);
         shop.addCarsForPurchase(Mustang);
-        shop.addCarsForPurchase(Ferrari);
-        shop.addCarsForPurchase(Bugatti);
+        shop.addCarsForPurchase(Ferrari458);
+        //shop.addCarsForPurchase(Bugatti);
 
-        TuningPart V4 = new TuningPart("V4", 200, "Speed", 1.1);
-        TuningPart V6 = new TuningPart("V6", 300, "Speed", 1.2 );
-        TuningPart V8 = new TuningPart("V8", 500, "Speed", 1.3 );
+        TuningPart Ethanol = new TuningPart("Ethanol", 4000, "Speed", 1.2);
+        TuningPart SuperCharger = new TuningPart("SuperCharger", 14000, "Speed", 1.5);
+        TuningPart TurboKit = new TuningPart("TurboKit", 21000, "Speed", 1.8);
 
-        TuningPart StreetWheel = new TuningPart("StreetWheel", 400, "Handling", 1.1 );
-        TuningPart SportsWheel = new TuningPart( "SportsWheel", 500, "Handling", 1.2 );
-        TuningPart RacingWheel = new TuningPart( "RacingWheel", 600, "Handling", 1.3 );
+        TuningPart StreetTyres = new TuningPart("StreetWheels", 2500, "Handling", 1.2);
+        TuningPart SportsTyres = new TuningPart("SportsWheels", 6400, "Handling", 1.5);
+        TuningPart RacingTyres = new TuningPart("RacingWheels", 10000, "Handling", 1.8);
 
-        shop.addTuningPartsForPurchase(V4);
-        shop.addTuningPartsForPurchase(V6);
-        shop.addTuningPartsForPurchase(V8);
-        shop.addTuningPartsForPurchase(StreetWheel);
-        shop.addTuningPartsForPurchase(SportsWheel);
-        shop.addTuningPartsForPurchase(RacingWheel);
+        shop.addTuningPartsForPurchase(Ethanol);
+        shop.addTuningPartsForPurchase(SuperCharger);
+        shop.addTuningPartsForPurchase(TurboKit);
+        shop.addTuningPartsForPurchase(StreetTyres);
+        shop.addTuningPartsForPurchase(SportsTyres);
+        shop.addTuningPartsForPurchase(RacingTyres);
 
         //Setup Garage
         Garage garage = new Garage();
-        Car Honda = new Car("Honda", 180, 7, 8, 500, 32000);
-        garage.setSelectedCar(Honda);
+        Car HondaCivicR = new Car("Honda Civic R", 180, 7, 7, 500, 32000);
+        Car ToyotaGRCorolla  =  new Car("Toyota Corolla", 180, 7, 8, 500, 32000);
+        Car MazdaMPS = new Car("Mazda MPS", 180, 6, 7, 500, 32000);
+        Car NissanZ = new Car("Nissan Z", 180, 7, 8, 500, 32000);
+
+        //garage.setSelectedCar(Honda);
     }
 }
