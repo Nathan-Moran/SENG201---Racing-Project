@@ -51,4 +51,12 @@ public class RaceSelectionController {
         routeMenu.setVisible(true);
         routeMenu.setManaged(true);
     }
+
+    Course course = GameEnvironment.getSelectedCourse();
+    Route route = GameEnvironment.getSelectedRoute();
+    Season season = GameEnvironment.getCurrentSeason();
+
+if (season != null && course != null && route != null) {
+        season.addRace(course, route);
+    }
 }
