@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
             <VBox fx:id="desertButton" onMouseClicked="#onDesertSelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>
                   <HBox>
                      <children>
-                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="DESERT" textAlignment="CENTER">
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="74.0" prefWidth="300.0" text="DESERT" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="51.0" />
+                              <Font name="SansSerif Bold" size="45.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -47,9 +47,9 @@
                <children>
                   <HBox>
                      <children>
-                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="MOUNTAIN" textAlignment="CENTER">
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="74.0" prefWidth="300.0" text="MOUNTAIN" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="51.0" />
+                              <Font name="SansSerif Bold" size="45.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -82,7 +82,7 @@
                      <children>
                         <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="COUNTRY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="51.0" />
+                              <Font name="SansSerif Bold" size="45.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -115,7 +115,7 @@
                      <children>
                         <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="CITY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="51.0" />
+                              <Font name="SansSerif Bold" size="45.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -312,7 +312,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="cityRouteMenu" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="cityRouteMenu" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <HBox fx:id="cityAlleysButton" onMouseClicked="#onCityAlleysSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>

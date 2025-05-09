@@ -1,9 +1,8 @@
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
-
-public class RaceSelectionController {
+public class CourseSelectionController {
 
     @FXML private VBox courseSelectionMenu;
     @FXML private VBox desertRouteMenu;
@@ -13,21 +12,25 @@ public class RaceSelectionController {
 
     @FXML
     private void onDesertSelected(ActionEvent event) {
+        GameEnvironment.setSelectedCourse(Course.DESERT);
         showRouteMenu(desertRouteMenu);
     }
 
     @FXML
     private void onMountainSelected(ActionEvent event) {
+        GameEnvironment.setSelectedCourse(Course.MOUNTAIN);
         showRouteMenu(mountainRouteMenu);
     }
 
     @FXML
     private void onCountrySelected(ActionEvent event) {
+        GameEnvironment.setSelectedCourse(Course.COUNTRY);
         showRouteMenu(countryRouteMenu);
     }
 
     @FXML
     private void onCitySelected(ActionEvent event) {
+        GameEnvironment.setSelectedCourse(Course.CITY);
         showRouteMenu(cityRouteMenu);
     }
 
@@ -47,16 +50,7 @@ public class RaceSelectionController {
         cityRouteMenu.setVisible(false);
         cityRouteMenu.setManaged(false);
 
-        // Show the selected one
         routeMenu.setVisible(true);
         routeMenu.setManaged(true);
-    }
-
-    Course course = GameEnvironment.getSelectedCourse();
-    Route route = GameEnvironment.getSelectedRoute();
-    Season season = GameEnvironment.getCurrentSeason();
-
-if (season != null && course != null && route != null) {
-        season.addRace(course, route);
     }
 }

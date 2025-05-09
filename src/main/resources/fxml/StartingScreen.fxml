@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+
+   <!-- Top: Title and Name Entry -->
+   <top>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="🏁 Welcome to Rocket Racing!" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="Enter your name:" />
+                  <TextField fx:id="nameField" promptText="Your name" prefWidth="200.0"/>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="20" bottom="10" left="20" right="20"/>
+         </padding>
+      </VBox>
+   </top>
+
+   <!-- Center: Difficulty Buttons -->
+   <center>
+      <VBox alignment="CENTER" spacing="20.0">
+         <children>
+            <Label text="Select Difficulty:" style="-fx-font-size: 16px;" />
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="easyButton" text="Easy" prefWidth="100.0" style="-fx-background-color: #7CFC00;" />
+                  <Button fx:id="mediumButton" text="Medium" prefWidth="100.0" style="-fx-background-color: #FFD700;" />
+                  <Button fx:id="hardButton" text="Hard" prefWidth="100.0" style="-fx-background-color: #FF4500;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+
+   <!-- Bottom: Season Slider -->
+   <bottom>
+      <HBox spacing="10.0" alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Season Length:" />
+            <Slider fx:id="seasonSlider"
+                    min="5.0" max="15.0"
+                    majorTickUnit="1" blockIncrement="1"
+                    showTickMarks="true" showTickLabels="true"
+                    snapToTicks="true" prefWidth="300.0"/>
+         </children>
+         <padding>
+            <Insets top="15" bottom="15" left="20" right="20"/>
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
