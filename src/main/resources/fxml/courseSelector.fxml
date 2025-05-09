@@ -1,47 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="desertButton" onMouseClicked="#onDesertSelected" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
-            <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="606.0" text="DESERT" textAlignment="CENTER">
-               <font>
-                  <Font name="SansSerif Bold" size="51.0" />
-               </font>
-            </Label>
+            <VBox fx:id="desertButton" onMouseClicked="#onDesertSelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="DESERT" textAlignment="CENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="51.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $100" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $300" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: HANDLING" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: SPEED" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="mountainButton" onMouseClicked="#onMountainSelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="MOUNTAIN" textAlignment="CENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="51.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $200" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $600" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: SPEED" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: HANDLING" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="countryButton" onMouseClicked="#onCountrySelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="COUNTRY" textAlignment="CENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="51.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $300" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $900" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: FUEL ECONOMY" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: RELIABILITY" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="cityButton" onMouseClicked="#onCitySelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="CITY" textAlignment="CENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="51.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $500" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $1500" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: SPEED" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: RELIABILITY" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
-      <VBox fx:id="mountainButton" onMouseClicked="#onMountainSelected" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="desertRouteMenu" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="606.0" text="MOUNTAIN" textAlignment="CENTER">
-               <font>
-                  <Font name="SansSerif Bold" size="51.0" />
-               </font>
-            </Label>
+            <HBox fx:id="desertDriftButton" onMouseClicked="#onDesertDriftSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="DESERT ">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="DRIFT">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: HANDLING" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: SPEED" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 20" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 2" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="desertLongButton" onMouseClicked="#onDesertLongSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="DESERT ">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="LONG">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: SPEED" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: HANDLING" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 30" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 3" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <VBox fx:id="countryButton" onMouseClicked="#onCountrySelected" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="mountainRouteMenu" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="606.0" text="COUNTRY" textAlignment="CENTER">
-               <font>
-                  <Font name="SansSerif Bold" size="51.0" />
-               </font>
-            </Label>
+            <HBox fx:id="mountainSteepButton" onMouseClicked="#onMountainSteepSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="MOUNTAIN">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="STEEP">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: RELIABILITY" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: HANDLING" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 15" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 1" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="mountainCurvesButton" onMouseClicked="#onMountainCurvesSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="MOUNTAIN">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="CURVES">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: HANDLING" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: SPEED" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 20" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 1" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <VBox fx:id="cityButton" onMouseClicked="#onCitySelected" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="countryRouteMenu" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="606.0" text="CITY" textAlignment="CENTER">
-               <font>
-                  <Font name="SansSerif Bold" size="51.0" />
-               </font>
-            </Label>
+            <HBox fx:id="countryStraightButton" onMouseClicked="#onCountryStraightSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="COUNTRY">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="STRAIGHT">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: SPEED" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: HANDLING" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 50" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 4" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="countryTwistButton" onMouseClicked="#onCountryTwistSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="COUNTRY">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="TWIST">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: HANDLING" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: SPEED" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 30" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 3" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="cityRouteMenu" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox fx:id="cityAlleysButton" onMouseClicked="#onCityAlleysSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="CITY">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="ALLEYS">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: SPEED" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: HANDLING" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 35" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 3" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="cityTrafficButton" onMouseClicked="#onCityTrafficSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="CITY">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="287.0" text="TRAFFIC">
+                           <font>
+                              <Font name="SansSerif Regular" size="51.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="300.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="67.0" prefWidth="300.0" text="SYNERGY: RELIABILITY" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="432.0" text="DISADVANTAGE: SPEED" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="LENGTH: 15" />
+                        <Label alignment="CENTER" maxWidth="300.0" prefHeight="67.0" prefWidth="300.0" text="FUEL STOPS: 2" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
-</VBox>
+</StackPane>
