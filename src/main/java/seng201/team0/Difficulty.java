@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public class Difficulty {
     private String difficulty;
     private double successRate;

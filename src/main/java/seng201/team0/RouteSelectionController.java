@@ -1,3 +1,5 @@
+package seng201.team0;
+
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 

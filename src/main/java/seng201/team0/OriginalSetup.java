@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public class OriginalSetup {
 
     public static void main(String[] args) {

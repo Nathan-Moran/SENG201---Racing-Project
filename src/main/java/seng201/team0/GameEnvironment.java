@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public class GameEnvironment {
     private static Course selectedCourse;
     private static Route selectedRoute;

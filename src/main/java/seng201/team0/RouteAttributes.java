@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public class RouteAttributes {
     private double speedAdvantage;
     private double handlingAdvantage;

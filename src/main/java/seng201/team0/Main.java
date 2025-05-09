@@ -1,4 +1,4 @@
-package com.example.aitesting2;
+package seng201.team0;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/aitesting2/ShopSellScene.fxml"));
-        primaryStage.setTitle("Garage");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
+        primaryStage.setTitle("Shop - Sell");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

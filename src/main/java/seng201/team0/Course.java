@@ -1,3 +1,5 @@
+package seng201.team0;
+
 import java.util.List;
 
 public enum Course {

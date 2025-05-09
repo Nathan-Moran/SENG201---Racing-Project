@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package seng201.team0;
 
 public class Car extends Purchasable {
     private double basespeed;
@@ -11,8 +11,8 @@ public class Car extends Purchasable {
         super(name, price);
         this.basespeed = speed;     // Can be changed using tuning parts
         this.basehandling = handling;   // Can be changed using tuning parts
-        this.basereliability = reliability; // Dependant on Car model
-        this.basefuelEconomy = fuelEconomy; // Dependant on Car model
+        this.basereliability = reliability; // Dependent on Car model
+        this.basefuelEconomy = fuelEconomy; // Dependent on Car model
     }
 
     public double getSpeed() {

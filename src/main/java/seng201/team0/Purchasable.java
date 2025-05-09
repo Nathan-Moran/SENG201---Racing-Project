@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public abstract class Purchasable {
     private String name;
     private int price;

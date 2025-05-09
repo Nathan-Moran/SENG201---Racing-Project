@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public enum Route {
     DESERT_DRIFT("Desert Drift", new RouteAttributes(0.5, 1.5, 1.2), 20, 2),
     DESERT_LONG("Desert Long", new RouteAttributes(1.5, 0.6, 1), 30, 3),

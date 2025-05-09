@@ -1,3 +1,5 @@
+package seng201.team0;
+
 public class CoursePrizes {
     private int firstPlacePrize;
     private int secondPlacePrize;
