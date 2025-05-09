@@ -1,31 +1,22 @@
 package seng201.team0;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SceneController implements Initializable {
+public class ShopBuyController implements Initializable{
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
 
     Car Toyota = new Car("Toyota Supra", 180, 6, 8, 538, 67000);
     Car Mustang = new Car("Mustang", 250, 6, 6, 400, 89000);
@@ -39,42 +30,18 @@ public class SceneController implements Initializable {
     TuningPart SportWheels = new TuningPart("SportsWheels", 6400, "\uD83C\uDFAE", 1.5);
     TuningPart RacingWheels = new TuningPart("RacingWheels", 10000, "\uD83C\uDFAE", 1.8);
 
-    Garage ShopList = new Garage();
+    public
+
     Garage inventoryList = new Garage();
+    Garage ShopList = new Garage();
 
-
-    public void switchToSceneGarage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/GarageScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToSceneShopBuy(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/ShopBuyScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    public void switchToSceneShopSell(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToSceneMenu(ActionEvent event) throws IOException {
-    }
 
     //Garage and Sellable Cars
-    @FXML private TableView<Car> carTable;
+    @FXML
+    private TableView<Car> carTable;
 
-    @FXML private TableColumn<Car, String> modelColumn;
+    @FXML
+    private TableColumn<Car, String> modelColumn;
 
     @FXML
     private TableColumn<Car, Integer> priceColumn;
@@ -128,7 +95,22 @@ public class SceneController implements Initializable {
         ShopList.addTuningParts(SportWheels);
         ShopList.addTuningParts(RacingWheels);
 
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
+        handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
+        reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
+        fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
 
+        carTable.setItems(ShopList.getCarList());
+
+
+        partnameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
+        partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
+
+        tuningPartTable.setItems(ShopList.getTuningPartList());
 
     }
 }

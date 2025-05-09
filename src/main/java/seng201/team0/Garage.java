@@ -1,38 +1,43 @@
 package seng201.team0;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Garage {
-    private ArrayList<Car> reserveCars;
-    private ArrayList<TuningPart> tuningParts;
+    private ObservableList<Car> reserveCarList;
+    private ObservableList<TuningPart> tuningPartList;
     Car selectedCar;
 
     public Garage() {
-        this.reserveCars = new ArrayList<>();
-        this.tuningParts = new ArrayList<>();
+        this.reserveCarList = FXCollections.observableArrayList();
+        this.tuningPartList = FXCollections.observableArrayList();
+
+
     }
 
-    public void installTuningPart(TuningPart part, Car selectedCar) {
-        if (part.getStat().equals("Speed")) {
-            selectedCar.addSpeedUpgrade(part);
-        } else if (part.getStat().equals("Handling")) {
-            selectedCar.addHandlingUpgrade(part);
-        }
-    }
+//    public void installTuningPart(TuningPart part, Car selectedCar) {
+//        if (part.getStat().equals("Speed")) {
+//            selectedCar.addSpeedUpgrade(part);
+//        } else if (part.getStat().equals("Handling")) {
+//            selectedCar.addHandlingUpgrade(part);
+//        }
+//    }
 
     public void setSelectedCar() {
         if (this.getSelectedCar() == null) {
-            if (!reserveCars.isEmpty()) { //Maybe throw and catch errors
-                selectedCar = reserveCars.get(0);
+            if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
+                selectedCar = reserveCarList.get(0);
             }
         }
     }
 
     public void setSelectedCar(Car selectedCar) {
         Car tempCar = this.getSelectedCar();
-        reserveCars.add(this.selectedCar);
+        reserveCarList.add(this.selectedCar);
         this.selectedCar = selectedCar;
-        reserveCars.remove(tempCar);
+        reserveCarList.remove(tempCar);
     }
 
     public Car getSelectedCar() {
@@ -40,18 +45,26 @@ public class Garage {
     }
 
     public void addTuningParts(TuningPart part) {
-        tuningParts.add(part);
+        tuningPartList.add(part);
     }
 
     public void removeTuningParts(TuningPart part) {
-        tuningParts.remove(part);
+        tuningPartList.remove(part);
     }
 
     public void removeCar(Car car) {
-        reserveCars.remove(car);
+        reserveCarList.remove(car);
     }
 
     public void addCar(Car car) {
-        reserveCars.add(car);
+        reserveCarList.add(car);
+    }
+
+    public ObservableList<Car> getCarList() {
+        return reserveCarList;
+    }
+
+    public ObservableList<TuningPart> getTuningPartList() {
+        return tuningPartList;
     }
 }
