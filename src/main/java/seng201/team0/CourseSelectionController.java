@@ -3,6 +3,7 @@ package seng201.team0;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
+import seng201.team0.gui.GameEnvironment;
 
 public class CourseSelectionController {
 

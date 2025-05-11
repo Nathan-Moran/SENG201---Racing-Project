@@ -1,4 +1,4 @@
-package seng201.team0;
+package seng201.team0.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng201.team0.Car;
 
 import java.net.URL;
 import java.util.ResourceBundle;
