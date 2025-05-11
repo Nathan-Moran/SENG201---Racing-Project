@@ -6,13 +6,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Main extends Application {
     @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
+//        primaryStage.setTitle("Shop - Sell");
+//        primaryStage.setScene(new Scene(root));
+//        primaryStage.show();
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
-        primaryStage.setTitle("Shop - Sell");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/courseSelector.fxml")));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
