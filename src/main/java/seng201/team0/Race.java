@@ -16,6 +16,7 @@ public class Race {
 
     }
 
+
     public Course getCourse() {
         return course;
     }

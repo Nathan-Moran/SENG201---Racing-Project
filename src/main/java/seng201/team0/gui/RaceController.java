@@ -1,7 +1,5 @@
 package seng201.team0.gui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -12,7 +10,7 @@ public class RaceController {
     @FXML private ImageView routeImage;
     @FXML private Label currentDistanceLabel;
     @FXML private Label raceLengthLabel;
-    @FXML private ProgressBar progressBar;
+    @FXML private ProgressBar fuelGauge;
 
     // Popups
     @FXML private VBox fuelStopPopup;
@@ -29,67 +27,26 @@ public class RaceController {
     @FXML private Button continueAfterWeatherButton;
 
     private double playerDistance = 0;
-    private final double raceLength = 100; // Placeholder - set this dynamically based on route
+    private final double raceLength = 100;
     private boolean isRacing = true;
 
     public void initialize() {
-        progressBar.setProgress(0);
+        fuelGauge.setProgress(1);
         updateUI();
 
-        stopForFuelButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleFuelStop(true);
-            }
-        });
-
-        continueWithoutFuelButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleFuelStop(false);
-            }
-        });
-
-        repairButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleRepair(true);
-            }
-        });
-
-        withdrawButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleRepair(false);
-            }
-        });
-
-        pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleTraveler(true);
-            }
-        });
-
-        drivePastButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleTraveler(false);
-            }
-        });
-
-        continueAfterWeatherButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleWeatherContinue();
-            }
-        });
+        stopForFuelButton.setOnAction(event -> handleFuelStop(true));
+        continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
+        repairButton.setOnAction(event -> handleRepair(true));
+        withdrawButton.setOnAction(event -> handleRepair(false));
+        pickUpButton.setOnAction(event -> handleTraveler(true));
+        drivePastButton.setOnAction(event -> handleTraveler(false));
+        continueAfterWeatherButton.setOnAction(event -> handleWeatherContinue());
     }
 
     private void updateUI() {
         currentDistanceLabel.setText("Current distance: " + (int) playerDistance + " km");
         raceLengthLabel.setText("Length: " + (int) raceLength + " km");
-        progressBar.setProgress(playerDistance / raceLength);
+        fuelGauge.setProgress(playerDistance / raceLength);
     }
 
     public void advanceRace(double distance) {
@@ -98,12 +55,9 @@ public class RaceController {
         playerDistance += distance;
         updateUI();
 
-        // Trigger events at certain distances (example logic)
         if (playerDistance >= 30 && playerDistance < 35) {
             fuelStopPopup.setVisible(true);
-        }
-
-        if (playerDistance >= 50 && playerDistance < 55) {
+        } else if (playerDistance >= 50 && playerDistance < 55) {
             breakdownPopup.setVisible(true);
         }
 
@@ -115,14 +69,14 @@ public class RaceController {
     private void handleFuelStop(boolean refuel) {
         fuelStopPopup.setVisible(false);
         if (refuel) {
-            // Add refueling time logic
+            // Add refueling logic
         }
     }
 
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
         if (pay) {
-            // Deduct money and add delay logic
+            // Deduct money, add delay
         } else {
             isRacing = false;
             // Show DNF screen
@@ -139,11 +93,11 @@ public class RaceController {
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
         isRacing = false;
-        // Refund player and end race
+        // Refund player, end race
     }
 
     private void finishRace() {
         isRacing = false;
-        // Show result screen, calculate position and award prize
+        // Show result screen
     }
 }
