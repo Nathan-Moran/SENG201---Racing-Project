@@ -34,7 +34,6 @@ public class GameEnvironment {
     }
 
 
-
     Garage shopInventory = new Garage();
     Garage playerInventory = new Garage();
 
@@ -83,5 +82,9 @@ public class GameEnvironment {
 
     public int getBalance() {
         return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

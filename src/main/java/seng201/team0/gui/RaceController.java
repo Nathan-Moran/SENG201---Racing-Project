@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import seng201.team0.Race;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,13 +34,15 @@ public class RaceController {
     @FXML private Button drivePastButton;
     @FXML private Button continueAfterWeatherButton;
 
+    private Race currentRace;  // Holds the current race information
     private double playerDistance = 0;
-    private final double raceLength = 100;
     private boolean isRacing = true;
     private double fuelLevel = 1.0; // 1.0 = full, 0.0 = empty
     private Timeline raceTimeline;
     private final double speed = 0.5; // km per tick
     private final double fuelConsumptionRate = 0.005;
+    private boolean isWaiting = false;
+    private int waitTicksRemaining = 0; // 1 tick = 100ms, so 50 = 5 seconds
 
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
@@ -67,12 +70,19 @@ public class RaceController {
 
     private void updateUI() {
         currentDistanceLabel.setText("Current distance: " + (int) playerDistance + " km");
-        raceLengthLabel.setText("Length: " + (int) raceLength + " km");
+        raceLengthLabel.setText("Length: " + (int) currentRace.getRoute().getLength() + " km");
         fuelGauge.setProgress(fuelLevel);
     }
 
     public void advanceRace() {
         if (!isRacing) return;
+        if (isWaiting) {
+            waitTicksRemaining--;
+            if (waitTicksRemaining <= 0) {
+                isWaiting = false;
+            }
+            return; // Don't advance player during repair
+        }
         playerDistance += speed;
         fuelLevel -= fuelConsumptionRate; // Adjust rate as needed
         if (fuelLevel < 0) fuelLevel = 0;
@@ -82,7 +92,7 @@ public class RaceController {
         } else if (playerDistance >= 50 && playerDistance < 55) {
             breakdownPopup.setVisible(true);
         }
-        if (playerDistance >= raceLength || fuelLevel <= 0) {
+        if (playerDistance >= currentRace.getRoute().getLength() || fuelLevel <= 0) {
             finishRace();
         }
         if (fuelLevel < 0.2) {
@@ -104,24 +114,28 @@ public class RaceController {
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
         if (pay) {
-
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - 500);
+            isWaiting = true;
+            waitTicksRemaining = 50;
         } else {
+            raceTimeline.stop();
             isRacing = false;
-            // Show DNF screen
         }
     }
 
     private void handleTraveler(boolean pickUp) {
         travelerPopup.setVisible(false);
         if (pickUp) {
-            // Add money, delay
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + 500);
+            isWaiting = true;
+            waitTicksRemaining = 50;
         }
     }
 
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
         isRacing = false;
-        // Refund player, end race
+        gameEnvironment.setBalance(gameEnvironment.getBalance() - GameEnvironment.getSelectedCourse().getEntryFee());
     }
 
     private void finishRace() {
