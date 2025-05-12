@@ -7,8 +7,8 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class ShopSellController extends AbstractShopController {
-    public ShopSellController() {
-        super();
+    public ShopSellController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        super(gameEnvironment, sceneNavigator);
     }
 
     @Override

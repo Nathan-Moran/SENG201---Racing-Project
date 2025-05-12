@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class ShopBuyController extends AbstractShopController {
 
-    public ShopBuyController() {
-        super();
+    public ShopBuyController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        super(gameEnvironment, sceneNavigator);
     }
 
     @Override
@@ -26,4 +26,6 @@ public class ShopBuyController extends AbstractShopController {
     private void switchToSceneShopSell(ActionEvent event) throws IOException {
         sceneNavigator.switchToSceneShopSell(event);
     }
+
+
 }
