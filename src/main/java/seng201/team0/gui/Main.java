@@ -16,12 +16,11 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/StartingScreen.fxml"));
         primaryStage.setTitle("Shop - Sell");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-
 
 
     public static void main(String[] args) {
