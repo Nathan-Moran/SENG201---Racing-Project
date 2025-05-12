@@ -1,17 +1,19 @@
-package seng201.team0;
+package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng201.team0.Car;
+import seng201.team0.TuningPart;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public abstract class AbstractShopController implements Initializable {
     //Garage and Sellable Cars
-    @FXML private TableView<Car> carTable;
+    @FXML protected TableView<Car> carTable;
 
     @FXML private TableColumn<Car, String> modelColumn;
 
@@ -31,7 +33,7 @@ public abstract class AbstractShopController implements Initializable {
     @FXML private TableColumn<Car, String> speedupgradeColumn;
 
     //Tuning Parts
-    @FXML private TableView<TuningPart> tuningPartTable;
+    @FXML protected TableView<TuningPart> tuningPartTable;
 
     @FXML private TableColumn<TuningPart, String> partnameColumn;
 
@@ -41,8 +43,24 @@ public abstract class AbstractShopController implements Initializable {
 
     @FXML private TableColumn<TuningPart, Double> partboostColumn;
 
+    protected SceneNavigator sceneNavigator;
+    protected GameEnvironment gameEnvironment;
+
+    public AbstractShopController() {
+        this.sceneNavigator = new SceneNavigator();
+        this.gameEnvironment = new GameEnvironment();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setupCarTable();
+        setupTuningPartTable();
+
+        loadCars();
+        loadTuningParts();
+    }
+
+    protected void setupCarTable() {
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
@@ -51,15 +69,17 @@ public abstract class AbstractShopController implements Initializable {
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
         handlingupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("handlingUpgrade"));
         speedupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("speedUpgrade"));
+    }
 
-        carTable.setItems(ShopList.getCarList());
-
-
+    protected void setupTuningPartTable() {
         partnameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
         partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
 
-        tuningPartTable.setItems(ShopList.getTuningPartList());
+
     }
+
+    protected abstract void loadTuningParts();
+    protected abstract void loadCars();
 }
