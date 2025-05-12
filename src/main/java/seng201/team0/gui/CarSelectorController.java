@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.Car;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,10 +23,10 @@ public class CarSelectorController implements Initializable {
     }
 
     @FXML
-    private void chooseSelected(ActionEvent event) {
-
-        Integer.parseInt(modelColumn.getText());
-        gameEnvironment.getShopInventory().getCarList();
+    private void chooseSelected(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneMainMenu(event);
+//        Integer.parseInt(modelColumn.getText());
+//        gameEnvironment.getShopInventory().getCarList();
     }
 
     @FXML protected TableView<Car> carTable;

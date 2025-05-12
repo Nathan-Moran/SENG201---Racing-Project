@@ -47,7 +47,7 @@
     <bottom>
         <StackPane style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
 
-            <Button onAction="#chooseSelected" onMouseClicked="#chooseSelected" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Choose Selected" StackPane.alignment="CENTER" />
+            <Button onAction="#chooseSelected" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Choose Selected" StackPane.alignment="CENTER" />
         </StackPane>
     </bottom>
 </BorderPane>

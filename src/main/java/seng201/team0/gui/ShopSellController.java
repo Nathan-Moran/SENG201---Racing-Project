@@ -28,6 +28,6 @@ public class ShopSellController extends AbstractShopController {
 
     @FXML
     private void switchToSceneMenu(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneMenu(event);
+        sceneNavigator.switchToSceneMainMenu(event);
     }
 }

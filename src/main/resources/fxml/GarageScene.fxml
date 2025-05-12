@@ -25,7 +25,7 @@
 
     <center>
         <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
-            <VBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
+            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Reserve Cars" />
                 <TableView fx:id="carTable" prefHeight="200.0" prefWidth="440.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                     <columns>
@@ -39,10 +39,10 @@
                         <TableColumn fx:id="handlingupgradeColumn" prefWidth="70.0" text="🎮⬆" />
                     </columns>
                 </TableView>
-                <Button mnemonicParsing="false" text="Select Car" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" />
+                <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Select Car" />
             </VBox>
 
-            <VBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
+            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Parts" />
                 <TableView fx:id="tuningPartTable" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                     <columns>
@@ -52,7 +52,7 @@
                         <TableColumn fx:id="partboostColumn" prefWidth="40.0" text="📈" />
                     </columns>
                 </TableView>
-                <Button mnemonicParsing="false" text="Install Part" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" />
+                <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Install Part" />
             </VBox>
         </HBox>
     </center>
@@ -72,7 +72,7 @@
                     <TableColumn fx:id="handlingupgradeColumn1" prefWidth="70.0" text="🎮⬆" />
                 </columns>
             </TableView>
-            <HBox alignment="CENTER_RIGHT" spacing="20" style="-fx-padding: 10 0 0 0;"> <Button onMouseClicked="#switchToSceneShopBuy" text="Back" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" />
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 10 0 0 0;"> <Button onAction="#switchToMainMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Menu" />
             </HBox>
         </VBox>
     </bottom>

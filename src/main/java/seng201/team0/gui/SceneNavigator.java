@@ -26,41 +26,81 @@ public class SceneNavigator {
     }
 
     public void switchToSceneGarage(ActionEvent event) throws IOException {
-//        GarageController garageController = new GarageController(GameEnvironment gameEnvironment);
+        String title = "Garage";
+        String fxml = "/fxml/GarageScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        root = FXMLLoader.load(getClass().getResource("/fxml/GarageScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        loader.setControllerFactory(ignoredControllerClass ->
+                new GarageController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
         stage.setScene(scene);
-        stage.show();
+        stage.setTitle(title);
     }
 
     public void switchToSceneShopBuy(ActionEvent event) throws IOException {
-        ShopBuyController shopBuyController = new ShopBuyController(gameEnvironment, this);
+        String title = "Shop Buy";
+        String fxml = "/fxml/ShopBuyScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        root = FXMLLoader.load(getClass().getResource("/fxml/ShopBuyScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        loader.setControllerFactory(ignoredControllerClass ->
+                new ShopBuyController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
         stage.setScene(scene);
-        stage.show();
+        stage.setTitle(title);
     }
 
     public void switchToSceneShopSell(ActionEvent event) throws IOException {
-        ShopSellController shopSellController = new ShopSellController(gameEnvironment, this);
+        String title = "Shop Sell";
+        String fxml = "/fxml/ShopSellScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        root = FXMLLoader.load(getClass().getResource("/fxml/ShopSellScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        loader.setControllerFactory(ignoredControllerClass ->
+                new ShopSellController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
         stage.setScene(scene);
-        stage.show();
+        stage.setTitle(title);
     }
 
-    public void switchToSceneMenu(ActionEvent event) throws IOException {
-    }
 
     public void switchToSceneCarSelector(ActionEvent event) throws IOException {
-        CarSelectorController carSelectorController = new CarSelectorController(gameEnvironment, this);
+//        CarSelectorController carSelectorController = new CarSelectorController(gameEnvironment, this);
+//
+//        root = FXMLLoader.load(getClass().getResource("/fxml/CarSelectorScene.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
 
+        //AI CODE
+        String title = "Select your car";
+        String fxml = "/fxml/CarSelectorScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new CarSelectorController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
     }
 
     public void switchToSceneRace(ActionEvent event) throws IOException {
@@ -69,5 +109,22 @@ public class SceneNavigator {
 
     public void switchToSceneCourseAndRoute(ActionEvent event) throws IOException {
         CourseAndRouteSelectionController courseAndRouteSelectionController = new CourseAndRouteSelectionController(gameEnvironment, this);
+    }
+
+    public void switchToSceneMainMenu(ActionEvent event) throws IOException {
+        String title = "Main Menu";
+        String fxml = "/fxml/MainMenuScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new MainMenuController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
     }
 }
