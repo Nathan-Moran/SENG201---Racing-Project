@@ -1,59 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="seng201.team0.gui.RaceController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="364.0" prefHeight="50.0" prefWidth="134.0" text="Current distance:" />
-      <Label layoutX="513.0" prefHeight="50.0" prefWidth="87.0" text="Length: " />
-      <ProgressBar prefHeight="50.0" prefWidth="250.0" progress="1.0" />
-      <Text layoutX="111.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel" wrappingWidth="28.0" />
-      <VBox layoutX="158.0" layoutY="118.0" prefHeight="150.0" prefWidth="300.0">
+      <!-- Background Image -->
+      <ImageView fx:id="routeImage" fitHeight="400.0" fitWidth="600.0" preserveRatio="true" />
+
+      <!-- Race Info -->
+      <VBox layoutX="20.0" layoutY="20.0" spacing="10">
          <children>
-            <Label prefHeight="171.0" prefWidth="300.0" text="You have reached a fuel stop! Would you like to stop for fuel?" />
-            <HBox prefHeight="104.0" prefWidth="217.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="150.0" text="Stop for fuel" />
-                  <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="150.0" text="Continue" />
-               </children>
+            <HBox spacing="10">
+               <Label text="Current distance:" />
+               <Label fx:id="currentDistanceLabel" text="0 km" />
+            </HBox>
+            <HBox spacing="10">
+               <Label text="Length:" />
+               <Label fx:id="raceLengthLabel" text="100 km" />
+            </HBox>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" />
+         </children>
+      </VBox>
+
+      <HBox layoutX="175.0" layoutY="20.0" spacing="10">
+         <children>
+            <Label text="Fuel Level:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <ProgressBar fx:id="fuelGauge" prefWidth="200" prefHeight="25"
+                         style="-fx-accent: green; -fx-border-color: black; -fx-border-width: 2px;" />
+         </children>
+      </HBox>
+
+      <!-- Fuel Stop Popup -->
+      <VBox fx:id="fuelStopPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label wrapText="true" text="You've reached a fuel stop! Would you like to stop for fuel?" />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="stopForFuelButton" text="Stop for fuel" />
+               <Button fx:id="continueWithoutFuelButton" text="Continue" />
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="168.0" layoutY="128.0" prefHeight="150.0" prefWidth="300.0" visible="false">
+
+      <!-- Breakdown Popup -->
+      <VBox fx:id="breakdownPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
-            <Label prefHeight="171.0" prefWidth="300.0" text="OH NO!! Your car broke down... Would you like to withdraw from the race or pay $500 of repair costs, they will take 10 seconds." />
-            <HBox prefHeight="104.0" prefWidth="217.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="150.0" text="Withdraw from race" />
-                  <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="150.0" text="Pay $500 repair costs and continue" />
-               </children>
+            <Label wrapText="true" text="OH NO! Your car broke down. Withdraw or pay $500 to repair? Delay: 10 seconds." />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="withdrawButton" text="Withdraw" />
+               <Button fx:id="repairButton" text="Pay and continue" />
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="168.0" layoutY="128.0" prefHeight="150.0" prefWidth="300.0" visible="false">
+
+      <!-- Traveler Popup -->
+      <VBox fx:id="travelerPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
-            <Label prefHeight="171.0" prefWidth="300.0" text="A stranded traveler has asked you for a pick up Do you accept?" />
-            <HBox prefHeight="104.0" prefWidth="217.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="150.0" text="Pick up" />
-                  <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="150.0" text="Drive past" />
-               </children>
+            <Label wrapText="true" text="A stranded traveler needs a ride. Do you pick them up?" />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="pickUpButton" text="Pick up" />
+               <Button fx:id="drivePastButton" text="Drive past" />
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="178.0" layoutY="138.0" prefHeight="150.0" prefWidth="300.0" visible="false">
+
+      <!-- Weather Popup -->
+      <VBox fx:id="weatherPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
-            <Label prefHeight="171.0" prefWidth="300.0" text="The route is affected by severe weather and the race is interrupted! You are refunded the initial cost " />
-            <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="150.0" text="Continue" />
+            <Label wrapText="true" text="Severe weather has interrupted the race. You've been refunded." />
+            <Button fx:id="continueAfterWeatherButton" text="Continue" />
          </children>
       </VBox>
    </children>
