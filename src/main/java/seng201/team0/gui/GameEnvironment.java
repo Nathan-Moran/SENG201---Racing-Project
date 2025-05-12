@@ -7,6 +7,8 @@ public class GameEnvironment {
     private static Route selectedRoute;
     private static Season currentSeason;
 
+    private int balance;
+
     public static void setSelectedCourse(Course course) {
         selectedCourse = course;
     }
@@ -77,5 +79,9 @@ public class GameEnvironment {
 
     public void setupInventoryList() {
 
+    }
+
+    public int getBalance() {
+        return balance;
     }
 }

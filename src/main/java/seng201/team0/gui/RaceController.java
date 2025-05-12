@@ -4,9 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class RaceController {
 
@@ -36,6 +40,15 @@ public class RaceController {
     private Timeline raceTimeline;
     private final double speed = 0.5; // km per tick
     private final double fuelConsumptionRate = 0.005;
+
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
+    public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+    }
+
 
     public void initialize() {
         fuelGauge.setProgress(1);

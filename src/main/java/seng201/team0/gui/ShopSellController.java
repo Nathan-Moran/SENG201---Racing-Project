@@ -7,18 +7,18 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class ShopSellController extends AbstractShopController {
-    public ShopSellController() {
-        super();
+    public ShopSellController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        super(gameEnvironment, sceneNavigator);
     }
 
     @Override
     protected void loadTuningParts() {
-        tuningPartTable.setItems(gameEnvironment.getShopInventory().getTuningPartList());
+        tuningPartTable.setItems(gameEnvironment.getPlayerInventory().getTuningPartList());
     }
 
     @Override
     protected void loadCars() {
-        carTable.setItems(gameEnvironment.getShopInventory().getCarList());
+        carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
     }
 
     @FXML

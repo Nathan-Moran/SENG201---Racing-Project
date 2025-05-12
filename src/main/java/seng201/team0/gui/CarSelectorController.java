@@ -1,18 +1,33 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.Car;
-import seng201.team0.TuningPart;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class AbstractShopController implements Initializable {
-    //Garage and Sellable Cars
+public class CarSelectorController implements Initializable {
+
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
+    public CarSelectorController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+    }
+
+    @FXML
+    private void chooseSelected(ActionEvent event) {
+
+        Integer.parseInt(modelColumn.getText());
+        gameEnvironment.getShopInventory().getCarList();
+    }
+
     @FXML protected TableView<Car> carTable;
 
     @FXML private TableColumn<Car, String> modelColumn;
@@ -32,33 +47,11 @@ public abstract class AbstractShopController implements Initializable {
 
     @FXML private TableColumn<Car, String> speedupgradeColumn;
 
-    //Tuning Parts
-    @FXML protected TableView<TuningPart> tuningPartTable;
-
-    @FXML private TableColumn<TuningPart, String> partnameColumn;
-
-    @FXML private TableColumn<TuningPart, Integer> partpriceColumn;
-
-    @FXML private TableColumn<TuningPart, String> partstatColumn;
-
-    @FXML private TableColumn<TuningPart, Double> partboostColumn;
-
-
-    protected GameEnvironment gameEnvironment;
-    protected SceneNavigator sceneNavigator;
-
-    public AbstractShopController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
-        this.gameEnvironment = gameEnvironment;
-        this.sceneNavigator = sceneNavigator;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupCarTable();
-        setupTuningPartTable();
-
         loadCars();
-        loadTuningParts();
+
     }
 
     protected void setupCarTable() {
@@ -72,15 +65,8 @@ public abstract class AbstractShopController implements Initializable {
         speedupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("speedUpgrade"));
     }
 
-    protected void setupTuningPartTable() {
-        partnameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
-        partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
-
-
+    protected void loadCars() {
+        carTable.getItems().clear();
     }
 
-    protected abstract void loadTuningParts();
-    protected abstract void loadCars();
 }
