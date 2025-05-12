@@ -7,24 +7,25 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="root" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.StartMenuController">
 
    <!-- Top: Title and Name Entry -->
    <top>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="🏁 Welcome to Rocket Racing!" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="🏁 Welcome to Rocket Racing!" />
             <HBox alignment="CENTER" spacing="10.0">
                <children>
                   <Label text="Enter your name:" />
-                  <TextField fx:id="nameField" promptText="Your name" prefWidth="200.0"/>
+                  <TextField fx:id="nameField" prefWidth="200.0" promptText="Your name" />
                </children>
             </HBox>
          </children>
          <padding>
-            <Insets top="20" bottom="10" left="20" right="20"/>
+            <Insets bottom="10" left="20" right="20" top="20" />
          </padding>
       </VBox>
    </top>
@@ -33,12 +34,12 @@
    <center>
       <VBox alignment="CENTER" spacing="20.0">
          <children>
-            <Label text="Select Difficulty:" style="-fx-font-size: 16px;" />
+            <Label style="-fx-font-size: 16px;" text="Select Difficulty:" />
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="easyButton" text="Easy" prefWidth="100.0" style="-fx-background-color: #7CFC00;" />
-                  <Button fx:id="mediumButton" text="Medium" prefWidth="100.0" style="-fx-background-color: #FFD700;" />
-                  <Button fx:id="hardButton" text="Hard" prefWidth="100.0" style="-fx-background-color: #FF4500;" />
+                  <Button fx:id="easyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #7CFC00;" text="Easy" />
+                  <Button fx:id="mediumButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Medium" />
+                  <Button fx:id="hardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FF4500;" text="Hard" />
                </children>
             </HBox>
          </children>
@@ -47,17 +48,15 @@
 
    <!-- Bottom: Season Slider -->
    <bottom>
-      <HBox spacing="10.0" alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Season Length:" />
-            <Slider fx:id="seasonSlider"
-                    min="5.0" max="15.0"
-                    majorTickUnit="1" blockIncrement="1"
-                    showTickMarks="true" showTickLabels="true"
-                    snapToTicks="true" prefWidth="300.0"/>
+            <Slider fx:id="seasonSlider" blockIncrement="1" majorTickUnit="1" max="15.0" min="5.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Pane prefHeight="38.0" prefWidth="166.0" />
+            <Button mnemonicParsing="false" onAction="#acceptButton" onMouseClicked="#acceptButton" text="Accept" />
          </children>
          <padding>
-            <Insets top="15" bottom="15" left="20" right="20"/>
+            <Insets bottom="15" left="20" right="20" top="15" />
          </padding>
       </HBox>
    </bottom>

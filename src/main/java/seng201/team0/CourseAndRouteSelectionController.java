@@ -6,7 +6,17 @@ import javafx.event.ActionEvent;
 import seng201.team0.gui.GameEnvironment;
 import seng201.team0.gui.SceneNavigator;
 
+import java.io.IOException;
+
 public class CourseAndRouteSelectionController {
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
+    public CourseAndRouteSelectionController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+    }
+
 
     @FXML private VBox courseSelectionMenu;
     @FXML private VBox desertRouteMenu;
@@ -59,54 +69,54 @@ public class CourseAndRouteSelectionController {
     }
 
     @FXML
-    private void onDesertDriftSelected(ActionEvent event) {
+    private void onDesertDriftSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.DESERT_DRIFT);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onDesertLongSelected(ActionEvent event) {
+    private void onDesertLongSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.DESERT_LONG);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onMountainSteepSelected(ActionEvent event) {
+    private void onMountainSteepSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.MOUNTAIN_STEEP);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onMountainCurvesSelected(ActionEvent event) {
+    private void onMountainCurvesSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.MOUNTAIN_CURVES);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onCountryStraightSelected(ActionEvent event) {
+    private void onCountryStraightSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.COUNTRY_STRAIGHT);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onCountryTwistySelected(ActionEvent event) {
+    private void onCountryTwistySelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.COUNTRY_TWISTY);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onCityAlleysSelected(ActionEvent event) {
+    private void onCityAlleysSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.CITY_ALLEYS);
-        startRace();
+        startRace(event);
     }
 
     @FXML
-    private void onCityTrafficSelected(ActionEvent event) {
+    private void onCityTrafficSelected(ActionEvent event) throws IOException {
         GameEnvironment.setSelectedRoute(Route.CITY_TRAFFIC);
-        startRace();
+        startRace(event);
     }
 
-    private void startRace() {
-        SceneNavigator.switchToSceneRace();
+    private void startRace(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneRace(event);
     }
 }

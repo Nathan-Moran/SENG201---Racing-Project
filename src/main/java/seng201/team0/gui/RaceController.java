@@ -3,9 +3,13 @@ package seng201.team0.gui;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class RaceController {
 
@@ -31,6 +35,15 @@ public class RaceController {
     private double playerDistance = 0;
     private final double raceLength = 100; // Placeholder - set this dynamically based on route
     private boolean isRacing = true;
+
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
+    public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+    }
+
 
     public void initialize() {
         progressBar.setProgress(0);
