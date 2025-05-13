@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import seng201.team0.Difficulty;
 import seng201.team0.Race;
 
 import java.net.URL;
@@ -34,6 +35,9 @@ public class RaceController {
     @FXML private Button drivePastButton;
     @FXML private Button continueAfterWeatherButton;
 
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
     private Race currentRace;  // Holds the current race information
     private double playerDistance = 0;
     private boolean isRacing = true;
@@ -44,8 +48,6 @@ public class RaceController {
     private boolean isWaiting = false;
     private int waitTicksRemaining = 0; // 1 tick = 100ms, so 50 = 5 seconds
 
-    protected GameEnvironment gameEnvironment;
-    protected SceneNavigator sceneNavigator;
 
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
