@@ -9,6 +9,8 @@ public class GameEnvironment {
     private Difficulty selectedDifficulty;
 
     private int balance;
+    private String name;
+    private int seasonLength;
 
     public static void setSelectedCourse(Course course) {
         selectedCourse = course;
@@ -50,6 +52,22 @@ public class GameEnvironment {
     public GameEnvironment() {
         setupInventoryList();
         setupShopList();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setSeasonLength(int seasonLength) {
+        this.seasonLength = seasonLength;
+    }
+
+    public int getSeasonLength() {
+        return seasonLength;
     }
 
     public void setupShopList() {
