@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import seng201.team0.Difficulty;
 
 
 public class StartMenuController {
@@ -25,8 +26,8 @@ public class StartMenuController {
         Boolean invalidNameLength = false;
         Boolean invalidNameCharacters = false;
 
-        gameEnvironment.setSeasonLength((int)seasonSlider.getValue());
-        name = (String)nameField.getText();
+        gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
+        name = (String) nameField.getText();
 
         //add name to main menu and change to display error in dedicated errorbox
         if (name.length() >= 3 && name.length() <= 15) {
@@ -48,48 +49,36 @@ public class StartMenuController {
         } else {
             sceneNavigator.switchToSceneCarSelector(event);
         }
+    }
 
-        @FXML
-        void setdifficultyEasy(ActionEvent event) throws IOException {
-            gameEnvironment.setDifficulty(Difficulty.EASY);
+    @FXML
+    private void setdifficultyEasy(ActionEvent event) throws IOException {
+        System.out.println("Easy");
+        gameEnvironment.setDifficulty(Difficulty.EASY);
+    }
 
+    @FXML
+    void setdifficultyMedium(ActionEvent event) {
+        System.out.println("Medium");
+        gameEnvironment.setDifficulty(Difficulty.MEDIUM);
+    }
 
-
-        }
-
-        @FXML
-        void setdifficultyHard(ActionEvent event) {
-
-        }
-
-        @FXML
-        void setdifficultyMedium(ActionEvent event) {
-
-        }
-
+    @FXML
+    void setdifficultyHard(ActionEvent event) {
+        System.out.println("Hard");
+        gameEnvironment.setDifficulty(Difficulty.HARD);
     }
 
 
+    @FXML private Button easyButton;
 
+    @FXML private Button hardButton;
 
-        @FXML
-        private Button easyButton;
+    @FXML private Button mediumButton;
 
-        @FXML
-        private Button hardButton;
+    @FXML private TextField nameField;
 
-        @FXML
-        private Button mediumButton;
-
-        @FXML
-        private TextField nameField;
-
-
-        @FXML
-        private Slider seasonSlider;
-
-
-
+    @FXML private Slider seasonSlider;
 }
 
 
