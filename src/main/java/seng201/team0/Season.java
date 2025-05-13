@@ -16,7 +16,7 @@ public class Season {
 
     public void addRace(Course course, Route route, List<OpponentCar> opponents, double raceDuration) {
         if (races.size() < length) {
-            races.add(new Race(course, route, opponents, raceDuration));
+            races.add(new Race(course, route));
         } else {
             System.out.println("Season is full.");
         }
