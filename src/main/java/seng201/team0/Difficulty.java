@@ -1,17 +1,21 @@
 package seng201.team0;
 
-public class Difficulty {
-    private String difficulty;
-    private double successRate;
-    private int startBudget;
-    private double randomEventRate;
+import java.util.ArrayList;
+import java.util.List;
 
-    public String getDifficulty() {
-        return difficulty;
-    }
+public enum Difficulty {
+    EASY(1000, 0.6, 50),
+    MEDIUM(800, 0.4, 60),
+    HARD(600, 0.3, 70);
 
-    public double getSuccessRate() {
-        return successRate;
+    private final int startBudget;
+    private final double randomEventRate;
+    private final int opponentSpeed;
+
+    Difficulty(int startBudget, double randomEventRate, int opponentSpeed) {
+        this.startBudget = startBudget;
+        this.randomEventRate = randomEventRate;
+        this.opponentSpeed = opponentSpeed;
     }
 
     public int getStartBudget() {
@@ -22,27 +26,18 @@ public class Difficulty {
         return randomEventRate;
     }
 
-    public void setSuccessRate(double successRate) {
-        switch (difficulty) {
-            case "easy" -> this.successRate = 0.9;
-            case "medium" -> this.successRate = 0.8;
-            case "hard" -> this.successRate = 0.7;
-        }
+    public int getOpponentSpeed() {
+        return opponentSpeed;
     }
 
-    public void setStartBudget(int startBudget) {
-        switch (difficulty) {
-            case "easy" -> this.startBudget = 1000;
-            case "medium" -> this.startBudget = 800;
-            case "hard" -> this.startBudget = 600;
+    public List<OpponentCar> generateOpponents(int count) {
+        List<OpponentCar> opponents = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            // Calculate speed with difference of 5 km/h for each opponent
+            int speed = opponentSpeed + (i * 5);
+            opponents.add(new OpponentCar(speed));
         }
+        return opponents;
     }
-
-    public void setRandomEventRate(double randomEventRate) {
-        switch (difficulty) {
-            case "easy" -> this.randomEventRate = 0.6;
-            case "medium" -> this.randomEventRate = 0.4;
-            case "hard" -> this.randomEventRate = 0.3;
-        }
-    }
+}
 }

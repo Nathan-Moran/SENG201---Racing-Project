@@ -6,6 +6,7 @@ public class GameEnvironment {
     private static Course selectedCourse;
     private static Route selectedRoute;
     private static Season currentSeason;
+    private Difficulty selectedDifficulty;
 
     private int balance;
     private String name;
@@ -24,6 +25,11 @@ public class GameEnvironment {
         currentSeason = season;
     }
 
+    public void setDifficulty(Difficulty difficulty) {
+        selectedDifficulty = difficulty;
+    }
+
+
     public static Course getSelectedCourse() {
         return selectedCourse;
     }
@@ -34,6 +40,10 @@ public class GameEnvironment {
 
     public static Season getCurrentSeason() {
         return currentSeason;
+    }
+
+    public Difficulty getDifficulty() {
+        return selectedDifficulty;
     }
 
 
