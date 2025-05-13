@@ -12,16 +12,15 @@ public class GameEnvironment {
     private String name;
     private int seasonLength;
 
-
-    public static void setSelectedCourse(Course course) {
+    public void setSelectedCourse(Course course) {
         selectedCourse = course;
     }
 
-    public static void setSelectedRoute(Route route) {
+    public void setSelectedRoute(Route route) {
         selectedRoute = route;
     }
 
-    public static void setCurrentSeason(Season season) {
+    public void setCurrentSeason(Season season) {
         currentSeason = season;
     }
 
@@ -30,15 +29,15 @@ public class GameEnvironment {
     }
 
 
-    public static Course getSelectedCourse() {
+    public Course getSelectedCourse() {
         return selectedCourse;
     }
 
-    public static Route getSelectedRoute() {
+    public Route getSelectedRoute() {
         return selectedRoute;
     }
 
-    public static Season getCurrentSeason() {
+    public Season getCurrentSeason() {
         return currentSeason;
     }
 
