@@ -43,7 +43,6 @@ public class GameEnvironment {
         return selectedDifficulty;
     }
 
-
     Garage shopInventory = new Garage();
     Garage playerInventory = new Garage();
 

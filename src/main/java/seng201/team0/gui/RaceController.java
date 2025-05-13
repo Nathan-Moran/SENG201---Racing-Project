@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import seng201.team0.Difficulty;
-import seng201.team0.OpponentCar;
-import seng201.team0.Race;
-import seng201.team0.Route;
+import seng201.team0.*;
 
 import java.net.URL;
 import java.util.List;
@@ -42,6 +39,7 @@ public class RaceController {
     protected SceneNavigator sceneNavigator;
 
     private Race currentRace;  // Holds the current race information
+    private Difficulty currentDifficulty;
     private double playerDistance = 0;
     private boolean isRacing = true;
     private double fuelLevel = 1.0; // 1.0 = full, 0.0 = empty
@@ -71,15 +69,14 @@ public class RaceController {
         pickUpButton.setOnAction(event -> handleTraveler(true));
         drivePastButton.setOnAction(event -> handleTraveler(false));
         continueAfterWeatherButton.setOnAction(event -> handleWeatherContinue());
-        this.currentRace = gameEnvironment.getCurrentRace(); // Make sure this is set
+        this.currentRace = gameEnvironment.getCurrentRace(); // Make race is set
         Route selectedRoute = currentRace.getRoute();
         Difficulty difficulty = gameEnvironment.getDifficulty();
+        Course course = gameEnvironment.getSelectedCourse();
 
 // Use number of fuel stops (or make a getOpponentCount() method) to determine number of opponents
-        int numberOfOpponents = selectedRoute.getFuelstops();
-
+        int numberOfOpponents = course.getNumberOfOpponents();
         this.opponents = difficulty.generateOpponents(numberOfOpponents);
-
         raceTimeline.play();
     }
 

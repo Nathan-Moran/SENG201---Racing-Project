@@ -1,10 +1,11 @@
-package seng201.team0;
+package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
-import seng201.team0.gui.GameEnvironment;
-import seng201.team0.gui.SceneNavigator;
+import seng201.team0.Course;
+import seng201.team0.Race;
+import seng201.team0.Route;
 
 import java.io.IOException;
 
@@ -24,27 +25,30 @@ public class CourseAndRouteSelectionController {
     @FXML private VBox countryRouteMenu;
     @FXML private VBox cityRouteMenu;
 
+    private Course selectedCourse;
+    private Route selectedRoute;
+
     @FXML
     private void onDesertSelected(ActionEvent event) {
-        gameEnvironment.setSelectedCourse(Course.DESERT);
+        selectedCourse = Course.DESERT;
         showRouteMenu(desertRouteMenu);
     }
 
     @FXML
     private void onMountainSelected(ActionEvent event) {
-        gameEnvironment.setSelectedCourse(Course.MOUNTAIN);
+        selectedCourse = Course.MOUNTAIN;
         showRouteMenu(mountainRouteMenu);
     }
 
     @FXML
     private void onCountrySelected(ActionEvent event) {
-        gameEnvironment.setSelectedCourse(Course.COUNTRY);
+        selectedCourse = Course.COUNTRY;
         showRouteMenu(countryRouteMenu);
     }
 
     @FXML
     private void onCitySelected(ActionEvent event) {
-        gameEnvironment.setSelectedCourse(Course.CITY);
+        selectedCourse = Course.CITY;
         showRouteMenu(cityRouteMenu);
     }
 
@@ -68,55 +72,53 @@ public class CourseAndRouteSelectionController {
         routeMenu.setManaged(true);
     }
 
+    // Desert routes
     @FXML
     private void onDesertDriftSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.DESERT_DRIFT);
-        startRace(event);
+        createRaceAndStart(Route.DESERT_DRIFT, event);
     }
 
     @FXML
     private void onDesertLongSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.DESERT_LONG);
-        startRace(event);
+        createRaceAndStart(Route.DESERT_LONG, event);
     }
 
+    // Mountain routes
     @FXML
     private void onMountainSteepSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.MOUNTAIN_STEEP);
-        startRace(event);
+        createRaceAndStart(Route.MOUNTAIN_STEEP, event);
     }
 
     @FXML
     private void onMountainCurvesSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.MOUNTAIN_CURVES);
-        startRace(event);
+        createRaceAndStart(Route.MOUNTAIN_CURVES, event);
     }
 
+    // Country routes
     @FXML
     private void onCountryStraightSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.COUNTRY_STRAIGHT);
-        startRace(event);
+        createRaceAndStart(Route.COUNTRY_STRAIGHT, event);
     }
 
     @FXML
     private void onCountryTwistySelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.COUNTRY_TWISTY);
-        startRace(event);
+        createRaceAndStart(Route.COUNTRY_TWISTY, event);
     }
 
+    // City routes
     @FXML
     private void onCityAlleysSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.CITY_ALLEYS);
-        startRace(event);
+        createRaceAndStart(Route.CITY_ALLEYS, event);
     }
 
     @FXML
     private void onCityTrafficSelected(ActionEvent event) throws IOException {
-        gameEnvironment.setSelectedRoute(Route.CITY_TRAFFIC);
-        startRace(event);
+        createRaceAndStart(Route.CITY_TRAFFIC, event);
     }
 
-    private void startRace(ActionEvent event) throws IOException {
+    private void createRaceAndStart(Route selectedRoute, ActionEvent event) throws IOException {
+        Race newRace = new Race(selectedCourse, selectedRoute);
+        gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
     }
 }
