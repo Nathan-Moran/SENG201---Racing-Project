@@ -11,6 +11,7 @@ public class GameEnvironment {
     private String name;
     private int seasonLength;
 
+
     public static void setSelectedCourse(Course course) {
         selectedCourse = course;
     }

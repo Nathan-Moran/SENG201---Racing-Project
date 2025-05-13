@@ -37,9 +37,9 @@
             <Label style="-fx-font-size: 16px;" text="Select Difficulty:" />
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="easyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #7CFC00;" text="Easy" />
-                  <Button fx:id="mediumButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Medium" />
-                  <Button fx:id="hardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FF4500;" text="Hard" />
+                  <Button fx:id="easyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#setdifficultyEasy" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #7CFC00;" text="Easy" />
+                  <Button fx:id="mediumButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#setdifficultyMedium" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Medium" />
+                  <Button fx:id="hardButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#setdifficultyHard" prefHeight="80.0" prefWidth="140.0" style="-fx-background-color: #FF4500;" text="Hard" />
                </children>
             </HBox>
          </children>
