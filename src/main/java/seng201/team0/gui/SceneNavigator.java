@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
-import seng201.team0.CourseAndRouteSelectionController;
 import seng201.team0.Garage;
 
 import java.io.IOException;

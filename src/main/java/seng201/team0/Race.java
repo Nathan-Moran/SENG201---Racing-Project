@@ -5,17 +5,12 @@ import java.util.List;
 public class Race {
     private Course course;
     private Route route;
-    private double raceDuration;
     private List<OpponentCar> opponents;
 
-    public Race(Course course, Route route, List<OpponentCar> opponents, double raceDuration) {
+    public Race(Course course, Route route) {
         this.course = course;
         this.route = route;
-        this.opponents = opponents;
-        this.raceDuration = raceDuration;
-
     }
-
 
     public Course getCourse() {
         return course;
@@ -23,6 +18,18 @@ public class Race {
 
     public Route getRoute() {
         return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public void setOpponents(List<OpponentCar> opponents) {
+        this.opponents = opponents;
     }
 
 

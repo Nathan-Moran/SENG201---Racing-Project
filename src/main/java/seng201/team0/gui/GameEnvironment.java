@@ -3,8 +3,7 @@ package seng201.team0.gui;
 import seng201.team0.*;
 
 public class GameEnvironment {
-    private static Course selectedCourse;
-    private static Route selectedRoute;
+    private Race currentRace;
     private static Season currentSeason;
     private Difficulty selectedDifficulty;
 
@@ -12,12 +11,8 @@ public class GameEnvironment {
     private String name;
     private int seasonLength;
 
-    public void setSelectedCourse(Course course) {
-        selectedCourse = course;
-    }
-
-    public void setSelectedRoute(Route route) {
-        selectedRoute = route;
+    public void setCurrentRace(Race currentRace) {
+        this.currentRace = currentRace;
     }
 
     public void setCurrentSeason(Season season) {
@@ -28,13 +23,16 @@ public class GameEnvironment {
         selectedDifficulty = difficulty;
     }
 
+    public Race getCurrentRace() {
+        return currentRace;
+    }
 
     public Course getSelectedCourse() {
-        return selectedCourse;
+        return currentRace != null ? currentRace.getCourse() : null;
     }
 
     public Route getSelectedRoute() {
-        return selectedRoute;
+        return currentRace != null ? currentRace.getRoute() : null;
     }
 
     public Season getCurrentSeason() {
@@ -44,7 +42,6 @@ public class GameEnvironment {
     public Difficulty getDifficulty() {
         return selectedDifficulty;
     }
-
 
     Garage shopInventory = new Garage();
     Garage playerInventory = new Garage();
