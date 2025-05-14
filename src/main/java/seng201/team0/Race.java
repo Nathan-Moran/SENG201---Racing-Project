@@ -33,7 +33,7 @@ public class Race {
     }
 
 
-    public void updateRace(double timeElapsed) {
+    public void updateRace(int timeElapsed) {
         // Update the distance for each opponent
         for (OpponentCar opponent : opponents) {
             opponent.updateDistance(timeElapsed);
