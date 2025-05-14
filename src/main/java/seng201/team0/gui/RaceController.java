@@ -20,6 +20,7 @@ public class RaceController {
     @FXML private Label currentDistanceLabel;
     @FXML private Label raceLengthLabel;
     @FXML private ProgressBar fuelGauge;
+    @FXML private VBox leaderboardBox;
 
     // Popups
     @FXML private VBox fuelStopPopup;
@@ -39,16 +40,19 @@ public class RaceController {
     protected SceneNavigator sceneNavigator;
 
     private Race currentRace;  // Holds the current race information
+    private Car currentCar;
     private Difficulty currentDifficulty;
     private double playerDistance = 0;
     private boolean isRacing = true;
     private double fuelLevel = 1.0; // 1.0 = full, 0.0 = empty
     private Timeline raceTimeline;
     private List<OpponentCar> opponents;
-    private final double speed = 0.5; // km per tick
-    private final double fuelConsumptionRate = 0.005;
+    private final double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute()); // km per tick
+    private final double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
     private boolean isWaiting = false;
     private int waitTicksRemaining = 0; // 1 tick = 100ms, so 50 = 5 seconds
+    private int tickCount = 0;
+    int secondsElapsed = tickCount / 10;
 
 
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
@@ -73,10 +77,9 @@ public class RaceController {
         Route selectedRoute = currentRace.getRoute();
         Difficulty difficulty = gameEnvironment.getDifficulty();
         Course course = gameEnvironment.getSelectedCourse();
-
-// Use number of fuel stops (or make a getOpponentCount() method) to determine number of opponents
         int numberOfOpponents = course.getNumberOfOpponents();
         this.opponents = difficulty.generateOpponents(numberOfOpponents);
+        currentRace.updateRace(secondsElapsed);
         raceTimeline.play();
     }
 
@@ -88,6 +91,7 @@ public class RaceController {
 
     public void advanceRace() {
         if (!isRacing) return;
+        tickCount++;
         if (isWaiting) {
             waitTicksRemaining--;
             if (waitTicksRemaining <= 0) {
@@ -95,6 +99,7 @@ public class RaceController {
             }
             return; // Don't advance player during repair
         }
+
         playerDistance += speed;
         fuelLevel -= fuelConsumptionRate; // Adjust rate as needed
         if (fuelLevel < 0) fuelLevel = 0;
@@ -114,6 +119,7 @@ public class RaceController {
         } else {
             fuelGauge.setStyle("-fx-accent: green;");
         }
+        updateLeaderboardDisplay();
     }
 
     private void handleFuelStop(boolean refuel) {
@@ -154,5 +160,20 @@ public class RaceController {
         raceTimeline.stop();
         isRacing = false;
         // Show result screen
+    }
+
+    private void updateLeaderboardDisplay() {
+        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size()); // Keep title, remove old entries
+
+        // Player
+        Label playerLabel = new Label("Player: " + (int) playerDistance + " km");
+        leaderboardBox.getChildren().add(playerLabel);
+
+        // Opponents
+        for (int i = 0; i < opponents.size(); i++) {
+            OpponentCar opponent = opponents.get(i);
+            Label opponentLabel = new Label("Opponent " + (i + 1) + ": " + (int) opponent.getCurrentDistance() + " km");
+            leaderboardBox.getChildren().add(opponentLabel);
+        }
     }
 }

@@ -35,6 +35,15 @@
          </children>
       </HBox>
 
+      <VBox fx:id="leaderboardBox" layoutX="400" layoutY="20" spacing="5"
+            style="-fx-background-color: rgba(255,255,255,0.8); -fx-padding: 10; -fx-border-color: black; -fx-border-width: 1;">
+         <children>
+            <Label text="Leaderboard" style="-fx-font-weight: bold; -fx-underline: true;" />
+            <!-- Dynamic labels will be added here in the controller -->
+         </children>
+      </VBox>
+
+
       <!-- Fuel Stop Popup -->
       <VBox fx:id="fuelStopPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
             style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
