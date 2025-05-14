@@ -26,12 +26,6 @@ public class GarageController implements Initializable {
         this.sceneNavigator = sceneNavigator;
     }
 
-    ObservableList<Car> reserveCars = FXCollections.observableArrayList(
-            new Car("Toyota Supra", 180, 6, 8, 538, 67000),
-            new Car("Mustang", 250, 6, 6, 400, 89000),
-            new Car("Ferrari 458", 330, 8, 7, 300, 485000)
-    );
-
     @FXML
     public void switchToMainMenu(ActionEvent event) throws IOException {
         sceneNavigator.switchToSceneMainMenu(event);
@@ -70,6 +64,6 @@ public class GarageController implements Initializable {
         reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
 
-        carTable.setItems(reserveCars);
+        carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
     }
 }

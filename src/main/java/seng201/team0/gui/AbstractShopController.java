@@ -77,8 +77,6 @@ public abstract class AbstractShopController implements Initializable {
         partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
         partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
-
-
     }
 
     protected abstract void loadTuningParts();
