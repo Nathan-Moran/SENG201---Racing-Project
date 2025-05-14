@@ -28,16 +28,14 @@
         <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
             <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Starter Cars" />
-                <TableView fx:id="carTable" prefHeight="300.0" prefWidth="440.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
+                <TableView fx:id="carTable" onMouseClicked="#getSelectedCar" prefHeight="300.0" prefWidth="440.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                     <columns>
-                        <TableColumn fx:id="modelColumn" prefWidth="80.0" text="🚗" />
+                        <TableColumn fx:id="modelColumn" minWidth="-Infinity" prefWidth="100.0" text="🚗" />
                         <TableColumn fx:id="priceColumn" prefWidth="60.0" text="💲" />
                         <TableColumn fx:id="speedColumn" prefWidth="40.0" text="💨" />
                         <TableColumn fx:id="handlingColumn" prefWidth="40.0" text="🎮" />
                         <TableColumn fx:id="reliabilityColumn" prefWidth="40.0" text="🔧" />
                         <TableColumn fx:id="fuelColumn" prefWidth="40.0" text="⛽" />
-                        <TableColumn fx:id="speedupgradeColumn" prefWidth="70.0" text="💨⬆" />
-                        <TableColumn fx:id="handlingupgradeColumn" prefWidth="70.0" text="🎮⬆" />
                     </columns>
                 </TableView>
             </VBox>

@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import seng201.team0.Car;
+import seng201.team0.Garage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,17 +18,31 @@ public class CarSelectorController implements Initializable {
 
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
+    protected Garage startingCarsGarage;
 
     public CarSelectorController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        gameEnvironment.setupStarterCars();
+        startingCarsGarage = gameEnvironment.getStarterCars();
     }
 
     @FXML
     private void chooseSelected(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneMainMenu(event);
+
+//
+        Car selectedCar = carTable.getSelectionModel().getSelectedItem();
+        gameEnvironment.starterCarInventory.removeCar(selectedCar);
+        gameEnvironment.playerInventory.addCar(selectedCar);
+        carTable.getSelectionModel().clearSelection();
+//        sceneNavigator.switchToSceneMainMenu(event);
 //        Integer.parseInt(modelColumn.getText());
 //        gameEnvironment.getShopInventory().getCarList();
+    }
+
+    @FXML
+    void getSelectedCar(MouseEvent event) {
+
     }
 
     @FXML protected TableView<Car> carTable;
@@ -44,10 +60,6 @@ public class CarSelectorController implements Initializable {
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
 
-    @FXML private TableColumn<Car, String> handlingupgradeColumn;
-
-    @FXML private TableColumn<Car, String> speedupgradeColumn;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupCarTable();
@@ -62,12 +74,10 @@ public class CarSelectorController implements Initializable {
         handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
         reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
-        handlingupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("handlingUpgrade"));
-        speedupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("speedUpgrade"));
     }
 
     protected void loadCars() {
-        carTable.getItems().clear();
+        carTable.setItems(startingCarsGarage.getCarList());
     }
 
 }

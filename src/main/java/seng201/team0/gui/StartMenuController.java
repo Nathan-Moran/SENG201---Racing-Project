@@ -67,9 +67,11 @@ public class StartMenuController {
             nameField.clear();
             nameField.setPromptText("Name must not contain special characters");
             nameField.setStyle("-fx-prompt-text-fill: red;");
-        } else {
-            sceneNavigator.switchToSceneCarSelector(event);
         }
+        if ((!invalidNameCharacters && !invalidNameLength) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
+            sceneNavigator.switchToSceneCarSelector(event);
+        };
+
     }
 
     @FXML

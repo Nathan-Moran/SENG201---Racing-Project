@@ -45,6 +45,7 @@ public class GameEnvironment {
 
     Garage shopInventory = new Garage();
     Garage playerInventory = new Garage();
+    Garage starterCarInventory = new Garage();
 
     public GameEnvironment() {
         setupInventoryList();
@@ -91,6 +92,21 @@ public class GameEnvironment {
         shopInventory.addTuningParts(StreetWheels);
         shopInventory.addTuningParts(SportWheels);
         shopInventory.addTuningParts(RacingWheels);
+    }
+
+    public void setupStarterCars() {
+        Car HondaCivicR = new Car("Honda Civic R", 180, 7, 7, 500, 32000);
+//        Car ToyotaGRCorolla  =  new Car("Toyota Corolla", 180, 7, 8, 500, 32000);
+        Car MazdaMPS = new Car("Mazda MPS", 180, 6, 7, 500, 32000);
+        Car NissanZ = new Car("Nissan Z", 180, 7, 8, 500, 32000);
+
+        starterCarInventory.addCar(HondaCivicR);
+        starterCarInventory.addCar(MazdaMPS);
+        starterCarInventory.addCar(NissanZ);
+    }
+
+    public Garage getStarterCars() {
+        return starterCarInventory;
     }
 
     public Garage getPlayerInventory() {
