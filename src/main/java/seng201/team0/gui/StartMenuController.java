@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import seng201.team0.Difficulty;
 
 
@@ -23,18 +26,22 @@ public class StartMenuController {
     }
 
     @FXML
-    void setSeasonLength(DragEvent event) {
+    private void setSeasonLength(MouseEvent event) {
         displaySeasonLengthLabel.setText(String.valueOf(seasonSlider.getValue()));
+    }
+
+
+    @FXML
+    void setName(KeyEvent event) {
+        displayNameLabel.setText(nameField.getText());
     }
 
     @FXML
     private void acceptButton(ActionEvent event) throws IOException {
-        //Get chosen difficulty
         Boolean invalidNameLength = false;
         Boolean invalidNameCharacters = false;
 
         gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
-        System.out.println(seasonSlider.getValue());
         name = (String) nameField.getText();
 
         if (!(name.length() >= 3 && name.length() <= 15)) {
@@ -60,23 +67,28 @@ public class StartMenuController {
             nameField.clear();
             nameField.setPromptText("Name must not contain special characters");
             nameField.setStyle("-fx-prompt-text-fill: red;");
-        } else {
-            sceneNavigator.switchToSceneCarSelector(event);
         }
+        if ((!invalidNameCharacters && !invalidNameLength) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
+            sceneNavigator.switchToSceneCarSelector(event);
+        };
+
     }
 
     @FXML
     private void setdifficultyEasy(ActionEvent event) throws IOException {
+        displayDifficultyLabel.setText("Easy");
         gameEnvironment.setDifficulty(Difficulty.EASY);
     }
 
     @FXML
     void setdifficultyMedium(ActionEvent event) {
+        displayDifficultyLabel.setText("Medium");
         gameEnvironment.setDifficulty(Difficulty.MEDIUM);
     }
 
     @FXML
     void setdifficultyHard(ActionEvent event) {
+        displayDifficultyLabel.setText("Hard");
         gameEnvironment.setDifficulty(Difficulty.HARD);
     }
 
