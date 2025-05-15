@@ -2,8 +2,8 @@ package seng201.team0.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 

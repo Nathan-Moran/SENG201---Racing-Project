@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
-import seng201.team0.Garage;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 

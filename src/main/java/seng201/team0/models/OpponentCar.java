@@ -1,4 +1,4 @@
-package seng201.team0;
+package seng201.team0.models;
 
 public class OpponentCar {
     private double speed;  // Constant speed for the opponent (in km/h)

@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 

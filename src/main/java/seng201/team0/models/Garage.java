@@ -1,9 +1,7 @@
-package seng201.team0;
+package seng201.team0.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 public class Garage {
     private ObservableList<Car> reserveCarList;

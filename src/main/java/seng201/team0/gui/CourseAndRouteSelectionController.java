@@ -3,9 +3,11 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
-import seng201.team0.Course;
-import seng201.team0.Race;
-import seng201.team0.Route;
+import seng201.team0.models.Course;
+import seng201.team0.models.Difficulty;
+import seng201.team0.models.Race;
+import seng201.team0.models.Route;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 
@@ -117,7 +119,8 @@ public class CourseAndRouteSelectionController {
     }
 
     private void createRaceAndStart(Route selectedRoute, ActionEvent event) throws IOException {
-        Race newRace = new Race(selectedCourse, selectedRoute);
+        Difficulty difficulty = gameEnvironment.getDifficulty();
+        Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
         gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
     }

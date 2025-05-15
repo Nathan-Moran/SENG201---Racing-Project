@@ -6,8 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import seng201.team0.Car;
-import seng201.team0.Garage;
+import seng201.team0.models.Car;
+import seng201.team0.models.Garage;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,8 +31,8 @@ public class CarSelectorController implements Initializable {
     @FXML
     private void chooseSelected(ActionEvent event) throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.starterCarInventory.removeCar(selectedCar);
-        gameEnvironment.playerInventory.addCar(selectedCar);
+        gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
+        gameEnvironment.getPlayerInventory().addCar(selectedCar);
         carTable.getSelectionModel().clearSelection();
     }
 
@@ -39,7 +40,7 @@ public class CarSelectorController implements Initializable {
     private void switchToMainMenu(ActionEvent event) throws IOException {
         if (!gameEnvironment.getPlayerInventory().getCarList().isEmpty()) {
             System.out.println(gameEnvironment.getPlayerInventory().getCarList());
-            gameEnvironment.shopInventory.getCarList().addAll(startingCarsGarage.getCarList());
+            gameEnvironment.getShopInventory().getCarList().addAll(startingCarsGarage.getCarList());
             startingCarsGarage.getCarList().clear();
             sceneNavigator.switchToSceneMainMenu(event);
         }

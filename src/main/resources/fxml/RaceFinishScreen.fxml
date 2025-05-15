@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
+
+    <!-- Race Finished Title anchored at top center -->
+    <Label alignment="CENTER" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Race Finished" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="20" />
+
+    <!-- VBox container centered with spacing and padding -->
+    <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="80">
+
+        <!-- Congratulatory or Condolence message, dynamic text -->
+        <Label fx:id="placementMessageLabel" style="-fx-font-size: 18px; -fx-text-fill: #2e7d32;" wrapText="true" />
+
+        <!-- Result title (e.g. "Final Results") -->
+        <Label fx:id="resultTitleLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+        <!-- Leaderboard -->
+        <Label style="-fx-font-size: 18px;" text="Final Leaderboard:" />
+        <ListView fx:id="leaderboardListView" prefHeight="200" prefWidth="300" />
+
+        <!-- Money earned -->
+        <Label fx:id="moneyEarnedLabel" style="-fx-font-size: 16px;" />
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" spacing="20">
+            <Button fx:id="mainMenuButton" text="Main Menu" />
+            <Button fx:id="newRaceButton" text="New Race" />
+        </HBox>
+    </VBox>
+
+</AnchorPane>

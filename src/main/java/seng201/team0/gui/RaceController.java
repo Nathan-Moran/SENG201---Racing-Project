@@ -4,15 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import seng201.team0.*;
+import seng201.team0.models.*;
+import seng201.team0.services.*;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class RaceController {
 
@@ -39,33 +37,34 @@ public class RaceController {
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
 
-    private Race currentRace;  // Holds the current race information
-    private Car currentCar;
-    private Difficulty currentDifficulty;
-    private double playerDistance = 0;
-    private boolean isRacing = true;
-    private double fuelLevel = 1.0; // 1.0 = full, 0.0 = empty
+    private RaceManager raceManager;
     private Timeline raceTimeline;
-    private List<OpponentCar> opponents;
-    private final double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute()); // km per tick
-    private final double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
-    private boolean isWaiting = false;
-    private int waitTicksRemaining = 0; // 1 tick = 100ms, so 50 = 5 seconds
-    private int tickCount = 0;
-    int secondsElapsed = tickCount / 10;
-
 
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
     }
 
-
     public void initialize() {
+        // Setup race manager
+        Race currentRace = gameEnvironment.getCurrentRace();
+        Car currentCar = gameEnvironment.getSelectedCar();
+        Difficulty difficulty = gameEnvironment.getDifficulty();
+        Course course = gameEnvironment.getSelectedCourse();
+        int numberOfOpponents = course.getNumberOfOpponents();
+        List<OpponentCar> opponents = difficulty.generateOpponents(numberOfOpponents);
+
+        double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute());
+        double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
+
+        raceManager = new RaceManager(currentRace, currentCar, opponents, speed, fuelConsumptionRate);
+
         fuelGauge.setProgress(1);
+
         raceTimeline = new Timeline(new KeyFrame(Duration.millis(100), event -> advanceRace()));
         raceTimeline.setCycleCount(Timeline.INDEFINITE);
-        updateUI();
+        raceTimeline.play();
+
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
         continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
         repairButton.setOnAction(event -> handleRepair(true));
@@ -73,45 +72,38 @@ public class RaceController {
         pickUpButton.setOnAction(event -> handleTraveler(true));
         drivePastButton.setOnAction(event -> handleTraveler(false));
         continueAfterWeatherButton.setOnAction(event -> handleWeatherContinue());
-        this.currentRace = gameEnvironment.getCurrentRace(); // Make race is set
-        Route selectedRoute = currentRace.getRoute();
-        Difficulty difficulty = gameEnvironment.getDifficulty();
-        Course course = gameEnvironment.getSelectedCourse();
-        int numberOfOpponents = course.getNumberOfOpponents();
-        this.opponents = difficulty.generateOpponents(numberOfOpponents);
-        currentRace.updateRace(secondsElapsed);
-        raceTimeline.play();
-    }
 
-    private void updateUI() {
-        currentDistanceLabel.setText("Current distance: " + (int) playerDistance + " km");
-        raceLengthLabel.setText("Length: " + (int) currentRace.getRoute().getLength() + " km");
-        fuelGauge.setProgress(fuelLevel);
-    }
-
-    public void advanceRace() {
-        if (!isRacing) return;
-        tickCount++;
-        if (isWaiting) {
-            waitTicksRemaining--;
-            if (waitTicksRemaining <= 0) {
-                isWaiting = false;
-            }
-            return; // Don't advance player during repair
-        }
-
-        playerDistance += speed;
-        fuelLevel -= fuelConsumptionRate; // Adjust rate as needed
-        if (fuelLevel < 0) fuelLevel = 0;
         updateUI();
+    }
+
+    private void advanceRace() {
+        raceManager.advanceRaceTick();
+
+        double playerDistance = raceManager.getPlayerDistance();
+
         if (playerDistance >= 30 && playerDistance < 35) {
             fuelStopPopup.setVisible(true);
         } else if (playerDistance >= 50 && playerDistance < 55) {
             breakdownPopup.setVisible(true);
         }
-        if (playerDistance >= currentRace.getRoute().getLength() || fuelLevel <= 0) {
+
+        updateUI();
+
+        if (raceManager.isRaceFinished()) {
             finishRace();
         }
+    }
+
+    private void updateUI() {
+        currentDistanceLabel.setText("Current distance: " + (int) raceManager.getPlayerDistance() + " km");
+        raceLengthLabel.setText("Length: " + (int) raceManager.getRace().getRoute().getLength() + " km");
+        fuelGauge.setProgress(raceManager.getFuelLevel());
+        updateLeaderboardDisplay();
+        updateFuelGauge();
+    }
+
+    private void updateFuelGauge() {
+        double fuelLevel = raceManager.getFuelLevel();
         if (fuelLevel < 0.2) {
             fuelGauge.setStyle("-fx-accent: red;");
         } else if (fuelLevel < 0.5) {
@@ -119,25 +111,39 @@ public class RaceController {
         } else {
             fuelGauge.setStyle("-fx-accent: green;");
         }
-        updateLeaderboardDisplay();
+    }
+
+    private void updateLeaderboardDisplay() {
+        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size()); // Keep title, remove old entries
+
+        // Player
+        Label playerLabel = new Label("Player: " + (int) raceManager.getPlayerDistance() + " km");
+        leaderboardBox.getChildren().add(playerLabel);
+
+        // Opponents
+        List<OpponentCar> opponents = raceManager.getOpponents();
+        for (int i = 0; i < opponents.size(); i++) {
+            OpponentCar opponent = opponents.get(i);
+            Label opponentLabel = new Label("Opponent " + (i + 1) + ": " + (int) opponent.getCurrentDistance() + " km");
+            leaderboardBox.getChildren().add(opponentLabel);
+        }
     }
 
     private void handleFuelStop(boolean refuel) {
         fuelStopPopup.setVisible(false);
         if (refuel) {
-            fuelGauge.setProgress(1);
+            raceManager.refuel();
         }
+        updateUI();
     }
 
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
         if (pay) {
             gameEnvironment.setBalance(gameEnvironment.getBalance() - 500);
-            isWaiting = true;
-            waitTicksRemaining = 50;
+            raceManager.setWaiting(true, 50);
         } else {
             raceTimeline.stop();
-            isRacing = false;
         }
     }
 
@@ -145,35 +151,18 @@ public class RaceController {
         travelerPopup.setVisible(false);
         if (pickUp) {
             gameEnvironment.setBalance(gameEnvironment.getBalance() + 500);
-            isWaiting = true;
-            waitTicksRemaining = 50;
+            raceManager.setWaiting(true, 50);
         }
     }
 
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
-        isRacing = false;
+        raceTimeline.stop();
         gameEnvironment.setBalance(gameEnvironment.getBalance() - gameEnvironment.getCurrentRace().getCourse().getEntryFee());
     }
 
     private void finishRace() {
         raceTimeline.stop();
-        isRacing = false;
-        // Show result screen
-    }
-
-    private void updateLeaderboardDisplay() {
-        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size()); // Keep title, remove old entries
-
-        // Player
-        Label playerLabel = new Label("Player: " + (int) playerDistance + " km");
-        leaderboardBox.getChildren().add(playerLabel);
-
-        // Opponents
-        for (int i = 0; i < opponents.size(); i++) {
-            OpponentCar opponent = opponents.get(i);
-            Label opponentLabel = new Label("Opponent " + (i + 1) + ": " + (int) opponent.getCurrentDistance() + " km");
-            leaderboardBox.getChildren().add(opponentLabel);
-        }
+        // Show results screen or navigate to next scene here
     }
 }

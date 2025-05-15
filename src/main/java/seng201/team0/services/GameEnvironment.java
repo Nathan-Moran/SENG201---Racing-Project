@@ -1,15 +1,18 @@
-package seng201.team0.gui;
+package seng201.team0.services;
 
-import seng201.team0.*;
+import seng201.team0.models.*;
 
 public class GameEnvironment {
     private Race currentRace;
-    private static Season currentSeason;
+    private Season currentSeason;
     private Difficulty selectedDifficulty;
-
+    private Car selectedCar;
     private int balance;
     private String name;
     private int seasonLength;
+    private Garage shopInventory = new Garage();
+    private Garage playerInventory = new Garage();
+    private Garage starterCarInventory = new Garage();
 
     public void setCurrentRace(Race currentRace) {
         this.currentRace = currentRace;
@@ -22,6 +25,8 @@ public class GameEnvironment {
     public void setDifficulty(Difficulty difficulty) {
         selectedDifficulty = difficulty;
     }
+
+    public void setSelectedCar(Car car) {}
 
     public Race getCurrentRace() {
         return currentRace;
@@ -43,9 +48,9 @@ public class GameEnvironment {
         return selectedDifficulty;
     }
 
-    Garage shopInventory = new Garage();
-    Garage playerInventory = new Garage();
-    Garage starterCarInventory = new Garage();
+    public Car getSelectedCar() {
+        return selectedCar;
+    }
 
     public GameEnvironment() {
         setupInventoryList();
@@ -115,6 +120,10 @@ public class GameEnvironment {
 
     public Garage getShopInventory() {
         return shopInventory;
+    }
+
+    public Garage getStarterCarInventory() {
+        return starterCarInventory;
     }
 
     public void setupInventoryList() {

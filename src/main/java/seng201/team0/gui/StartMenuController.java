@@ -7,11 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import seng201.team0.Difficulty;
+import seng201.team0.models.Difficulty;
+import seng201.team0.services.GameEnvironment;
 
 
 public class StartMenuController {

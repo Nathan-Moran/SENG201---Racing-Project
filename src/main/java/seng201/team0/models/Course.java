@@ -1,6 +1,4 @@
-package seng201.team0;
-
-import java.util.List;
+package seng201.team0.models;
 
 public enum Course {
     DESERT("Desert", 100, new CoursePrizes(300, 200, 150), 4),
