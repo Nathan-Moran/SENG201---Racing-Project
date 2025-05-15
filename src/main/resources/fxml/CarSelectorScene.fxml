@@ -30,14 +30,14 @@
         <HBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
             <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Starter Cars" />
-                <TableView fx:id="carTable" prefHeight="300.0" prefWidth="304.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
+                <TableView fx:id="carTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                     <columns>
-                        <TableColumn fx:id="modelColumn" prefWidth="50.0" text="🚗" />
-                        <TableColumn fx:id="priceColumn" prefWidth="50.0" text="💲" />
-                        <TableColumn fx:id="speedColumn" prefWidth="50.0" text="💨" />
-                        <TableColumn fx:id="handlingColumn" prefWidth="50.0" text="🎮" />
-                        <TableColumn fx:id="reliabilityColumn" prefWidth="50.0" text="🔧" />
-                        <TableColumn fx:id="fuelColumn" prefWidth="50.0" text="⛽" />
+                        <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🚗" />
+                        <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="💲" />
+                        <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="💨" />
+                        <TableColumn fx:id="handlingColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🎮" />
+                        <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🔧" />
+                        <TableColumn fx:id="fuelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⛽" />
                     </columns>
                 </TableView>
                 <Label fx:id="errorLabel" managed="false" style="-fx-text-fill: #EF5350; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" text="" visible="false" />

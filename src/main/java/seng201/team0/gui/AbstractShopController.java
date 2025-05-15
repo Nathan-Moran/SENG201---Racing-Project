@@ -29,9 +29,6 @@ public abstract class AbstractShopController implements Initializable {
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
 
-    @FXML private TableColumn<Car, String> handlingupgradeColumn;
-
-    @FXML private TableColumn<Car, String> speedupgradeColumn;
 
     //Tuning Parts
     @FXML protected TableView<TuningPart> tuningPartTable;
@@ -69,8 +66,6 @@ public abstract class AbstractShopController implements Initializable {
         handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
         reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
-        handlingupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("handlingUpgrade"));
-        speedupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("speedUpgrade"));
     }
 
     protected void setupTuningPartTable() {
