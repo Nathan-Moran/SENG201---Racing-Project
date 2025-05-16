@@ -184,22 +184,22 @@ public class SceneNavigator {
 
     }
 
-//    public void switchToRaceFinishScene(String reason, String placement, List<String> leaderboard, int earnings) throws IOException {
-//        String title = "Race Results";
-//        String fxml = "/fxml/RaceFinishScene.fxml";
-//
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-//        Parent parent = loader.load();
-//
-//        // Get controller and pass data
-//        RaceFinishController controller = loader.getController();
-//        controller.setSceneNavigator(this);
-//        controller.setRaceResults(reason, placement, leaderboard, earnings);
-//
-//        Stage stage = (Stage) this.stage.getScene().getWindow();
+    public void switchToRaceFinishScene(String reason, String placement, List<String> leaderboard, int earnings) throws IOException {
+        String title = "Race Results";
+        String fxml = "/fxml/RaceFinishScene.fxml";
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent parent = loader.load();
+
+        // Get controller and pass data
+        RaceFinishController controller = loader.getController();
+        controller.setSceneNavigator(this);
+        controller.setRaceResults(reason, placement, leaderboard, earnings);
+
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        Scene scene = new Scene(parent);
 //        stage.setScene(scene);
 //        stage.setTitle(title);
-//    }
+    }
 
 }
