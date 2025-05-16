@@ -86,7 +86,7 @@ public class GarageController implements Initializable {
 
     @FXML
     void switchToPartsMenu(ActionEvent event) throws IOException {
-        sceneNavigator.switchToScenePartsMenu(event);
+        sceneNavigator.switchToScenePartsManager(event);
     }
 
     public void setGUI () {

@@ -6,22 +6,44 @@ import javafx.collections.ObservableList;
 public class Garage {
     private ObservableList<Car> reserveCarList;
     private ObservableList<TuningPart> tuningPartList;
-    Car selectedCar;
+    private Car selectedCar;
+    private ObservableList<TuningPart> selectedTuningPartList;
 
     public Garage() {
         this.reserveCarList = FXCollections.observableArrayList();
         this.tuningPartList = FXCollections.observableArrayList();
+        this.selectedTuningPartList = FXCollections.observableArrayList();
 
 
     }
 
-//    public void installTuningPart(TuningPart part, Car selectedCar) {
-//        if (part.getStat().equals("Speed")) {
-//            selectedCar.addSpeedUpgrade(part);
-//        } else if (part.getStat().equals("Handling")) {
-//            selectedCar.addHandlingUpgrade(part);
-//        }
-//    }
+    public void installTuningPart(TuningPart part) {
+        if (part.getStat().equals("\uD83D\uDCA8") && selectedCar.getSpeedUpgrade() == null) {
+            selectedCar.addSpeedUpgrade(part);
+            removeTuningParts(part);
+        } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
+            selectedCar.addHandlingUpgrade(part);
+            removeTuningParts(part);
+        }
+    }
+
+    public void removeTuningPart(TuningPart part) {
+        if (part.getStat().equals("\uD83D\uDCA8")) {
+            selectedCar.getSpeedUpgrade();
+        }
+    }
+
+    public ObservableList<TuningPart> getInstalledTuningParts() {
+        selectedTuningPartList.clear();
+        if (selectedCar.getSpeedUpgrade() != null) {
+            selectedTuningPartList.add(selectedCar.getSpeedUpgrade());
+        }
+        if (selectedCar.getHandlingUpgrade() != null) {
+            selectedTuningPartList.add(selectedCar.getHandlingUpgrade());
+        }
+//        selectedTuningPartList.addAll(selectedCar.getSpeedUpgrade(), selectedCar.getHandlingUpgrade());
+        return selectedTuningPartList;
+    }
 
     public void setSelectedCar() {
         if (selectedCar == null) {

@@ -6,6 +6,8 @@ public class Car extends Purchasable {
     private int basereliability; // a percentage. Higher reliability means the car will be less likely to breakdown during a race (random event)
     private int basefuelEconomy; // max distance in km achievable with full tank of fuel
     private TuningPart[] upgrades = new TuningPart[2];
+    private TuningPart handlingUpgrade;
+    private TuningPart speedUpgrade;
 
     public Car(String name, double speed, double handling, int reliability, int fuelEconomy, int price) {
         super(name, price);
@@ -46,18 +48,35 @@ public class Car extends Purchasable {
     }
 
     public void addSpeedUpgrade(TuningPart part) {
-        upgrades[0] = part;
+//        if (upgrades[0] == null) {
+//            System.out.println("Adding upgrade " + part.getName());
+//            upgrades[0] = part;
+//        }
+        if (speedUpgrade == null) {
+            this.speedUpgrade = part;
+        }
     }
 
     public void addHandlingUpgrade(TuningPart part) {
-        upgrades[1] = part;
+//        if (upgrades[1] == null) {
+//            System.out.println("Adding upgrade " + part.getName());
+//            upgrades[1] = part;
+//        }
+        if (handlingUpgrade == null) {
+            handlingUpgrade = part;
+        }
+
     }
 
+
     public TuningPart getSpeedUpgrade() {
-        return upgrades[0];
+//        return upgrades[0];
+            return speedUpgrade;
     }
 
     public TuningPart getHandlingUpgrade() {
-        return upgrades[1];
+//        return upgrades[1];
+            return handlingUpgrade;
+
     }
 }

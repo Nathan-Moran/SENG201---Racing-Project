@@ -171,4 +171,21 @@ public class SceneNavigator {
         stage.setScene(scene);
         stage.setTitle(title);
     }
+
+    public void switchToScenePartsManager(ActionEvent event) throws IOException {
+        String title = "Parts Manager";
+        String fxml = "/fxml/GaragePartsScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new GaragePartsController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+    }
 }
