@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,21 +32,20 @@ public class CarSelectorController implements Initializable {
     @FXML
     private void chooseSelected(ActionEvent event) throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
-        gameEnvironment.getPlayerInventory().addCar(selectedCar);
+        gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
         carTable.getSelectionModel().clearSelection();
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
     }
 
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
-        if (!gameEnvironment.getPlayerInventory().getCarList().isEmpty()) {
-            System.out.println(gameEnvironment.getPlayerInventory().getCarList());
-            gameEnvironment.getShopInventory().getCarList().addAll(startingCarsGarage.getCarList());
-            startingCarsGarage.getCarList().clear();
-            sceneNavigator.switchToSceneMainMenu(event);
-        }
+        gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
+        sceneNavigator.switchToSceneMainMenu(event);
     }
 
+
+    @FXML
+    private Label moneyLabel;
 
     @FXML protected TableView<Car> carTable;
 
@@ -66,6 +66,7 @@ public class CarSelectorController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupCarTable();
         loadCars();
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
 
     }
 

@@ -13,6 +13,15 @@ public class GameEnvironment {
     private Garage shopInventory = new Garage();
     private Garage playerInventory = new Garage();
     private Garage starterCarInventory = new Garage();
+    private BalanceManager balanceManager;
+    private ControllerLogicManager controllerLogicManager;
+
+    public GameEnvironment() {
+        this.balanceManager = new BalanceManager(this);
+        this.controllerLogicManager = new ControllerLogicManager(this);
+        setupShopList();
+        setBalance();
+    }
 
     public void setCurrentRace(Race currentRace) {
         this.currentRace = currentRace;
@@ -54,10 +63,6 @@ public class GameEnvironment {
         return playerInventory.getSelectedCar();
     }
 
-    public GameEnvironment() {
-        setupShopList();
-        setBalance();
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -75,10 +80,18 @@ public class GameEnvironment {
         return seasonLength;
     }
 
+    public BalanceManager getBalanceManager() {
+        return balanceManager;
+    }
+
+    public ControllerLogicManager getControllerLogicManager() {
+        return controllerLogicManager;
+    }
+
 
     public void setupShopList() {
         Car Toyota = new Car("Toyota Supra", 180, 6, 8, 538, 67000);
-        Car Mustang = new Car("Mustang", 250, 6, 6, 400, 89000);
+//        Car Mustang = new Car("Mustang", 250, 6, 6, 400, 89000);
         Car Ferrari = new Car("Ferrari 458", 330, 8, 7, 300, 485000);
 
         TuningPart Ethanol = new TuningPart("Ethanol", 4000, "\uD83D\uDCA8", 1.2);
@@ -91,7 +104,7 @@ public class GameEnvironment {
 
 
         shopInventory.addCar(Toyota);
-        shopInventory.addCar(Mustang);
+//        shopInventory.addCar(Mustang);
         shopInventory.addCar(Ferrari);
 
         shopInventory.addTuningParts(Ethanol);

@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import seng201.team0.models.Car;
 import seng201.team0.models.TuningPart;
 import seng201.team0.services.GameEnvironment;
@@ -14,6 +15,8 @@ public class ShopBuyController extends AbstractShopController {
     public ShopBuyController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         super(gameEnvironment, sceneNavigator);
     }
+
+    @FXML private Label moneyLabel;
 
     @Override
     protected void loadTuningParts() {
@@ -38,17 +41,17 @@ public class ShopBuyController extends AbstractShopController {
     @FXML
     void buyCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getShopInventory().removeCar(selectedCar);
-        gameEnvironment.getPlayerInventory().addCar(selectedCar);
+        gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
         carTable.getSelectionModel().clearSelection();
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+
     }
 
     @FXML
     void buyPart(ActionEvent event) {
         TuningPart selectedPart = tuningPartTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getShopInventory().removeTuningParts(selectedPart);
-        gameEnvironment.getPlayerInventory().addTuningParts(selectedPart);
+        gameEnvironment.getBalanceManager().buySelectedPart(selectedPart);
         tuningPartTable.getSelectionModel().clearSelection();
-
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
     }
 }

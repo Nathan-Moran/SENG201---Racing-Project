@@ -47,14 +47,14 @@ public class Garage {
         return selectedTuningPartList;
     }
 
-    public void setSelectedCar() {
-        if (selectedCar == null) {
-            if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
-                selectedCar = reserveCarList.get(0);
-                removeCar(selectedCar);
-            }
-        }
-    }
+//    public void setSelectedCar() {
+//        if (selectedCar == null) {
+//            if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
+//                selectedCar = reserveCarList.get(0);
+//                removeCar(selectedCar);
+//            }
+//        }
+//    }
 
     public void setSelectedCar(Car newSelectedCar) {
         if (selectedCar.getSpeedUpgrade() != null) {
@@ -67,6 +67,10 @@ public class Garage {
         reserveCarList.add(oldSelectedCar);
         this.selectedCar = newSelectedCar;
         reserveCarList.remove(newSelectedCar);
+    }
+
+    public void setStarterCar(Car newStarterCar) {
+        this.selectedCar = newStarterCar;
     }
 
     public Car getSelectedCar() {

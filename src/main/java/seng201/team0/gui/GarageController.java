@@ -11,6 +11,7 @@ import seng201.team0.models.Car;
 
 
 import javafx.event.ActionEvent;
+import seng201.team0.services.ControllerLogicManager;
 import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
@@ -22,10 +23,12 @@ public class GarageController implements Initializable {
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
     protected Car activeCar;
+    private ControllerLogicManager controllerLogicManager;
 
     public GarageController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        this.controllerLogicManager = gameEnvironment.getControllerLogicManager();
     }
 
     @FXML
@@ -90,7 +93,7 @@ public class GarageController implements Initializable {
     }
 
     public void setGUI () {
-        gameEnvironment.getPlayerInventory().setSelectedCar();
+//        gameEnvironment.getPlayerInventory().setSelectedCar();
         this.activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
 
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -101,23 +104,13 @@ public class GarageController implements Initializable {
 
         carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
 
-        if (activeCar != null) {
-            selectedCarFuelLabel.setText(String.valueOf(activeCar.getFuelEconomy()));
-            selectedCarModelLabel.setText(activeCar.getName());
-            selectedCarHandlingLabel.setText(String.valueOf(activeCar.getHandling()));
-            selectedCarSpeedLabel.setText(String.valueOf(activeCar.getSpeed()));
-            selectedCarReliabilityLabel.setText(String.valueOf(activeCar.getReliability()));
-            if (activeCar.getHandlingUpgrade() != null) {
-                selectedCarHandlingUpgradeLabel.setText(activeCar.getHandlingUpgrade().getName());
-            } else {
-                selectedCarHandlingUpgradeLabel.setText("-");
-            }
-            if (activeCar.getSpeedUpgrade() != null) {
-                selectedCarSpeedUpgradeLabel.setText(activeCar.getSpeedUpgrade().getName());
-            } else {
-                selectedCarSpeedUpgradeLabel.setText("-");
-            }
-        }
+        selectedCarFuelLabel.setText(controllerLogicManager.setLabels("Fuel"));
+        selectedCarModelLabel.setText(controllerLogicManager.setLabels("Model"));
+        selectedCarHandlingLabel.setText(controllerLogicManager.setLabels("Handling"));
+        selectedCarSpeedLabel.setText(controllerLogicManager.setLabels("Speed"));
+        selectedCarReliabilityLabel.setText(controllerLogicManager.setLabels("Reliability"));
+        selectedCarHandlingUpgradeLabel.setText(controllerLogicManager.setLabels("HandlingUpgrade"));
+        selectedCarSpeedUpgradeLabel.setText(controllerLogicManager.setLabels("SpeedUpgrade"));
     }
 
 
