@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import seng201.team0.gui.GameEnvironment;
 
-public class CourseSelectionController {
+public class CourseAndRouteSelectionController {
 
     @FXML private VBox courseSelectionMenu;
     @FXML private VBox desertRouteMenu;
