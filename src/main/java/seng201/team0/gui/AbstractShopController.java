@@ -32,7 +32,6 @@ public abstract class AbstractShopController implements Initializable {
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
 
-
     //Tuning Parts
     @FXML protected TableView<TuningPart> tuningPartTable;
 
