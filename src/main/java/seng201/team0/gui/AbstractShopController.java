@@ -2,6 +2,7 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,6 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public abstract class AbstractShopController implements Initializable {
+    @FXML private Label moneyLabel;
+
     //Garage and Sellable Cars
     @FXML protected TableView<Car> carTable;
 
@@ -57,6 +60,7 @@ public abstract class AbstractShopController implements Initializable {
 
         loadCars();
         loadTuningParts();
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
     }
 
     protected void setupCarTable() {

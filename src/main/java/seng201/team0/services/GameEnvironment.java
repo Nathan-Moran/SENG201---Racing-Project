@@ -53,8 +53,8 @@ public class GameEnvironment {
     }
 
     public GameEnvironment() {
-        setupInventoryList();
         setupShopList();
+        setBalance();
     }
 
     public void setName(String name) {
@@ -72,6 +72,7 @@ public class GameEnvironment {
     public int getSeasonLength() {
         return seasonLength;
     }
+
 
     public void setupShopList() {
         Car Toyota = new Car("Toyota Supra", 180, 6, 8, 538, 67000);
@@ -126,14 +127,13 @@ public class GameEnvironment {
         return starterCarInventory;
     }
 
-    public void setupInventoryList() {
-
-    }
-
     public int getBalance() {
         return balance;
     }
 
+    public void setBalance() {
+        this.balance = 32000;
+    }
     public void setBalance(int balance) {
         this.balance = balance;
     }

@@ -15,12 +15,12 @@
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
-            <HBox alignment="CENTER" style="-fx-background-color: #D6EAF8; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
+            <HBox alignment="CENTER" style="-fx-background-color: #FFFFFF; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 1.5px;">
                 <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #37474F;" text="Select Your Car" />
             </HBox>
             <Region HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER_RIGHT" spacing="5" style="-fx-background-color: #CFD8DC; -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
-                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Credits:" />
+                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Balance" />
                 <Label fx:id="moneyLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
             </HBox>
         </HBox>

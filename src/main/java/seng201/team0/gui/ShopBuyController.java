@@ -31,11 +31,8 @@ public class ShopBuyController extends AbstractShopController {
     }
 
     @FXML
-    void buySelected(ActionEvent event) {
-        Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getShopInventory().removeCar(selectedCar);
-        gameEnvironment.getPlayerInventory().addCar(selectedCar);
-        carTable.getSelectionModel().clearSelection();
+    private void switchToSceneMenu(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneMainMenu(event);
     }
 
     @FXML
