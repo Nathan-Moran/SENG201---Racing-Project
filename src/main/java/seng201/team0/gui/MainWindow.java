@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 
@@ -19,17 +20,25 @@ public class MainWindow extends Application {
      * @param primaryStage The current fxml stage, handled by javaFX Application class
      * @throws IOException if there is an issue loading fxml file
      */
+    protected SceneNavigator sceneNavigator;
+    protected GameEnvironment gameEnvironment;
+
+    public MainWindow() {
+        this.gameEnvironment = new GameEnvironment();
+        this.sceneNavigator = new SceneNavigator(this.gameEnvironment); // Assumes this constructor exists
+    }
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        Parent root = baseLoader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartingScreen.fxml"));
+        loader.setControllerFactory(ignoredControllerClass ->
+                new StartMenuController(this.gameEnvironment, this.sceneNavigator)
+        );
 
-        MainController baseController = baseLoader.getController();
-        baseController.init(primaryStage);
+        Parent root = loader.load();
 
-        primaryStage.setTitle("SENG201 Example App");
-        Scene scene = new Scene(root, 600, 400);
-        primaryStage.setScene(scene);
+        primaryStage.setTitle("Start Menu");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

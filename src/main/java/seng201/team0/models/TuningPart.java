@@ -1,6 +1,4 @@
-package seng201.team0;
-
-import java.util.ArrayList;
+package seng201.team0.models;
 
 public class TuningPart extends Purchasable {
     String stat;

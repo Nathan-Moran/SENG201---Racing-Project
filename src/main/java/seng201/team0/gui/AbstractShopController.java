@@ -5,8 +5,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import seng201.team0.Car;
-import seng201.team0.TuningPart;
+import seng201.team0.models.Car;
+import seng201.team0.models.TuningPart;
+import seng201.team0.services.GameEnvironment;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,9 +29,6 @@ public abstract class AbstractShopController implements Initializable {
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
 
-    @FXML private TableColumn<Car, String> handlingupgradeColumn;
-
-    @FXML private TableColumn<Car, String> speedupgradeColumn;
 
     //Tuning Parts
     @FXML protected TableView<TuningPart> tuningPartTable;
@@ -43,12 +41,13 @@ public abstract class AbstractShopController implements Initializable {
 
     @FXML private TableColumn<TuningPart, Double> partboostColumn;
 
-    protected SceneNavigator sceneNavigator;
-    protected GameEnvironment gameEnvironment;
 
-    public AbstractShopController() {
-        this.sceneNavigator = new SceneNavigator();
-        this.gameEnvironment = new GameEnvironment();
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+
+    public AbstractShopController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
     }
 
     @Override
@@ -67,8 +66,6 @@ public abstract class AbstractShopController implements Initializable {
         handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
         reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
-        handlingupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("handlingUpgrade"));
-        speedupgradeColumn.setCellValueFactory(new PropertyValueFactory<>("speedUpgrade"));
     }
 
     protected void setupTuningPartTable() {
@@ -76,8 +73,6 @@ public abstract class AbstractShopController implements Initializable {
         partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
         partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
-
-
     }
 
     protected abstract void loadTuningParts();

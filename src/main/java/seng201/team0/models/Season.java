@@ -1,4 +1,4 @@
-package seng201.team0;
+package seng201.team0.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,15 @@ public class Season {
     private List<Race> races;
     private int currentRaceIndex = 0;
 
+
     public Season(int length, List<Race> races) {
         this.length = length;
         this.races = races != null ? new ArrayList<>(races) : new ArrayList<>();
     }
 
-    public void addRace(Course course, Route route) {
+    public void addRace(Course course, Route route, List<OpponentCar> opponents, double raceDuration, Difficulty difficulty) {
         if (races.size() < length) {
-            races.add(new Race(course, route));
+            races.add(new Race(course, route, difficulty));
         } else {
             System.out.println("Season is full.");
         }

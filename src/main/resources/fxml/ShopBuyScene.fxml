@@ -28,43 +28,38 @@
       <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
          <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Cars" />
-            <TableView fx:id="carTable" prefHeight="300.0" prefWidth="440.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
+            <TableView fx:id="carTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                <columns>
-                  <TableColumn fx:id="modelColumn" prefWidth="80.0" text="🚗" />
-                  <TableColumn fx:id="priceColumn" prefWidth="60.0" text="💲" />
-                  <TableColumn fx:id="speedColumn" prefWidth="40.0" text="💨" />
-                  <TableColumn fx:id="handlingColumn" prefWidth="40.0" text="🎮" />
-                  <TableColumn fx:id="reliabilityColumn" prefWidth="40.0" text="🔧" />
-                  <TableColumn fx:id="fuelColumn" prefWidth="40.0" text="⛽" />
-                  <TableColumn fx:id="speedupgradeColumn" prefWidth="70.0" text="💨⬆" />
-                  <TableColumn fx:id="handlingupgradeColumn" prefWidth="70.0" text="🎮⬆" />
+                  <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🚗" />
+                  <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="💲" />
+                  <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="💨" />
+                  <TableColumn fx:id="handlingColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🎮" />
+                  <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🔧" />
+                  <TableColumn fx:id="fuelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⛽" />
                </columns>
             </TableView>
+            <Button onAction="#buyCar" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Buy Car" />
          </VBox>
 
          <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Parts" />
-            <TableView fx:id="tuningPartTable" prefHeight="300.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
+            <TableView fx:id="tuningPartTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="230.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                <columns>
-                  <TableColumn fx:id="partnameColumn" prefWidth="80.0" text="⚙" />
-                  <TableColumn fx:id="partpriceColumn" prefWidth="60.0" text="💲" />
-                  <TableColumn fx:id="partstatColumn" prefWidth="40.0" text="⬆" />
-                  <TableColumn fx:id="partboostColumn" prefWidth="40.0" text="📈" />
+                  <TableColumn fx:id="partnameColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="⚙" />
+                  <TableColumn fx:id="partpriceColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="💲" />
+                  <TableColumn fx:id="partstatColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⬆" />
+                  <TableColumn fx:id="partboostColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="📈" />
                </columns>
             </TableView>
+            <Button onAction="#buyPart" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Buy Part" />
          </VBox>
       </HBox>
    </center>
 
    <bottom>
       <StackPane style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
-         <Button text="Buy Selected"
-                 style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);"
-                 StackPane.alignment="CENTER" />
 
-         <Button onAction="#switchToSceneShopSell" onMouseClicked="#switchToSceneShopSell" text="Previous Page"
-                 style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);"
-                 StackPane.alignment="CENTER_LEFT" />
+         <Button onAction="#switchToSceneShopSell" onMouseClicked="#switchToSceneShopSell" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Previous Page" StackPane.alignment="CENTER_LEFT" />
       </StackPane>
    </bottom>
 </BorderPane>

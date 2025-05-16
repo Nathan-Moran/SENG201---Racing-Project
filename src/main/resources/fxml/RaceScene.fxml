@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="seng201.team0.gui.RaceController">
+   <children>
+      <!-- Background Image -->
+      <ImageView fx:id="routeImage" fitHeight="400.0" fitWidth="600.0" preserveRatio="true" />
+
+      <!-- Race Info -->
+      <VBox layoutX="20.0" layoutY="20.0" spacing="10">
+         <children>
+            <HBox spacing="10">
+               <Label text="Current distance:" />
+               <Label fx:id="currentDistanceLabel" text="0 km" />
+            </HBox>
+            <HBox spacing="10">
+               <Label text="Length:" />
+               <Label fx:id="raceLengthLabel" text="100 km" />
+            </HBox>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" />
+         </children>
+      </VBox>
+
+      <HBox layoutX="175.0" layoutY="20.0" spacing="10">
+         <children>
+            <Label text="Fuel Level:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <ProgressBar fx:id="fuelGauge" prefWidth="200" prefHeight="25"
+                         style="-fx-accent: green; -fx-border-color: black; -fx-border-width: 2px;" />
+         </children>
+      </HBox>
+
+      <VBox fx:id="leaderboardBox" layoutX="400" layoutY="20" spacing="5"
+            style="-fx-background-color: rgba(255,255,255,0.8); -fx-padding: 10; -fx-border-color: black; -fx-border-width: 1;">
+         <children>
+            <Label text="Leaderboard" style="-fx-font-weight: bold; -fx-underline: true;" />
+            <!-- Dynamic labels will be added here in the controller -->
+         </children>
+      </VBox>
+
+
+      <!-- Fuel Stop Popup -->
+      <VBox fx:id="fuelStopPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label wrapText="true" text="You've reached a fuel stop! Would you like to stop for fuel?" />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="stopForFuelButton" text="Stop for fuel" />
+               <Button fx:id="continueWithoutFuelButton" text="Continue" />
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- Breakdown Popup -->
+      <VBox fx:id="breakdownPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label wrapText="true" text="OH NO! Your car broke down. Withdraw or pay $500 to repair? Delay: 10 seconds." />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="withdrawButton" text="Withdraw" />
+               <Button fx:id="repairButton" text="Pay and continue" />
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- Traveler Popup -->
+      <VBox fx:id="travelerPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label wrapText="true" text="A stranded traveler needs a ride. Do you pick them up?" />
+            <HBox spacing="10" alignment="CENTER">
+               <Button fx:id="pickUpButton" text="Pick up" />
+               <Button fx:id="drivePastButton" text="Drive past" />
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- Weather Popup -->
+      <VBox fx:id="weatherPopup" layoutX="150" layoutY="100" spacing="15" alignment="CENTER" visible="false"
+            style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label wrapText="true" text="Severe weather has interrupted the race. You've been refunded." />
+            <Button fx:id="continueAfterWeatherButton" text="Continue" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

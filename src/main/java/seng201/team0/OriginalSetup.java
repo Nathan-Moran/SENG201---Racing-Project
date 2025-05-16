@@ -1,5 +1,10 @@
 package seng201.team0;
 
+import seng201.team0.models.Car;
+import seng201.team0.models.Garage;
+import seng201.team0.models.Shop;
+import seng201.team0.models.TuningPart;
+
 public class OriginalSetup {
 
     public static void main(String[] args) {

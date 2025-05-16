@@ -1,25 +1,37 @@
 package seng201.team0.gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import seng201.team0.Car;
+import seng201.team0.models.Car;
 
+
+import javafx.event.ActionEvent;
+import seng201.team0.services.GameEnvironment;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class GarageController implements Initializable {
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+    protected Car activeCar;
 
-    ObservableList<Car> reserveCars = FXCollections.observableArrayList(
-            new Car("Toyota Supra", 180, 6, 8, 538, 67000),
-            new Car("Mustang", 250, 6, 6, 400, 89000),
-            new Car("Ferrari 458", 330, 8, 7, 300, 485000)
-    );
+    public GarageController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+    }
+
+    @FXML
+    public void switchToMainMenu(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneMainMenu(event);
+    }
 
     @FXML
     private TableView<Car> carTable;
@@ -27,8 +39,9 @@ public class GarageController implements Initializable {
     @FXML
     private TableColumn<Car, String> modelColumn;
 
+
     @FXML
-    private TableColumn<Car, Integer> ReliabilityColumn;
+    private TableColumn<Car, Integer> reliabilityColumn;
 
     @FXML
     private TableColumn<Car, Integer> fuelColumn;
@@ -39,20 +52,77 @@ public class GarageController implements Initializable {
     @FXML
     private TableColumn<Car, Double> speedColumn;
 
-//    @FXML
-//    private TableColumn<Car, String> handlingupgradeColumn;
 
-//    @FXML
-//    private TableColumn<Car, String> speedupgradeColumn;
+    @FXML
+    private Label selectedCarFuelLabel;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private Label selectedCarHandlingLabel;
+
+    @FXML
+    private Label selectedCarHandlingUpgradeLabel;
+
+    @FXML
+    private Label selectedCarModelLabel;
+
+    @FXML
+    private Label selectedCarReliabilityLabel;
+
+    @FXML
+    private Label selectedCarSpeedLabel;
+
+    @FXML
+    private Label selectedCarSpeedUpgradeLabel;
+
+
+    @FXML
+    void selectCar(ActionEvent event) {
+        Car selectedCar = carTable.getSelectionModel().getSelectedItem();
+        gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);;
+        carTable.getSelectionModel().clearSelection();
+        setGUI();
+    }
+
+
+    @FXML
+    void switchToPartsMenu(ActionEvent event) throws IOException {
+        sceneNavigator.switchToScenePartsManager(event);
+    }
+
+    public void setGUI () {
+        gameEnvironment.getPlayerInventory().setSelectedCar();
+        this.activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
+
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
         handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
-        ReliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
+        reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
         fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
 
-        carTable.setItems(reserveCars);
+        carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
+
+        if (activeCar != null) {
+            selectedCarFuelLabel.setText(String.valueOf(activeCar.getFuelEconomy()));
+            selectedCarModelLabel.setText(activeCar.getName());
+            selectedCarHandlingLabel.setText(String.valueOf(activeCar.getHandling()));
+            selectedCarSpeedLabel.setText(String.valueOf(activeCar.getSpeed()));
+            selectedCarReliabilityLabel.setText(String.valueOf(activeCar.getReliability()));
+            if (activeCar.getHandlingUpgrade() != null) {
+                selectedCarHandlingUpgradeLabel.setText(activeCar.getHandlingUpgrade().getName());
+            } else {
+                selectedCarHandlingUpgradeLabel.setText("-");
+            }
+            if (activeCar.getSpeedUpgrade() != null) {
+                selectedCarSpeedUpgradeLabel.setText(activeCar.getSpeedUpgrade().getName());
+            } else {
+                selectedCarSpeedUpgradeLabel.setText("-");
+            }
+        }
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setGUI();
     }
 }
