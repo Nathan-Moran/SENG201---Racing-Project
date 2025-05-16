@@ -14,19 +14,20 @@
 
     <!-- VBox container centered with spacing and padding -->
     <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="80">
+      <Label fx:id="finishReason" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
 
         <!-- Congratulatory or Condolence message, dynamic text -->
-        <Label fx:id="placementMessageLabel" style="-fx-font-size: 18px; -fx-text-fill: #2e7d32;" wrapText="true" />
+        <Label fx:id="placementMessage" style="-fx-font-size: 18px; -fx-text-fill: #2e7d32;" wrapText="true" />
 
         <!-- Result title (e.g. "Final Results") -->
-        <Label fx:id="resultTitleLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+        <Label fx:id="resultTitle" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
 
         <!-- Leaderboard -->
         <Label style="-fx-font-size: 18px;" text="Final Leaderboard:" />
         <ListView fx:id="leaderboardListView" prefHeight="200" prefWidth="300" />
 
         <!-- Money earned -->
-        <Label fx:id="moneyEarnedLabel" style="-fx-font-size: 16px;" />
+        <Label fx:id="moneyEarned" style="-fx-font-size: 16px;" />
 
         <!-- Buttons -->
         <HBox alignment="CENTER" spacing="20">

@@ -34,7 +34,7 @@ public enum Route {
         return length;
     }
 
-    public int getFuelstops() {
+    public int getFuelStops() {
         return fuelstops;
     }
 }

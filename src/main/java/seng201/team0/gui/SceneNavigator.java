@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seng201.team0.services.GameEnvironment;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class SceneNavigator {
@@ -119,7 +120,7 @@ public class SceneNavigator {
         stage.setTitle(title);
     }
 
-    public void switchToSceneRace(ActionEvent event) throws IOException {
+    public void switchToSceneRace(MouseEvent event) throws IOException {
         String title = "Race";
         String fxml = "/fxml/RaceScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
@@ -170,5 +171,23 @@ public class SceneNavigator {
 
         stage.setScene(scene);
         stage.setTitle(title);
+    }
+
+    public void switchToSceneRace(javafx.scene.input.MouseEvent event) throws IOException {
+        String title = "Race";
+        String fxml = "/fxml/RaceScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new RaceController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+
     }
 }

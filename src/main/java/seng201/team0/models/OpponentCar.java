@@ -16,8 +16,7 @@ public class OpponentCar {
         return currentDistance;
     }
 
-    public void updateDistance(double timeElapsed) {
-        // The opponent moves at a constant speed regardless of other factors
-        this.currentDistance += speed * timeElapsed;  // Update distance based on speed and time
+    public void advanceTick() {
+        currentDistance += speed;
     }
 }

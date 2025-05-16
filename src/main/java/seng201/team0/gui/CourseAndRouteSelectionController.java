@@ -2,13 +2,14 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;
 import seng201.team0.models.Course;
 import seng201.team0.models.Difficulty;
 import seng201.team0.models.Race;
 import seng201.team0.models.Route;
 import seng201.team0.services.GameEnvironment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class CourseAndRouteSelectionController {
@@ -21,7 +22,7 @@ public class CourseAndRouteSelectionController {
     }
 
 
-    @FXML private VBox courseSelectionMenu;
+    @FXML private VBox courseMenu;
     @FXML private VBox desertRouteMenu;
     @FXML private VBox mountainRouteMenu;
     @FXML private VBox countryRouteMenu;
@@ -31,32 +32,32 @@ public class CourseAndRouteSelectionController {
     private Route selectedRoute;
 
     @FXML
-    private void onDesertSelected(ActionEvent event) {
+    void onDesertSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.DESERT;
         showRouteMenu(desertRouteMenu);
     }
 
     @FXML
-    private void onMountainSelected(ActionEvent event) {
+    void onMountainSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.MOUNTAIN;
         showRouteMenu(mountainRouteMenu);
     }
 
     @FXML
-    private void onCountrySelected(ActionEvent event) {
+    void onCountrySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.COUNTRY;
         showRouteMenu(countryRouteMenu);
     }
 
     @FXML
-    private void onCitySelected(ActionEvent event) {
+    void onCitySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.CITY;
         showRouteMenu(cityRouteMenu);
     }
 
-    private void showRouteMenu(VBox routeMenu) {
-        courseSelectionMenu.setVisible(false);
-        courseSelectionMenu.setManaged(false);
+    void showRouteMenu(VBox routeMenu) {
+        courseMenu.setVisible(false);
+        courseMenu.setManaged(false);
 
         desertRouteMenu.setVisible(false);
         desertRouteMenu.setManaged(false);
@@ -76,52 +77,53 @@ public class CourseAndRouteSelectionController {
 
     // Desert routes
     @FXML
-    private void onDesertDriftSelected(ActionEvent event) throws IOException {
+    void onDesertDriftSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.DESERT_DRIFT, event);
     }
 
     @FXML
-    private void onDesertLongSelected(ActionEvent event) throws IOException {
+    void onDesertLongSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.DESERT_LONG, event);
     }
 
     // Mountain routes
     @FXML
-    private void onMountainSteepSelected(ActionEvent event) throws IOException {
+    void onMountainSteepSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.MOUNTAIN_STEEP, event);
     }
 
     @FXML
-    private void onMountainCurvesSelected(ActionEvent event) throws IOException {
+    void onMountainCurvesSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.MOUNTAIN_CURVES, event);
     }
 
     // Country routes
     @FXML
-    private void onCountryStraightSelected(ActionEvent event) throws IOException {
+    void onCountryStraightSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.COUNTRY_STRAIGHT, event);
     }
 
     @FXML
-    private void onCountryTwistySelected(ActionEvent event) throws IOException {
+    void onCountryTwistSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.COUNTRY_TWISTY, event);
     }
 
     // City routes
     @FXML
-    private void onCityAlleysSelected(ActionEvent event) throws IOException {
+    void onCityAlleysSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.CITY_ALLEYS, event);
     }
 
     @FXML
-    private void onCityTrafficSelected(ActionEvent event) throws IOException {
+    void onCityTrafficSelected(javafx.scene.input.MouseEvent event) throws IOException {
         createRaceAndStart(Route.CITY_TRAFFIC, event);
     }
 
-    private void createRaceAndStart(Route selectedRoute, ActionEvent event) throws IOException {
+    void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
         Difficulty difficulty = gameEnvironment.getDifficulty();
         Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
         gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
     }
+
 }
