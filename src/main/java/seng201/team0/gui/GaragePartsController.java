@@ -29,13 +29,33 @@ public class GaragePartsController implements Initializable {
         sceneNavigator.switchToSceneMainMenu(event);
     }
 
+    @FXML
+    void installPart(ActionEvent event) {
+        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
+        gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart);
+        setupInstalledPartsTable();
+        setupReservePartsTable();
+    }
+
+    @FXML
+    void removePart(ActionEvent event) {
+        TuningPart selectedTuningPart = tuningPartTable1.getSelectionModel().getSelectedItem();
+        gameEnvironment.getPlayerInventory().removeTuningPart(selectedTuningPart);
+        setupInstalledPartsTable();
+        setupReservePartsTable();
+    }
+
+    @FXML
+    void switchToCarMenu(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneGarage(event);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupInstalledPartsTable();
         setupReservePartsTable();
 
         activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
-
     }
 
     protected void setupInstalledPartsTable() {
@@ -78,25 +98,4 @@ public class GaragePartsController implements Initializable {
 
     @FXML
     private TableView<TuningPart> tuningPartTable1;
-
-    @FXML
-    void installPart(ActionEvent event) {
-        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
-
-        gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart);
-        setupInstalledPartsTable();
-        setupReservePartsTable();
-    }
-
-    @FXML
-    void removePart(ActionEvent event) {
-
-    }
-
-    @FXML
-    void switchToCarMenu(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneGarage(event);
-
-    }
-
 }

@@ -26,7 +26,7 @@ public class SceneNavigator {
     }
 
     public void switchToSceneGarage(ActionEvent event) throws IOException {
-        String title = "Garage";
+        String title = "Car Manager";
         String fxml = "/fxml/GarageCarScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
