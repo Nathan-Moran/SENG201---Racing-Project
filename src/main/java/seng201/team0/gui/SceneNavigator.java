@@ -15,10 +15,6 @@ import java.io.IOException;
 
 public class SceneNavigator {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     private final GameEnvironment gameEnvironment;
 
     public SceneNavigator(GameEnvironment gameEnvironment) {
@@ -42,22 +38,6 @@ public class SceneNavigator {
         stage.setTitle(title);
     }
 
-    public void switchToScenePartsMenu(ActionEvent event) throws IOException {
-        String title = "Parts Menu";
-        String fxml = "/fxml/GaragePartsScene.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-
-        loader.setControllerFactory(ignoredControllerClass ->
-                new ShopBuyController(this.gameEnvironment, this)
-        );
-
-        Parent parent = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-
-        stage.setScene(scene);
-        stage.setTitle(title);
-    }
 
     public void switchToSceneShopBuy(ActionEvent event) throws IOException {
         String title = "Shop Buy";
@@ -95,15 +75,6 @@ public class SceneNavigator {
 
 
     public void switchToSceneCarSelector(ActionEvent event) throws IOException {
-//        CarSelectorController carSelectorController = new CarSelectorController(gameEnvironment, this);
-//
-//        root = FXMLLoader.load(getClass().getResource("/fxml/CarSelectorScene.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-
-        //AI CODE
         String title = "Select your car";
         String fxml = "/fxml/CarSelectorScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
