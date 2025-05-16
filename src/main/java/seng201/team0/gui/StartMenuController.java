@@ -92,12 +92,6 @@ public class StartMenuController {
     }
 
 
-    @FXML private Button easyButton;
-
-    @FXML private Button hardButton;
-
-    @FXML private Button mediumButton;
-
     @FXML private TextField nameField;
 
     @FXML private Slider seasonSlider;

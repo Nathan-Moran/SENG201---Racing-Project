@@ -36,6 +36,6 @@ public class MainMenuController {
 
     @FXML
     void startRace(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneRace(event);
+        sceneNavigator.switchToSceneCourseAndRoute(event);
         }
 }

@@ -24,18 +24,20 @@ public class Garage {
 //    }
 
     public void setSelectedCar() {
-        if (this.getSelectedCar() == null) {
+        if (selectedCar == null) {
             if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
                 selectedCar = reserveCarList.get(0);
+                removeCar(selectedCar);
+
             }
         }
     }
 
-    public void setSelectedCar(Car selectedCar) {
-        Car tempCar = this.getSelectedCar();
-        reserveCarList.add(this.selectedCar);
-        this.selectedCar = selectedCar;
-        reserveCarList.remove(tempCar);
+    public void setSelectedCar(Car newSelectedCar) {
+        Car oldSelectedCar = this.getSelectedCar();
+        reserveCarList.add(oldSelectedCar);
+        this.selectedCar = newSelectedCar;
+        reserveCarList.remove(newSelectedCar);
     }
 
     public Car getSelectedCar() {

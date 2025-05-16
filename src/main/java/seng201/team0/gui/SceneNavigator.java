@@ -26,11 +26,28 @@ public class SceneNavigator {
 
     public void switchToSceneGarage(ActionEvent event) throws IOException {
         String title = "Garage";
-        String fxml = "/fxml/GarageScene.fxml";
+        String fxml = "/fxml/GarageCarScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
                 new GarageController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+    }
+
+    public void switchToScenePartsMenu(ActionEvent event) throws IOException {
+        String title = "Parts Menu";
+        String fxml = "/fxml/GaragePartsScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new ShopBuyController(this.gameEnvironment, this)
         );
 
         Parent parent = loader.load();
@@ -103,11 +120,39 @@ public class SceneNavigator {
     }
 
     public void switchToSceneRace(ActionEvent event) throws IOException {
-        RaceController raceController = new RaceController(gameEnvironment, this);
+        String title = "Race";
+        String fxml = "/fxml/RaceScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new RaceController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
     }
 
     public void switchToSceneCourseAndRoute(ActionEvent event) throws IOException {
         CourseAndRouteSelectionController courseAndRouteSelectionController = new CourseAndRouteSelectionController(gameEnvironment, this);
+
+        String title = "Course Selector";
+        String fxml = "/fxml/courseSelector.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new CourseAndRouteSelectionController(this.gameEnvironment, this)
+        );
+
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
     }
 
     public void switchToSceneMainMenu(ActionEvent event) throws IOException {
