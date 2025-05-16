@@ -122,8 +122,32 @@ public class CourseAndRouteSelectionController {
     void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
         Difficulty difficulty = gameEnvironment.getDifficulty();
         Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
+        if (selectedCourse == null || selectedRoute == null || difficulty == null) {
+            System.err.println("Course, Route, or Difficulty not selected!");
+            return;
+        }
         gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
+    }
+
+    public void initializeView() {
+        courseMenu.setVisible(true);
+        courseMenu.setManaged(true);
+
+        desertRouteMenu.setVisible(false);
+        desertRouteMenu.setManaged(false);
+
+        mountainRouteMenu.setVisible(false);
+        mountainRouteMenu.setManaged(false);
+
+        countryRouteMenu.setVisible(false);
+        countryRouteMenu.setManaged(false);
+
+        cityRouteMenu.setVisible(false);
+        cityRouteMenu.setManaged(false);
+
+        selectedCourse = null;
+        selectedRoute = null;
     }
 
 }

@@ -26,7 +26,9 @@ public class GameEnvironment {
         selectedDifficulty = difficulty;
     }
 
-    public void setSelectedCar(Car car) {}
+    public void setSelectedCar(Car car) {
+        this.selectedCar = car;
+    }
 
     public Race getCurrentRace() {
         return currentRace;
@@ -49,7 +51,7 @@ public class GameEnvironment {
     }
 
     public Car getSelectedCar() {
-        return selectedCar;
+        return playerInventory.getSelectedCar();
     }
 
     public GameEnvironment() {
