@@ -13,12 +13,10 @@ public class Garage {
         this.reserveCarList = FXCollections.observableArrayList();
         this.tuningPartList = FXCollections.observableArrayList();
         this.selectedTuningPartList = FXCollections.observableArrayList();
-
-
     }
 
     public void installTuningPart(TuningPart part) {
-        if (part.getStat().equals("\uD83D\uDCA8") && selectedCar.getSpeedUpgrade() == null) {
+        if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() == null) {
             selectedCar.addSpeedUpgrade(part);
             removeTuningParts(part);
         } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
@@ -28,8 +26,13 @@ public class Garage {
     }
 
     public void removeTuningPart(TuningPart part) {
-        if (part.getStat().equals("\uD83D\uDCA8")) {
-            selectedCar.getSpeedUpgrade();
+        if (part.getStat().equals("💨")) {
+            addTuningParts(selectedCar.getSpeedUpgrade());
+            selectedCar.removeSpeedUpgrade(part);
+        }
+        if (part.getStat().equals("🎮")) {
+            addTuningParts(selectedCar.getHandlingUpgrade());
+            selectedCar.removeHandlingUpgrade(part);
         }
     }
 
@@ -41,7 +44,6 @@ public class Garage {
         if (selectedCar.getHandlingUpgrade() != null) {
             selectedTuningPartList.add(selectedCar.getHandlingUpgrade());
         }
-//        selectedTuningPartList.addAll(selectedCar.getSpeedUpgrade(), selectedCar.getHandlingUpgrade());
         return selectedTuningPartList;
     }
 
@@ -50,12 +52,17 @@ public class Garage {
             if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
                 selectedCar = reserveCarList.get(0);
                 removeCar(selectedCar);
-
             }
         }
     }
 
     public void setSelectedCar(Car newSelectedCar) {
+        if (selectedCar.getSpeedUpgrade() != null) {
+            removeTuningPart(selectedCar.getSpeedUpgrade());
+        }
+        if (selectedCar.getHandlingUpgrade() != null) {
+            removeTuningPart(selectedCar.getHandlingUpgrade());
+        }
         Car oldSelectedCar = this.getSelectedCar();
         reserveCarList.add(oldSelectedCar);
         this.selectedCar = newSelectedCar;
