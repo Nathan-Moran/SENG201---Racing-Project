@@ -64,7 +64,6 @@ public class RaceController {
         raceTimeline = new Timeline(new KeyFrame(Duration.millis(100), event -> advanceRace()));
         raceTimeline.setCycleCount(Timeline.INDEFINITE);
         raceTimeline.play();
-
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
         continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
         repairButton.setOnAction(event -> handleRepair(true));
@@ -78,17 +77,10 @@ public class RaceController {
 
     private void advanceRace() {
         raceManager.advanceRaceTick();
+        eventChecker();
 
         double playerDistance = raceManager.getPlayerDistance();
-
-        if (playerDistance >= 30 && playerDistance < 35) {
-            fuelStopPopup.setVisible(true);
-        } else if (playerDistance >= 50 && playerDistance < 55) {
-            breakdownPopup.setVisible(true);
-        }
-
         updateUI();
-
         if (raceManager.isRaceFinished()) {
             finishRace();
         }
@@ -129,11 +121,34 @@ public class RaceController {
         }
     }
 
+    private void eventChecker() {
+        RaceEvent event = raceManager.getCurrentEvent();
+        if (event != null && raceManager.isWaiting()) {
+            switch (event.getType()) {
+                case BREAKDOWN:
+                    breakdownPopup.setVisible(true);
+                    break;
+                case TRAVELER:
+                    travelerPopup.setVisible(true);
+                    break;
+                case WEATHER:
+                    weatherPopup.setVisible(true);
+                    break;
+                case FUEL_STOP:
+                    fuelStopPopup.setVisible(true);
+                    break;
+            }
+        }
+
+    }
+
     private void handleFuelStop(boolean refuel) {
         fuelStopPopup.setVisible(false);
         if (refuel) {
             raceManager.refuel();
         }
+        raceManager.clearCurrentEvent();
+        raceManager.setWaiting(false, 0);
         updateUI();
     }
 
@@ -145,6 +160,7 @@ public class RaceController {
         } else {
             raceTimeline.stop();
         }
+        raceManager.clearCurrentEvent();
     }
 
     private void handleTraveler(boolean pickUp) {
@@ -153,12 +169,14 @@ public class RaceController {
             gameEnvironment.setBalance(gameEnvironment.getBalance() + 500);
             raceManager.setWaiting(true, 50);
         }
+        raceManager.clearCurrentEvent();
     }
 
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
         raceTimeline.stop();
         gameEnvironment.setBalance(gameEnvironment.getBalance() - gameEnvironment.getCurrentRace().getCourse().getEntryFee());
+        raceManager.clearCurrentEvent();
     }
 
     private void finishRace() {

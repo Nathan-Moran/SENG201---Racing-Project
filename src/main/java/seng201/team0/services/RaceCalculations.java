@@ -2,10 +2,12 @@ package seng201.team0.services;
 
 import seng201.team0.models.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RaceCalculations {
+public final class RaceCalculations {
     private List<OpponentCar> opponents;
+
 
     public RaceCalculations(List<OpponentCar> opponents) {
         this.opponents = opponents;
@@ -34,12 +36,25 @@ public class RaceCalculations {
                 .toList();
     }
 
-
-    public void updateRace(int timeElapsed) {
-        // Update the distance for each opponent
-        for (OpponentCar opponent : opponents) {
-            opponent.updateDistance(timeElapsed);
+    public static List<Double> calculateFuelStopDistances(double length, int numStops) {
+        List<Double> stops = new ArrayList<>();
+        for (int i = 1; i <= numStops; i++) {
+            stops.add(length * i / (numStops + 1));
         }
+        return stops;
+    }
+
+    public static double calculateEffectiveReliability(Car car, Route route) {
+        RouteAttributes attr = route.getAttributes();
+        return car.getReliability() * attr.getReliabilityAdvantage();
+    }
+
+    public static double calculateEventTriggerDistance(double length) {
+        return (double) (length * 0.4);
+    }
+
+    public static double calculateBreakdownTriggerDistance(double length) {
+        return (double) (length * 0.7);
     }
 }
 
