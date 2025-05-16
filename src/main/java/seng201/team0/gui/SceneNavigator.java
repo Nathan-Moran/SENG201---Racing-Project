@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
+import seng201.team0.models.Race;
 import seng201.team0.services.GameEnvironment;
 
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.List;
 
 public class SceneNavigator {
 
@@ -113,11 +115,17 @@ public class SceneNavigator {
         String fxml = "/fxml/courseSelector.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
+        // Set the controller using controller factory
         loader.setControllerFactory(ignoredControllerClass ->
                 new CourseAndRouteSelectionController(this.gameEnvironment, this)
         );
 
         Parent parent = loader.load();
+
+        // Get the controller and call initializeView()
+        CourseAndRouteSelectionController controller = loader.getController();
+        controller.initializeView();  // <- reset the view to course menu
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
 
@@ -167,7 +175,6 @@ public class SceneNavigator {
         loader.setControllerFactory(ignoredControllerClass ->
                 new RaceController(this.gameEnvironment, this)
         );
-
         Parent parent = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
@@ -176,4 +183,23 @@ public class SceneNavigator {
         stage.setTitle(title);
 
     }
+
+    public void switchToRaceFinishScene(String reason, String placement, List<String> leaderboard, int earnings) throws IOException {
+        String title = "Race Results";
+        String fxml = "/fxml/RaceFinishScene.fxml";
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent parent = loader.load();
+
+        // Get controller and pass data
+        RaceFinishController controller = loader.getController();
+        controller.setSceneNavigator(this);
+        controller.setRaceResults(reason, placement, leaderboard, earnings);
+
+        Stage stage = (Stage) this.stage.getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+    }
+
 }

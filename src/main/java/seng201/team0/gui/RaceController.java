@@ -40,6 +40,11 @@ public class RaceController {
     private RaceManager raceManager;
     private Timeline raceTimeline;
 
+    private static final int REPAIR_WAIT_TICKS = 50;
+    private static final int TRAVELER_WAIT_TICKS = 50;
+    private static final int REPAIR_COST = 500;
+    private static final int TRAVELER_PROFIT = 500;
+
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
@@ -49,6 +54,10 @@ public class RaceController {
         // Setup race manager
         Race currentRace = gameEnvironment.getCurrentRace();
         Car currentCar = gameEnvironment.getSelectedCar();
+        if (currentCar == null) {
+            System.err.println("No car selected! Cannot calculate speed.");
+            return;
+        }
         Difficulty difficulty = gameEnvironment.getDifficulty();
         Course course = gameEnvironment.getSelectedCourse();
         int numberOfOpponents = course.getNumberOfOpponents();
@@ -124,6 +133,7 @@ public class RaceController {
     private void eventChecker() {
         RaceEvent event = raceManager.getCurrentEvent();
         if (event != null && raceManager.isWaiting()) {
+            raceTimeline.pause();
             switch (event.getType()) {
                 case BREAKDOWN:
                     breakdownPopup.setVisible(true);
@@ -150,26 +160,29 @@ public class RaceController {
         raceManager.clearCurrentEvent();
         raceManager.setWaiting(false, 0);
         updateUI();
+        raceTimeline.play();
     }
 
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
         if (pay) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - 500);
-            raceManager.setWaiting(true, 50);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - REPAIR_COST);
+            raceManager.setWaiting(true, REPAIR_WAIT_TICKS);
         } else {
             raceTimeline.stop();
         }
         raceManager.clearCurrentEvent();
+        raceTimeline.play();
     }
 
     private void handleTraveler(boolean pickUp) {
         travelerPopup.setVisible(false);
         if (pickUp) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() + 500);
-            raceManager.setWaiting(true, 50);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT);
+            raceManager.setWaiting(true, TRAVELER_WAIT_TICKS);
         }
         raceManager.clearCurrentEvent();
+        raceTimeline.play();
     }
 
     private void handleWeatherContinue() {
@@ -177,10 +190,10 @@ public class RaceController {
         raceTimeline.stop();
         gameEnvironment.setBalance(gameEnvironment.getBalance() - gameEnvironment.getCurrentRace().getCourse().getEntryFee());
         raceManager.clearCurrentEvent();
+        raceTimeline.play();
     }
 
     private void finishRace() {
         raceTimeline.stop();
-        // Show results screen or navigate to next scene here
     }
 }
