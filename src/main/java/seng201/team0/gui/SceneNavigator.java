@@ -196,10 +196,10 @@ public class SceneNavigator {
         controller.setSceneNavigator(this);
         controller.setRaceResults(reason, placement, leaderboard, earnings);
 
-        Stage stage = (Stage) this.stage.getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setTitle(title);
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(parent);
+//        stage.setScene(scene);
+//        stage.setTitle(title);
     }
 
 }
