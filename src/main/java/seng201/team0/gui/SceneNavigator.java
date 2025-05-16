@@ -109,8 +109,6 @@ public class SceneNavigator {
     }
 
     public void switchToSceneCourseAndRoute(ActionEvent event) throws IOException {
-        CourseAndRouteSelectionController courseAndRouteSelectionController = new CourseAndRouteSelectionController(gameEnvironment, this);
-
         String title = "Course Selector";
         String fxml = "/fxml/courseSelector.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
