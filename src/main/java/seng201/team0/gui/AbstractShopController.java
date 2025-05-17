@@ -67,22 +67,22 @@ public abstract class AbstractShopController implements Initializable {
     /**
      * TableColumn for displaying the name of the tuning part.
      */
-    @FXML private TableColumn<TuningPart, String> partnameColumn;
+    @FXML private TableColumn<TuningPart, String> partNameColumn;
 
     /**
      * TableColumn for displaying the price of the tuning part.
      */
-    @FXML private TableColumn<TuningPart, Integer> partpriceColumn;
+    @FXML private TableColumn<TuningPart, Integer> partPriceColumn;
 
     /**
      * TableColumn for displaying the stat affected by the tuning part.
      */
-    @FXML private TableColumn<TuningPart, String> partstatColumn;
+    @FXML private TableColumn<TuningPart, String> partStatColumn;
 
     /**
      * TableColumn for displaying the boost value of the tuning part.
      */
-    @FXML private TableColumn<TuningPart, Double> partboostColumn;
+    @FXML private TableColumn<TuningPart, Double> partBoostColumn;
 
     /**
      * The game environment, providing access to game state and services.
@@ -139,21 +139,21 @@ public abstract class AbstractShopController implements Initializable {
      * Sets up the columns for the tuning part table, binding them to the properties of the TuningPart class.
      */
     protected void setupTuningPartTable() {
-        partnameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partpriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partstatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
-        partboostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
+        partBoostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
     }
 
     /**
      * Abstract method to be implemented by subclasses to load tuning parts into the tuning part table.
-     * The specific source of tuning parts are determined by the subclass.
+     * The specific source of tuning parts is determined by the subclass.
      */
     protected abstract void loadTuningParts();
 
     /**
      * Abstract method to be implemented by subclasses to load cars into the car table.
-     * The specific source of cars are determined by the subclass.
+     * The specific source of cars is determined by the subclass.
      */
     protected abstract void loadCars();
 }

@@ -10,19 +10,19 @@ public class Car extends Purchasable {
     /**
      * The base speed of the car before any upgrades.
      */
-    private final double basespeed;
+    private final double baseSpeed;
     /**
      * The base handling of the car, influencing control, before any upgrades.
      */
-    private final double basehandling;
+    private final double baseHandling;
     /**
      * The base reliability of the car as a percentage. Higher values mean less chance of breakdown.
      */
-    private final double basereliability;
+    private final double baseReliability;
     /**
      * The base fuel economy of the car, representing max distance (km) on a full tank.
      */
-    private final double basefuelEconomy;
+    private final double baseFuelEconomy;
     /**
      * The currently installed handling upgrade tuning part. Null if no upgrade is installed.
      */
@@ -44,10 +44,10 @@ public class Car extends Purchasable {
      */
     public Car(String name, double speed, double handling, double reliability, double fuelEconomy, int price) {
         super(name, price);
-        this.basespeed = speed;
-        this.basehandling = handling;
-        this.basereliability = reliability;
-        this.basefuelEconomy = fuelEconomy;
+        this.baseSpeed = speed;
+        this.baseHandling = handling;
+        this.baseReliability = reliability;
+        this.baseFuelEconomy = fuelEconomy;
     }
 
     /**
@@ -58,9 +58,9 @@ public class Car extends Purchasable {
     public double getSpeed() {
         if (speedUpgrade != null) {
             double speedBoost = speedUpgrade.getBoost();
-            return basespeed * speedBoost;
+            return baseSpeed * speedBoost;
         } else {
-            return basespeed;
+            return baseSpeed;
         }
     }
 
@@ -72,9 +72,9 @@ public class Car extends Purchasable {
     public double getHandling() {
         if (handlingUpgrade != null) {
             double handlingBoost = handlingUpgrade.getBoost();
-            return basehandling * handlingBoost;
+            return baseHandling * handlingBoost;
         } else {
-            return basehandling;
+            return baseHandling;
         }
     }
 
@@ -84,7 +84,7 @@ public class Car extends Purchasable {
      * @return The reliability percentage.
      */
     public double getReliability() {
-        return basereliability;
+        return baseReliability;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Car extends Purchasable {
      * @return The maximum distance achievable on a full tank.
      */
     public double getFuelEconomy() {
-        return basefuelEconomy;
+        return baseFuelEconomy;
     }
 
     /**

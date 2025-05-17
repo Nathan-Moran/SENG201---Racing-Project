@@ -30,7 +30,7 @@ public class StartMenuController {
     /**
      * Manager for handling controller-specific logic, such as name validation.
      */
-    private ControllerLogicManager controllerLogicManager;
+    private final ControllerLogicManager controllerLogicManager;
     /**
      * Stores the player's chosen name.
      */
@@ -85,7 +85,7 @@ public class StartMenuController {
         name = nameField.getText();
 
         nameField.setPromptText(controllerLogicManager.nameChecker(name));
-        if (nameField.getPromptText() != "Valid Name") {
+        if (nameField.getPromptText().equals("Valid Name")) {
             nameField.setStyle("-fx-prompt-text-fill: red;");
             nameField.clear();
         }
@@ -99,10 +99,9 @@ public class StartMenuController {
      * Sets the game difficulty to Easy and updates the difficulty display label.
      *
      * @param event The action event triggered by the "Easy" difficulty button.
-     * @throws IOException Potentially, if future logic here involves I/O (currently not).
      */
     @FXML
-    private void setdifficultyEasy(ActionEvent event) throws IOException {
+    private void setdifficultyEasy(ActionEvent event) {
         displayDifficultyLabel.setText("Easy");
         gameEnvironment.setDifficulty(Difficulty.EASY);
     }

@@ -26,6 +26,14 @@ public class SceneNavigator {
      */
     private final GameEnvironment gameEnvironment;
     /**
+     * The name of the scene to be initialised
+     */
+    String title;
+    /**
+     * The name of the fxml file to be initialised
+     */
+    String fxml;
+    /**
      * Constructs a SceneNavigator with the given game environment.
      *
      * @param gameEnvironment The game environment instance.
@@ -64,8 +72,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneShopBuy(ActionEvent event) throws IOException {
-        String title = "Shop Buy";
-        String fxml = "/fxml/ShopBuyScene.fxml";
+        title = "Shop Buy";
+        fxml = "/fxml/ShopBuyScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -87,8 +95,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneShopSell(ActionEvent event) throws IOException {
-        String title = "Shop Sell";
-        String fxml = "/fxml/ShopSellScene.fxml";
+        title = "Shop Sell";
+        fxml = "/fxml/ShopSellScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -110,8 +118,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneCarSelector(ActionEvent event) throws IOException {
-        String title = "Select your car";
-        String fxml = "/fxml/CarSelectorScene.fxml";
+        title = "Select your car";
+        fxml = "/fxml/CarSelectorScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -136,8 +144,8 @@ public class SceneNavigator {
      * @deprecated Consider using the JavaFX MouseEvent version or clarifying usage.
      */
     public void switchToSceneRace(MouseEvent event) throws IOException {
-        String title = "Race";
-        String fxml = "/fxml/RaceScene.fxml";
+        title = "Race";
+        fxml = "/fxml/RaceScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -159,8 +167,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneCourseAndRoute(ActionEvent event) throws IOException {
-        String title = "Course Selector";
-        String fxml = "/fxml/courseSelector.fxml";
+        title = "Course Selector";
+        fxml = "/fxml/courseSelector.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         // Set the controller using controller factory
@@ -188,8 +196,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneMainMenu(ActionEvent event) throws IOException {
-        String title = "Main Menu";
-        String fxml = "/fxml/MainMenuScene.fxml";
+        title = "Main Menu";
+        fxml = "/fxml/MainMenuScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -211,8 +219,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToScenePartsManager(ActionEvent event) throws IOException {
-        String title = "Parts Manager";
-        String fxml = "/fxml/GaragePartsScene.fxml";
+        title = "Parts Manager";
+        fxml = "/fxml/GaragePartsScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -234,8 +242,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneRace(javafx.scene.input.MouseEvent event) throws IOException {
-        String title = "Race";
-        String fxml = "/fxml/RaceScene.fxml";
+        title = "Race";
+        fxml = "/fxml/RaceScene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -265,8 +273,8 @@ public class SceneNavigator {
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToRaceFinishScene(String reason, String placement, List<String> leaderboard, int earnings) throws IOException {
-        String title = "Race Results";
-        String fxml = "/fxml/RaceFinishScene.fxml";
+        title = "Race Results";
+        fxml = "/fxml/RaceFinishScene.fxml";
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent parent = loader.load();

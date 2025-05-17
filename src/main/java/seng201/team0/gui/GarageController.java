@@ -41,7 +41,7 @@ public class GarageController implements Initializable {
     /**
      * Manager for handling controller-specific logic, such as label formatting.
      */
-    private ControllerLogicManager controllerLogicManager;
+    private final ControllerLogicManager controllerLogicManager;
 
     /**
      * Constructs a GarageController with the given game environment and scene navigator.
@@ -155,7 +155,7 @@ public class GarageController implements Initializable {
     void selectCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);;
+            gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);
             carTable.getSelectionModel().clearSelection();
             setGUI();
         }
@@ -164,7 +164,7 @@ public class GarageController implements Initializable {
     /**
      * Handles the action of switching to the parts manager scene.
      *
-     * @param event The action event triggered by the button to switch to the parts manager.
+     * @param event The action event triggered by the button to switch to the parts' manager.
      * @throws IOException If an I/O error occurs during scene transition.
      */
     @FXML

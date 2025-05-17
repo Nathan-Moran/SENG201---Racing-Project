@@ -60,7 +60,7 @@ public class GaragePartsController implements Initializable {
      * Handles the action of installing a selected tuning part from the reserve parts table to the active car.
      * If a part is selected, it is installed, and both the installed and reserve parts tables are updated.
      *
-     * @param event The action event triggered by the install part button.
+     * @param event The action event triggered by the installation part button.
      */
     @FXML
     void installPart(ActionEvent event) {
