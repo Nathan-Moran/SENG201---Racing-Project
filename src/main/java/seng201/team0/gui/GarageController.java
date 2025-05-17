@@ -81,9 +81,11 @@ public class GarageController implements Initializable {
     @FXML
     void selectCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);;
-        carTable.getSelectionModel().clearSelection();
-        setGUI();
+        if (selectedCar != null) {
+            gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);;
+            carTable.getSelectionModel().clearSelection();
+            setGUI();
+        }
     }
 
 

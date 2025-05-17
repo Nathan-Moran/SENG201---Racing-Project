@@ -33,9 +33,11 @@ public class CarSelectorController implements Initializable {
     @FXML
     private void chooseSelected(ActionEvent event) throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
-        carTable.getSelectionModel().clearSelection();
-        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+        if (selectedCar != null) {
+            gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
+            carTable.getSelectionModel().clearSelection();
+            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+        }
     }
 
     @FXML
