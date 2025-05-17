@@ -39,8 +39,10 @@ public class CarSelectorController implements Initializable {
 
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
-        gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
-        sceneNavigator.switchToSceneMainMenu(event);
+        if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
+            gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
+            sceneNavigator.switchToSceneMainMenu(event);
+        }
     }
 
 

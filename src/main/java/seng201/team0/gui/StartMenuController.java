@@ -41,17 +41,18 @@ public class StartMenuController {
 
     @FXML
     private void acceptButton(ActionEvent event) throws IOException {
-
-
         gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
         name = nameField.getText();
 
-        nameField.clear();
         nameField.setPromptText(controllerLogicManager.nameChecker(name));
-        nameField.setStyle("-fx-prompt-text-fill: red;");
-        sceneNavigator.switchToSceneCarSelector(event);
+        if (nameField.getPromptText() != "Valid Name") {
+            nameField.setStyle("-fx-prompt-text-fill: red;");
+            nameField.clear();
+        }
 
-
+        if ((nameField.getPromptText().equals("Valid Name")) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
+            sceneNavigator.switchToSceneCarSelector(event);
+        }
     }
 
     @FXML
