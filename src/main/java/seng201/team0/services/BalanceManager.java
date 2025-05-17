@@ -11,10 +11,17 @@ public class BalanceManager {
         this.gameEnvironment = gameEnvironment;
     }
     public void chooseStarterCar(Car selectedCar) {
-        if (selectedCar != null) {
+        if (selectedCar != null && gameEnvironment.getSelectedCar() == null) {
             if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
                 gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
                 gameEnvironment.getPlayerInventory().setStarterCar(selectedCar);
+                gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+            }
+        } else if (gameEnvironment.getSelectedCar() != null) {
+            System.out.println("hmm");
+            if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
+                gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
+                gameEnvironment.getPlayerInventory().addCar(selectedCar);
                 gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
             }
         }

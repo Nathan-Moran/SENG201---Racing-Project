@@ -82,7 +82,7 @@ public class GaragePartsController implements Initializable {
     void removePart(ActionEvent event) {
         TuningPart selectedTuningPart = tuningPartTable1.getSelectionModel().getSelectedItem();
         if (selectedTuningPart != null) {
-            gameEnvironment.getPlayerInventory().removeTuningPart(selectedTuningPart);
+            gameEnvironment.getPlayerInventory().uninstallTuningPart(selectedTuningPart);
             setupInstalledPartsTable();
             setupReservePartsTable();
         }

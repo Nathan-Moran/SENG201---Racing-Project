@@ -15,7 +15,7 @@ public class GameEnvironment {
     private StarterCarInventory starterCarInventory;
     private BalanceManager balanceManager;
     private ControllerLogicManager controllerLogicManager;
-    private int STARTING_BALANCE = 1000;
+    private int STARTING_BALANCE = 1000000;
 
     public GameEnvironment() {
         this.balanceManager = new BalanceManager(this);
@@ -24,6 +24,7 @@ public class GameEnvironment {
         this.starterCarInventory = new StarterCarInventory();
         setupShop();
         setBalance();
+        setSelectedCar();
     }
 
     public void setupShop() {
@@ -42,8 +43,8 @@ public class GameEnvironment {
         selectedDifficulty = difficulty;
     }
 
-    public void setSelectedCar(Car car) {
-        this.selectedCar = car;
+    public void setSelectedCar() {
+        this.selectedCar = playerInventory.getSelectedCar();
     }
 
     public Race getCurrentRace() {

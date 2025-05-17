@@ -24,15 +24,15 @@ public class Garage extends ItemStorage {
         }
     }
 
-    public void removeTuningPart(TuningPart part) {
+    public void uninstallTuningPart(TuningPart part) {
         if (selectedCar != null) {
-            if (part.getStat().equals("💨")) {
+            if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() != null) {
                 addTuningPart(selectedCar.getSpeedUpgrade());
-                selectedCar.removeSpeedUpgrade(part);
+                selectedCar.removeSpeedUpgrade();
             }
-            if (part.getStat().equals("🎮")) {
+            if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() != null) {
                 addTuningPart(selectedCar.getHandlingUpgrade());
-                selectedCar.removeHandlingUpgrade(part);
+                selectedCar.removeHandlingUpgrade();
             }
         }
 
