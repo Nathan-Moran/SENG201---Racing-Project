@@ -49,7 +49,7 @@ public class StartMenuController {
         nameField.clear();
         nameField.setPromptText(controllerLogicManager.nameChecker(name));
         nameField.setStyle("-fx-prompt-text-fill: red;");
-
+        sceneNavigator.switchToSceneCarSelector(event);
 
 
     }
