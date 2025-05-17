@@ -10,9 +10,9 @@ public class GameEnvironment {
     private int balance;
     private String name;
     private int seasonLength;
-    private Garage shopInventory = new Garage();
+    private Shop shopInventory;
     private Garage playerInventory = new Garage();
-    private Garage starterCarInventory = new Garage();
+    private StarterCarInventory starterCarInventory;
     private BalanceManager balanceManager;
     private ControllerLogicManager controllerLogicManager;
     private int STARTING_BALANCE = 1000;
@@ -20,6 +20,8 @@ public class GameEnvironment {
     public GameEnvironment() {
         this.balanceManager = new BalanceManager(this);
         this.controllerLogicManager = new ControllerLogicManager(this);
+        this.shopInventory = new Shop();
+        this.starterCarInventory = new StarterCarInventory();
         setupShopList();
         setBalance();
     }
@@ -108,12 +110,12 @@ public class GameEnvironment {
 //        shopInventory.addCar(Mustang);
         shopInventory.addCar(Ferrari);
 
-        shopInventory.addTuningParts(Ethanol);
-        shopInventory.addTuningParts(SuperCharger);
-        shopInventory.addTuningParts(TurboKit);
-        shopInventory.addTuningParts(StreetWheels);
-        shopInventory.addTuningParts(SportWheels);
-        shopInventory.addTuningParts(RacingWheels);
+        shopInventory.addTuningPart(Ethanol);
+        shopInventory.addTuningPart(SuperCharger);
+        shopInventory.addTuningPart(TurboKit);
+        shopInventory.addTuningPart(StreetWheels);
+        shopInventory.addTuningPart(SportWheels);
+        shopInventory.addTuningPart(RacingWheels);
     }
 
     public void setupStarterCars() {
@@ -127,7 +129,7 @@ public class GameEnvironment {
         starterCarInventory.addCar(NissanZ);
     }
 
-    public Garage getStarterCars() {
+    public StarterCarInventory getStarterCars() {
         return starterCarInventory;
     }
 
@@ -135,11 +137,11 @@ public class GameEnvironment {
         return playerInventory;
     }
 
-    public Garage getShopInventory() {
+    public Shop getShopInventory() {
         return shopInventory;
     }
 
-    public Garage getStarterCarInventory() {
+    public StarterCarInventory getStarterCarInventory() {
         return starterCarInventory;
     }
 

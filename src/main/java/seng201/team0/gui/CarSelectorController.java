@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
 import seng201.team0.models.Garage;
+import seng201.team0.models.StarterCarInventory;
 import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class CarSelectorController implements Initializable {
 
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
-    protected Garage startingCarsGarage;
+    protected StarterCarInventory startingCarsGarage;
 
     public CarSelectorController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
@@ -39,8 +40,10 @@ public class CarSelectorController implements Initializable {
 
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
-        gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
-        sceneNavigator.switchToSceneMainMenu(event);
+        if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
+            gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
+            sceneNavigator.switchToSceneMainMenu(event);
+        }
     }
 
 

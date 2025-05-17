@@ -3,46 +3,50 @@ package seng201.team0.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Garage {
-    private ObservableList<Car> reserveCarList;
-    private ObservableList<TuningPart> tuningPartList;
+public class Garage extends ItemStorage {
     private Car selectedCar;
     private ObservableList<TuningPart> selectedTuningPartList;
 
     public Garage() {
-        this.reserveCarList = FXCollections.observableArrayList();
-        this.tuningPartList = FXCollections.observableArrayList();
+        super();
         this.selectedTuningPartList = FXCollections.observableArrayList();
     }
 
     public void installTuningPart(TuningPart part) {
-        if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() == null) {
-            selectedCar.addSpeedUpgrade(part);
-            removeTuningParts(part);
-        } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
-            selectedCar.addHandlingUpgrade(part);
-            removeTuningParts(part);
+        if (selectedCar != null) {
+            if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() == null) {
+                selectedCar.addSpeedUpgrade(part);
+                removeTuningPart(part);
+            } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
+                selectedCar.addHandlingUpgrade(part);
+                removeTuningPart(part);
+            }
         }
     }
 
     public void removeTuningPart(TuningPart part) {
-        if (part.getStat().equals("💨")) {
-            addTuningParts(selectedCar.getSpeedUpgrade());
-            selectedCar.removeSpeedUpgrade(part);
+        if (selectedCar != null) {
+            if (part.getStat().equals("💨")) {
+                addTuningPart(selectedCar.getSpeedUpgrade());
+                selectedCar.removeSpeedUpgrade(part);
+            }
+            if (part.getStat().equals("🎮")) {
+                addTuningPart(selectedCar.getHandlingUpgrade());
+                selectedCar.removeHandlingUpgrade(part);
+            }
         }
-        if (part.getStat().equals("🎮")) {
-            addTuningParts(selectedCar.getHandlingUpgrade());
-            selectedCar.removeHandlingUpgrade(part);
-        }
+
     }
 
     public ObservableList<TuningPart> getInstalledTuningParts() {
         selectedTuningPartList.clear();
-        if (selectedCar.getSpeedUpgrade() != null) {
-            selectedTuningPartList.add(selectedCar.getSpeedUpgrade());
-        }
-        if (selectedCar.getHandlingUpgrade() != null) {
-            selectedTuningPartList.add(selectedCar.getHandlingUpgrade());
+        if (selectedCar != null) {
+            if (selectedCar.getSpeedUpgrade() != null) {
+                selectedTuningPartList.add(selectedCar.getSpeedUpgrade());
+            }
+            if (selectedCar.getHandlingUpgrade() != null) {
+                selectedTuningPartList.add(selectedCar.getHandlingUpgrade());
+            }
         }
         return selectedTuningPartList;
     }
@@ -57,16 +61,19 @@ public class Garage {
 //    }
 
     public void setSelectedCar(Car newSelectedCar) {
-        if (selectedCar.getSpeedUpgrade() != null) {
-            removeTuningPart(selectedCar.getSpeedUpgrade());
+        if (selectedCar != null) {
+            if (selectedCar.getSpeedUpgrade() != null) {
+                removeTuningPart(selectedCar.getSpeedUpgrade());
+            }
+            if (selectedCar.getHandlingUpgrade() != null) {
+                removeTuningPart(selectedCar.getHandlingUpgrade());
+            }
+            Car oldSelectedCar = this.getSelectedCar();
+            addCar(oldSelectedCar);
+            this.selectedCar = newSelectedCar;
+            removeCar(newSelectedCar);
         }
-        if (selectedCar.getHandlingUpgrade() != null) {
-            removeTuningPart(selectedCar.getHandlingUpgrade());
-        }
-        Car oldSelectedCar = this.getSelectedCar();
-        reserveCarList.add(oldSelectedCar);
-        this.selectedCar = newSelectedCar;
-        reserveCarList.remove(newSelectedCar);
+
     }
 
     public void setStarterCar(Car newStarterCar) {
@@ -75,29 +82,5 @@ public class Garage {
 
     public Car getSelectedCar() {
         return selectedCar;
-    }
-
-    public void addTuningParts(TuningPart part) {
-        tuningPartList.add(part);
-    }
-
-    public void removeTuningParts(TuningPart part) {
-        tuningPartList.remove(part);
-    }
-
-    public void removeCar(Car car) {
-        reserveCarList.remove(car);
-    }
-
-    public void addCar(Car car) {
-        reserveCarList.add(car);
-    }
-
-    public ObservableList<Car> getCarList() {
-        return reserveCarList;
-    }
-
-    public ObservableList<TuningPart> getTuningPartList() {
-        return tuningPartList;
     }
 }

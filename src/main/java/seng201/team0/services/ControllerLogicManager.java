@@ -1,7 +1,9 @@
 package seng201.team0.services;
 
+import javafx.event.ActionEvent;
 import seng201.team0.models.Car;
 import seng201.team0.models.Garage;
+import seng201.team0.models.StarterCarInventory;
 
 public class ControllerLogicManager {
     GameEnvironment gameEnvironment;
@@ -12,7 +14,7 @@ public class ControllerLogicManager {
 
 
     //CarSelector Controller
-    public void storeLeftOverCars(Garage startingCarsGarage) {
+    public void storeLeftOverCars(StarterCarInventory startingCarsGarage) {
         if (!gameEnvironment.getStarterCarInventory().getCarList().isEmpty()) {
             System.out.println(gameEnvironment.getPlayerInventory().getCarList());
             gameEnvironment.getShopInventory().getCarList().addAll(startingCarsGarage.getCarList());
@@ -64,12 +66,14 @@ public class ControllerLogicManager {
 
 
     //StartMenuController
-    boolean invalidNameLength = false;
-    boolean invalidNameCharacters = false;
     String prompt;
+    boolean invalidNameLength;
+    boolean invalidNameCharacters;
 
     public String nameChecker(String name) {
-
+        invalidNameLength = false;
+        invalidNameCharacters = false;
+        prompt = "Valid Name";
         if (!(name.length() >= 3 && name.length() <= 15)) {
             invalidNameLength = true;
         }
@@ -80,19 +84,13 @@ public class ControllerLogicManager {
             }
         }
         //Maybe remove if both
-        if (invalidNameCharacters && invalidNameLength) {
-            prompt = "Name must be between 3 and 15 characters and not contain special characters";
-        }
-        else if (invalidNameLength) {
+        if (invalidNameLength) {
             prompt = "Name must be between 3 and 15 characters";
         } else if (invalidNameCharacters) {
 
             prompt = "Name must not contain special characters";
 
         }
-//        if ((!invalidNameCharacters && !invalidNameLength) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
-//            sceneNavigator.switchToSceneCarSelector(event);
-//        }
         return prompt;
     }
 }
