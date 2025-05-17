@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
+<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
 
    <!-- Background Image -->
    <ImageView fx:id="routeImage" fitHeight="400" fitWidth="600" preserveRatio="false" />
@@ -22,19 +22,19 @@
    <AnchorPane pickOnBounds="false" prefHeight="400" prefWidth="600">
 
       <!-- Race Info Panel -->
-      <VBox spacing="10" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-width: 1;" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="178.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-width: 1;" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15">
          <GridPane hgap="10" vgap="6">
             <Label text="⏱ Time Left:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label fx:id="timeLeftLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="📍 Distance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label fx:id="currentDistanceLabel" text="0 km" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="currentDistanceLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="30.0" text="0 km" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <Label text="🛣 Race Length:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label fx:id="raceLengthLabel" text="100 km" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
+               <ColumnConstraints maxWidth="108.0" minWidth="96.0" prefWidth="97.0" />
+               <ColumnConstraints maxWidth="46.0" minWidth="34.0" prefWidth="45.0" />
             </columnConstraints>
             <rowConstraints>
                <RowConstraints />
@@ -45,20 +45,20 @@
       </VBox>
 
       <!-- Fuel Gauge -->
-      <HBox alignment="CENTER_LEFT" layoutX="183.0" layoutY="15.0" spacing="10" AnchorPane.leftAnchor="183.0" AnchorPane.topAnchor="15.0">
-         <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="⛽ Fuel:" />
-         <ProgressBar fx:id="fuelGauge" prefHeight="20" prefWidth="200" style="-fx-accent: #28a745; -fx-border-color: #333; -fx-border-width: 1; -fx-background-radius: 5;" />
+      <HBox alignment="CENTER_LEFT" layoutX="209.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="197.0" spacing="10" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="15.0">
+         <Label prefHeight="20.0" prefWidth="57.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="⛽ Fuel:" />
+         <ProgressBar fx:id="fuelGauge" prefHeight="20" prefWidth="142.0" style="-fx-accent: #28a745; -fx-border-color: #333; -fx-border-width: 1; -fx-background-radius: 5;" />
       </HBox>
 
       <!-- Leaderboard -->
-      <VBox fx:id="leaderboardBox" prefHeight="178.0" prefWidth="132.0" spacing="6" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #888; -fx-border-width: 1;" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
-         <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-underline: true;" text="🏁 Leaderboard" />
+      <VBox fx:id="leaderboardBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="178.0" prefWidth="159.0" spacing="6" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #888; -fx-border-width: 1;" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
+         <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-underline: true;" text="Leaderboard" />
          <ListView prefHeight="200.0" prefWidth="200.0" />
          <!-- Leaderboard entries injected here -->
       </VBox>
 
       <!-- Popups container -->
-      <StackPane alignment="CENTER" prefHeight="400" prefWidth="600" visible="false">
+      <StackPane alignment="CENTER" prefHeight="400" prefWidth="600">
 
          <!-- Breakdown Popup -->
          <VBox fx:id="breakdownPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="420.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="420.0" spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #444; -fx-border-width: 2; -fx-padding: 16; -fx-opacity: 0.95;" visible="false">

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class RaceFinishController {
 
-    @FXML private Label finishReason;
-    @FXML private Label placementMessage;
-    @FXML private Label resultTitle;
-    @FXML private ListView<String> leaderboardListView;
-    @FXML private Label moneyEarned;
+    @FXML private static Label finishReason;
+    @FXML private static Label placementMessage;
+    @FXML private static Label resultTitle;
+    @FXML private static ListView<String> leaderboardListView;
+    @FXML private static Label moneyEarned;
     @FXML private Button mainMenuButton;
     @FXML private Button newRaceButton;
 
@@ -24,9 +24,9 @@ public class RaceFinishController {
         this.sceneNavigator = sceneNavigator;
     }
 
-    public void setRaceResults(String reason, String placement, List<String> leaderboard, int earnings) {
+    public static void setRaceResults(String reason, String placementText, List<String> leaderboard, int earnings) {
         finishReason.setText("Reason: " + reason);
-        placementMessage.setText(placement);
+        placementMessage.setText(placementText);
         resultTitle.setText("Final Results");
         leaderboardListView.setItems(FXCollections.observableArrayList(leaderboard));
         moneyEarned.setText("Money Earned: $" + earnings);

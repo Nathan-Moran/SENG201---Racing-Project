@@ -90,9 +90,9 @@ public class ControllerLogicManager {
             prompt = "Name must not contain special characters";
 
         }
-        if ((!invalidNameCharacters && !invalidNameLength) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
-            sceneNavigator.switchToSceneCarSelector(event);
-        }
+//        if ((!invalidNameCharacters && !invalidNameLength) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
+//            sceneNavigator.switchToSceneCarSelector(event);
+//        }
         return prompt;
     }
 }

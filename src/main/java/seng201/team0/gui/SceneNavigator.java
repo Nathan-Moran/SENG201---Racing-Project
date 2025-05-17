@@ -181,6 +181,7 @@ public class SceneNavigator {
 
         stage.setScene(scene);
         stage.setTitle(title);
+        stage.show();
 
     }
 

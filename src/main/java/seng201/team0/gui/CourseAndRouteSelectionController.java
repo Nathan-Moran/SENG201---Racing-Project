@@ -121,11 +121,11 @@ public class CourseAndRouteSelectionController {
 
     void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
         Difficulty difficulty = gameEnvironment.getDifficulty();
-        Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
         if (selectedCourse == null || selectedRoute == null || difficulty == null) {
             System.err.println("Course, Route, or Difficulty not selected!");
             return;
         }
+        Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
         gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
     }

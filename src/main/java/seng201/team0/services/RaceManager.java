@@ -2,6 +2,7 @@ package seng201.team0.services;
 
 import seng201.team0.models.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,8 +18,8 @@ public class RaceManager {
     private int waitTicksRemaining = 0;
     private double speed;
     private double fuelConsumptionRate;
-    private final double eventTriggerDistance = RaceCalculations.calculateEventTriggerDistance(race.getRoute().getLength());
-    private final double breakdownTriggerDistance = RaceCalculations.calculateBreakdownTriggerDistance(race.getRoute().getLength());
+    private double eventTriggerDistance;
+    private double breakdownTriggerDistance;
     private final Random random = new Random();
     private RaceEvent currentEvent = null;
     private boolean eventDone = false;
@@ -27,6 +28,9 @@ public class RaceManager {
     private int nextFuelStopIndex = 0;
     private static final int INDEFINITE_WAIT = 9999;
     private String finishReason = "";
+    private int playerFinishTick = -1;
+    private boolean playerFinished = false;
+
 
 
     public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
@@ -36,6 +40,8 @@ public class RaceManager {
         this.speed = speed;
         this.fuelConsumptionRate = fuelConsumptionRate;
         this.fuelStopDistances = RaceCalculations.calculateFuelStopDistances(race.getRoute().getLength(), race.getRoute().getFuelStops());
+        this.eventTriggerDistance = RaceCalculations.calculateEventTriggerDistance(race.getRoute().getLength());
+        this.breakdownTriggerDistance = RaceCalculations.calculateBreakdownTriggerDistance(race.getRoute().getLength());
     }
 
     public void advanceRaceTick() {
@@ -111,12 +117,53 @@ public class RaceManager {
         }
     }
 
+    public List<LeaderboardEntry> getLeaderboardStandings() {
+        List<LeaderboardEntry> standings = new ArrayList<>();
+
+        standings.add(new LeaderboardEntry("Player", playerDistance));
+        for (int i = 0; i < opponents.size(); i++) {
+            standings.add(new LeaderboardEntry("Opponent " + (i + 1), opponents.get(i).getCurrentDistance()));
+        }
+
+        standings.sort((a, b) -> Double.compare(b.getDistance(), a.getDistance())); // Sort descending
+
+        return standings;
+    }
+
+    public List<String> getLeaderboardStrings() {
+        List<LeaderboardEntry> standings = getLeaderboardStandings();
+        List<String> leaderboardStrings = new ArrayList<>();
+
+        for (int i = 0; i < standings.size(); i++) {
+            LeaderboardEntry entry = standings.get(i);
+            String position = (i + 1) + ". " + entry.getName() + " - " + (int) entry.getDistance() + " km";
+            leaderboardStrings.add(position);
+        }
+
+        return leaderboardStrings;
+    }
+
+    public int getPlayerPlacement() {
+        List<LeaderboardEntry> standings = getLeaderboardStandings();
+
+        for (int i = 0; i < standings.size(); i++) {
+            if (standings.get(i).getName().equals("Player")) {
+                return i + 1; // +1 to make it 1-based (1st place, 2nd place, etc.)
+            }
+        }
+        return -1; // Should not happen unless "Player" is missing
+    }
+
     private void finishRace() {
         isRacing = false;
         if (fuelLevel <= 0) {
             finishReason = "Out of fuel!";
         } else {
             finishReason = "Finished the race!";
+        }
+        if (!playerFinished) {
+            playerFinished = true;
+            playerFinishTick = tickCount;
         }
     }
 
@@ -140,6 +187,27 @@ public class RaceManager {
 
     public String getFinishReason() {
         return finishReason;
+    }
+
+    public int getPlayerFinishTick() {
+        return playerFinishTick;
+    }
+
+
+    public int getMoneyEarned() {
+        int placement = getPlayerPlacement();
+        CoursePrizes prizes = race.getCourse().getPrizes();
+
+        return switch (placement) {
+            case 1 -> prizes.getFirstPlacePrize();
+            case 2 -> prizes.getSecondPlacePrize();
+            case 3 -> prizes.getThirdPlacePrize();
+            default -> 0;
+        };
+    }
+
+    public boolean hasPlayerFinished() {
+        return playerFinished;
     }
 
     public boolean isWaiting() {

@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import seng201.team0.models.*;
 import seng201.team0.services.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public class RaceController {
@@ -40,8 +41,8 @@ public class RaceController {
     private RaceManager raceManager;
     private Timeline raceTimeline;
 
-    private static final int REPAIR_WAIT_TICKS = 50;
-    private static final int TRAVELER_WAIT_TICKS = 50;
+    private static final int REPAIR_WAIT_TICKS = 2;
+    private static final int TRAVELER_WAIT_TICKS = 2;
     private static final int REPAIR_COST = 500;
     private static final int TRAVELER_PROFIT = 500;
 
@@ -61,16 +62,21 @@ public class RaceController {
         Difficulty difficulty = gameEnvironment.getDifficulty();
         Course course = gameEnvironment.getSelectedCourse();
         int numberOfOpponents = course.getNumberOfOpponents();
-        List<OpponentCar> opponents = difficulty.generateOpponents(numberOfOpponents);
+        List<OpponentCar> opponents = currentRace.getRoute().generateOpponents(numberOfOpponents);
 
         double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute());
         double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
-
         raceManager = new RaceManager(currentRace, currentCar, opponents, speed, fuelConsumptionRate);
 
         fuelGauge.setProgress(1);
 
-        raceTimeline = new Timeline(new KeyFrame(Duration.millis(100), event -> advanceRace()));
+        raceTimeline = new Timeline(new KeyFrame(Duration.millis(300), event -> {
+            try {
+                advanceRace();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
         raceTimeline.setCycleCount(Timeline.INDEFINITE);
         raceTimeline.play();
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
@@ -84,7 +90,7 @@ public class RaceController {
         updateUI();
     }
 
-    private void advanceRace() {
+    private void advanceRace() throws IOException {
         raceManager.advanceRaceTick();
         eventChecker();
 
@@ -129,6 +135,7 @@ public class RaceController {
             leaderboardBox.getChildren().add(opponentLabel);
         }
     }
+
 
     private void eventChecker() {
         RaceEvent event = raceManager.getCurrentEvent();
@@ -193,7 +200,22 @@ public class RaceController {
         raceTimeline.play();
     }
 
-    private void finishRace() {
+    private void finishRace() throws IOException {
         raceTimeline.stop();
+        String reason = raceManager.getFinishReason();
+        List<String> leaderboard = raceManager.getLeaderboardStrings();
+        int earnings = raceManager.getMoneyEarned();
+        int placement = raceManager.getPlayerPlacement();
+        String placementText;
+
+        switch (placement) {
+            case 1: placementText = "🏆 You finished 1st!"; break;
+            case 2: placementText = "🥈 You finished 2nd!"; break;
+            case 3: placementText = "🥉 You finished 3rd!"; break;
+            default: placementText = "You finished " + placement + "th.";
+        }
+
+
+        sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
     }
 }

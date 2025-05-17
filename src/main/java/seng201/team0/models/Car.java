@@ -3,12 +3,12 @@ package seng201.team0.models;
 public class Car extends Purchasable {
     private double basespeed;
     private double basehandling; // influences how well the car can navigate turns and maintain control
-    private int basereliability; // a percentage. Higher reliability means the car will be less likely to breakdown during a race (random event)
-    private int basefuelEconomy; // max distance in km achievable with full tank of fuel
+    private double basereliability; // a percentage. Higher reliability means the car will be less likely to breakdown during a race (random event)
+    private double basefuelEconomy; // max distance in km achievable with full tank of fuel
     private TuningPart handlingUpgrade;
     private TuningPart speedUpgrade;
 
-    public Car(String name, double speed, double handling, int reliability, int fuelEconomy, int price) {
+    public Car(String name, double speed, double handling, double reliability, double fuelEconomy, int price) {
         super(name, price);
         this.basespeed = speed;     // Can be changed using tuning parts
         this.basehandling = handling;   // Can be changed using tuning parts
@@ -34,11 +34,11 @@ public class Car extends Purchasable {
         }
     }
 
-    public int getReliability() {
+    public double getReliability() {
         return basereliability;
     }
 
-    public int getFuelEconomy() {
+    public double getFuelEconomy() {
         return basefuelEconomy;
     }
 
