@@ -27,8 +27,8 @@ public class BalanceManager {
 
     public void buySelectedPart(TuningPart selectedPart) {
         if (gameEnvironment.getBalance() >= selectedPart.getPrice()) {
-            gameEnvironment.getShopInventory().removeTuningParts(selectedPart);
-            gameEnvironment.getPlayerInventory().addTuningParts(selectedPart);
+            gameEnvironment.getShopInventory().removeTuningPart(selectedPart);
+            gameEnvironment.getPlayerInventory().addTuningPart(selectedPart);
             gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedPart.getPrice());
         }
     }
@@ -40,8 +40,8 @@ public class BalanceManager {
     }
 
     public void sellSelectedPart(TuningPart selectedPart) {
-        gameEnvironment.getPlayerInventory().removeTuningParts(selectedPart);
-        gameEnvironment.getShopInventory().addTuningParts(selectedPart);
+        gameEnvironment.getPlayerInventory().removeTuningPart(selectedPart);
+        gameEnvironment.getShopInventory().addTuningPart(selectedPart);
         gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedPart.getPrice());
     }
 }
