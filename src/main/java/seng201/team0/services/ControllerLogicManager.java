@@ -1,8 +1,6 @@
 package seng201.team0.services;
 
-import javafx.event.ActionEvent;
 import seng201.team0.models.Car;
-import seng201.team0.models.Garage;
 import seng201.team0.models.StarterCarInventory;
 
 public class ControllerLogicManager {

@@ -3,42 +3,82 @@ package seng201.team0.gui;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import seng201.team0.models.Difficulty;
-import seng201.team0.services.BalanceManager;
 import seng201.team0.services.ControllerLogicManager;
 import seng201.team0.services.GameEnvironment;
 
-
+/**
+ * Controller for the start menu screen.
+ * This class handles player input for game setup, including player name, season length, and difficulty.
+ * It validates the input and then proceeds to the car selection screen.
+ * @author Nathan Moran
+ */
 public class StartMenuController {
+    /**
+     * The game environment, used to configure game settings like difficulty and season length.
+     */
     protected GameEnvironment gameEnvironment;
+    /**
+     * The scene navigator, used for switching to the next scene (car selector) after setup.
+     */
     protected SceneNavigator sceneNavigator;
+    /**
+     * Manager for handling controller-specific logic, such as name validation.
+     */
     private ControllerLogicManager controllerLogicManager;
-
+    /**
+     * Stores the player's chosen name.
+     */
     String name;
 
+    /**
+     * Constructs a StartMenuController with the given game environment and scene navigator.
+     *
+     * @param gameEnvironment The game environment instance.
+     * @param sceneNavigator  The scene navigator instance.
+     */
     public StartMenuController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
         this.controllerLogicManager = gameEnvironment.getControllerLogicManager();
     }
 
+    /**
+     * Sets the season length display label based on the current value of the season slider.
+     * This method is typically called when the slider's value changes (e.g., on mouse drag or release).
+     *
+     * @param event The mouse event that triggered this action (e.g., slider value changed).
+     */
     @FXML
     private void setSeasonLength(MouseEvent event) {
         displaySeasonLengthLabel.setText(String.valueOf(seasonSlider.getValue()));
     }
 
-
+    /**
+     * Sets the display name label based on the text entered in the name field.
+     * This method is called as the user types in the name field.
+     *
+     * @param event The key event that triggered this action (e.g., key typed in name field).
+     */
     @FXML
     void setName(KeyEvent event) {
         displayNameLabel.setText(nameField.getText());
     }
 
+    /**
+     * Handles the "Accept" button action.
+     * It finalizes the game settings (season length, player name, difficulty),
+     * validates the player's name, and if all inputs are valid, switches to the car selector scene.
+     * If the name is invalid, it provides feedback to the user.
+     *
+     * @param event The action event triggered by the "Accept" button.
+     * @throws IOException If an I/O error occurs during scene transition.
+     */
     @FXML
     private void acceptButton(ActionEvent event) throws IOException {
         gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
@@ -55,37 +95,60 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Sets the game difficulty to Easy and updates the difficulty display label.
+     *
+     * @param event The action event triggered by the "Easy" difficulty button.
+     * @throws IOException Potentially, if future logic here involves I/O (currently not).
+     */
     @FXML
     private void setdifficultyEasy(ActionEvent event) throws IOException {
         displayDifficultyLabel.setText("Easy");
         gameEnvironment.setDifficulty(Difficulty.EASY);
     }
 
+    /**
+     * Sets the game difficulty to Medium and updates the difficulty display label.
+     *
+     * @param event The action event triggered by the "Medium" difficulty button.
+     */
     @FXML
     void setdifficultyMedium(ActionEvent event) {
         displayDifficultyLabel.setText("Medium");
         gameEnvironment.setDifficulty(Difficulty.MEDIUM);
     }
 
+    /**
+     * Sets the game difficulty to Hard and updates the difficulty display label.
+     *
+     * @param event The action event triggered by the "Hard" difficulty button.
+     */
     @FXML
     void setdifficultyHard(ActionEvent event) {
         displayDifficultyLabel.setText("Hard");
         gameEnvironment.setDifficulty(Difficulty.HARD);
     }
 
-
+    /**
+     * TextField for the player to enter their name.
+     */
     @FXML private TextField nameField;
-
+    /**
+     * Slider for the player to select the season length.
+     */
     @FXML private Slider seasonSlider;
-
-    @FXML
-    private Label displayDifficultyLabel;
-
-    @FXML
-    private Label displayNameLabel;
-
-    @FXML
-    private Label displaySeasonLengthLabel;
+    /**
+     * Label to display the currently selected difficulty.
+     */
+    @FXML private Label displayDifficultyLabel;
+    /**
+     * Label to display the name entered by the player.
+     */
+    @FXML private Label displayNameLabel;
+    /**
+     * Label to display the currently selected season length.
+     */
+    @FXML private Label displaySeasonLengthLabel;
 }
 
 
