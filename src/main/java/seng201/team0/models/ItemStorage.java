@@ -13,10 +13,14 @@ public abstract class ItemStorage {
     }
 
     public void addCar(Car car) {
-        CarList.add(car);
+        if (car != null) {
+            CarList.add(car);
+        }
     }
     public void removeCar(Car car) {
-        CarList.remove(car);
+        if (car != null) {
+            CarList.remove(car);
+        }
     }
 
     public ObservableList<Car> getCarList() {
@@ -24,11 +28,15 @@ public abstract class ItemStorage {
     }
 
     public void addTuningPart(TuningPart tuningPart) {
-        tuningPartList.add(tuningPart);
+        if (tuningPart != null) {
+            tuningPartList.add(tuningPart);
+        }
     }
 
     public void removeTuningPart(TuningPart tuningPart) {
-        tuningPartList.remove(tuningPart);
+        if (tuningPart != null) {
+            tuningPartList.remove(tuningPart);
+        }
     }
 
     public ObservableList<TuningPart> getTuningPartList() {

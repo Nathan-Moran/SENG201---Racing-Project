@@ -10,38 +10,48 @@ public class BalanceManager {
         this.gameEnvironment = gameEnvironment;
     }
     public void chooseStarterCar(Car selectedCar) {
-        if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
-            gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
-            gameEnvironment.getPlayerInventory().setStarterCar(selectedCar);
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+        if (selectedCar != null) {
+            if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
+                gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
+                gameEnvironment.getPlayerInventory().setStarterCar(selectedCar);
+                gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+            }
         }
     }
 
     public void buySelectedCar(Car selectedCar) {
-        if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
-            gameEnvironment.getShopInventory().removeCar(selectedCar);
-            gameEnvironment.getPlayerInventory().addCar(selectedCar);
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+        if (selectedCar != null) {
+            if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
+                gameEnvironment.getShopInventory().removeCar(selectedCar);
+                gameEnvironment.getPlayerInventory().addCar(selectedCar);
+                gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+            }
         }
     }
 
     public void buySelectedPart(TuningPart selectedPart) {
-        if (gameEnvironment.getBalance() >= selectedPart.getPrice()) {
-            gameEnvironment.getShopInventory().removeTuningPart(selectedPart);
-            gameEnvironment.getPlayerInventory().addTuningPart(selectedPart);
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedPart.getPrice());
+        if (selectedPart != null) {
+            if (gameEnvironment.getBalance() >= selectedPart.getPrice()) {
+                gameEnvironment.getShopInventory().removeTuningPart(selectedPart);
+                gameEnvironment.getPlayerInventory().addTuningPart(selectedPart);
+                gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedPart.getPrice());
+            }
         }
     }
 
     public void sellSelectedCar(Car selectedCar) {
-        gameEnvironment.getPlayerInventory().removeCar(selectedCar);
-        gameEnvironment.getShopInventory().addCar(selectedCar);
-        gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedCar.getPrice());
+        if (selectedCar != null) {
+            gameEnvironment.getPlayerInventory().removeCar(selectedCar);
+            gameEnvironment.getShopInventory().addCar(selectedCar);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedCar.getPrice());
+        }
     }
 
     public void sellSelectedPart(TuningPart selectedPart) {
-        gameEnvironment.getPlayerInventory().removeTuningPart(selectedPart);
-        gameEnvironment.getShopInventory().addTuningPart(selectedPart);
-        gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedPart.getPrice());
+        if (selectedPart != null) {
+            gameEnvironment.getPlayerInventory().removeTuningPart(selectedPart);
+            gameEnvironment.getShopInventory().addTuningPart(selectedPart);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedPart.getPrice());
+        }
     }
 }
