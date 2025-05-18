@@ -3,9 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
 
@@ -144,6 +142,10 @@ public class GarageController implements Initializable {
     @FXML
     private Label selectedCarSpeedUpgradeLabel;
 
+    @FXML
+    private TextField renameCarTextField;
+
+
     /**
      * Handles the action of selecting a car from the table.
      * If a car is selected, it is set as the player's currently active car,
@@ -158,6 +160,22 @@ public class GarageController implements Initializable {
             gameEnvironment.getPlayerInventory().setSelectedCar(selectedCar);
             carTable.getSelectionModel().clearSelection();
             setGUI();
+        }
+    }
+
+    @FXML
+    void renameCar(ActionEvent event) {
+        Car selectedCar = gameEnvironment.getSelectedCar();
+        if (selectedCar != null) {
+            String name = renameCarTextField.getText();
+            renameCarTextField.setPromptText(controllerLogicManager.nameChecker(name));
+            if (!renameCarTextField.getPromptText().equals("Valid Name")) {
+                renameCarTextField.setStyle("-fx-prompt-text-fill: red;");
+                renameCarTextField.clear();
+            } else {
+                selectedCar.setName(name);
+                selectedCarModelLabel.setText(selectedCar.getName());
+            }
         }
     }
 

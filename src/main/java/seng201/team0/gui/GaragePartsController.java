@@ -64,12 +64,16 @@ public class GaragePartsController implements Initializable {
      */
     @FXML
     void installPart(ActionEvent event) {
-        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
-        if (selectedTuningPart != null) {
-            gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart);
-            setupInstalledPartsTable();
-            setupReservePartsTable();
-        }
+//        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
+//        if (selectedTuningPart != null) {
+//            if () {
+//
+//            } else {
+//                gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart);
+//                setupInstalledPartsTable();
+//                setupReservePartsTable();
+//            }
+//        }
     }
 
     /**
