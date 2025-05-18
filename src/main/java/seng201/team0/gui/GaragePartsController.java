@@ -70,14 +70,12 @@ public class GaragePartsController implements Initializable {
             if (gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart)) {
                 setupInstalledPartsTable();
                 setupReservePartsTable();
-
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Incompatible Tuning Part");
                 alert.setHeaderText(null);
                 alert.setContentText("Cannot install two of the same tuning parts on a car");
                 alert.showAndWait();
-
             }
         }
     }

@@ -173,6 +173,7 @@ public class GarageController implements Initializable {
                 renameCarTextField.setStyle("-fx-prompt-text-fill: red;");
                 renameCarTextField.clear();
             } else {
+                renameCarTextField.clear();
                 selectedCar.setCustomName(name);
                 selectedCarModelLabel.setText(selectedCar.getCustomName());
             }
