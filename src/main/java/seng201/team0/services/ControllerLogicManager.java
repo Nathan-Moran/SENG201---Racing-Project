@@ -36,7 +36,12 @@ public class ControllerLogicManager {
                     label = String.valueOf(activeCar.getHandling());
                     break;
                 case "Model":
-                    label = activeCar.getName();
+                    if (activeCar.getCustomName() == null) {
+                        label = activeCar.getName();
+                    } else {
+                        label = activeCar.getCustomName();
+                    }
+
                     break;
                 case "Reliability":
                     label = String.valueOf(activeCar.getReliability());

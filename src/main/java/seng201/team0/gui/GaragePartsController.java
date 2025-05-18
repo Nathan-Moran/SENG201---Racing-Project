@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -64,16 +65,21 @@ public class GaragePartsController implements Initializable {
      */
     @FXML
     void installPart(ActionEvent event) {
-//        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
-//        if (selectedTuningPart != null) {
-//            if () {
-//
-//            } else {
-//                gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart);
-//                setupInstalledPartsTable();
-//                setupReservePartsTable();
-//            }
-//        }
+        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
+        if (selectedTuningPart != null) {
+            if (gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart)) {
+                setupInstalledPartsTable();
+                setupReservePartsTable();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Incompatible Tuning Part");
+                alert.setHeaderText(null);
+                alert.setContentText("Cannot install two of the same tuning parts on a car");
+                alert.showAndWait();
+
+            }
+        }
     }
 
     /**

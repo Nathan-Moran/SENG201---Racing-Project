@@ -12,16 +12,19 @@ public class Garage extends ItemStorage {
         this.selectedTuningPartList = FXCollections.observableArrayList();
     }
 
-    public void installTuningPart(TuningPart part) {
+    public boolean installTuningPart(TuningPart part) {
         if (selectedCar != null) {
             if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() == null) {
                 selectedCar.addSpeedUpgrade(part);
                 removeTuningPart(part);
+                return true;
             } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
                 selectedCar.addHandlingUpgrade(part);
                 removeTuningPart(part);
+                return true;
             }
         }
+        return false;
     }
 
     public void uninstallTuningPart(TuningPart part) {
@@ -30,13 +33,13 @@ public class Garage extends ItemStorage {
                 addTuningPart(selectedCar.getSpeedUpgrade());
                 selectedCar.removeSpeedUpgrade();
             }
-            if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() != null) {
+            else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() != null) {
                 addTuningPart(selectedCar.getHandlingUpgrade());
                 selectedCar.removeHandlingUpgrade();
             }
         }
-
     }
+
 
     public ObservableList<TuningPart> getInstalledTuningParts() {
         selectedTuningPartList.clear();
@@ -68,13 +71,16 @@ public class Garage extends ItemStorage {
             if (selectedCar.getHandlingUpgrade() != null) {
                 removeTuningPart(selectedCar.getHandlingUpgrade());
             }
+            if (selectedCar.getCustomName() != null) {
+                selectedCar.setCustomName(null);
+            }
             Car oldSelectedCar = this.getSelectedCar();
             addCar(oldSelectedCar);
             this.selectedCar = newSelectedCar;
             removeCar(newSelectedCar);
         }
-
     }
+
 
     public void setStarterCar(Car newStarterCar) {
         this.selectedCar = newStarterCar;

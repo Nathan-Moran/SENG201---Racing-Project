@@ -32,6 +32,8 @@ public class Car extends Purchasable {
      */
     private TuningPart speedUpgrade;
 
+    private String customName;
+
     /**
      * Constructs a new Car instance.
      *
@@ -152,5 +154,13 @@ public class Car extends Purchasable {
      */
     public TuningPart getHandlingUpgrade() {
             return handlingUpgrade;
+    }
+
+    public String getCustomName() {
+        return customName;
+    }
+
+    public void setCustomName(String name) {
+        this.customName = name;
     }
 }
