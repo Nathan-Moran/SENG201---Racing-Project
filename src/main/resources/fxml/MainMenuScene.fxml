@@ -22,6 +22,12 @@
             <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Season Length:" />
             <Label fx:id="seasonLengthLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
          </HBox>
+            <HBox alignment="CENTER" spacing="5" style="-fx-background-color: #CFD8DC; -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
+               <children>
+                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Races Remaining:" />
+                  <Label fx:id="racesRemainingLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
+               </children>
+            </HBox>
       </HBox>
       </HBox>
    </top>

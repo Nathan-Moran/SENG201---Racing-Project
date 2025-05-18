@@ -15,6 +15,7 @@ public class GameEnvironment {
     private final BalanceManager balanceManager;
     private final ControllerLogicManager controllerLogicManager;
     private final int STARTING_BALANCE;
+    private int racesRemaining;
 
     public GameEnvironment() {
         this.balanceManager = new BalanceManager(this);
@@ -42,6 +43,10 @@ public class GameEnvironment {
         selectedDifficulty = difficulty;
     }
 
+    public void setRacesRemaining(int racesRemaining) {
+        this.racesRemaining = racesRemaining;
+    }
+
     public Race getCurrentRace() {
         return currentRace;
     }
@@ -64,6 +69,10 @@ public class GameEnvironment {
 
     public Car getSelectedCar() {
         return playerInventory.getSelectedCar();
+    }
+
+    public int getRacesRemaining() {
+        return racesRemaining;
     }
 
     public void setName(String name) {
@@ -115,5 +124,11 @@ public class GameEnvironment {
     }
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public void decrementRacesRemaining() {
+        if (racesRemaining > 0) {
+            racesRemaining--;
+        }
     }
 }
