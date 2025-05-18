@@ -82,7 +82,9 @@ public class StartMenuController {
      */
     @FXML
     private void acceptButton(ActionEvent event) throws IOException {
-        gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
+        int seasonLength = (int) seasonSlider.getValue();
+        gameEnvironment.setSeasonLength(seasonLength);
+        gameEnvironment.setRacesRemaining(seasonLength);
         name = nameField.getText();
 
         boolean difficultySelected = !displayDifficultyLabel.getText().equals("-");

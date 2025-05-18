@@ -49,6 +49,10 @@ public class MainMenuController implements Initializable {
     @FXML
     private Label seasonLengthLabel;
 
+
+    @FXML
+    private Label racesRemainingLabel;
+
     /**
      * Handles the action of navigating to the garage screen.
      *
@@ -93,5 +97,6 @@ public class MainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
         seasonLengthLabel.setText(String.valueOf(gameEnvironment.getSeasonLength()));
+        racesRemainingLabel.setText(String.valueOf(gameEnvironment.getRacesRemaining()));
     }
 }

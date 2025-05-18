@@ -58,12 +58,6 @@ public class RaceController {
     private RaceManager raceManager;
     private Timeline raceTimeline;
 
-    private static final int REPAIR_WAIT_TICKS = 2;
-    private static final int TRAVELER_WAIT_TICKS = 2;
-    private static final int REFUEL_WAIT_TICKS = 2;
-    private static final int REPAIR_COST = 500;
-    private static final int TRAVELER_PROFIT = 500;
-
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
@@ -77,7 +71,6 @@ public class RaceController {
             System.err.println("No car selected! Cannot calculate speed.");
             return;
         }
-        Difficulty difficulty = gameEnvironment.getDifficulty();
         Course course = gameEnvironment.getSelectedCourse();
         int numberOfOpponents = course.getNumberOfOpponents();
         List<OpponentCar> opponents = currentRace.getRoute().generateOpponents(numberOfOpponents);
@@ -85,9 +78,9 @@ public class RaceController {
         double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute());
         double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
         raceManager = new RaceManager(currentRace, currentCar, opponents, speed, fuelConsumptionRate);
-
         fuelGauge.setProgress(1);
-
+        raceManager.deductEntryFee(gameEnvironment);
+        gameEnvironment.decrementRacesRemaining();
         raceTimeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
             try {
                 advanceRace();
@@ -172,61 +165,41 @@ public class RaceController {
                     break;
             }
         }
-
     }
 
     private void handleFuelStop(boolean refuel) {
         fuelStopPopup.setVisible(false);
-        if (refuel) {
-            raceManager.refuel();
-            raceManager.setWaiting(true, REFUEL_WAIT_TICKS);
-        }
-        raceManager.clearCurrentEvent();
-        raceManager.setWaiting(false, 0);
+        raceManager.handleFuelStop(refuel);
         updateUI();
         raceTimeline.play();
     }
 
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
-        if (pay) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - REPAIR_COST);
-            raceManager.setWaiting(true, REPAIR_WAIT_TICKS);
-        } else {
-            raceTimeline.stop();
-            raceManager.playerWithdrawDueToBreakdown();
-        }
-        raceManager.clearCurrentEvent();
+        raceManager.handleRepair(pay, gameEnvironment);
         raceTimeline.play();
     }
 
     private void handleTraveler(boolean pickUp) {
         travelerPopup.setVisible(false);
-        if (pickUp) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT);
-            raceManager.setWaiting(true, TRAVELER_WAIT_TICKS);
-        } else {
-            raceManager.setWaiting(false, 0);  // <-- Fix added here
-        }
-        raceManager.clearCurrentEvent();
+        raceManager.handleTraveler(pickUp, gameEnvironment);
         raceTimeline.play();
     }
-
 
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
-        raceTimeline.stop();
-        gameEnvironment.setBalance(gameEnvironment.getBalance() - gameEnvironment.getCurrentRace().getCourse().getEntryFee());
-        raceManager.clearCurrentEvent();
+        raceManager.handleWeather(gameEnvironment);
         raceTimeline.play();
     }
+
+
 
     private void finishRace() throws IOException {
         raceTimeline.stop();
         String reason = raceManager.getFinishReason();
         List<String> leaderboard = raceManager.getLeaderboardStrings();
         int earnings = raceManager.getMoneyEarned();
-
+        raceManager.awardPrizeMoney(gameEnvironment);
         int placement;
         if (Objects.equals(reason, "Car broke down! You withdrew from the race.")) {
             placement = raceManager.getOpponents().size() + 1;

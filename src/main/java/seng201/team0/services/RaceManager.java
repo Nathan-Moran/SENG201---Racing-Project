@@ -31,6 +31,13 @@ public class RaceManager {
     private int playerFinishTick = -1;
     private boolean playerFinished = false;
 
+    private static final int REPAIR_WAIT_TICKS = 2;
+    private static final int TRAVELER_WAIT_TICKS = 2;
+    private static final int REFUEL_WAIT_TICKS = 2;
+    private static final int REPAIR_COST = 500;
+    private static final int TRAVELER_PROFIT = 500;
+
+
 
 
     public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
@@ -174,6 +181,44 @@ public class RaceManager {
         }
     }
 
+    public void handleFuelStop(boolean refuel) {
+        if (refuel) {
+            refuel();
+            setWaiting(true, REFUEL_WAIT_TICKS);
+        } else {
+            setWaiting(false, 0);
+        }
+        clearCurrentEvent();
+    }
+
+    public void handleRepair(boolean pay, GameEnvironment gameEnvironment) {
+        if (pay) {
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - REPAIR_COST);
+            setWaiting(true, REPAIR_WAIT_TICKS);
+        } else {
+            playerWithdrawDueToBreakdown();
+        }
+        clearCurrentEvent();
+    }
+
+    public void handleTraveler(boolean pickUp, GameEnvironment gameEnvironment) {
+        if (pickUp) {
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT);
+            setWaiting(true, TRAVELER_WAIT_TICKS);
+        } else {
+            setWaiting(false, 0);
+        }
+        clearCurrentEvent();
+    }
+
+    public void handleWeather(GameEnvironment gameEnvironment) {
+        gameEnvironment.setBalance(
+                gameEnvironment.getBalance() - race.getCourse().getEntryFee()
+        );
+        clearCurrentEvent();
+    }
+
+
     public boolean isRaceFinished() {
         return !isRacing;
     }
@@ -211,6 +256,20 @@ public class RaceManager {
             case 3 -> prizes.getThirdPlacePrize();
             default -> 0;
         };
+    }
+
+    public void deductEntryFee(GameEnvironment gameEnvironment) {
+        int entryFee = race.getCourse().getEntryFee();
+        gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
+    }
+
+    public int awardPrizeMoney(GameEnvironment gameEnvironment) {
+        if (playerFinished) {
+            int prize = getMoneyEarned();
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
+            return prize;
+        }
+        return 0;
     }
 
     public boolean hasPlayerFinished() {
