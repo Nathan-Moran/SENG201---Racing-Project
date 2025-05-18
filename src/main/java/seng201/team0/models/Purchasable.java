@@ -13,6 +13,14 @@ public abstract class Purchasable {
         return name;
     }
 
+    /**
+     * Sets or updates the name of the purchasable item.
+     * @param name The new name for the item.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getPrice() {
         return price;
     }
