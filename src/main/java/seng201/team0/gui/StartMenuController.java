@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -84,15 +85,25 @@ public class StartMenuController {
         gameEnvironment.setSeasonLength((int) seasonSlider.getValue());
         name = nameField.getText();
 
+        boolean difficultySelected = !displayDifficultyLabel.getText().equals("-");
+        boolean seasonLengthSelected = !displaySeasonLengthLabel.getText().equals("-");
+
+
         nameField.setPromptText(controllerLogicManager.nameChecker(name));
-        if (nameField.getPromptText().equals("Valid Name")) {
+        if (!nameField.getPromptText().equals("Valid Name")) {
             nameField.setStyle("-fx-prompt-text-fill: red;");
             nameField.clear();
-        }
-
-        if ((nameField.getPromptText().equals("Valid Name")) && !displayDifficultyLabel.getText().equals("-") && !displaySeasonLengthLabel.getText().equals("-")) {
+        } else if (!difficultySelected || !seasonLengthSelected) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please ensure a difficulty and season length are selected");
+            alert.showAndWait();
+        } else {
+            gameEnvironment.setName(name);
             sceneNavigator.switchToSceneCarSelector(event);
         }
+
     }
 
     /**

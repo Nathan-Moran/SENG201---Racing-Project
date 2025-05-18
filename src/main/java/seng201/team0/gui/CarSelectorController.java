@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,7 +48,7 @@ public class CarSelectorController implements Initializable {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
         gameEnvironment.setupStarterCars();
-        startingCarsGarage = gameEnvironment.getStarterCars();
+        startingCarsGarage = gameEnvironment.getStarterCarInventory();
     }
 
     /**
@@ -62,9 +63,17 @@ public class CarSelectorController implements Initializable {
     private void chooseSelected(ActionEvent event) throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
-            carTable.getSelectionModel().clearSelection();
-            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedCar.getPrice())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Funds");
+                alert.setHeaderText(null);
+                alert.setContentText("You do not have the required funds to choose this car");
+                alert.showAndWait();
+            } else {
+                gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
+                carTable.getSelectionModel().clearSelection();
+                moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            }
         }
     }
 
@@ -81,6 +90,12 @@ public class CarSelectorController implements Initializable {
         if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
             gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
             sceneNavigator.switchToSceneMainMenu(event);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No car has been selected");
+            alert.showAndWait();
         }
     }
 

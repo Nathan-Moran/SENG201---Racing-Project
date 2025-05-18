@@ -6,7 +6,6 @@ public class GameEnvironment {
     private Race currentRace;
     private Season currentSeason;
     private Difficulty selectedDifficulty;
-    private Car selectedCar;
     private int balance;
     private String name;
     private int seasonLength;
@@ -22,10 +21,9 @@ public class GameEnvironment {
         this.controllerLogicManager = new ControllerLogicManager(this);
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
-        this.STARTING_BALANCE = 1000;
+        this.STARTING_BALANCE = 3000;
         setupShop();
         setBalance();
-        setSelectedCar();
     }
 
     public void setupShop() {
@@ -42,10 +40,6 @@ public class GameEnvironment {
 
     public void setDifficulty(Difficulty difficulty) {
         selectedDifficulty = difficulty;
-    }
-
-    public void setSelectedCar() {
-        this.selectedCar = playerInventory.getSelectedCar();
     }
 
     public Race getCurrentRace() {
@@ -69,7 +63,7 @@ public class GameEnvironment {
     }
 
     public Car getSelectedCar() {
-        return selectedCar;
+        return playerInventory.getSelectedCar();
     }
 
     public void setName(String name) {
@@ -96,13 +90,8 @@ public class GameEnvironment {
         return controllerLogicManager;
     }
 
-
     public void setupStarterCars() {
        starterCarInventory.setupStarterCarInventory();
-    }
-
-    public StarterCarInventory getStarterCars() {
-        return starterCarInventory;
     }
 
     public Garage getPlayerInventory() {
