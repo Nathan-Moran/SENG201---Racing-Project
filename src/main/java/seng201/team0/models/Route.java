@@ -3,7 +3,7 @@ package seng201.team0.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Route {
+public enum     Route {
     DESERT_DRIFT("Desert Drift", new RouteAttributes(0.5, 1.5, 1.2), 20, 2, 0.8),
     DESERT_LONG("Desert Long", new RouteAttributes(1.5, 0.6, 1), 30, 3, 0.9),
     MOUNTAIN_STEEP("Mountain Steep", new RouteAttributes(1, 0.8, 1.2), 15, 1, 1),

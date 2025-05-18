@@ -33,13 +33,19 @@ public class SceneNavigator {
      * The name of the fxml file to be initialised
      */
     String fxml;
+    private Stage stage;
     /**
      * Constructs a SceneNavigator with the given game environment.
      *
      * @param gameEnvironment The game environment instance.
      */
-    public SceneNavigator(GameEnvironment gameEnvironment) {
+    public SceneNavigator(GameEnvironment gameEnvironment, Stage stage) {
         this.gameEnvironment = gameEnvironment;
+        this.stage = stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     /**
@@ -134,31 +140,6 @@ public class SceneNavigator {
         stage.setTitle(title);
     }
 
-    /**
-     * Switches the current scene to the Race scene.
-     * This version is intended for AWT MouseEvent, but the parameter type is java.awt.event.MouseEvent,
-     * which might be a mismatch if JavaFX MouseEvent is intended elsewhere.
-     *
-     * @param event The AWT mouse event that triggered this navigation.
-     * @throws IOException If an error occurs during FXML loading.
-     * @deprecated Consider using the JavaFX MouseEvent version or clarifying usage.
-     */
-    public void switchToSceneRace(MouseEvent event) throws IOException {
-        title = "Race";
-        fxml = "/fxml/RaceScene.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-
-        loader.setControllerFactory(ignoredControllerClass ->
-                new RaceController(this.gameEnvironment, this)
-        );
-
-        Parent parent = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-
-        stage.setScene(scene);
-        stage.setTitle(title);
-    }
 
     /**
      * Switches the current scene to the Course and Route Selection scene.
@@ -274,20 +255,25 @@ public class SceneNavigator {
      */
     public void switchToRaceFinishScene(String reason, String placement, List<String> leaderboard, int earnings) throws IOException {
         title = "Race Results";
-        fxml = "/fxml/RaceFinishScene.fxml";
+        fxml = "/fxml/RaceFinishScreen.fxml";
 
+        // Set controller factory to inject GameEnvironment and SceneNavigator
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        loader.setControllerFactory(ignoredClass -> new RaceFinishController(this.gameEnvironment, this));
+
         Parent parent = loader.load();
 
-        // Get controller and pass data
+        // Get the controller instance created via factory
         RaceFinishController controller = loader.getController();
-        controller.setSceneNavigator(this);
+
+        // Set the race results after FXML has loaded
         controller.setRaceResults(reason, placement, leaderboard, earnings);
 
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(parent);
-//        stage.setScene(scene);
-//        stage.setTitle(title);
+        // Create and show the new scene
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
     }
 
 }

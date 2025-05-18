@@ -23,13 +23,11 @@ public class MainWindow extends Application {
     protected SceneNavigator sceneNavigator;
     protected GameEnvironment gameEnvironment;
 
-    public MainWindow() {
-        this.gameEnvironment = new GameEnvironment();
-        this.sceneNavigator = new SceneNavigator(this.gameEnvironment); // Assumes this constructor exists
-    }
-
     @Override
     public void start(Stage primaryStage) throws IOException {
+        this.gameEnvironment = new GameEnvironment();
+        this.sceneNavigator = new SceneNavigator(this.gameEnvironment, primaryStage); // Assumes this constructor exists
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartingScreen.fxml"));
         loader.setControllerFactory(ignoredControllerClass ->
                 new StartMenuController(this.gameEnvironment, this.sceneNavigator)

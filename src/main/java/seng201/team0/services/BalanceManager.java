@@ -15,6 +15,7 @@ public class BalanceManager {
             if (gameEnvironment.getBalance() >= selectedCar.getPrice()) {
                 gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
                 gameEnvironment.getPlayerInventory().setStarterCar(selectedCar);
+                gameEnvironment.setSelectedCar();
                 gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
             }
         } else if (gameEnvironment.getSelectedCar() != null) {

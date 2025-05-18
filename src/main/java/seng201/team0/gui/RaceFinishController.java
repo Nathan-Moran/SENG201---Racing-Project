@@ -4,27 +4,36 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
+import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 import java.util.List;
 
 public class RaceFinishController {
 
-    @FXML private static Label finishReason;
-    @FXML private static Label placementMessage;
-    @FXML private static Label resultTitle;
-    @FXML private static ListView<String> leaderboardListView;
-    @FXML private static Label moneyEarned;
+    @FXML private Label finishReason;
+    @FXML private Label placementMessage;
+    @FXML private Label resultTitle;
+    @FXML private ListView<String> leaderboardListView;
+    @FXML private Label moneyEarned;
     @FXML private Button mainMenuButton;
     @FXML private Button newRaceButton;
 
-    private SceneNavigator sceneNavigator;
+    protected SceneNavigator sceneNavigator;
+    protected GameEnvironment gameEnvironment;
+
+
+    public RaceFinishController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+
+    }
 
     public void setSceneNavigator(SceneNavigator sceneNavigator) {
         this.sceneNavigator = sceneNavigator;
     }
 
-    public static void setRaceResults(String reason, String placementText, List<String> leaderboard, int earnings) {
+    public void setRaceResults(String reason, String placementText, List<String> leaderboard, int earnings) {
         finishReason.setText("Reason: " + reason);
         placementMessage.setText(placementText);
         resultTitle.setText("Final Results");

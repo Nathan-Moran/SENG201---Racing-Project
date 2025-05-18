@@ -47,6 +47,7 @@ public class RaceManager {
     public void advanceRaceTick() {
         if (!isRacing) return;
         tickCount++;
+        updateOpponentDistances();
         if (isWaiting) {
             waitTicksRemaining--;
             if (waitTicksRemaining <= 0) {
@@ -58,14 +59,16 @@ public class RaceManager {
         fuelLevel -= fuelConsumptionRate;
         if (fuelLevel <= 0) {
             fuelLevel = 0;
+            finishRace();
         }
 
-        updateOpponentDistances();
         if (playerDistance >= eventTriggerDistance && !eventDone) {
             maybeTriggerRandomEvent();
+            eventDone = true;
         }
         if (playerDistance >= breakdownTriggerDistance && !breakdownDone) {
             maybeTriggerBreakdownEvent();
+            breakdownDone = true;
         }
         if (nextFuelStopIndex < fuelStopDistances.size() && playerDistance >= fuelStopDistances.get(nextFuelStopIndex)) {
             isWaiting = true;
@@ -95,16 +98,14 @@ public class RaceManager {
     }
 
     private void maybeTriggerBreakdownEvent() {
-        double reliability = RaceCalculations.calculateEffectiveReliability(playerCar, race.getRoute()); // For example, 0.85 means 85% reliable
-        double breakdownChance = (1.0 - reliability) * 100; // More reliable → lower chance
-        int roll = random.nextInt(100);
-        if (roll < 50) {
+        double reliability = RaceCalculations.calculateEffectiveReliability(playerCar, race.getRoute()); // e.g., 0.85
+        double breakdownChance = (1.0 - reliability) * 100; // e.g., 15.0
+        int roll = random.nextInt(100); // random number between 0 and 99 inclusive
+        if (roll < breakdownChance) {   // triggers breakdown with probability = breakdownChance%
             currentEvent = new RaceEvent(RaceEventType.BREAKDOWN);
             isWaiting = true;
             waitTicksRemaining = INDEFINITE_WAIT;
         }
-        breakdownDone = true;
-
     }
 
     public void clearCurrentEvent() {
@@ -154,7 +155,13 @@ public class RaceManager {
         return -1; // Should not happen unless "Player" is missing
     }
 
-    private void finishRace() {
+    public void playerWithdrawDueToBreakdown() {
+        isRacing = false;
+        playerFinished = true;
+        finishReason = "Car broke down! You withdrew from the race.";
+    }
+
+    public void finishRace() {
         isRacing = false;
         if (fuelLevel <= 0) {
             finishReason = "Out of fuel!";

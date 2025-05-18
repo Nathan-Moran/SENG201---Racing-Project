@@ -12,28 +12,45 @@ import seng201.team0.services.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class RaceController {
 
-    @FXML private ImageView routeImage;
-    @FXML private Label currentDistanceLabel;
-    @FXML private Label raceLengthLabel;
-    @FXML private ProgressBar fuelGauge;
-    @FXML private VBox leaderboardBox;
+    @FXML
+    private ImageView routeImage;
+    @FXML
+    private Label currentDistanceLabel;
+    @FXML
+    private Label raceLengthLabel;
+    @FXML
+    private ProgressBar fuelGauge;
+    @FXML
+    private VBox leaderboardBox;
 
     // Popups
-    @FXML private VBox fuelStopPopup;
-    @FXML private VBox breakdownPopup;
-    @FXML private VBox travelerPopup;
-    @FXML private VBox weatherPopup;
+    @FXML
+    private VBox fuelStopPopup;
+    @FXML
+    private VBox breakdownPopup;
+    @FXML
+    private VBox travelerPopup;
+    @FXML
+    private VBox weatherPopup;
 
-    @FXML private Button stopForFuelButton;
-    @FXML private Button continueWithoutFuelButton;
-    @FXML private Button withdrawButton;
-    @FXML private Button repairButton;
-    @FXML private Button pickUpButton;
-    @FXML private Button drivePastButton;
-    @FXML private Button continueAfterWeatherButton;
+    @FXML
+    private Button stopForFuelButton;
+    @FXML
+    private Button continueWithoutFuelButton;
+    @FXML
+    private Button withdrawButton;
+    @FXML
+    private Button repairButton;
+    @FXML
+    private Button pickUpButton;
+    @FXML
+    private Button drivePastButton;
+    @FXML
+    private Button continueAfterWeatherButton;
 
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
@@ -43,6 +60,7 @@ public class RaceController {
 
     private static final int REPAIR_WAIT_TICKS = 2;
     private static final int TRAVELER_WAIT_TICKS = 2;
+    private static final int REFUEL_WAIT_TICKS = 2;
     private static final int REPAIR_COST = 500;
     private static final int TRAVELER_PROFIT = 500;
 
@@ -70,7 +88,7 @@ public class RaceController {
 
         fuelGauge.setProgress(1);
 
-        raceTimeline = new Timeline(new KeyFrame(Duration.millis(300), event -> {
+        raceTimeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
             try {
                 advanceRace();
             } catch (IOException e) {
@@ -93,8 +111,6 @@ public class RaceController {
     private void advanceRace() throws IOException {
         raceManager.advanceRaceTick();
         eventChecker();
-
-        double playerDistance = raceManager.getPlayerDistance();
         updateUI();
         if (raceManager.isRaceFinished()) {
             finishRace();
@@ -103,7 +119,7 @@ public class RaceController {
 
     private void updateUI() {
         currentDistanceLabel.setText("Current distance: " + (int) raceManager.getPlayerDistance() + " km");
-        raceLengthLabel.setText("Length: " + (int) raceManager.getRace().getRoute().getLength() + " km");
+        raceLengthLabel.setText((int) raceManager.getRace().getRoute().getLength() + " km");
         fuelGauge.setProgress(raceManager.getFuelLevel());
         updateLeaderboardDisplay();
         updateFuelGauge();
@@ -163,6 +179,7 @@ public class RaceController {
         fuelStopPopup.setVisible(false);
         if (refuel) {
             raceManager.refuel();
+            raceManager.setWaiting(true, REFUEL_WAIT_TICKS);
         }
         raceManager.clearCurrentEvent();
         raceManager.setWaiting(false, 0);
@@ -177,6 +194,7 @@ public class RaceController {
             raceManager.setWaiting(true, REPAIR_WAIT_TICKS);
         } else {
             raceTimeline.stop();
+            raceManager.playerWithdrawDueToBreakdown();
         }
         raceManager.clearCurrentEvent();
         raceTimeline.play();
@@ -187,10 +205,13 @@ public class RaceController {
         if (pickUp) {
             gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT);
             raceManager.setWaiting(true, TRAVELER_WAIT_TICKS);
+        } else {
+            raceManager.setWaiting(false, 0);  // <-- Fix added here
         }
         raceManager.clearCurrentEvent();
         raceTimeline.play();
     }
+
 
     private void handleWeatherContinue() {
         weatherPopup.setVisible(false);
@@ -205,16 +226,29 @@ public class RaceController {
         String reason = raceManager.getFinishReason();
         List<String> leaderboard = raceManager.getLeaderboardStrings();
         int earnings = raceManager.getMoneyEarned();
-        int placement = raceManager.getPlayerPlacement();
-        String placementText;
 
-        switch (placement) {
-            case 1: placementText = "🏆 You finished 1st!"; break;
-            case 2: placementText = "🥈 You finished 2nd!"; break;
-            case 3: placementText = "🥉 You finished 3rd!"; break;
-            default: placementText = "You finished " + placement + "th.";
+        int placement;
+        if (Objects.equals(reason, "Car broke down! You withdrew from the race.")) {
+            placement = raceManager.getOpponents().size() + 1;
+        } else {
+            placement = raceManager.getPlayerPlacement();
         }
 
+        String placementText;
+        switch (placement) {
+            case 1:
+                placementText = "🏆 You finished 1st!";
+                break;
+            case 2:
+                placementText = "🥈 You finished 2nd!";
+                break;
+            case 3:
+                placementText = "🥉 You finished 3rd!";
+                break;
+            default:
+                placementText = "You finished " + placement + "th.";
+                break;
+        }
 
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
     }
