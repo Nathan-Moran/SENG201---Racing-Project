@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import seng201.team0.models.Car;
 import seng201.team0.models.TuningPart;
@@ -86,9 +87,17 @@ public class ShopBuyController extends AbstractShopController {
     void buyCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
-            carTable.getSelectionModel().clearSelection();
-            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedCar.getPrice())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Funds");
+                alert.setHeaderText(null);
+                alert.setContentText("You do not have the required funds to buy this Car");
+                alert.showAndWait();
+            } else {
+                gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
+                carTable.getSelectionModel().clearSelection();
+                moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            }
         }
     }
 
@@ -104,9 +113,17 @@ public class ShopBuyController extends AbstractShopController {
     void buyPart(ActionEvent event) {
         TuningPart selectedPart = tuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            gameEnvironment.getBalanceManager().buySelectedPart(selectedPart);
-            tuningPartTable.getSelectionModel().clearSelection();
-            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedPart.getPrice())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Funds");
+                alert.setHeaderText(null);
+                alert.setContentText("You do not have the required funds to buy this Part");
+                alert.showAndWait();
+            } else {
+                gameEnvironment.getBalanceManager().buySelectedPart(selectedPart);
+                tuningPartTable.getSelectionModel().clearSelection();
+                moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+            }
         }
     }
 }
