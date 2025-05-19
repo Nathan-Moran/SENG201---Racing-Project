@@ -23,7 +23,7 @@ public class BalanceManagerTest {
         balanceManager = gameEnvironment.getBalanceManager();
 
         car1 = new Car("Affordable Car", 100, 0.5, 0.8, 15, 1000);
-        car2_expensive = new Car("Expensive Car", 200, 0.9, 0.9, 10, 5000);
+        car2_expensive = new Car("Expensive Car", 200, 0.9, 0.9, 10, 3000);
         part1 = new TuningPart("Basic Part", 200, "Speed", 1.1);
         part2_expensive = new TuningPart("Premium Part", 1000, "Handling", 1.3);
 
@@ -94,7 +94,7 @@ public class BalanceManagerTest {
     @Test
     void testBuySelectedCarSufficientFunds() {
         balanceManager.buySelectedCar(car2_expensive);
-        assertEquals(-2000, gameEnvironment.getBalance());
+        assertEquals(0, gameEnvironment.getBalance());
         assertTrue(gameEnvironment.getPlayerInventory().getCarList().contains(car2_expensive));
         assertFalse(gameEnvironment.getShopInventory().getCarList().contains(car2_expensive));
     }
