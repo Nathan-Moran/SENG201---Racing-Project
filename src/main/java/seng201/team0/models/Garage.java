@@ -54,22 +54,14 @@ public class Garage extends ItemStorage {
         return selectedTuningPartList;
     }
 
-//    public void setSelectedCar() {
-//        if (selectedCar == null) {
-//            if (!reserveCarList.isEmpty()) { //Maybe throw and catch errors
-//                selectedCar = reserveCarList.get(0);
-//                removeCar(selectedCar);
-//            }
-//        }
-//    }
 
     public void setSelectedCar(Car newSelectedCar) {
         if (selectedCar != null) {
             if (selectedCar.getSpeedUpgrade() != null) {
-                removeTuningPart(selectedCar.getSpeedUpgrade());
+                uninstallTuningPart(selectedCar.getSpeedUpgrade());
             }
             if (selectedCar.getHandlingUpgrade() != null) {
-                removeTuningPart(selectedCar.getHandlingUpgrade());
+                uninstallTuningPart(selectedCar.getHandlingUpgrade());
             }
             if (selectedCar.getCustomName() != null) {
                 selectedCar.setCustomName(null);
