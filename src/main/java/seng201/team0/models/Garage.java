@@ -73,6 +73,10 @@ public class Garage extends ItemStorage {
         }
     }
 
+    public boolean garageFull() {
+        return getCarList().size() > 3;
+    }
+
 
     public void setStarterCar(Car newStarterCar) {
         this.selectedCar = newStarterCar;

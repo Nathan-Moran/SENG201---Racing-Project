@@ -94,9 +94,18 @@ public class ShopBuyController extends AbstractShopController {
                 alert.setContentText("You do not have the required funds to buy this Car");
                 alert.showAndWait();
             } else {
-                gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
-                carTable.getSelectionModel().clearSelection();
-                moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+                if (!gameEnvironment.getPlayerInventory().garageFull()) {
+                    gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
+                    carTable.getSelectionModel().clearSelection();
+                    moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Garage Full");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your Garage can not fit more than 4 reserved Cars, please sell a Car first");
+                    alert.showAndWait();
+                }
             }
         }
     }
