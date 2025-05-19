@@ -7,9 +7,9 @@ public class Shop extends ItemStorage {
     }
 
     public void setShopInventory() {
-        Car Toyota = new Car("Toyota Supra", 0.5, 0.5, 0.8, 15, 2000);
-//        Car Mustang = new Car("Mustang", 250, 6, 6, 400, 89000);
-        Car Ferrari = new Car("Ferrari 458", 1, 0.7, 0.7, 10, 3000);
+        Car Toyota = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23.0, 7500);
+        Car Mustang = new Car("Mustang", 0.92, 0.78, 0.80, 19.0, 7800);
+        Car Ferrari = new Car("Ferrari 458", 0.96, 0.96, 0.90, 15.0, 15000);
 
         TuningPart Ethanol = new TuningPart("Ethanol", 500, "\uD83D\uDCA8", 1.2);
         TuningPart SuperCharger = new TuningPart("SuperCharger", 750, "\uD83D\uDCA8", 1.5);
