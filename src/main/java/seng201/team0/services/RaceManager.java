@@ -30,6 +30,8 @@ public class RaceManager {
     private String finishReason = "";
     private int playerFinishTick = -1;
     private boolean playerFinished = false;
+    private double raceDurationSeconds;
+    private double timeElapsedSeconds = 0;
 
     private static final int REPAIR_WAIT_TICKS = 2;
     private static final int TRAVELER_WAIT_TICKS = 2;
@@ -49,6 +51,7 @@ public class RaceManager {
         this.fuelStopDistances = RaceCalculations.calculateFuelStopDistances(race.getRoute().getLength(), race.getRoute().getFuelStops());
         this.eventTriggerDistance = RaceCalculations.calculateEventTriggerDistance(race.getRoute().getLength());
         this.breakdownTriggerDistance = RaceCalculations.calculateBreakdownTriggerDistance(race.getRoute().getLength());
+        this.raceDurationSeconds = race.getRoute().getRaceDuration();
     }
 
     public void advanceRaceTick() {
@@ -64,11 +67,14 @@ public class RaceManager {
         }
         playerDistance += speed;
         fuelLevel -= fuelConsumptionRate;
+        timeElapsedSeconds += (1.0 / 2);
         if (fuelLevel <= 0) {
             fuelLevel = 0;
             finishRace();
         }
-
+        if (timeElapsedSeconds >= raceDurationSeconds && !playerFinished) {
+            finishRace();
+        }
         if (playerDistance >= eventTriggerDistance && !eventDone) {
             maybeTriggerRandomEvent();
             eventDone = true;
@@ -179,6 +185,8 @@ public class RaceManager {
         isRacing = false;
         if (fuelLevel <= 0) {
             finishReason = "Out of fuel!";
+        } else if (timeElapsedSeconds >= raceDurationSeconds) {
+            finishReason = "Time ran out!";
         } else {
             finishReason = "Finished the race!";
         }
@@ -303,6 +311,14 @@ public class RaceManager {
 
     public Car getPlayerCar() {
         return playerCar;
+    }
+
+    public double getRaceDurationSeconds() {
+        return raceDurationSeconds;
+    }
+
+    public double getTimeElapsedSeconds() {
+        return timeElapsedSeconds;
     }
 
     public int getTickCount() {

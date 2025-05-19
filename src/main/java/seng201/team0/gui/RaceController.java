@@ -25,6 +25,8 @@ public class RaceController {
     @FXML
     private Label raceLengthLabel;
     @FXML
+    private Label timerLabel;
+    @FXML
     private ProgressBar fuelGauge;
     @FXML
     private VBox leaderboardBox;
@@ -71,6 +73,7 @@ public class RaceController {
 
     private RaceManager raceManager;
     private Timeline raceTimeline;
+    private Timeline timerTimeline;
 
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
@@ -104,6 +107,16 @@ public class RaceController {
         }));
         raceTimeline.setCycleCount(Timeline.INDEFINITE);
         raceTimeline.play();
+
+        timerTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            if (!raceManager.hasPlayerFinished()) {
+                double timeLeft = raceManager.getRaceDurationSeconds() - raceManager.getTimeElapsedSeconds();
+                timerLabel.setText(String.format("%.0f", Math.max(0, timeLeft))); // Ensure no negative time
+            }
+        }));
+        timerTimeline.setCycleCount((int) raceManager.getRaceDurationSeconds());
+        timerTimeline.play();
+
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
         continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
         repairButton.setOnAction(event -> handleRepair(true));

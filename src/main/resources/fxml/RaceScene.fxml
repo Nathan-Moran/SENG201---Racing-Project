@@ -15,21 +15,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
+<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
 
    <ImageView fx:id="routeImage" fitHeight="400" fitWidth="600" preserveRatio="false">
       <image>
          <Image url="@../cartoon-desert-landscape-vector-51673450.jpg" />
       </image></ImageView>
 
+   <!-- Foreground UI overlay -->
    <AnchorPane pickOnBounds="false" prefHeight="400" prefWidth="600">
 
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="178.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-width: 1;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <GridPane hgap="10" vgap="6">
             <Label text="⏱ Time Left:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="timerLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
             <Label fx:id="timeLeftLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label fx:id="currentDistanceLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="30.0" text="0 km" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
             <Label text="🛣 Race Length:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label fx:id="raceLengthLabel" text="100 km" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <columnConstraints>
@@ -52,6 +56,7 @@
       <VBox fx:id="leaderboardBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="178.0" prefWidth="159.0" spacing="6" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #888; -fx-border-width: 1;" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-underline: true;" text="Leaderboard" />
          <ListView prefHeight="200.0" prefWidth="200.0" />
+         <!-- Leaderboard entries injected here -->
       </VBox>
 
       <Rectangle fx:id="raceTrackLine" fill="#555555" height="6.0" layoutX="40.0" layoutY="297.0" width="494.0" />
@@ -79,6 +84,7 @@
             </HBox>
          </VBox>
 
+         <!-- Traveler Popup -->
          <VBox fx:id="travelerPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="380.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="380.0" spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #444; -fx-border-width: 2; -fx-padding: 16; -fx-opacity: 0.95;" visible="false">
             <Label text="🚶 A traveler needs a ride. Pick them up?" wrapText="true" />
             <HBox alignment="CENTER" spacing="10">
@@ -87,6 +93,7 @@
             </HBox>
          </VBox>
 
+         <!-- Weather Popup -->
          <VBox fx:id="weatherPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="380.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="336.0" spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #444; -fx-border-width: 2; -fx-padding: 16; -fx-opacity: 0.95;" visible="false">
             <Label text="⛈ Weather interrupted the race. You've been refunded." wrapText="true" />
             <Button fx:id="continueAfterWeatherButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #27ae60; -fx-text-fill: white;" text="Continue" />
@@ -99,6 +106,7 @@
                <Button fx:id="continueWithoutFuelButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #95a5a6; -fx-text-fill: white;" text="Keep Driving" />
             </HBox>
          </VBox>
+
       </StackPane>
    </AnchorPane>
 </StackPane>
