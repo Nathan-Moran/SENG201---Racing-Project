@@ -25,7 +25,7 @@
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="178.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 12; -fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-width: 1;" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15">
          <GridPane hgap="10" vgap="6">
             <Label text="⏱ Time Left:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label fx:id="timeLeftLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="timerLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
             <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label fx:id="currentDistanceLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="30.0" text="0 km" GridPane.columnIndex="1" GridPane.rowIndex="1" />
