@@ -28,7 +28,7 @@ public class MainWindow extends Application {
         this.gameEnvironment = new GameEnvironment();
         this.sceneNavigator = new SceneNavigator(this.gameEnvironment, primaryStage); // Assumes this constructor exists
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartingScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameFinishScene.fxml"));
         loader.setControllerFactory(ignoredControllerClass ->
                 new StartMenuController(this.gameEnvironment, this.sceneNavigator)
         );

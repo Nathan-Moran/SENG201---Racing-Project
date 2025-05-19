@@ -35,7 +35,7 @@ public class FinishGameController implements Initializable {
         this.sceneNavigator = sceneNavigator;
     }
 
-    private void updateEndScreen() {
+    void updateEndScreen() {
         if (gameEnvironment != null) {
             userNameLabel.setText(gameEnvironment.getName());
             seasonLengthLabel.setText(String.valueOf(gameEnvironment.getSeasonLength()));

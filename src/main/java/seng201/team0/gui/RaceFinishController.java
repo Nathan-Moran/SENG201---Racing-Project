@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import seng201.team0.services.GameEnvironment;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +28,6 @@ public class RaceFinishController {
     public RaceFinishController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
-
     }
 
     public void setSceneNavigator(SceneNavigator sceneNavigator) {
@@ -39,23 +40,57 @@ public class RaceFinishController {
         resultTitle.setText("Final Results");
         leaderboardListView.setItems(FXCollections.observableArrayList(leaderboard));
         moneyEarned.setText("Money Earned: $" + earnings);
+
+        if (gameEnvironment.getRacesRemaining() <= 0) {
+            mainMenuButton.setVisible(false);
+            mainMenuButton.setManaged(false);
+            newRaceButton.setText("View End Screen");
+            newRaceButton.setOnAction(event -> { // Lambda for the end screen button
+                try {
+                    sceneNavigator.switchToFinishGameScene();
+                } catch (IOException e) {
+                    showAlert("Error Loading Scene", "Could not load the End Game Screen: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            });
+        } else {
+            mainMenuButton.setVisible(true);
+            mainMenuButton.setManaged(true);
+            newRaceButton.setText("New Race");
+            newRaceButton.setOnAction(event -> { // Lambda for the new race button
+                try {
+                    sceneNavigator.switchToSceneCourseAndRoute(event);
+                } catch (IOException e) {
+                    showAlert("Error Loading Scene", "Could not load the Course and Route Selection: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     @FXML
     private void initialize() {
-        mainMenuButton.setOnAction(event -> {
+        mainMenuButton.setOnAction(event -> { // Lambda for the main menu button
             try {
                 sceneNavigator.switchToSceneMainMenu(event);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                showAlert("Error Loading Scene", "Could not load the Main Menu: " + e.getMessage());
+                e.printStackTrace();
             }
         });
-        newRaceButton.setOnAction(event -> {
-            try {
-                sceneNavigator.switchToSceneCourseAndRoute(event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+
+    @FXML
+    void quitGame(ActionEvent event) {
+        gameEnvironment.quit();
     }
 }
