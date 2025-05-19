@@ -17,8 +17,4 @@ public class TuningPart extends Purchasable {
     public double getBoost() {
         return boost;
     }
-
-    public String getDescription() {
-        return this.getStat() + " +" + (1 - this.getBoost()) * 100 + "%";
-    }
 }
