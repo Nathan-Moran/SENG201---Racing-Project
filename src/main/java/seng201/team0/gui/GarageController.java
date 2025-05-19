@@ -9,7 +9,7 @@ import seng201.team0.models.Car;
 
 
 import javafx.event.ActionEvent;
-import seng201.team0.services.ControllerLogicManager;
+import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class GarageController implements Initializable {
     /**
      * Manager for handling controller-specific logic, such as label formatting.
      */
-    private final ControllerLogicManager controllerLogicManager;
+    private final ControllerService controllerLogicManager;
 
     /**
      * Constructs a GarageController with the given game environment and scene navigator.
@@ -50,7 +50,7 @@ public class GarageController implements Initializable {
     public GarageController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
-        this.controllerLogicManager = gameEnvironment.getControllerLogicManager();
+        this.controllerLogicManager = gameEnvironment.getControllerService();
     }
 
     /**

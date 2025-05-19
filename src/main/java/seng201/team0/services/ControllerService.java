@@ -3,10 +3,10 @@ package seng201.team0.services;
 import seng201.team0.models.Car;
 import seng201.team0.models.StarterCarInventory;
 
-public class ControllerLogicManager {
+public class ControllerService {
     GameEnvironment gameEnvironment;
 
-    public ControllerLogicManager(GameEnvironment gameEnvironment) {
+    public ControllerService(GameEnvironment gameEnvironment) {
         this.gameEnvironment = gameEnvironment;
     }
 

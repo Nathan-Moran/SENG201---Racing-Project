@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import seng201.team0.models.Difficulty;
-import seng201.team0.services.ControllerLogicManager;
+import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
 /**
@@ -31,7 +31,7 @@ public class StartMenuController {
     /**
      * Manager for handling controller-specific logic, such as name validation.
      */
-    private final ControllerLogicManager controllerLogicManager;
+    private final ControllerService controllerLogicManager;
     /**
      * Stores the player's chosen name.
      */
@@ -46,7 +46,7 @@ public class StartMenuController {
     public StartMenuController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
-        this.controllerLogicManager = gameEnvironment.getControllerLogicManager();
+        this.controllerLogicManager = gameEnvironment.getControllerService();
     }
 
     /**

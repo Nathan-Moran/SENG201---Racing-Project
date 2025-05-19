@@ -4,10 +4,10 @@ import seng201.team0.models.Car;
 import seng201.team0.models.TuningPart;
 
 
-public class BalanceManager {
+public class ShopService {
     GameEnvironment gameEnvironment;
 
-    public BalanceManager(GameEnvironment gameEnvironment) {
+    public ShopService(GameEnvironment gameEnvironment) {
         this.gameEnvironment = gameEnvironment;
     }
 

@@ -15,16 +15,16 @@ public class GameEnvironment {
     private final Shop shopInventory;
     private final Garage playerInventory = new Garage();
     private final StarterCarInventory starterCarInventory;
-    private final BalanceManager balanceManager;
-    private final ControllerLogicManager controllerLogicManager;
+    private final ShopService shopService;
+    private final ControllerService controllerService;
     private final int STARTING_BALANCE;
     private int racesRemaining;
     private List<Integer> racePlacements = new ArrayList<>();
     private int totalPrizeMoney = 0;
 
     public GameEnvironment() {
-        this.balanceManager = new BalanceManager(this);
-        this.controllerLogicManager = new ControllerLogicManager(this);
+        this.shopService = new ShopService(this);
+        this.controllerService = new ControllerService(this);
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
         this.STARTING_BALANCE = 30000;
@@ -96,12 +96,12 @@ public class GameEnvironment {
         return seasonLength;
     }
 
-    public BalanceManager getBalanceManager() {
-        return balanceManager;
+    public ShopService getShopService() {
+        return shopService;
     }
 
-    public ControllerLogicManager getControllerLogicManager() {
-        return controllerLogicManager;
+    public ControllerService getControllerService() {
+        return controllerService;
     }
 
     public void setupStarterCars() {

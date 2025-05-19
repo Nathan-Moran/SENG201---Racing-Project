@@ -63,14 +63,14 @@ public class CarSelectorController implements Initializable {
     private void chooseSelected(ActionEvent event) throws IOException {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedCar.getPrice())) {
+            if (gameEnvironment.getShopService().notEnoughBalance(selectedCar.getPrice())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Funds");
                 alert.setHeaderText(null);
                 alert.setContentText("You do not have the required funds to choose this car");
                 alert.showAndWait();
             } else {
-                gameEnvironment.getBalanceManager().chooseStarterCar(selectedCar);
+                gameEnvironment.getShopService().chooseStarterCar(selectedCar);
                 carTable.getSelectionModel().clearSelection();
                 moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
             }
@@ -88,7 +88,7 @@ public class CarSelectorController implements Initializable {
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
         if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
-            gameEnvironment.getControllerLogicManager().storeLeftOverCars(startingCarsGarage);
+            gameEnvironment.getControllerService().storeLeftOverCars(startingCarsGarage);
             sceneNavigator.switchToSceneMainMenu(event);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

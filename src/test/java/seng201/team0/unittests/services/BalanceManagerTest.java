@@ -3,7 +3,7 @@ package seng201.team0.unittests.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team0.models.*;
-import seng201.team0.services.BalanceManager;
+import seng201.team0.services.ShopService;
 import seng201.team0.services.GameEnvironment;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BalanceManagerTest {
 
     private GameEnvironment gameEnvironment;
-    private BalanceManager balanceManager;
+    private ShopService balanceManager;
     private Car car1;
     private Car car2_expensive;
     private TuningPart part1;
@@ -20,7 +20,7 @@ public class BalanceManagerTest {
     @BeforeEach
     void setUp() {
         gameEnvironment = new GameEnvironment();
-        balanceManager = gameEnvironment.getBalanceManager();
+        balanceManager = gameEnvironment.getShopService();
 
         car1 = new Car("Affordable Car", 100, 0.5, 0.8, 15, 1000);
         car2_expensive = new Car("Expensive Car", 200, 0.9, 0.9, 10, 3000);

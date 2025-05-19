@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import seng201.team0.models.Car;
 import seng201.team0.models.StarterCarInventory;
 import seng201.team0.models.TuningPart;
-import seng201.team0.services.ControllerLogicManager;
+import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerLogicManagerTest {
 
     private GameEnvironment gameEnvironment;
-    private ControllerLogicManager logicManager;
+    private ControllerService logicManager;
     private Car testCar;
 
     @BeforeEach
     void setUp() {
         gameEnvironment = new GameEnvironment();
-        logicManager = gameEnvironment.getControllerLogicManager();
+        logicManager = gameEnvironment.getControllerService();
         testCar = new Car("Test Model", 150.0, 0.85, 0.95, 12.5, 25000);
     }
 

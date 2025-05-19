@@ -87,7 +87,7 @@ public class ShopBuyController extends AbstractShopController {
     void buyCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedCar.getPrice())) {
+            if (gameEnvironment.getShopService().notEnoughBalance(selectedCar.getPrice())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Funds");
                 alert.setHeaderText(null);
@@ -95,7 +95,7 @@ public class ShopBuyController extends AbstractShopController {
                 alert.showAndWait();
             } else {
                 if (!gameEnvironment.getPlayerInventory().garageFull()) {
-                    gameEnvironment.getBalanceManager().buySelectedCar(selectedCar);
+                    gameEnvironment.getShopService().buySelectedCar(selectedCar);
                     carTable.getSelectionModel().clearSelection();
                     moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
                 }
@@ -122,14 +122,14 @@ public class ShopBuyController extends AbstractShopController {
     void buyPart(ActionEvent event) {
         TuningPart selectedPart = tuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            if (gameEnvironment.getBalanceManager().notEnoughBalance(selectedPart.getPrice())) {
+            if (gameEnvironment.getShopService().notEnoughBalance(selectedPart.getPrice())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Funds");
                 alert.setHeaderText(null);
                 alert.setContentText("You do not have the required funds to buy this Part");
                 alert.showAndWait();
             } else {
-                gameEnvironment.getBalanceManager().buySelectedPart(selectedPart);
+                gameEnvironment.getShopService().buySelectedPart(selectedPart);
                 tuningPartTable.getSelectionModel().clearSelection();
                 moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
             }

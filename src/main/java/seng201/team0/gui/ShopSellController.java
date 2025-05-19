@@ -82,7 +82,7 @@ public class ShopSellController extends AbstractShopController {
     void sellCar(ActionEvent event) {
         Car selectedCar = carTable.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            gameEnvironment.getBalanceManager().sellSelectedCar(selectedCar);
+            gameEnvironment.getShopService().sellSelectedCar(selectedCar);
             carTable.getSelectionModel().clearSelection();
             moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
         }
@@ -100,7 +100,7 @@ public class ShopSellController extends AbstractShopController {
     void sellPart(ActionEvent event) {
         TuningPart selectedPart = tuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
-            gameEnvironment.getBalanceManager().sellSelectedPart(selectedPart);
+            gameEnvironment.getShopService().sellSelectedPart(selectedPart);
             tuningPartTable.getSelectionModel().clearSelection();
             moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
         }

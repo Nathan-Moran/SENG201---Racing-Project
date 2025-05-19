@@ -117,8 +117,8 @@ public class GameEnvironmentTest {
 
     @Test
     void testGetManagers() {
-        assertNotNull(gameEnv.getBalanceManager());
-        assertNotNull(gameEnv.getControllerLogicManager());
+        assertNotNull(gameEnv.getShopService());
+        assertNotNull(gameEnv.getControllerService());
     }
 
     @Test

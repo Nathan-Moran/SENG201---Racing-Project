@@ -242,8 +242,8 @@ public class SceneNavigator {
      * or this method is called from a context where the stage is already managed.
      *
      * @author Jamie wood
-     * @param reason      The reason for the race finishing (e.g., "Finished", "Crashed").
-     * @param placement   The player's placement in the race (e.g., "1st", "DNF").
+     * @param reason The reason for the race finishing (e.g., "Finished", "Crashed").
+     * @param placement The player's placement in the race (e.g., "1st", "DNF").
      * @param leaderboard A list of strings representing the race leaderboard.
      * @param earnings    The amount of money earned from the race.
      * @throws IOException If an error occurs during FXML loading.
