@@ -86,6 +86,11 @@ public class MainMenuController implements Initializable {
         sceneNavigator.switchToSceneCourseAndRoute(event);
     }
 
+    @FXML
+    void quitGame(ActionEvent event) throws IOException {
+        gameEnvironment.quit();
+    }
+
     /**
      * Initializes the controller after its root element has been completely processed.
      * This method updates the money label and season length label with current game data.

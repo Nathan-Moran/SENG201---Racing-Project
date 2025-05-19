@@ -2,6 +2,9 @@ package seng201.team0.services;
 
 import seng201.team0.models.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameEnvironment {
     private Race currentRace;
     private Season currentSeason;
@@ -16,6 +19,8 @@ public class GameEnvironment {
     private final ControllerLogicManager controllerLogicManager;
     private final int STARTING_BALANCE;
     private int racesRemaining;
+    private List<Integer> racePlacements = new ArrayList<>();
+    private int totalPrizeMoney = 0;
 
     public GameEnvironment() {
         this.balanceManager = new BalanceManager(this);
@@ -130,5 +135,32 @@ public class GameEnvironment {
         if (racesRemaining > 0) {
             racesRemaining--;
         }
+    }
+
+    public double getAveragePlacement() {
+        if (racePlacements.isEmpty()) {
+            return 0; // Avoid division by zero
+        }
+        int sum = 0;
+        for (int placement : racePlacements) {
+            sum += placement;
+        }
+        return (double) sum / racePlacements.size();
+    }
+
+    public int getRacesCompleted() {
+        return seasonLength - racesRemaining;
+    }
+
+    public void addPrizeMoney(int prize) {
+        this.totalPrizeMoney += prize;
+    }
+
+    public int getTotalPrizeMoney() {
+        return this.totalPrizeMoney;
+    }
+
+    public void quit() {
+        System.exit(0);
     }
 }

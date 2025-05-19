@@ -168,6 +168,13 @@ public class RaceManager {
         finishReason = "Car broke down! You withdrew from the race.";
     }
 
+
+    public void playerWithdrawDueToWeather() {
+        isRacing = false;
+        playerFinished = true;
+        finishReason = "Weather has cancelled the race! You withdrew from the race.";
+    }
+
     public void finishRace() {
         isRacing = false;
         if (fuelLevel <= 0) {
@@ -216,6 +223,7 @@ public class RaceManager {
                 gameEnvironment.getBalance() - race.getCourse().getEntryFee()
         );
         clearCurrentEvent();
+        playerWithdrawDueToWeather();
     }
 
 

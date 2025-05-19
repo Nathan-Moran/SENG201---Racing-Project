@@ -6,25 +6,66 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CourseAndRouteSelectionController">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CourseAndRouteSelectionController">
    <children>
-      <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox fx:id="desertButton" onMouseClicked="#onDesertSelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+            <VBox fx:id="desertButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onDesertSelected" prefHeight="40.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>
-                  <HBox>
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
                      <children>
-                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="74.0" prefWidth="300.0" text="DESERT" textAlignment="CENTER">
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="16.0" prefWidth="150.0" text="Balance:" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="45.0" />
+                              <Font name="SansSerif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="moneyLabel" alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="0" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
                         <HBox>
                            <children>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $100" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $300" wrapText="true" />
+                                    <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="20.0" prefWidth="150.0" text="Races left:" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Label fx:id="racesRemainingLabel" alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="0" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="desertButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onDesertSelected" prefHeight="90.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="64.0" prefWidth="200.0" text="DESERT" textAlignment="CENTER">
+                           <font>
+                              <Font name="SansSerif Bold" size="37.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="EASY" textFill="#00ff15">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $0" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $300" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -43,13 +84,18 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="mountainButton" onMouseClicked="#onMountainSelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+            <VBox fx:id="mountainButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMountainSelected" prefHeight="90.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>
-                  <HBox>
+                  <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="64.0">
                      <children>
-                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="74.0" prefWidth="300.0" text="MOUNTAIN" textAlignment="CENTER">
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="64.0" prefWidth="200.0" text="MOUNTAIN" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="45.0" />
+                              <Font name="SansSerif Bold" size="37.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="MEDIUM" textFill="#ffc300">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -57,7 +103,7 @@
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $200" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $600" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $600" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -66,7 +112,7 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: SPEED" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="SYNERGY: SPEED" wrapText="true" />
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: HANDLING" wrapText="true" />
                                  </children>
                               </VBox>
@@ -76,13 +122,18 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="countryButton" onMouseClicked="#onCountrySelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+            <VBox fx:id="countryButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onCountrySelected" prefHeight="90.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>
                   <HBox>
                      <children>
-                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="COUNTRY" textAlignment="CENTER">
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="200.0" text="COUNTRY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="45.0" />
+                              <Font name="SansSerif Bold" size="37.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="MEDIUM" textFill="#ffc200">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -90,14 +141,14 @@
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $300" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $900" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $900" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <VBox>
+                              <VBox maxWidth="192.0">
                                  <children>
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: FUEL ECONOMY" wrapText="true" />
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: RELIABILITY" wrapText="true" />
@@ -109,13 +160,18 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="cityButton" onMouseClicked="#onCitySelected" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
+            <VBox fx:id="cityButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onCitySelected" prefHeight="90.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>
                   <HBox>
                      <children>
-                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="300.0" text="CITY" textAlignment="CENTER">
+                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="200.0" text="CITY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="45.0" />
+                              <Font name="SansSerif Bold" size="37.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="HARD" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -123,7 +179,7 @@
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
                                     <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $500" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="PRIZE: $1500" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $1500" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -144,7 +200,7 @@
             </VBox>
          </children>
       </VBox>
-      <VBox fx:id="desertRouteMenu" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="desertRouteMenu" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <HBox fx:id="desertDriftButton" onMouseClicked="#onDesertDriftSelected" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-padding: 10;">
                <children>

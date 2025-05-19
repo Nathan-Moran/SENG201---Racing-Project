@@ -50,9 +50,9 @@ public class RaceFinishController {
                 throw new RuntimeException(e);
             }
         });
-        newRaceButton.setOnMouseClicked(event -> {
+        newRaceButton.setOnAction(event -> {
             try {
-                sceneNavigator.switchToSceneRace(event);
+                sceneNavigator.switchToSceneCourseAndRoute(event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
