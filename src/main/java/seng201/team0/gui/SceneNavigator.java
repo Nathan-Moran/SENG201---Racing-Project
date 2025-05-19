@@ -7,10 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seng201.team0.services.GameEnvironment;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -158,10 +158,6 @@ public class SceneNavigator {
         );
 
         Parent parent = loader.load();
-
-        // Get the controller and call initializeView()
-        CourseAndRouteSelectionController controller = loader.getController();
-        controller.initializeView();  // <- reset the view to course menu
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);

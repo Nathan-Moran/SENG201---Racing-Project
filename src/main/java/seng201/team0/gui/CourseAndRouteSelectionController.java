@@ -1,6 +1,8 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import seng201.team0.models.Course;
 import seng201.team0.models.Difficulty;
@@ -8,11 +10,11 @@ import seng201.team0.models.Race;
 import seng201.team0.models.Route;
 import seng201.team0.services.GameEnvironment;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CourseAndRouteSelectionController {
+public class CourseAndRouteSelectionController implements Initializable {
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
 
@@ -23,6 +25,8 @@ public class CourseAndRouteSelectionController {
 
 
     @FXML private VBox courseMenu;
+    @FXML private Label moneyLabel;
+    @FXML private Label racesRemainingLabel;
     @FXML private VBox desertRouteMenu;
     @FXML private VBox mountainRouteMenu;
     @FXML private VBox countryRouteMenu;
@@ -130,9 +134,12 @@ public class CourseAndRouteSelectionController {
         sceneNavigator.switchToSceneRace(event);
     }
 
-    public void initializeView() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         courseMenu.setVisible(true);
         courseMenu.setManaged(true);
+
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+        racesRemainingLabel.setText(String.valueOf(gameEnvironment.getRacesRemaining()));
 
         desertRouteMenu.setVisible(false);
         desertRouteMenu.setManaged(false);
