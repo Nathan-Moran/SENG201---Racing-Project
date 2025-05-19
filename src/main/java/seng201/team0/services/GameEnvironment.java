@@ -27,7 +27,7 @@ public class GameEnvironment {
         this.controllerLogicManager = new ControllerLogicManager(this);
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
-        this.STARTING_BALANCE = 3000;
+        this.STARTING_BALANCE = 30000;
         setupShop();
         setBalance();
     }

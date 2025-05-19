@@ -47,7 +47,7 @@ public class RaceFinishController {
             newRaceButton.setText("View End Screen");
             newRaceButton.setOnAction(event -> { // Lambda for the end screen button
                 try {
-                    sceneNavigator.switchToFinishGameScene();
+                    sceneNavigator.switchToFinishGameScene(event);
                 } catch (IOException e) {
                     showAlert("Error Loading Scene", "Could not load the End Game Screen: " + e.getMessage());
                     e.printStackTrace();

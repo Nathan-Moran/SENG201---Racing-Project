@@ -233,7 +233,6 @@ public class SceneNavigator {
         stage.setScene(scene);
         stage.setTitle(title);
         stage.show();
-
     }
 
     /**
@@ -272,22 +271,21 @@ public class SceneNavigator {
         stage.show();
     }
 
-    public void switchToFinishGameScene() throws IOException {
-        title = "Finished Gane";
-        fxml = "/fxml/GameFinishScene.fxml";
+    public void switchToFinishGameScene(ActionEvent event) throws IOException {
+       title = "Game Results";
+       fxml = "/fxml/GameFinishScene.fxml";
+       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        // Set controller factory to inject GameEnvironment and SceneNavigator
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        loader.setControllerFactory(ignoredClass -> new RaceFinishController(this.gameEnvironment, this));
+       loader.setControllerFactory(ignoredControllerClass ->
+               new FinishGameController(this.gameEnvironment, this)
+       );
+       Parent parent = loader.load();
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+       Scene scene = new Scene(parent);
 
-        Parent parent = loader.load();
+       stage.setScene(scene);
+       stage.setTitle(title);
+       stage.show();
+    }
 
-        // Get the controller instance created via factory
-        FinishGameController controller = loader.getController();
-        // Create and show the new scene
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setTitle(title);
-        stage.show();
-}
 }

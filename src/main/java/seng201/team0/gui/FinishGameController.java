@@ -60,7 +60,7 @@ public class FinishGameController implements Initializable {
     }
 
     @FXML
-    void quitGame(ActionEvent event) {
+    public void quitGame(ActionEvent event) {
         gameEnvironment.quit();
     }
 }
