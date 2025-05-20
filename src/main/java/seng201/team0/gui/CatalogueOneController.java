@@ -1,98 +1,105 @@
 package seng201.team0.gui;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import seng201.team0.models.Car;
-import seng201.team0.models.TuningPart;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.event.ActionEvent;
+import seng201.team0.models.ItemCatalogue; // Ensure this is imported
 import seng201.team0.services.GameEnvironment;
-
+import seng201.team0.models.Car;
+import seng201.team0.models.SetupCarTable;
+import seng201.team0.services.DescriptionService;
 import java.io.IOException;
+import java.util.List;
 
-public class CatalogueOneController extends AbstractShopController{
+public class CatalogueOneController {
+
+    private GameEnvironment gameEnvironment;
+    private SceneNavigator sceneNavigator;
+    private SetupCarTable setupCarTable;
+
+    @FXML private TableView<Car> starterCarTable;
+    @FXML private TableColumn<Car, String> modelColumn;
+    @FXML private TableColumn<Car, Integer> priceColumn;
+    @FXML private TableColumn<Car, Double> speedColumn;
+    @FXML private TableColumn<Car, Double> handlingColumn;
+    @FXML private TableColumn<Car, Integer> reliabilityColumn;
+    @FXML private TableColumn<Car, Integer> fuelColumn;
+
+    @FXML private TableView<Car> shopCarTable;
+    @FXML private TableColumn<Car, String> modelColumn1;
+    @FXML private TableColumn<Car, Integer> priceColumn1;
+    @FXML private TableColumn<Car, Double> speedColumn1;
+    @FXML private TableColumn<Car, Double> handlingColumn1;
+    @FXML private TableColumn<Car, Integer> reliabilityColumn1;
+    @FXML private TableColumn<Car, Integer> fuelColumn1;
+
+    private Object lastSelectedItem;
+
     public CatalogueOneController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
-        super(gameEnvironment, sceneNavigator);
+        this.gameEnvironment = gameEnvironment;
+        this.sceneNavigator = sceneNavigator;
+        this.setupCarTable = new SetupCarTable();
     }
 
-    /**
-     * Loads cars from the player's inventory into the car table for selling.
-     * This method is an implementation of the abstract method from {@link AbstractShopController}.
-     */
-    @Override
-    protected void loadTuningParts() {
-        tuningPartTable.setItems(gameEnvironment.getPlayerInventory().getTuningPartList());
-    }
-
-    /**
-     * Loads tuning parts from the player's inventory into the tuning part table for selling.
-     * This method is an implementation of the abstract method from {@link AbstractShopController}.
-     */
-    @Override
-    protected void loadCars() {
-        carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
-    }
-
-    /**
-     * Handles the action of switching to the "buy" section of the shop.
-     *
-     * @param event The action event triggered by the button to switch to the buy shop.
-     * @throws IOException If an I/O error occurs during scene transition.
-     */
     @FXML
-    private void switchToSceneShopBuy(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneShopBuy(event);
+    public void initialize() {
+        setupCarTable.setupCarTable(starterCarTable, modelColumn, priceColumn, speedColumn, handlingColumn, reliabilityColumn, fuelColumn);
+        setupCarTable.setupCarTable(shopCarTable, modelColumn1, priceColumn1, speedColumn1, handlingColumn1, reliabilityColumn1, fuelColumn1);
+
+        if (gameEnvironment != null && gameEnvironment.getItemCatalogue() != null) {
+            starterCarTable.setItems(gameEnvironment.getItemCatalogue().getCarList());
+            shopCarTable.setItems(gameEnvironment.getItemCatalogue().getShopCarList());
+        }
+
+
+        starterCarTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lastSelectedItem = newSelection;
+                shopCarTable.getSelectionModel().clearSelection();
+            }
+        });
+
+        shopCarTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lastSelectedItem = newSelection;
+                starterCarTable.getSelectionModel().clearSelection();
+            }
+        });
     }
 
-    /**
-     * Handles the action of switching back to the main menu scene.
-     *
-     * @param event The action event triggered by the button to switch to the main menu.
-     * @throws IOException If an I/O error occurs during scene transition.
-     */
+    @FXML
+    private void getDescription(ActionEvent event) {
+        if (lastSelectedItem != null) {
+            if (lastSelectedItem instanceof Car) {
+                Car selectedCar = (Car) lastSelectedItem;
+                String carName = selectedCar.getName();
+                String description = DescriptionService.getCarDescription(carName);
+                String title = carName + " - Description";
+                showAlert(title, description);
+            }
+        }
+    }
+
     @FXML
     private void switchToSceneMenu(ActionEvent event) throws IOException {
         sceneNavigator.switchToSceneMainMenu(event);
     }
 
-    /**
-     * Handles the action of selling a selected car from the player's inventory.
-     * If a car is selected, the transaction is processed, the player's balance is updated,
-     * and the car is removed from their inventory.
-     * The table selection is then cleared and the money label is updated.
-     *
-     * @param event The action event triggered by the "Sell Car" button.
-     */
     @FXML
-    void sellCar(ActionEvent event) {
-        Car selectedCar = carTable.getSelectionModel().getSelectedItem();
-        if (selectedCar != null) {
-            gameEnvironment.getShopService().sellSelectedCar(selectedCar);
-            carTable.getSelectionModel().clearSelection();
-            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
-        }
+    private void switchToPageTwo(ActionEvent event) throws IOException {
+        sceneNavigator.switchToSceneCatalogueTwo(event);
     }
 
-    /**
-     * Handles the action of selling a selected tuning part from the player's inventory.
-     * If a part is selected, the transaction is processed, the player's balance is updated,
-     * and the part is removed from their inventory.
-     * The table selection is then cleared and the money label is updated.
-     *
-     * @param event The action event triggered by the "Sell Part" button.
-     */
-    @FXML
-    void sellPart(ActionEvent event) {
-        TuningPart selectedPart = tuningPartTable.getSelectionModel().getSelectedItem();
-        if (selectedPart != null) {
-            gameEnvironment.getShopService().sellSelectedPart(selectedPart);
-            tuningPartTable.getSelectionModel().clearSelection();
-            moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
-        }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
-
-    /**
-     * Label to display the player's current amount of money.
-     */
-    @FXML
-    private Label moneyLabel;
 }

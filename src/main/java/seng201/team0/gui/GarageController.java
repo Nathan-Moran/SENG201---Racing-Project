@@ -9,6 +9,7 @@ import seng201.team0.models.Car;
 
 
 import javafx.event.ActionEvent;
+import seng201.team0.models.SetupCarTable;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
@@ -41,6 +42,8 @@ public class GarageController implements Initializable {
      */
     private final ControllerService controllerLogicManager;
 
+    private SetupCarTable setupCarTable;
+
     /**
      * Constructs a GarageController with the given game environment and scene navigator.
      *
@@ -50,6 +53,7 @@ public class GarageController implements Initializable {
     public GarageController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        this.setupCarTable = new SetupCarTable();
         this.controllerLogicManager = gameEnvironment.getControllerService();
     }
 
@@ -198,11 +202,17 @@ public class GarageController implements Initializable {
     public void setGUI () {
         this.activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
 
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
-        handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
-        reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
-        fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
+        if (carTable != null) {
+            setupCarTable.setupCarTable(
+                    carTable,
+                    modelColumn,
+                    null,
+                    speedColumn,
+                    handlingColumn,
+                    reliabilityColumn,
+                    fuelColumn
+            );
+        }
 
         carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
 

@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seng201.team0.services.GameEnvironment;
 
@@ -288,9 +287,9 @@ public class SceneNavigator {
        stage.show();
     }
 
-    public void switchToSceneCatalogueOne(javafx.scene.input.MouseEvent event) throws IOException {
+    public void switchToSceneCatalogueOne(ActionEvent event) throws IOException {
         title = "Item Catalogue";
-        fxml = "/fxml/ItemCatalogue.fxml";
+        fxml = "/fxml/ItemCatalogueScene1.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
@@ -304,5 +303,24 @@ public class SceneNavigator {
         stage.setTitle(title);
         stage.show();
     }
+
+    public void switchToSceneCatalogueTwo(ActionEvent event) throws IOException {
+        title = "Item Catalogue";
+        fxml = "/fxml/ItemCatalogueScene2.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new CatalogueTwoController(this.gameEnvironment, this)
+        );
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
+    }
+
+
 
 }
