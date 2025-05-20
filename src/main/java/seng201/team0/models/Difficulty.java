@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Difficulty {
-    EASY(1000, 0.6, 1),
-    MEDIUM(800, 0.4, 1.1),
-    HARD(600, 0.3, 1.2);
+    EASY(1500, 0.6, 1),
+    MEDIUM(1250, 0.4, 1.1),
+    HARD(1000, 0.3, 1.2);
 
     private final int startBudget;
     private final double randomEventRate;

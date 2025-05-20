@@ -148,7 +148,7 @@ public class GameEnvironmentTest {
     void testSetBalanceResetsToStartingBalance() {
         gameEnv.setBalance(500);
         assertEquals(500, gameEnv.getBalance());
-        gameEnv.setBalance();
+        gameEnv.setBalance(gameEnvironment.getBalance() + prize);
         assertEquals(3000, gameEnv.getBalance());
     }
 }

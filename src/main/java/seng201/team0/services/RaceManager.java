@@ -180,14 +180,6 @@ public class RaceManager {
         finishReason = "Car broke down! You withdrew from the race.";
     }
 
-
-    public void playerWithdrawDueToWeather() {
-        raceCancelled = true;
-        isRacing = false;
-        playerFinished = true;
-        finishReason = "Weather has cancelled the race!";
-    }
-
     public void finishRace(String reason) {
         if (isRacing && !raceCancelled) {
             isRacing = false;
@@ -236,6 +228,7 @@ public class RaceManager {
         raceCancelled = true;
         isRacing = false;
         playerFinished = true;
+        gameEnvironment.setRacesRemaining(gameEnvironment.getRacesRemaining() + 1);
         finishReason = "Weather has cancelled the race!";
         // No balance change or races remaining decrement here, handled in GUI
     }

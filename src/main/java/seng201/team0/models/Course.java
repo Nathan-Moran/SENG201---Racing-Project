@@ -2,9 +2,9 @@ package seng201.team0.models;
 
 public enum Course {
     DESERT("Desert", 0, new CoursePrizes(500, 350, 250), 4),
-    MOUNTAIN("Mountain", 200, new CoursePrizes(800, 650, 500), 3),
-    COUNTRY("Country", 300, new CoursePrizes(900, 600, 450), 4),
-    CITY("City", 500, new CoursePrizes(1500, 1000, 750), 2);
+    MOUNTAIN("Mountain", 250, new CoursePrizes(1000, 750, 500), 3),
+    COUNTRY("Country", 500, new CoursePrizes(1500, 1000, 800), 4),
+    CITY("City", 1000, new CoursePrizes(3000, 0, 0), 2);
 
     private String name;
     private int entryFee;

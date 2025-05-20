@@ -5,13 +5,13 @@ import java.util.List;
 
 public enum     Route {
     DESERT_DRIFT("Desert Drift", new RouteAttributes(0.5, 1.5, 1.2), 20, 2, 0.8, 30),
-    DESERT_LONG("Desert Long", new RouteAttributes(1.5, 0.6, 1), 30, 3, 0.9, 40),
-    MOUNTAIN_STEEP("Mountain Steep", new RouteAttributes(1, 0.8, 1.2), 15, 1, 1, 25),
-    MOUNTAIN_CURVES("Mountain Curves", new RouteAttributes(0.8, 1.3, 1.2), 20, 1, 1, 30),
+    DESERT_LONG("Desert Long", new RouteAttributes(1.5, 0.6, 1), 30, 3, 0.8, 40),
+    MOUNTAIN_STEEP("Mountain Steep", new RouteAttributes(1, 0.8, 1.2), 15, 1, 1.1, 25),
+    MOUNTAIN_CURVES("Mountain Curves", new RouteAttributes(0.8, 1.3, 1.2), 20, 1, 1.1, 30),
     COUNTRY_STRAIGHT("Country Straight", new RouteAttributes(1.6, 0.5, 1.1), 50, 4, 1.3, 40),
-    COUNTRY_TWISTY("Country Twisty", new RouteAttributes(0.8, 1.3, 1.2), 30, 3, 1.1, 35),
-    CITY_ALLEYS("City Alleys", new RouteAttributes(1.2, 1.2, 1), 35, 3, 1.5, 30),
-    CITY_TRAFFIC("City Cut Line", new RouteAttributes(0.4, 1, 1.5), 15, 2, 1.2, 15);
+    COUNTRY_TWISTY("Country Twisty", new RouteAttributes(0.8, 1.3, 1.2), 30, 3, 1.3, 35),
+    CITY_ALLEYS("City Alleys", new RouteAttributes(1.2, 1.2, 1), 35, 3, 1.6, 30),
+    CITY_TRAFFIC("City Cut Line", new RouteAttributes(0.4, 1, 1.5), 15, 2, 1.6, 15);
 
     private String routeName;
     private RouteAttributes attributes;

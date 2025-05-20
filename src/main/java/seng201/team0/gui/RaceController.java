@@ -2,6 +2,7 @@ package seng201.team0.gui;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -55,6 +56,19 @@ public class RaceController {
     private Button drivePastButton;
     @FXML
     private Button continueAfterWeatherButton;
+
+    //Added some stuff for race animations
+    @FXML
+    private Rectangle raceTrackLine;
+    @FXML
+    private ImageView startFlagImageView;
+    @FXML
+    private ImageView finishFlagImageView;
+    @FXML
+    private ImageView carImage;
+    @FXML
+    private Label timeLeftLabel;
+
 
     protected GameEnvironment gameEnvironment;
     protected SceneNavigator sceneNavigator;
@@ -152,7 +166,30 @@ public class RaceController {
         fuelGauge.setProgress(raceManager.getFuelLevel());
         updateLeaderboardDisplay();
         updateFuelGauge();
+        //some code for the car animation
+        //might wanna move this code to a controller
+        if (carImage != null && raceTrackLine != null && raceManager != null && raceManager.getRace().getRoute().getLength() > 0) {
+            double playerDistance = raceManager.getPlayerDistance();
+            double routeLength = raceManager.getRace().getRoute().getLength();
+            double progress = 0.0;
+
+            if (routeLength > 0) {
+                progress = playerDistance / routeLength;
+            }
+            progress = Math.max(0, Math.min(1, progress));
+
+            double startPosition = raceTrackLine.getLayoutX();
+            double trackVisualWidth = raceTrackLine.getWidth();
+            double carImageWidth = carImage.getFitWidth();
+
+            double updatedCarPosition = startPosition + (progress * (trackVisualWidth - carImageWidth));
+
+            carImage.setLayoutX(updatedCarPosition);
+        }
+
     }
+
+
 
     private void updateFuelGauge() {
         double fuelLevel = raceManager.getFuelLevel();

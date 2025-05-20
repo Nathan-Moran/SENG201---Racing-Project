@@ -16,12 +16,12 @@ public class Shop extends ItemStorage {
         addCar(new Car("Mustang", 0.92, 0.78, 0.80, 19.0, 6800));
         addCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15.0, 12500));
 
-        addTuningPart(new TuningPart("Ethanol", 500, "\uD83D\uDCA8", 1.2));
-        addTuningPart(new TuningPart("SuperCharger", 750, "\uD83D\uDCA8", 1.5));
-        addTuningPart(new TuningPart("TurboKit", 1750, "\uD83D\uDCA8", 1.8));
-        addTuningPart(new TuningPart("StreetWheels", 400, "\uD83C\uDFAE", 1.2));
-        addTuningPart(new TuningPart("SportsWheels", 800, "\uD83C\uDFAE", 1.5));
-        addTuningPart(new TuningPart("RacingWheels", 1250, "\uD83C\uDFAE", 1.8));
+        addTuningPart(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
+        addTuningPart(new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3));
+        addTuningPart(new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5));
+        addTuningPart(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
+        addTuningPart(new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3));
+        addTuningPart(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
 
         lockedCars.add(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));
         lockedCars.add(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));

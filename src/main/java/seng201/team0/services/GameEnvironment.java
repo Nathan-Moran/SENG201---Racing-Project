@@ -17,7 +17,6 @@ public class GameEnvironment {
     private final StarterCarInventory starterCarInventory;
     private final ShopService shopService;
     private final ControllerService controllerService;
-    private final int STARTING_BALANCE;
     private int racesRemaining;
     private List<Integer> racePlacements = new ArrayList<>();
     private int totalPrizeMoney = 0;
@@ -27,9 +26,8 @@ public class GameEnvironment {
         this.controllerService = new ControllerService(this);
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
-        this.STARTING_BALANCE = 30000;
         setupShop();
-        setBalance();
+        setBalance(gameEnvironment.getBalance() + prize);
     }
 
     public void setupShop() {
@@ -124,11 +122,12 @@ public class GameEnvironment {
         return balance;
     }
 
-    public void setBalance() {
-        this.balance = STARTING_BALANCE;
-    }
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setBalance(int i) {
+        if (selectedDifficulty != null) {
+            this.balance = selectedDifficulty.getStartBudget();
+        } else {
+            this.balance = 0;
+        }
     }
 
     public void decrementRacesRemaining() {
