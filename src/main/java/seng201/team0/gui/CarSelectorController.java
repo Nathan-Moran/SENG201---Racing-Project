@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
+import seng201.team0.models.SetupCarTable;
 import seng201.team0.models.StarterCarInventory;
 import seng201.team0.services.GameEnvironment;
 
@@ -37,6 +38,8 @@ public class CarSelectorController implements Initializable {
      */
     protected StarterCarInventory startingCarsGarage;
 
+    private SetupCarTable setupCarTable;
+
     /**
      * Constructs a CarSelectorController with the given game environment and scene navigator.
      * It initializes the starter cars within the game environment.
@@ -47,6 +50,7 @@ public class CarSelectorController implements Initializable {
     public CarSelectorController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        this.setupCarTable = new SetupCarTable();
         gameEnvironment.setupStarterCars();
         startingCarsGarage = gameEnvironment.getStarterCarInventory();
     }
@@ -159,13 +163,19 @@ public class CarSelectorController implements Initializable {
      * Sets up the columns for the car table, binding them to the properties of the Car class.
      */
     protected void setupCarTable() {
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
-        handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
-        reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
-        fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
+        if (carTable != null) {
+            setupCarTable.setupCarTable(
+                    carTable,
+                    modelColumn,
+                    priceColumn,
+                    speedColumn,
+                    handlingColumn,
+                    reliabilityColumn,
+                    fuelColumn
+            );
+        }
     }
+
 
     /**
      * Loads the starter cars from the `startingCarsGarage` into the car table.

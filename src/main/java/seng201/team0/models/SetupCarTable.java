@@ -12,8 +12,8 @@ public class SetupCarTable {
             TableColumn<Car, Integer> priceColumn,
             TableColumn<Car, Double> speedColumn,
             TableColumn<Car, Double> handlingColumn,
-            TableColumn<Car, Double> reliabilityColumn,
-            TableColumn<Car, Double> fuelColumn) {
+            TableColumn<Car, Integer> reliabilityColumn,
+            TableColumn<Car, Integer> fuelColumn) {
 
         if (modelColumn != null) {
             modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
