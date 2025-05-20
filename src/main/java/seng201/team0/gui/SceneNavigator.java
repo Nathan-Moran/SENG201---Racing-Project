@@ -288,4 +288,21 @@ public class SceneNavigator {
        stage.show();
     }
 
+    public void switchToSceneCatalogueOne(javafx.scene.input.MouseEvent event) throws IOException {
+        title = "Item Catalogue";
+        fxml = "/fxml/ItemCatalogue.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new CatalogueOneController(this.gameEnvironment, this)
+        );
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
+    }
+
 }
