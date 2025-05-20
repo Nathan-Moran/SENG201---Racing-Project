@@ -163,15 +163,15 @@ public class RaceController {
         // You'll need to define the logic to map courses to image paths
         switch (course.getName().toLowerCase()) {
             case "desert":
-                return "../desert.jpg";
+                return "/fxml/desert.jpg";
             case "mountain":
-                return "../mountain.png";
+                return "/fxml/mountain.png";
             case "country":
-                return "../country.png";
+                return "/fxml/country.png";
             case "city":
-                return "../city.png";
+                return "/fxml/city.png";
             default:
-                return "../desert.png"; // Default image
+                return "/fxml/desert.png"; // Default image
         }
     }
 

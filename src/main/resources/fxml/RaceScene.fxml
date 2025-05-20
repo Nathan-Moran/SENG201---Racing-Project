@@ -16,11 +16,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
 
    <ImageView fx:id="routeImage" fitHeight="400" fitWidth="600" preserveRatio="false">
       <image>
-         <Image url="@../cartoon-desert-landscape-vector-51673450.jpg" />
+         <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
       </image></ImageView>
 
    <!-- Foreground UI overlay -->
@@ -62,15 +62,15 @@
 
       <ImageView fx:id="startFlagImageView" fitHeight="100.0" fitWidth="106.0" layoutX="20.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../StartFlag.png" />
+            <Image url="@StartFlag.png" />
          </image></ImageView>
       <ImageView fx:id="finishFlagImageView" fitHeight="92.0" fitWidth="100.0" layoutX="500.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../FinishFlag.png" />
+            <Image url="@FinishFlag.png" />
          </image></ImageView>
       <ImageView fx:id="carImage" fitHeight="84.0" fitWidth="80.0" layoutX="40.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Car.png" />
+            <Image url="@Car.png" />
          </image>
       </ImageView>
       <StackPane alignment="CENTER" layoutX="-24.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="0.0">
