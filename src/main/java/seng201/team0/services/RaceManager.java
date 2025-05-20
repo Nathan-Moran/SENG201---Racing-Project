@@ -32,14 +32,13 @@ public class RaceManager {
     private boolean playerFinished = false;
     private double raceDurationSeconds;
     private double timeElapsedSeconds = 0;
+    private boolean raceCancelled = false;
 
     private static final int REPAIR_WAIT_TICKS = 2;
     private static final int TRAVELER_WAIT_TICKS = 2;
     private static final int REFUEL_WAIT_TICKS = 2;
     private static final int REPAIR_COST = 500;
     private static final int TRAVELER_PROFIT = 500;
-
-
 
 
     public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
@@ -55,7 +54,7 @@ public class RaceManager {
     }
 
     public void advanceRaceTick() {
-        if (!isRacing) return;
+        if (!isRacing || raceCancelled) return;
         tickCount++;
         updateOpponentDistances();
         if (isWaiting) {
@@ -70,10 +69,10 @@ public class RaceManager {
         timeElapsedSeconds += (1.0 / 2);
         if (fuelLevel <= 0) {
             fuelLevel = 0;
-            finishRace();
+            finishRace("Out of fuel!");
         }
         if (timeElapsedSeconds >= raceDurationSeconds && !playerFinished) {
-            finishRace();
+            finishRace("Time ran out!");
         }
         if (playerDistance >= eventTriggerDistance && !eventDone) {
             maybeTriggerRandomEvent();
@@ -89,11 +88,18 @@ public class RaceManager {
             currentEvent = new RaceEvent(RaceEventType.FUEL_STOP);
             nextFuelStopIndex++;
         }
-        if (playerDistance >= race.getRoute().getLength()) {
-            finishRace();
+        if (playerDistance >= race.getRoute().getLength() && !playerFinished) {
+            finishRace("Finished the race!");
         }
     }
 
+    public void playerFinished() {
+        if (isRacing && !playerFinished && !raceCancelled) {
+            playerFinished = true;
+            playerFinishTick = tickCount;
+            finishRace("Finished the race!");
+        }
+    }
 
 
     private void maybeTriggerRandomEvent() {
@@ -176,23 +182,23 @@ public class RaceManager {
 
 
     public void playerWithdrawDueToWeather() {
+        raceCancelled = true;
         isRacing = false;
         playerFinished = true;
-        finishReason = "Weather has cancelled the race! You withdrew from the race.";
+        finishReason = "Weather has cancelled the race!";
     }
 
-    public void finishRace() {
-        isRacing = false;
-        if (fuelLevel <= 0) {
-            finishReason = "Out of fuel!";
-        } else if (timeElapsedSeconds >= raceDurationSeconds) {
-            finishReason = "Time ran out!";
-        } else {
-            finishReason = "Finished the race!";
-        }
-        if (!playerFinished) {
-            playerFinished = true;
-            playerFinishTick = tickCount;
+    public void finishRace(String reason) {
+        if (isRacing && !raceCancelled) {
+            isRacing = false;
+            finishReason = reason;
+            if (!playerFinished && reason.equals("Finished the race!")) {
+                playerFinished = true;
+                playerFinishTick = tickCount;
+            } else if (reason.equals("Time ran out!") && !playerFinished) {
+                playerFinished = true; // Mark as finished due to time
+                playerFinishTick = tickCount; // Record the tick count when time ran out
+            }
         }
     }
 
@@ -227,16 +233,20 @@ public class RaceManager {
     }
 
     public void handleWeather(GameEnvironment gameEnvironment) {
-        gameEnvironment.setBalance(
-                gameEnvironment.getBalance() - race.getCourse().getEntryFee()
-        );
-        clearCurrentEvent();
-        playerWithdrawDueToWeather();
+        raceCancelled = true;
+        isRacing = false;
+        playerFinished = true;
+        finishReason = "Weather has cancelled the race!";
+        // No balance change or races remaining decrement here, handled in GUI
     }
 
 
     public boolean isRaceFinished() {
         return !isRacing;
+    }
+
+    public boolean isRaceCancelled() {
+        return raceCancelled;
     }
 
     // Getters and setters for UI to read state
@@ -263,6 +273,9 @@ public class RaceManager {
 
 
     public int getMoneyEarned() {
+        if (raceCancelled) {
+            return 0; // No earnings if race is cancelled
+        }
         int placement = getPlayerPlacement();
         CoursePrizes prizes = race.getCourse().getPrizes();
 
@@ -275,12 +288,14 @@ public class RaceManager {
     }
 
     public void deductEntryFee(GameEnvironment gameEnvironment) {
-        int entryFee = race.getCourse().getEntryFee();
-        gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
+        if (!raceCancelled) {
+            int entryFee = race.getCourse().getEntryFee();
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
+        }
     }
 
     public int awardPrizeMoney(GameEnvironment gameEnvironment) {
-        if (playerFinished) {
+        if (playerFinished && !raceCancelled) {
             int prize = getMoneyEarned();
             gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
             return prize;
@@ -327,5 +342,9 @@ public class RaceManager {
 
     public void refuel() {
         fuelLevel = 1.0;
+    }
+
+    public boolean isRacing() {
+        return isRacing;
     }
 }

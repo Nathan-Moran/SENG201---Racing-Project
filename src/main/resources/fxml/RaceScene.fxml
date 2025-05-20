@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
 
@@ -29,16 +30,14 @@
          <GridPane hgap="10" vgap="6">
             <Label text="⏱ Time Left:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label fx:id="timerLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="\$ Balance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="moneyLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="52.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <Label fx:id="timeLeftLabel" text="10s" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label fx:id="currentDistanceLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="30.0" text="0 km" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-            <Label text="🛣 Race Length:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="🛣 Length:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label fx:id="raceLengthLabel" text="100 km" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <columnConstraints>
-               <ColumnConstraints maxWidth="108.0" minWidth="96.0" prefWidth="97.0" />
-               <ColumnConstraints maxWidth="46.0" minWidth="34.0" prefWidth="45.0" />
+               <ColumnConstraints maxWidth="108.0" minWidth="88.0" prefWidth="88.0" />
+               <ColumnConstraints maxWidth="54.0" minWidth="34.0" prefWidth="54.0" />
             </columnConstraints>
             <rowConstraints>
                <RowConstraints />
@@ -105,6 +104,15 @@
                <Button fx:id="stopForFuelButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #f39c12; -fx-text-fill: white;" text="Stop for Fuel" />
                <Button fx:id="continueWithoutFuelButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #95a5a6; -fx-text-fill: white;" text="Keep Driving" />
             </HBox>
+         </VBox>
+         <VBox fx:id="travelerPayPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="220.0" minHeight="-Infinity" prefHeight="80.0" prefWidth="292.0" spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #444; -fx-border-width: 2; -fx-padding: 16; -fx-opacity: 0.95;" visible="false">
+            <children>
+               <Label fx:id="travelerpayLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="The traveler payed you $250 for your generosity!" wrapText="true">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+            </children>
          </VBox>
 
       </StackPane>
