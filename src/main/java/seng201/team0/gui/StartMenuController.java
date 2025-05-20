@@ -103,6 +103,7 @@ public class StartMenuController {
             alert.showAndWait();
         } else {
             gameEnvironment.setName(name);
+            gameEnvironment.setBalance();
             sceneNavigator.switchToSceneCarSelector(event);
         }
 
