@@ -24,4 +24,5 @@ public abstract class Purchasable {
     public int getPrice() {
         return price;
     }
+
 }

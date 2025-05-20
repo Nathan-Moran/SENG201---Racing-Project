@@ -23,14 +23,14 @@ public class Shop extends ItemStorage {
         addTuningPart(new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3));
         addTuningPart(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
 
-        lockedCars.add(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));
-        lockedCars.add(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));
-        lockedCars.add(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20.0, 2600));
-        lockedCars.add(new Car("Ridge Racer", 0.5, 0.9, 0.7, 28.0, 3000));
-        lockedCars.add(new Car("Farmers Flyer", 0.9, 0.4, 0.9, 30.0, 3800));
-        lockedCars.add(new Car("Vineyard Viper", 0.6, 0.8, 0.8, 24.0, 3000));
-        lockedCars.add(new Car("Alley Cat", 0.8, 0.5, 0.7, 23.0, 2600));
-        lockedCars.add(new Car("Commuter King", 0.4, 0.7, 0.9, 28.0, 3300));
+        lockedCars.add(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));         //Desert Drift
+        lockedCars.add(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));    //Desert Long
+        lockedCars.add(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20.0, 2600));        //Mountain Steep
+        lockedCars.add(new Car("Ridge Racer", 0.5, 0.9, 0.7, 28.0, 3000));          //Mountain Curves
+        lockedCars.add(new Car("Farmers Flyer", 0.9, 0.4, 0.9, 30.0, 3800));        //Country Straight
+        lockedCars.add(new Car("Vineyard Viper", 0.6, 0.8, 0.8, 24.0, 3000));       //Country Twist
+        lockedCars.add(new Car("Alley Cat", 0.8, 0.5, 0.7, 23.0, 2600));            //City Alleys
+        lockedCars.add(new Car("Commuter King", 0.4, 0.7, 0.9, 28.0, 3300));        //City Traffic
 
 
     }
