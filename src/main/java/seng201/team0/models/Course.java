@@ -10,7 +10,6 @@ public enum Course {
     private int entryFee;
     private CoursePrizes prizes;
     private int numberOfOpponents;
-
     Course(String name, int entryFee, CoursePrizes prizes, int numberOfOpponents) {
         this.name = name;
         this.entryFee = entryFee;

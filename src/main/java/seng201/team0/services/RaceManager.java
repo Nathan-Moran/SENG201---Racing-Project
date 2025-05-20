@@ -36,9 +36,9 @@ public class RaceManager {
 
     private static final int REPAIR_WAIT_TICKS = 2;
     private static final int TRAVELER_WAIT_TICKS = 2;
-    private static final int REFUEL_WAIT_TICKS = 2;
-    private static final int REPAIR_COST = 500;
-    private static final int TRAVELER_PROFIT = 500;
+    private static final int REFUEL_WAIT_TICKS = 1;
+    private static final int REPAIR_COST = 250;
+    private static final int TRAVELER_PROFIT = 250;
 
 
     public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {

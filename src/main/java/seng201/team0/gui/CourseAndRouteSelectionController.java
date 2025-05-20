@@ -2,6 +2,7 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import seng201.team0.models.Course;
@@ -12,6 +13,8 @@ import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CourseAndRouteSelectionController implements Initializable {
@@ -32,32 +35,109 @@ public class CourseAndRouteSelectionController implements Initializable {
     @FXML private VBox countryRouteMenu;
     @FXML private VBox cityRouteMenu;
 
+    // Labels to indicate completed courses
+    @FXML private Label desertCompletedLabel;
+    @FXML private Label mountainCompletedLabel;
+    @FXML private Label countryCompletedLabel;
+    @FXML private Label cityCompletedLabel;
+
+    // Map to hold the course labels for easier access.
+    private Map<Course, Label> courseLabels = new HashMap<>();
+
     private Course selectedCourse;
     private Route selectedRoute;
+
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        courseMenu.setVisible(true);
+        courseMenu.setManaged(true);
+
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+        racesRemainingLabel.setText(String.valueOf(gameEnvironment.getRacesRemaining()));
+
+
+        desertRouteMenu.setVisible(false);
+        desertRouteMenu.setManaged(false);
+
+        mountainRouteMenu.setVisible(false);
+        mountainRouteMenu.setManaged(false);
+
+        countryRouteMenu.setVisible(false);
+        countryRouteMenu.setManaged(false);
+
+        cityRouteMenu.setVisible(false);
+        cityRouteMenu.setManaged(false);
+
+        selectedCourse = null;
+        selectedRoute = null;
+
+        // Initialize the courseLabels map.  This makes it easy to access the labels.
+        courseLabels.put(Course.DESERT, desertCompletedLabel);
+        courseLabels.put(Course.MOUNTAIN, mountainCompletedLabel);
+        courseLabels.put(Course.COUNTRY, countryCompletedLabel);
+        courseLabels.put(Course.CITY, cityCompletedLabel);
+
+        // Loop through the courses and set the visibility of the labels.
+        for (Course course : Course.values()) {
+            Label label = courseLabels.get(course); //gets the label
+            if (gameEnvironment.hasWonCourse(course)) {
+                label.setVisible(true);
+            } else {
+                label.setVisible(false);
+            }
+        }
+    }
+
 
     @FXML
     void onDesertSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.DESERT;
+        if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
+            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            return; // Stop execution if funds are insufficient
+        }
         showRouteMenu(desertRouteMenu);
     }
 
     @FXML
     void onMountainSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.MOUNTAIN;
+        if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
+            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            return; // Stop execution if funds are insufficient
+        }
         showRouteMenu(mountainRouteMenu);
     }
 
     @FXML
     void onCountrySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.COUNTRY;
+        if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
+            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            return; // Stop execution if funds are insufficient
+        }
         showRouteMenu(countryRouteMenu);
     }
 
     @FXML
     void onCitySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.CITY;
+        if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
+            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            return; // Stop execution if funds are insufficient
+        }
         showRouteMenu(cityRouteMenu);
     }
+
+    // ---
+    // Helper method for showing alerts
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    // ---
 
     void showRouteMenu(VBox routeMenu) {
         courseMenu.setVisible(false);
@@ -134,27 +214,5 @@ public class CourseAndRouteSelectionController implements Initializable {
         sceneNavigator.switchToSceneRace(event);
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        courseMenu.setVisible(true);
-        courseMenu.setManaged(true);
-
-        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
-        racesRemainingLabel.setText(String.valueOf(gameEnvironment.getRacesRemaining()));
-
-        desertRouteMenu.setVisible(false);
-        desertRouteMenu.setManaged(false);
-
-        mountainRouteMenu.setVisible(false);
-        mountainRouteMenu.setManaged(false);
-
-        countryRouteMenu.setVisible(false);
-        countryRouteMenu.setManaged(false);
-
-        cityRouteMenu.setVisible(false);
-        cityRouteMenu.setManaged(false);
-
-        selectedCourse = null;
-        selectedRoute = null;
-    }
-
 }
+

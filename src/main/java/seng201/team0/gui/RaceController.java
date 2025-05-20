@@ -284,6 +284,13 @@ public class RaceController {
 
     private void handleRepair(boolean pay) {
         breakdownPopup.setVisible(false);
+        if (pay && gameEnvironment.getBalance() < 250) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Funds");
+            alert.setHeaderText(null);
+            alert.setContentText("You do not have the required funds to repair");
+            alert.showAndWait();
+        }
         raceManager.handleRepair(pay, gameEnvironment);
         raceTimeline.play();
         timerTimeline.play(); // Resume timer
@@ -363,7 +370,7 @@ public class RaceController {
         } else {
             placementText = "Race Over"; // Default message
         }
-
+        gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
     }
 }

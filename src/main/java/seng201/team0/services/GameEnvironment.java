@@ -1,9 +1,12 @@
 package seng201.team0.services;
 
+import seng201.team0.gui.CourseAndRouteSelectionController;
 import seng201.team0.models.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameEnvironment {
     private Race currentRace;
@@ -20,6 +23,7 @@ public class GameEnvironment {
     private int racesRemaining;
     private List<Integer> racePlacements = new ArrayList<>();
     private int totalPrizeMoney = 0;
+    private Map<Course, Boolean> hasWonCourse = new HashMap<>();
 
     public GameEnvironment() {
         this.shopService = new ShopService(this);
@@ -28,6 +32,9 @@ public class GameEnvironment {
         this.starterCarInventory = new StarterCarInventory();
         setupShop();
         setBalance();
+        for (Course course : Course.values()) {
+            hasWonCourse.put(course, false);
+        }
     }
 
     public void setupShop() {
@@ -165,5 +172,28 @@ public class GameEnvironment {
 
     public void quit() {
         System.exit(0);
+    }
+
+
+    /**
+     * Updates the flag indicating whether the player has won a course for the first time.
+     *
+     * @param course The course that the player has completed.
+     * @param placement The player's placement in the race.
+     */
+    public void updateHasWonCourse(Course course, int placement) {
+        if (placement == 1) {
+            hasWonCourse.put(course, true);
+        }
+    }
+
+    /**
+     * Checks if the player has won a course for the first time.
+     *
+     * @param course The course to check.
+     * @return True if the player has won the course for the first time, false otherwise.
+     */
+    public boolean hasWonCourse(Course course) {
+        return hasWonCourse.get(course);
     }
 }
