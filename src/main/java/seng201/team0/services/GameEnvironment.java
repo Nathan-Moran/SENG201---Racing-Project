@@ -24,6 +24,7 @@ public class GameEnvironment {
     private List<Integer> racePlacements = new ArrayList<>();
     private int totalPrizeMoney = 0;
     private Map<Course, Boolean> hasWonCourse = new HashMap<>();
+    private ItemCatalogue itemCatalogue;
 
     public GameEnvironment() {
         this.shopService = new ShopService(this);
@@ -32,9 +33,14 @@ public class GameEnvironment {
         this.starterCarInventory = new StarterCarInventory();
         setupShop();
         setBalance();
+        this.itemCatalogue = new ItemCatalogue();
         for (Course course : Course.values()) {
             hasWonCourse.put(course, false);
         }
+    }
+
+    public ItemCatalogue getItemCatalogue() {
+        return itemCatalogue;
     }
 
     public void setupShop() {
