@@ -55,17 +55,17 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="EASY" textFill="#00ff15">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="EASY" textFill="#00ff15">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
                         <HBox>
                            <children>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $0" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $300" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="COST: $0" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="120.0" text="1st PRIZE: $500" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -74,8 +74,8 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: HANDLING" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: SPEED" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="2nd PRIZE: $350" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="3rd PRIZE:  $250" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -93,17 +93,17 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="MEDIUM" textFill="#ffc300">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="MEDIUM" textFill="#ffc300">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
                         <HBox>
                            <children>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $200" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $600" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="COST: $250" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="1st PRIZE: $1000" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -112,8 +112,8 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="SYNERGY: SPEED" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: HANDLING" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="2nd PRIZE: $750" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="3rd PRIZE:  $500" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -131,27 +131,27 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="MEDIUM" textFill="#ffc200">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="MEDIUM" textFill="#ffc200">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
                         <HBox>
                            <children>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $300" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $900" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="COST: $500" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $1500" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="120.0">
                            <children>
                               <VBox maxWidth="192.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: FUEL ECONOMY" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: RELIABILITY" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="2nd PRIZE: $1000" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="3rd PRIZE:  $800" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -169,27 +169,27 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="100.0" text="HARD" textFill="RED">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="HARD" textFill="RED">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
                         <HBox>
                            <children>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="233.0" text="COST: $500" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $1500" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="COST: $1000" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="150.0" text="1st PRIZE: $3000" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="120.0">
                            <children>
                               <VBox>
                                  <children>
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="322.0" text="SYNERGY: SPEED" wrapText="true" />
-                                    <Label alignment="CENTER" lineSpacing="1.0" prefHeight="50.0" prefWidth="198.0" text="DISADVANTAGE: RELIABILITY" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="2nd PRIZE: $0" wrapText="true" />
+                                    <Label alignment="CENTER" lineSpacing="1.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="120.0" text="3rd PRIZE:  $0" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
