@@ -20,14 +20,21 @@ public class GameEnvironment {
     private int racesRemaining;
     private List<Integer> racePlacements = new ArrayList<>();
     private int totalPrizeMoney = 0;
+    private ItemCatalogue itemCatalogue;
 
     public GameEnvironment() {
         this.shopService = new ShopService(this);
         this.controllerService = new ControllerService(this);
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
+        this.itemCatalogue = new ItemCatalogue();
         setupShop();
         setBalance();
+
+    }
+
+    public ItemCatalogue getItemCatalogue() {
+        return itemCatalogue;
     }
 
     public void setupShop() {

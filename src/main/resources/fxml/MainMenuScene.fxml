@@ -40,6 +40,7 @@
          <Button mnemonicParsing="false" onAction="#startRace" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 15 40 15 40; -fx-min-width: 220.0; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Start Race" />
          <Button mnemonicParsing="false" onAction="#goToGarage" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Garage" />
          <Button mnemonicParsing="false" onAction="#goToShop" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Shop" />
+         <Button mnemonicParsing="false" onAction="#goToItemCatalogue" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Item Catalogue" />
       </VBox>
    </center>
    <bottom>
