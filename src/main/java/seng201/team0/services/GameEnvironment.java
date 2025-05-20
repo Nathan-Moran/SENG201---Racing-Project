@@ -27,7 +27,7 @@ public class GameEnvironment {
         this.shopInventory = new Shop();
         this.starterCarInventory = new StarterCarInventory();
         setupShop();
-        setBalance(gameEnvironment.getBalance() + prize);
+        setBalance();
     }
 
     public void setupShop() {
@@ -122,7 +122,11 @@ public class GameEnvironment {
         return balance;
     }
 
-    public void setBalance(int i) {
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setBalance() {
         if (selectedDifficulty != null) {
             this.balance = selectedDifficulty.getStartBudget();
         } else {
