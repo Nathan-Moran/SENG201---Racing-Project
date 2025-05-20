@@ -2,6 +2,7 @@ package seng201.team0.gui;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.fxml.FXML;
@@ -87,6 +88,21 @@ public class RaceController {
         // Setup race manager
         Race currentRace = gameEnvironment.getCurrentRace();
         Car currentCar = gameEnvironment.getSelectedCar();
+        Course selectedCourse = gameEnvironment.getSelectedCourse();
+        if (selectedCourse != null) {
+            String imagePath = getImagePathForCourse(selectedCourse);
+            if (imagePath != null && !imagePath.isEmpty()) {
+                try {
+                    Image backgroundImage = new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm());
+                    routeImage.setImage(backgroundImage);
+                } catch (NullPointerException e) {
+                    System.err.println("Error loading background image: " + imagePath);
+                    // Optionally set a default image here if loading fails
+                }
+            } else {
+
+            }
+        }
         if (currentCar == null) {
             System.err.println("No car selected! Cannot calculate speed.");
             return;
@@ -138,10 +154,25 @@ public class RaceController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }); // Use method reference
-
+        });
         updateUI();
         startRace();
+    }
+
+    private String getImagePathForCourse(Course course) {
+        // You'll need to define the logic to map courses to image paths
+        switch (course.getName().toLowerCase()) {
+            case "desert":
+                return "../desert.jpg";
+            case "mountain":
+                return "../mountain.png";
+            case "country":
+                return "../country.png";
+            case "city":
+                return "../city.png";
+            default:
+                return "../desert.png"; // Default image
+        }
     }
 
     private void startRace() {
