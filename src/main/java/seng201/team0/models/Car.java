@@ -56,6 +56,19 @@ public class Car extends Purchasable {
         return String.format("%.0f%%", baseReliability * 100);
     }
 
+    public String getSpeedString() {
+        return String.format("%.2fkm/h", baseSpeed * 300);
+    }
+
+    public String getHandlingPercent() {
+        return String.format("%.2f%%", baseHandling * 100);
+    }
+
+    public String getFuelEconomyString() {
+        return String.format("%.2f%%", baseFuelEconomy * 300);
+    }
+
+
     /**
      * Gets the current speed of the car, including any boost from an installed speed upgrade.
      *

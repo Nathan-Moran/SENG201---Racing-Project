@@ -22,10 +22,10 @@ public class CatalogueTwoController {
     @FXML private TableView<Car> unlockableCarTable;
     @FXML private TableColumn<Car, String> modelColumn;
     @FXML private TableColumn<Car, Integer> priceColumn;
-    @FXML private TableColumn<Car, Double> speedColumn;
-    @FXML private TableColumn<Car, Double> handlingColumn;
+    @FXML private TableColumn<Car, String> speedColumn;
+    @FXML private TableColumn<Car, String> handlingColumn;
     @FXML private TableColumn<Car, String> reliabilityColumn;
-    @FXML private TableColumn<Car, Integer> fuelColumn;
+    @FXML private TableColumn<Car, String> fuelColumn;
 
     @FXML private TableView<TuningPart> tuningPartTable;
     @FXML private TableColumn<TuningPart, String> partNameColumn;

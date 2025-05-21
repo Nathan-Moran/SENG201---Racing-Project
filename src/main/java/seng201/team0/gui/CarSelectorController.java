@@ -127,12 +127,12 @@ public class CarSelectorController implements Initializable {
     /**
      * TableColumn for displaying the speed of the car.
      */
-    @FXML private TableColumn<Car, Double> speedColumn;
+    @FXML private TableColumn<Car, String> speedColumn;
 
     /**
      * TableColumn for displaying the handling of the car.
      */
-    @FXML private TableColumn<Car, Double> handlingColumn;
+    @FXML private TableColumn<Car, String> handlingColumn;
 
     /**
      * TableColumn for displaying the reliability of the car.
@@ -142,7 +142,7 @@ public class CarSelectorController implements Initializable {
     /**
      * TableColumn for displaying the fuel economy of the car.
      */
-    @FXML private TableColumn<Car, Integer> fuelColumn;
+    @FXML private TableColumn<Car, String> fuelColumn;
 
     /**
      * Initializes the controller after its root element has been completely processed.

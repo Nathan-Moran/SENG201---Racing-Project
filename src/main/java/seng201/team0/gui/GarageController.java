@@ -57,92 +57,60 @@ public class GarageController implements Initializable {
         this.controllerLogicManager = gameEnvironment.getControllerService();
     }
 
-    /**
-     * Handles the action of switching to the main menu scene.
-     *
-     * @param event The action event triggered by the button to switch to the main menu.
-     * @throws IOException If an I/O error occurs during scene transition.
-     */
+
     @FXML
     public void switchToMainMenu(ActionEvent event) throws IOException {
         sceneNavigator.switchToSceneMainMenu(event);
     }
 
-    /**
-     * TableView to display the player's cars.
-     */
+
     @FXML
     private TableView<Car> carTable;
 
-    /**
-     * TableColumn for displaying the model of the car.
-     */
+
     @FXML
     private TableColumn<Car, String> modelColumn;
 
-    /**
-     * TableColumn for displaying the reliability of the car.
-     */
     @FXML
     private TableColumn<Car, String> reliabilityColumn;
 
-    /**
-     * TableColumn for displaying the fuel economy of the car.
-     */
-    @FXML
-    private TableColumn<Car, Integer> fuelColumn;
 
-    /**
-     * TableColumn for displaying the handling of the car.
-     */
     @FXML
-    private TableColumn<Car, Double> handlingColumn;
+    private TableColumn<Car, String> fuelColumn;
 
-    /**
-     * TableColumn for displaying the speed of the car.
-     */
+
     @FXML
-    private TableColumn<Car, Double> speedColumn;
+    private TableColumn<Car, String> handlingColumn;
 
-    /**
-     * Label to display the fuel economy of the selected car.
-     */
+
+    @FXML
+    private TableColumn<Car, String> speedColumn;
+
+
     @FXML
     private Label selectedCarFuelLabel;
 
-    /**
-     * Label to display the handling stat of the selected car.
-     */
+
     @FXML
     private Label selectedCarHandlingLabel;
 
-    /**
-     * Label to display the handling upgrade status of the selected car.
-     */
+
     @FXML
     private Label selectedCarHandlingUpgradeLabel;
 
-    /**
-     * Label to display the model name of the selected car.
-     */
+
     @FXML
     private Label selectedCarModelLabel;
 
-    /**
-     * Label to display the reliability stat of the selected car.
-     */
+
     @FXML
     private Label selectedCarReliabilityLabel;
 
-    /**
-     * Label to display the speed stat of the selected car.
-     */
+
     @FXML
     private Label selectedCarSpeedLabel;
 
-    /**
-     * Label to display the speed upgrade status of the selected car.
-     */
+
     @FXML
     private Label selectedCarSpeedUpgradeLabel;
 

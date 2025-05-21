@@ -18,25 +18,25 @@ import java.util.List;
 
 public class CatalogueOneController {
 
-    private GameEnvironment gameEnvironment;
-    private SceneNavigator sceneNavigator;
-    private SetupCarTable setupCarTable;
+    private final GameEnvironment gameEnvironment;
+    private final SceneNavigator sceneNavigator;
+    private final SetupCarTable setupCarTable;
 
     @FXML private TableView<Car> starterCarTable;
     @FXML private TableColumn<Car, String> modelColumn;
     @FXML private TableColumn<Car, Integer> priceColumn;
-    @FXML private TableColumn<Car, Double> speedColumn;
-    @FXML private TableColumn<Car, Double> handlingColumn;
+    @FXML private TableColumn<Car, String> speedColumn;
+    @FXML private TableColumn<Car, String> handlingColumn;
     @FXML private TableColumn<Car, String> reliabilityColumn;
-    @FXML private TableColumn<Car, Integer> fuelColumn;
+    @FXML private TableColumn<Car, String> fuelColumn;
 
     @FXML private TableView<Car> shopCarTable;
     @FXML private TableColumn<Car, String> modelColumn1;
     @FXML private TableColumn<Car, Integer> priceColumn1;
-    @FXML private TableColumn<Car, Double> speedColumn1;
-    @FXML private TableColumn<Car, Double> handlingColumn1;
+    @FXML private TableColumn<Car, String> speedColumn1;
+    @FXML private TableColumn<Car, String> handlingColumn1;
     @FXML private TableColumn<Car, String> reliabilityColumn1;
-    @FXML private TableColumn<Car, Integer> fuelColumn1;
+    @FXML private TableColumn<Car, String> fuelColumn1;
 
     private Object lastSelectedItem;
 

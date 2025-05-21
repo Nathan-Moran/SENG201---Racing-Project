@@ -10,10 +10,10 @@ public class SetupCarTable {
             TableView<Car> carTable,
             TableColumn<Car, String> modelColumn,
             TableColumn<Car, Integer> priceColumn,
-            TableColumn<Car, Double> speedColumn,
-            TableColumn<Car, Double> handlingColumn,
+            TableColumn<Car, String> speedColumn,
+            TableColumn<Car, String> handlingColumn,
             TableColumn<Car, String> reliabilityColumn,
-            TableColumn<Car, Integer> fuelColumn) {
+            TableColumn<Car, String> fuelColumn) {
 
         if (modelColumn != null) {
             modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -22,16 +22,16 @@ public class SetupCarTable {
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         }
         if (speedColumn != null) {
-            speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
+            speedColumn.setCellValueFactory(new PropertyValueFactory<>("speedString"));
         }
         if (handlingColumn != null) {
-            handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
+            handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handlingPercent"));
         }
         if (reliabilityColumn != null) {
             reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliabilityPercent"));
         }
         if (fuelColumn != null) {
-            fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
+            fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomyString"));
         }
     }
 }
