@@ -8,6 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
+import seng201.team0.models.SetupCarTable;
+import seng201.team0.models.SetupTuningPartTable;
 import seng201.team0.models.TuningPart;
 import seng201.team0.services.GameEnvironment;
 
@@ -22,18 +24,20 @@ import java.util.ResourceBundle;
  * @author Nathan Moran
  */
 public class GaragePartsController implements Initializable {
-    /**
-     * The game environment, providing access to game state and services.
-     */
+
     protected GameEnvironment gameEnvironment;
-    /**
-     * The scene navigator, used for switching between different scenes in the application.
-     */
     protected SceneNavigator sceneNavigator;
-    /**
-     * The currently active car for which parts are being managed.
-     */
     protected Car activeCar;
+    private SetupTuningPartTable setupTuningPartTable;
+
+    @FXML private TableColumn<TuningPart, Double> reservePartBoostColumn;
+    @FXML private TableColumn<TuningPart, Double> installedPartBoostColumn;
+    @FXML private TableColumn<TuningPart, String> reservePartNameColumn;
+    @FXML private TableColumn<TuningPart, String> installedPartNameColumn;
+    @FXML private TableColumn<TuningPart, String> reservePartStatColumn;
+    @FXML private TableColumn<TuningPart, String> installedPartStatColumn;
+    @FXML private TableView<TuningPart> reserveTuningPartTable;
+    @FXML private TableView<TuningPart> installedTuningPartTable;
 
     /**
      * Constructs a GaragePartsController with the given game environment and scene navigator.
@@ -44,6 +48,7 @@ public class GaragePartsController implements Initializable {
     public GaragePartsController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        this.setupTuningPartTable = new SetupTuningPartTable();
     }
 
     /**
@@ -65,7 +70,7 @@ public class GaragePartsController implements Initializable {
      */
     @FXML
     void installPart(ActionEvent event) {
-        TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
+        TuningPart selectedTuningPart = reserveTuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedTuningPart != null) {
             if (gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart)) {
                 setupInstalledPartsTable();
@@ -88,7 +93,7 @@ public class GaragePartsController implements Initializable {
      */
     @FXML
     void removePart(ActionEvent event) {
-        TuningPart selectedTuningPart = tuningPartTable1.getSelectionModel().getSelectedItem();
+        TuningPart selectedTuningPart = installedTuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedTuningPart != null) {
             gameEnvironment.getPlayerInventory().uninstallTuningPart(selectedTuningPart);
             setupInstalledPartsTable();
@@ -129,11 +134,14 @@ public class GaragePartsController implements Initializable {
      * parts currently installed on the active car.
      */
     protected void setupInstalledPartsTable() {
-        partNameColumn1.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partStatColumn1.setCellValueFactory(new PropertyValueFactory<>("stat"));
-        partBoostColumn1.setCellValueFactory(new PropertyValueFactory<>("boost"));
-
-        tuningPartTable1.setItems(gameEnvironment.getPlayerInventory().getInstalledTuningParts());
+        setupTuningPartTable.setupTuningPartTable(
+                installedTuningPartTable,
+                installedPartNameColumn,
+                null,
+                installedPartStatColumn,
+                installedPartBoostColumn
+        );
+        installedTuningPartTable.setItems(gameEnvironment.getPlayerInventory().getInstalledTuningParts());
     }
 
     /**
@@ -142,51 +150,14 @@ public class GaragePartsController implements Initializable {
      * tuning parts in the player's general inventory (not installed).
      */
     protected void setupReservePartsTable() {
-        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partStatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
-        partBoostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
+        setupTuningPartTable.setupTuningPartTable(
+                reserveTuningPartTable,
+                reservePartNameColumn,
+                null,
+                reservePartStatColumn,
+                reservePartBoostColumn
+        );
 
-        tuningPartTable.setItems(gameEnvironment.getPlayerInventory().getTuningPartList());
+        reserveTuningPartTable.setItems(gameEnvironment.getPlayerInventory().getTuningPartList());
     }
-
-    /**
-     * TableColumn for displaying the boost value of tuning parts in the reserve table.
-     */
-    @FXML
-    private TableColumn<TuningPart, Double> partBoostColumn;
-    /**
-     * TableColumn for displaying the boost value of tuning parts in the installed parts table.
-     */
-    @FXML
-    private TableColumn<TuningPart, Double> partBoostColumn1;
-    /**
-     * TableColumn for displaying the name of tuning parts in the reserve table.
-     */
-    @FXML
-    private TableColumn<TuningPart, String> partNameColumn;
-    /**
-     * TableColumn for displaying the name of tuning parts in the installed parts table.
-     */
-    @FXML
-    private TableColumn<TuningPart, String> partNameColumn1;
-    /**
-     * TableColumn for displaying the stat affected by tuning parts in the reserve table.
-     */
-    @FXML
-    private TableColumn<TuningPart, String> partStatColumn;
-    /**
-     * TableColumn for displaying the stat affected by tuning parts in the installed parts table.
-     */
-    @FXML
-    private TableColumn<TuningPart, String> partStatColumn1;
-    /**
-     * TableView to display the player's reserve tuning parts.
-     */
-    @FXML
-    private TableView<TuningPart> tuningPartTable;
-    /**
-     * TableView to display the tuning parts currently installed on the active car.
-     */
-    @FXML
-    private TableView<TuningPart> tuningPartTable1;
 }

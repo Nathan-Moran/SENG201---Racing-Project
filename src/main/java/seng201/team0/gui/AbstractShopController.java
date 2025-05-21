@@ -7,11 +7,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
+import seng201.team0.models.SetupCarTable;
+import seng201.team0.models.SetupTuningPartTable;
 import seng201.team0.models.TuningPart;
 import seng201.team0.services.GameEnvironment;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * Abstract base class for shop controllers, providing common functionality for displaying cars and tuning parts.
@@ -19,80 +22,25 @@ import java.util.ResourceBundle;
  * @author Nathan Moran
  */
 public abstract class AbstractShopController implements Initializable {
-    /**
-     * Label to display the player's current balance.
-     */
     @FXML private Label moneyLabel;
-
-    /**
-     * TableView to display cars available in the shop or garage.
-     */
     @FXML protected TableView<Car> carTable;
-
-    /**
-     * TableColumn for displaying the model of the car.
-     */
     @FXML private TableColumn<Car, String> modelColumn;
-
-    /**
-     * TableColumn for displaying the price of the car.
-     */
     @FXML private TableColumn<Car, Integer> priceColumn;
-
-    /**
-     * TableColumn for displaying the speed of the car.
-     */
-    @FXML private TableColumn<Car, Double> speedColumn;
-
-    /**
-     * TableColumn for displaying the handling of the car.
-     */
-    @FXML private TableColumn<Car, Double> handlingColumn;
-
-    /**
-     * TableColumn for displaying the reliability of the car.
-     */
-    @FXML private TableColumn<Car, Integer> reliabilityColumn;
-
-    /**
-     * TableColumn for displaying the fuel economy of the car.
-     */
-    @FXML private TableColumn<Car, Integer> fuelColumn;
-
-    /**
-     * TableView to display tuning parts available in the shop or player's inventory.
-     */
+    @FXML private TableColumn<Car, String> speedColumn;
+    @FXML private TableColumn<Car, String> handlingColumn;
+    @FXML private TableColumn<Car, String> reliabilityColumn;
+    @FXML private TableColumn<Car, String> fuelColumn;
     @FXML protected TableView<TuningPart> tuningPartTable;
-
-    /**
-     * TableColumn for displaying the name of the tuning part.
-     */
     @FXML private TableColumn<TuningPart, String> partNameColumn;
-
-    /**
-     * TableColumn for displaying the price of the tuning part.
-     */
     @FXML private TableColumn<TuningPart, Integer> partPriceColumn;
-
-    /**
-     * TableColumn for displaying the stat affected by the tuning part.
-     */
     @FXML private TableColumn<TuningPart, String> partStatColumn;
-
-    /**
-     * TableColumn for displaying the boost value of the tuning part.
-     */
     @FXML private TableColumn<TuningPart, Double> partBoostColumn;
 
-    /**
-     * The game environment, providing access to game state and services.
-     */
     protected GameEnvironment gameEnvironment;
-
-    /**
-     * The scene navigator, used for switching between different scenes in the application.
-     */
     protected SceneNavigator sceneNavigator;
+
+    private SetupCarTable setupCarTable;
+    private SetupTuningPartTable setupTuningPartTable;
 
     /**
      * Constructs an AbstractShopController with the given game environment and scene navigator.
@@ -103,6 +51,8 @@ public abstract class AbstractShopController implements Initializable {
     public AbstractShopController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        this.setupCarTable = new SetupCarTable();
+        this.setupTuningPartTable = new SetupTuningPartTable();
     }
 
     /**
@@ -127,22 +77,30 @@ public abstract class AbstractShopController implements Initializable {
      * Sets up the columns for the car table, binding them to the properties of the Car class.
      */
     protected void setupCarTable() {
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        speedColumn.setCellValueFactory(new PropertyValueFactory<>("speed"));
-        handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
-        reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
-        fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));
+        if (carTable != null) {
+            setupCarTable.setupCarTable(
+                    carTable,
+                    modelColumn,
+                    priceColumn,
+                    speedColumn,
+                    handlingColumn,
+                    reliabilityColumn,
+                    fuelColumn
+            );
+        }
     }
 
     /**
      * Sets up the columns for the tuning part table, binding them to the properties of the TuningPart class.
      */
     protected void setupTuningPartTable() {
-        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partStatColumn.setCellValueFactory(new PropertyValueFactory<>("stat"));
-        partBoostColumn.setCellValueFactory(new PropertyValueFactory<>("boost"));
+        setupTuningPartTable.setupTuningPartTable(
+                tuningPartTable,
+                partNameColumn,
+                partPriceColumn,
+                partStatColumn,
+                partBoostColumn
+        );
     }
 
     /**
