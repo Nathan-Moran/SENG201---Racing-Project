@@ -15,6 +15,7 @@ public class StarterCarInventory extends ItemStorage {
     /**
      * Constructs a new StarterCarInventory instance.
      * Calls the superclass constructor to initialize car and tuning part lists.
+     * @param gameEnvironment The game environment instance.
      */
     public StarterCarInventory(GameEnvironment gameEnvironment) {
         super();

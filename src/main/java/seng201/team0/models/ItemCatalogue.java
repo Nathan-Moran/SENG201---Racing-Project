@@ -10,13 +10,26 @@ import javafx.collections.ObservableList;
  * It serves as a central repository for all game items.
  */
 public class ItemCatalogue extends ItemStorage {
+    /**
+     * An {@link ObservableList} storing {@link Car} objects that are initially locked
+     * and must be unlocked through game progression (e.g., winning specific courses).
+     */
     private final ObservableList<Car> lockedCarListInternal;
+    /**
+     * An {@link ObservableList} storing {@link Car} objects that are generally available
+     * for purchase in the shop from the start of the game or become available through general shop rotation.
+     */
     private final ObservableList<Car> shopCarListInternal;
+    /**
+     * An {@link ObservableList} storing {@link Car} objects that are offered to the player
+     * as initial choices at the beginning of the game.
+     */
     private final ObservableList<Car> starterCarPool;
 
     /**
      * Constructs a new ItemCatalogue instance.
-     * Initializes the lists for locked and shop-available cars and then sets up the catalogue.
+     * Initializes the internal observable lists for locked cars, shop cars, and starter cars,
+     * and then populates the entire catalogue with predefined game items.
      */
     public ItemCatalogue() {
         super();
@@ -29,7 +42,7 @@ public class ItemCatalogue extends ItemStorage {
     /**
      * Populates the item catalogue with all the cars and tuning parts in the game.
      * This includes cars initially available in the shop, starter cars, and cars that are locked
-     * and need to be unlocked through progression.
+     * and need to be unlocked through progression. It also adds all available tuning parts.
      */
     public void setupCatalogue() {
         Car honda = new Car("Honda Civic", 0.6, 0.5, 0.7, 20, 1000);
@@ -56,21 +69,31 @@ public class ItemCatalogue extends ItemStorage {
         TuningPart sportsWheels = new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3);
         TuningPart racingWheels = new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5);
 
+        // Add all tuning parts to the inherited tuning part list from ItemStorage
         super.getTuningPartList().addAll(ethanol, superCharger, turboKit, streetWheels, sportsWheels, racingWheels);
     }
 
-
+    /**
+     * Returns the {@link ObservableList} of starter cars available to the player at the beginning of the game.
+     * @return An {@link ObservableList} of {@link Car} objects representing the starter car pool.
+     */
     public ObservableList<Car> getStarterCarPool() {
         return starterCarPool;
     }
 
-
-    public ObservableList<Car> getShopCarList() { // Already exists
+    /**
+     * Returns the {@link ObservableList} of cars that are generally available for purchase in the shop.
+     * @return An {@link ObservableList} of {@link Car} objects representing the shop's general car list.
+     */
+    public ObservableList<Car> getShopCarList() {
         return shopCarListInternal;
     }
 
-
-    public ObservableList<Car> getLockedCarList() { // Already exists
+    /**
+     * Returns the {@link ObservableList} of cars that are initially locked and require specific game progression to unlock.
+     * @return An {@link ObservableList} of {@link Car} objects representing the locked car list.
+     */
+    public ObservableList<Car> getLockedCarList() {
         return lockedCarListInternal;
     }
 }
