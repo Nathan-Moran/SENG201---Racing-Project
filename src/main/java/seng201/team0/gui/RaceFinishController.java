@@ -35,6 +35,10 @@ public class RaceFinishController {
     }
 
     public void setRaceResults(String reason, String placementText, List<String> leaderboard, int earnings) {
+        if (this.gameEnvironment != null && this.gameEnvironment.getShopInventory() != null) {
+            this.gameEnvironment.getShopInventory().setShopInventory();
+        }
+
         finishReason.setText("Reason: " + reason);
         placementMessage.setText(placementText);
         resultTitle.setText("Final Results");

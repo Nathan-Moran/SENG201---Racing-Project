@@ -31,13 +31,11 @@ public class ControllerService {
      * @param startingCarsGarage The {@link StarterCarInventory} containing the initial car choices.
      */
     public void storeLeftOverCars(StarterCarInventory startingCarsGarage) {
-        // Check if there are still cars in the starter inventory (meaning player didn't pick all or some were left)
         if (!gameEnvironment.getStarterCarInventory().getCarList().isEmpty()) {
-            System.out.println(gameEnvironment.getPlayerInventory().getCarList()); // Debug print, consider removing
-            // Add all remaining starter cars to the shop's car list
-            gameEnvironment.getShopInventory().getCarList().addAll(startingCarsGarage.getCarList());
-            // Clear the starter car inventory as they are now in the shop
+            System.out.println(gameEnvironment.getPlayerInventory().getCarList());
+            gameEnvironment.getShopInventory().getAllAvailableCars().addAll(startingCarsGarage.getCarList());
             startingCarsGarage.getCarList().clear();
+            gameEnvironment.getShopInventory().setShopInventory();
         }
     }
 
