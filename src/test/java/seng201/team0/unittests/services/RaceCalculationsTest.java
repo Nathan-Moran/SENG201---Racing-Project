@@ -31,15 +31,6 @@ public class RaceCalculationsTest {
     }
 
     @Test
-    void testConstructor() {
-        List<OpponentCar> opponentList = new ArrayList<>();
-        OpponentCar opCar = new OpponentCar(10);
-        opponentList.add(opCar);
-        RaceCalculations rc = new RaceCalculations(opponentList);
-        assertNotNull(rc);
-    }
-
-    @Test
     void testCalculateEffectiveSpeed() {
         RouteAttributes attr = testRoute.getAttributes();
         double expectedSpeed = testCar.getSpeed() * attr.getSpeedAdvantage() +

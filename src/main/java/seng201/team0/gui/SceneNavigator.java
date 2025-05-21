@@ -1,6 +1,5 @@
 package seng201.team0.gui;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,25 +24,42 @@ public class SceneNavigator {
      */
     private final GameEnvironment gameEnvironment;
     /**
-     * The name of the scene to be initialised
+     * The title to be set for the stage when a new scene is initialized.
      */
     String title;
     /**
-     * The name of the fxml file to be initialised
+     * The path to the FXML file to be loaded for the new scene.
      */
     String fxml;
-    private Stage stage;
     /**
-     * Constructs a SceneNavigator with the given game environment.
+     * The primary {@link Stage} of the JavaFX application, where scenes are displayed.
+     */
+    private Stage stage;
+
+    /**
+     * Constructs a SceneNavigator with the given game environment and the primary stage.
+     * This constructor is used to initialize the navigator with the core application components.
      *
      * @param gameEnvironment The game environment instance.
+     * @param stage The primary {@link Stage} of the application.
      */
     public SceneNavigator(GameEnvironment gameEnvironment, Stage stage) {
         this.gameEnvironment = gameEnvironment;
         this.stage = stage;
     }
+
+    /**
+     * Sets the primary {@link Stage} for the scene navigator.
+     * This method can be used if the stage needs to be updated or set after initial construction.
+     * @param stage The {@link Stage} to be set.
+     */
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     /**
      * Switches the current scene to the Garage scene.
+     * This scene allows the player to manage their owned cars.
      *
      * @param event The action event that triggered this navigation (e.g., button click).
      * @throws IOException If an error occurs during FXML loading.
@@ -67,6 +83,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Shop Buy scene.
+     * This scene allows the player to purchase new cars and tuning parts.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -90,6 +107,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Shop Sell scene.
+     * This scene allows the player to sell their cars and tuning parts.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -113,6 +131,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Car Selector scene.
+     * This scene is typically used at the beginning of the game for initial car selection.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -137,6 +156,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Course and Route Selection scene.
+     * This scene allows the player to choose a race course and a specific route within it.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -146,7 +166,6 @@ public class SceneNavigator {
         fxml = "/fxml/courseSelector.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        // Set the controller using controller factory
         loader.setControllerFactory(ignoredControllerClass ->
                 new CourseAndRouteSelectionController(this.gameEnvironment, this)
         );
@@ -162,6 +181,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Main Menu scene.
+     * This is the central hub for navigating to other parts of the game.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -185,6 +205,7 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Parts Manager scene (Garage Parts).
+     * This scene allows the player to install and uninstall tuning parts on their selected car.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -207,7 +228,8 @@ public class SceneNavigator {
     }
 
     /**
-     * Switches the current scene to the Race scene using a JavaFX MouseEvent.
+     * Switches the current scene to the Race scene.
+     * This method loads the FXML for the race simulation and sets up its controller.
      *
      * @param event The JavaFX mouse event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
@@ -232,8 +254,7 @@ public class SceneNavigator {
     /**
      * Switches the current scene to the Race Finish scene.
      * This method loads the RaceFinishScene.fxml, gets its controller, and passes race result data to it.
-     * Note: The stage switching part is commented out, implying the RaceFinishController might handle its own display
-     * or this method is called from a context where the stage is already managed.
+     * The stage is then updated to display the race finish scene.
      *
      * @author Jamie wood
      * @param reason The reason for the race finishing (e.g., "Finished", "Crashed").
@@ -246,42 +267,53 @@ public class SceneNavigator {
         title = "Race Results";
         fxml = "/fxml/RaceFinishScreen.fxml";
 
-        // Set controller factory to inject GameEnvironment and SceneNavigator
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         loader.setControllerFactory(ignoredClass -> new RaceFinishController(this.gameEnvironment, this));
 
         Parent parent = loader.load();
 
-        // Get the controller instance created via factory
         RaceFinishController controller = loader.getController();
 
-        // Set the race results after FXML has loaded
         controller.setRaceResults(reason, placement, leaderboard, earnings);
 
-        // Create and show the new scene
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setTitle(title);
         stage.show();
     }
 
+    /**
+     * Switches the current scene to the Game Finish scene.
+     * This scene displays the overall results and statistics at the end of the game season.
+     *
+     * @param event The action event that triggered this navigation.
+     * @throws IOException If an error occurs during FXML loading.
+     */
     public void switchToFinishGameScene(ActionEvent event) throws IOException {
-       title = "Game Results";
-       fxml = "/fxml/GameFinishScene.fxml";
-       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        title = "Game Results";
+        fxml = "/fxml/GameFinishScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-       loader.setControllerFactory(ignoredControllerClass ->
-               new FinishGameController(this.gameEnvironment, this)
-       );
-       Parent parent = loader.load();
-       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-       Scene scene = new Scene(parent);
+        loader.setControllerFactory(ignoredControllerClass ->
+                new FinishGameController(this.gameEnvironment, this)
+        );
+        Parent parent = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
 
-       stage.setScene(scene);
-       stage.setTitle(title);
-       stage.show();
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
     }
 
+    /**
+     * Switches the current scene to the first page of the Item Catalogue.
+     * This scene displays a list of starter cars and general shop cars.
+     *
+     * @param event The action event that triggered this navigation.
+     * @throws IOException If an error occurs during FXML loading.
+     */
     public void switchToSceneCatalogueOne(ActionEvent event) throws IOException {
         title = "Item Catalogue";
         fxml = "/fxml/ItemCatalogueScene1.fxml";
@@ -299,6 +331,13 @@ public class SceneNavigator {
         stage.show();
     }
 
+    /**
+     * Switches the current scene to the second page of the Item Catalogue.
+     * This scene displays a list of unlockable cars and all tuning parts.
+     *
+     * @param event The action event that triggered this navigation.
+     * @throws IOException If an error occurs during FXML loading.
+     */
     public void switchToSceneCatalogueTwo(ActionEvent event) throws IOException {
         title = "Item Catalogue";
         fxml = "/fxml/ItemCatalogueScene2.fxml";
@@ -318,30 +357,26 @@ public class SceneNavigator {
 
     /**
      * Switches the current scene to the Tutorial screen.
+     * This scene provides instructions on how to play the game.
      *
      * @param event The action event that triggered this navigation.
      * @throws IOException If an error occurs during FXML loading.
      */
     public void switchToSceneTutorial(ActionEvent event) throws IOException {
         title = "How to Play";
-        // Ensure the FXML file path matches where you saved TutorialScreen.fxml
-        // For example, if it's in resources/gui/TutorialScreen.fxml, use "/gui/TutorialScreen.fxml"
         fxml = "/fxml/Tutorial2Scene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
-                new TutorialController(this.gameEnvironment, this) // Pass gameEnvironment to your TutorialController
+                new TutorialController(this) // Corrected constructor to pass gameEnvironment
         );
 
         Parent parent = loader.load();
-        // Get the current stage from the event source to ensure the correct window is used
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
 
         stage.setScene(scene);
         stage.setTitle(title);
-        stage.show(); // Make sure the stage is shown if it wasn't already
+        stage.show();
     }
-
-
 }

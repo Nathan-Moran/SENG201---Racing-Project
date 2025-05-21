@@ -1,9 +1,8 @@
 package seng201.team0.models;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import seng201.team0.services.GameEnvironment;
+
+import java.util.*;
 
 /**
  * Represents the in-game shop where players can buy and sell cars and tuning parts.
@@ -17,52 +16,108 @@ public class Shop extends ItemStorage {
      * whose completion unlocks them.
      */
     private Map<Course, Car> lockedCarsMap;
-    /**
-     * A map storing lists of tuning parts that are initially locked, mapped to the {@link Course}
-     * whose completion unlocks them.
-     */
-    private Map<Course, List<TuningPart>> lockedTuningPartMap;
+
+    private List<Car> allAvailableCars;
+    private List<TuningPart> allAvailableTuningParts;
+    private GameEnvironment gameEnvironment;
+    private ArrayList<Car> lockedCarList;
 
     /**
      * Constructs a new Shop instance.
-     * Initializes the maps for locked cars and tuning parts.
+     * Initializes the maps for locked cars and tuning parts, and populates
+     * the master lists of all available items.
+     * @param gameEnvironment The {@link GameEnvironment} instance for accessing item catalogue.
      */
-    public Shop() {
-        super(); // Call the constructor of ItemStorage to initialize carList and tuningPartList
+    public Shop(GameEnvironment gameEnvironment) {
+        super();
+        this.gameEnvironment = gameEnvironment;
         this.lockedCarsMap = new HashMap<>();
-        this.lockedTuningPartMap = new HashMap<>();
+        this.allAvailableCars = new ArrayList<>();
+        this.allAvailableTuningParts = new ArrayList<>();
+        this.lockedCarList = new ArrayList<>();
+
+        populateBaseMasterLists();
+        setupLockedItems();
     }
 
     /**
-     * Populates the shop's initial inventory with available cars and tuning parts.
-     * This method also sets up the mapping for locked items that will be unlocked
-     * by winning specific courses.
+     * Populates the master lists with standard, non-starter items from the item catalogue.
+     * This includes all cars and tuning parts that can eventually appear in the shop,
+     * whether initially available or locked.
+     */
+    private void populateBaseMasterLists() {
+        ItemCatalogue catalogue = gameEnvironment.getItemCatalogue();
+        if (catalogue != null) {
+            this.allAvailableCars.clear();
+            for (Car shopCar : catalogue.getShopCarList()) {
+                this.allAvailableCars.add(shopCar);
+            }
+
+            this.allAvailableTuningParts.clear();
+            for (TuningPart part : catalogue.getTuningPartList()) {
+                this.allAvailableTuningParts.add(part);
+            }
+            this.lockedCarList.clear();
+            for (Car lockedCar : catalogue.getLockedCarList()) {
+                this.lockedCarList.add(lockedCar);
+            }
+        }
+    }
+
+    /**
+     * Sets up the mappings for items that are initially locked.
+     * This method associates specific cars and tuning parts with the {@link Course}
+     * that needs to be completed to unlock them.
+     */
+    private void setupLockedItems() {
+
+        this.lockedCarsMap.clear();
+
+        for (Car carFromPool : this.lockedCarList) {
+            switch (carFromPool.getName()) {
+                case "Dune Drifter":
+                    this.lockedCarsMap.put(Course.DESERT, carFromPool);
+                    break;
+                case "Sandstorm Strider":
+                    this.lockedCarsMap.put(Course.MOUNTAIN, carFromPool);
+                    break;
+                case "Cliff Climber":
+                    this.lockedCarsMap.put(Course.COUNTRY, carFromPool);
+                    break;
+                case "Ridge Racer":
+                    this.lockedCarsMap.put(Course.CITY, carFromPool);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Populates the shop's initial inventory with a randomized selection of available cars and tuning parts.
+     * This method is typically called at the start of a new shop session to display items for purchase.
      */
     public void setShopInventory() {
-        // Initial tuning parts available in the shop
-        addTuningPart(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
-        addTuningPart(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
+        getCarList().clear();
+        getTuningPartList().clear();
 
-        // Initial cars available in the shop
-        addCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23.0, 6500));
-        addCar(new Car("Mustang", 0.92, 0.78, 0.80, 19.0, 6800));
-        addCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15.0, 12500));
+        Collections.shuffle(allAvailableCars);
+        int carsToDisplayCount = Math.min(3, allAvailableCars.size());
+        for (int i = 0; i < carsToDisplayCount; i++) {
+            super.addCar(allAvailableCars.get(i));
+        }
 
-        // Locked tuning parts that become available after winning specific courses
-        lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
-                new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3),
-                new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3)
-        ));
-        lockedTuningPartMap.put(Course.CITY, Arrays.asList(
-                new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5),
-                new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5)
-        ));
+        Collections.shuffle(allAvailableTuningParts);
+        int partsToDisplayCount = Math.min(3, allAvailableTuningParts.size());
+        for (int i = 0; i < partsToDisplayCount; i++) {
+            super.addTuningPart(allAvailableTuningParts.get(i));
+        }
+    }
 
-        // Locked cars that become available after winning specific courses
-        lockedCarsMap.put(Course.DESERT, new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));
-        lockedCarsMap.put(Course.MOUNTAIN, new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));
-        lockedCarsMap.put(Course.COUNTRY, new Car("Cliff Climber", 0.6, 0.5, 0.9, 20.0, 2600));
-        lockedCarsMap.put(Course.CITY, new Car("Ridge Racer", 0.5, 0.9, 0.7, 28.0, 3000));
+    /**
+     * Retrieves the master list of all cars that can potentially be available in the shop.
+     * @return A {@link List} of all available {@link Car} objects.
+     */
+    public List<Car> getAllAvailableCars() {
+        return allAvailableCars;
     }
 
     /**
@@ -84,20 +139,42 @@ public class Shop extends ItemStorage {
     }
 
     /**
-     * Gets the map of tuning parts that are currently locked, associated with the course
-     * that unlocks them.
-     * @return A {@link Map} where keys are {@link Course} and values are {@link List} of {@link TuningPart} objects.
+     * Removes a specific car from the master list of all available cars.
+     * This is typically called when a car is purchased by the player.
+     * @param car The {@link Car} to be removed.
      */
-    public Map<Course, List<TuningPart>> getLockedTuningPartMap() {
-        return lockedTuningPartMap;
+    public void removeCarFromAllAvailable(Car car) {
+        allAvailableCars.remove(car);
     }
 
     /**
-     * Removes a list of locked tuning parts from the map, typically after they have been unlocked and
-     * moved to the main shop inventory.
-     * @param course The {@link Course} associated with the locked tuning parts to be removed.
+     * Removes a specific tuning part from the master list of all available tuning parts.
+     * This is typically called when a tuning part is purchased by the player.
+     * @param part The {@link TuningPart} to be removed.
      */
-    public void removeLockedTuningParts(Course course) {
-        lockedTuningPartMap.remove(course);
+    public void removePartFromAllAvailable(TuningPart part) {
+        allAvailableTuningParts.remove(part);
+    }
+
+    /**
+     * Adds a specific car back to the master list of all available cars.
+     * This is typically called when a car is sold by the player back to the shop.
+     * @param car The {@link Car} to be added.
+     */
+    public void addCarToAllAvailable(Car car) {
+        allAvailableCars.add(car);
+    }
+
+    /**
+     * Adds a specific tuning part back to the master list of all available tuning parts.
+     * This is typically called when a tuning part is sold by the player back to the shop.
+     * @param part The {@link TuningPart} to be added.
+     */
+    public void addPartToAllAvailable(TuningPart part) {
+        allAvailableTuningParts.add(part);
+    }
+
+    public List<TuningPart> getAllAvailableTuningParts() {
+        return allAvailableTuningParts;
     }
 }

@@ -100,7 +100,6 @@ public class Garage extends ItemStorage {
      * @param newSelectedCar The {@link Car} to be set as the currently selected car.
      */
     public void setSelectedCar(Car newSelectedCar) {
-        // If a car was already selected, uninstall its parts and put it back in the garage list
         if (selectedCar != null) {
             if (selectedCar.getSpeedUpgrade() != null) {
                 uninstallTuningPart(selectedCar.getSpeedUpgrade());
@@ -108,16 +107,14 @@ public class Garage extends ItemStorage {
             if (selectedCar.getHandlingUpgrade() != null) {
                 uninstallTuningPart(selectedCar.getHandlingUpgrade());
             }
-            // Clear any custom name on the previously selected car
+
             if (selectedCar.getCustomName() != null) {
                 selectedCar.setCustomName(null);
             }
-            // Re-add the old selected car to the general car list
-            addCar(this.selectedCar); // Add the old selected car back to the garage's main car list
+            addCar(this.selectedCar);
         }
-        // Set the new selected car and remove it from the general car list
         this.selectedCar = newSelectedCar;
-        removeCar(newSelectedCar); // Remove the new selected car from the garage's main car list
+        removeCar(newSelectedCar);
     }
 
 
@@ -127,16 +124,20 @@ public class Garage extends ItemStorage {
      * is greater than 3, {@code false} otherwise.
      */
     public boolean garageFull() {
-        return getCarList().size() > 3; // Assuming getCarList() returns the list of non-selected cars
+        return getCarList().size() > 3;
     }
 
 
     /**
      * Sets the initial starter car for the player. This is typically used at the beginning of the game.
-     * @param newStarterCar The {@link Car} chosen as the starter car.
+     * @param newStarterCarTemplate The {@link Car} chosen as the starter car.
      */
-    public void setStarterCar(Car newStarterCar) {
-        this.selectedCar = newStarterCar;
+    public void setStarterCar(Car newStarterCarTemplate) {
+        if (newStarterCarTemplate != null) {
+            this.selectedCar = new Car(newStarterCarTemplate); // Use the copy constructor
+        } else {
+            this.selectedCar = null;
+        }
     }
 
     /**

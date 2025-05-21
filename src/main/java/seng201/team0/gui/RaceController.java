@@ -2,7 +2,6 @@ package seng201.team0.gui;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -14,83 +13,168 @@ import seng201.team0.models.*;
 import seng201.team0.services.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 /**
- * Controller for the Race screen, managing the visual representation and user interaction during a race.
- * This class orchestrates the race simulation by interacting with the {@link RaceManager} and updates
- * the UI accordingly, including player and opponent progress, fuel levels, and race events.
+ * Controller for the Race Scene. Manages the real-time simulation and
+ * visual representation of a race, including player and opponent progress,
+ * fuel levels, event pop-ups, and race conclusion logic.
  */
-public class RaceController implements Initializable {
+public class RaceController {
 
+    /**
+     * ImageView for displaying the background image of the race route.
+     */
     @FXML
     private ImageView routeImage;
+    /**
+     * Label for displaying the player's current money.
+     */
     @FXML
     private Label moneyLabel;
+    /**
+     * Label for displaying the total length of the current race route.
+     */
     @FXML
     private Label raceLengthLabel;
+    /**
+     * ProgressBar for visualizing the player's current fuel level.
+     */
     @FXML
     private ProgressBar fuelGauge;
+    /**
+     * VBox container for displaying the race leaderboard.
+     */
     @FXML
     private VBox leaderboardBox;
+    /**
+     * Label for displaying the remaining time in the race.
+     */
     @FXML
     private Label timerLabel;
 
     // Popups
+    /**
+     * VBox container for the fuel stop event popup.
+     */
     @FXML
     private VBox fuelStopPopup;
+    /**
+     * VBox container for the breakdown event popup.
+     */
     @FXML
     private VBox breakdownPopup;
+    /**
+     * VBox container for the traveler event popup.
+     */
     @FXML
     private VBox travelerPopup;
+    /**
+     * VBox container for the weather event popup.
+     */
     @FXML
     private VBox weatherPopup;
+    /**
+     * VBox container for the traveler pay confirmation popup.
+     */
     @FXML
     private VBox travelerPayPopup;
 
+    /**
+     * Button to stop for fuel during a fuel stop event.
+     */
     @FXML
     private Button stopForFuelButton;
+    /**
+     * Button to continue without fueling during a fuel stop event.
+     */
     @FXML
     private Button continueWithoutFuelButton;
+    /**
+     * Button to withdraw from the race (typically due to breakdown).
+     */
     @FXML
     private Button withdrawButton;
+    /**
+     * Button to repair the car during a breakdown event.
+     */
     @FXML
     private Button repairButton;
+    /**
+     * Button to pick up a traveler during a traveler event.
+     */
     @FXML
     private Button pickUpButton;
+    /**
+     * Button to drive past a traveler during a traveler event.
+     */
     @FXML
     private Button drivePastButton;
+    /**
+     * Button to continue after a weather event (race cancellation).
+     */
     @FXML
     private Button continueAfterWeatherButton;
 
-    //Added some stuff for race animations
+    //Race animations
+    /**
+     * Rectangle representing the visual race track line for car animation.
+     */
     @FXML
     private Rectangle raceTrackLine;
+    /**
+     * ImageView for displaying the start flag.
+     */
     @FXML
-    private ImageView startFlagImageView; // Not directly used in provided methods but often for visual effects
+    private ImageView startFlagImageView;
+    /**
+     * ImageView for displaying the finish flag.
+     */
     @FXML
-    private ImageView finishFlagImageView; // Not directly used in provided methods but often for visual effects
+    private ImageView finishFlagImageView;
+    /**
+     * ImageView for displaying the player's car during the race animation.
+     */
     @FXML
     private ImageView carImage;
+    /**
+     * Label for displaying the time left in the race (redundant with timerLabel, but present in FXML).
+     */
     @FXML
-    private Label timeLeftLabel; // Appears to be a duplicate/alternative to timerLabel, verify usage
+    private Label timeLeftLabel;
 
 
+    /**
+     * The game environment, providing access to game state and services.
+     */
     protected GameEnvironment gameEnvironment;
+    /**
+     * The scene navigator for switching between different application scenes.
+     */
     protected SceneNavigator sceneNavigator;
 
+    /**
+     * The RaceManager instance handling the core race simulation logic.
+     */
     private RaceManager raceManager;
+    /**
+     * Timeline for advancing the race simulation ticks.
+     */
     private Timeline raceTimeline;
+    /**
+     * Timeline for updating the on-screen timer.
+     */
     private Timeline timerTimeline;
+    /**
+     * Timeline for controlling the visibility of the traveler pay popup.
+     */
     private Timeline travelerPayTimeline;
 
     /**
-     * Constructs a RaceController with the given game environment and scene navigator.
-     * @param gameEnvironment The {@link GameEnvironment} instance for the current game session.
-     * @param sceneNavigator The {@link SceneNavigator} to handle scene transitions.
+     * Constructs a RaceController.
+     * @param gameEnvironment The current game environment.
+     * @param sceneNavigator The scene navigator for scene transitions.
      */
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
@@ -98,17 +182,15 @@ public class RaceController implements Initializable {
     }
 
     /**
-     * Initializes the Race screen. This method is automatically called after the FXML file has been loaded.
-     * It sets up the {@link RaceManager}, loads the route image, initializes UI elements,
-     * and sets up event handlers for user interactions and timelines for race simulation.
+     * Initializes the Race Scene controller. This method is automatically called
+     * by the FXMLLoader after the FXML file has been loaded. It sets up the
+     * RaceManager, initializes UI elements, configures event handlers for pop-up buttons,
+     * and starts the race simulation timelines.
      */
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Setup race manager
+    public void initialize() {
         Race currentRace = gameEnvironment.getCurrentRace();
         Car currentCar = gameEnvironment.getSelectedCar();
         Course selectedCourse = gameEnvironment.getSelectedCourse();
-
-        // Load route image based on selected course
         if (selectedCourse != null) {
             String imagePath = getImagePathForCourse(selectedCourse);
             if (imagePath != null && !imagePath.isEmpty()) {
@@ -117,18 +199,15 @@ public class RaceController implements Initializable {
                     routeImage.setImage(backgroundImage);
                 } catch (NullPointerException e) {
                     System.err.println("Error loading background image: " + imagePath);
-                    // Optionally set a default image here if loading fails
                 }
             } else {
-                // Handle case where imagePath is null or empty
+
             }
         }
         if (currentCar == null) {
             System.err.println("No car selected! Cannot calculate speed.");
-            return; // Prevent further initialization if no car is selected
+            return;
         }
-
-        // Generate opponents and initialize RaceManager
         Course course = gameEnvironment.getSelectedCourse();
         int numberOfOpponents = course.getNumberOfOpponents();
         List<OpponentCar> opponents = currentRace.getRoute().generateOpponents(numberOfOpponents);
@@ -136,55 +215,48 @@ public class RaceController implements Initializable {
         double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute());
         double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
         raceManager = new RaceManager(currentRace, currentCar, opponents, speed, fuelConsumptionRate);
+        fuelGauge.setProgress(1);
+        raceManager.deductEntryFee(gameEnvironment);
+        gameEnvironment.decrementRacesRemaining();
 
-        // Initialize UI elements and game state for the race
-        fuelGauge.setProgress(1); // Full fuel at start
-        raceManager.deductEntryFee(gameEnvironment); // Deduct entry fee
-        gameEnvironment.decrementRacesRemaining(); // Decrement races left in season
+        timerLabel.setText(String.format("%.0f", raceManager.getRaceDurationSeconds()));
 
-        timerLabel.setText(String.format("%.0f", raceManager.getRaceDurationSeconds())); // Display initial race duration
-
-        // Setup race simulation timeline
         raceTimeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
             try {
                 advanceRace();
             } catch (IOException e) {
-                // Handle or log the IOException, potentially show an error to the user
-                throw new RuntimeException("Failed to advance race due to I/O error: " + e.getMessage(), e);
+                throw new RuntimeException(e);
             }
         }));
-        raceTimeline.setCycleCount(Timeline.INDEFINITE); // Runs continuously until stopped
+        raceTimeline.setCycleCount(Timeline.INDEFINITE);
 
-        // Setup race timer timeline for UI
         timerTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             if (raceManager.isRacing()) {
                 double timeLeft = raceManager.getRaceDurationSeconds() - raceManager.getTimeElapsedSeconds();
-                timerLabel.setText(String.format("%.0f", Math.max(0, timeLeft))); // Display remaining time, not less than 0
+                timerLabel.setText(String.format("%.0f", Math.max(0, timeLeft))); // Ensure no negative time
             }
         }));
-        timerTimeline.setCycleCount((int) raceManager.getRaceDurationSeconds()); // Runs for the duration of the race
+        timerTimeline.setCycleCount((int) raceManager.getRaceDurationSeconds());
 
-        // Setup timeline for temporary traveler pay popup
         travelerPayTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(2), event -> travelerPayPopup.setVisible(false))
         );
-        travelerPayTimeline.setCycleCount(1); // Plays once
+        travelerPayTimeline.setCycleCount(1);
 
-        // Set up button actions for race events
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
         continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
         repairButton.setOnAction(event -> {
             try {
                 handleRepair(true);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to handle repair due to I/O error: " + e.getMessage(), e);
+                throw new RuntimeException(e);
             }
         });
         withdrawButton.setOnAction(event -> {
             try {
-                handleRepair(false); // Withdraws if repair not paid
+                handleRepair(false);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to handle withdrawal due to I/O error: " + e.getMessage(), e);
+                throw new RuntimeException(e);
             }
         });
         pickUpButton.setOnAction(event -> handleTraveler(true));
@@ -193,20 +265,17 @@ public class RaceController implements Initializable {
             try {
                 handleWeatherContinue();
             } catch (IOException e) {
-                throw new RuntimeException("Failed to handle weather continue due to I/O error: " + e.getMessage(), e);
+                throw new RuntimeException(e);
             }
         });
-
-        // Initial UI update and start the race
         updateUI();
         startRace();
     }
 
     /**
-     * Retrieves the image path for a given course.
-     * This method maps {@link Course} names to their corresponding background image files.
-     * @param course The {@link Course} for which to get the image path.
-     * @return A string representing the relative path to the course's background image.
+     * Determines the image path for the race background based on the selected course.
+     * @param course The Course enum representing the selected course.
+     * @return The string path to the background image resource.
      */
     private String getImagePathForCourse(Course course) {
         switch (course.getName().toLowerCase()) {
@@ -219,12 +288,12 @@ public class RaceController implements Initializable {
             case "city":
                 return "/fxml/city.png";
             default:
-                return "/fxml/desert.png"; // Default image if course name doesn't match
+                return "/fxml/desert.png";
         }
     }
 
     /**
-     * Starts the race simulation by playing the associated timelines.
+     * Starts the race simulation by playing the race and timer timelines.
      */
     private void startRace() {
         raceTimeline.play();
@@ -232,35 +301,33 @@ public class RaceController implements Initializable {
     }
 
     /**
-     * Advances the race by one tick in the {@link RaceManager}.
-     * Checks for race events and updates the UI after each tick.
-     * If the race finishes, it calls the {@link #finishRace()} method.
-     * @throws IOException If there's an issue with scene navigation (e.g., FXML loading).
+     * Advances the race simulation by one tick. This method is called repeatedly
+     * by the {@code raceTimeline}. It updates the race manager, checks for events,
+     * updates the UI, and triggers the race finish sequence if the race concludes.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
      */
     private void advanceRace() throws IOException {
         if (raceManager.isRacing()) {
             raceManager.advanceRaceTick();
-            eventChecker(); // Check for and display any new events
-            updateUI();     // Update all UI elements
+            eventChecker();
+            updateUI();
             if (raceManager.isRaceFinished()) {
-                finishRace(); // End the race if manager indicates it's finished
+                finishRace();
             }
         }
     }
 
     /**
-     * Updates all dynamic UI elements on the Race screen.
-     * This includes player money, race length display, fuel gauge, leaderboard,
-     * and car animation along the track.
+     * Updates all dynamic UI elements on the race screen, including money,
+     * race length, fuel gauge, leaderboard, and car animation.
      */
     private void updateUI() {
         moneyLabel.setText(String.valueOf((int) gameEnvironment.getBalance()));
         raceLengthLabel.setText((int) raceManager.getRace().getRoute().getLength() + " km");
         fuelGauge.setProgress(raceManager.getFuelLevel());
         updateLeaderboardDisplay();
-        updateFuelGauge(); // Update fuel gauge color based on level
+        updateFuelGauge();
 
-        // Update car animation position
         if (carImage != null && raceTrackLine != null && raceManager != null && raceManager.getRace().getRoute().getLength() > 0) {
             double playerDistance = raceManager.getPlayerDistance();
             double routeLength = raceManager.getRace().getRoute().getLength();
@@ -269,22 +336,23 @@ public class RaceController implements Initializable {
             if (routeLength > 0) {
                 progress = playerDistance / routeLength;
             }
-            progress = Math.max(0, Math.min(1, progress)); // Clamp progress between 0 and 1
+            progress = Math.max(0, Math.min(1, progress));
 
             double startPosition = raceTrackLine.getLayoutX();
             double trackVisualWidth = raceTrackLine.getWidth();
             double carImageWidth = carImage.getFitWidth();
 
-            // Calculate new car position along the track visual
             double updatedCarPosition = startPosition + (progress * (trackVisualWidth - carImageWidth));
 
             carImage.setLayoutX(updatedCarPosition);
         }
+
     }
 
+
     /**
-     * Updates the color of the fuel gauge based on the current fuel level.
-     * Red for low fuel, orange for medium, and green for high fuel.
+     * Updates the color of the fuel gauge based on the current fuel level
+     * to provide visual warnings for low fuel.
      */
     private void updateFuelGauge() {
         double fuelLevel = raceManager.getFuelLevel();
@@ -298,20 +366,16 @@ public class RaceController implements Initializable {
     }
 
     /**
-     * Updates the display of the leaderboard, showing player and opponent distances.
-     * Clears previous entries and adds new ones based on current race manager data.
+     * Updates the leaderboard display in the UI, showing player and opponent distances.
      */
     private void updateLeaderboardDisplay() {
-        // Remove existing leaderboard entries (keeping the title/header)
-        if (leaderboardBox.getChildren().size() > 1) {
-            leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size());
-        }
+        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size());
 
-        // Add player's current distance
+        // Player
         Label playerLabel = new Label("Player: " + (int) raceManager.getPlayerDistance() + " km");
         leaderboardBox.getChildren().add(playerLabel);
 
-        // Add opponents' current distances
+        // Opponents
         List<OpponentCar> opponents = raceManager.getOpponents();
         for (int i = 0; i < opponents.size(); i++) {
             OpponentCar opponent = opponents.get(i);
@@ -320,15 +384,16 @@ public class RaceController implements Initializable {
         }
     }
 
+
     /**
-     * Checks for active race events and displays the appropriate popup.
-     * Pauses the race timeline while an event popup is active, requiring user interaction.
+     * Checks for active race events (breakdown, traveler, weather, fuel stop)
+     * and pauses the race timeline to display the corresponding pop-up.
      */
     private void eventChecker() {
         RaceEvent event = raceManager.getCurrentEvent();
         if (event != null && raceManager.isWaiting()) {
             raceTimeline.pause();
-            timerTimeline.pause(); // Pause the timer during events
+            timerTimeline.pause();
             switch (event.getType()) {
                 case BREAKDOWN:
                     breakdownPopup.setVisible(true);
@@ -344,114 +409,134 @@ public class RaceController implements Initializable {
                     break;
             }
         } else if (!raceManager.isWaiting() && raceManager.getCurrentEvent() == null && travelerPayPopup.isVisible()) {
-            // If waiting ends and no new event, hide travelerPayPopup (if still visible)
             travelerPayPopup.setVisible(false);
         }
     }
 
     /**
-     * Handles the player's choice at a fuel stop event.
-     * Hides the fuel stop popup, updates the race manager based on the choice,
-     * updates the UI, and resumes the race timeline.
-     * @param refuel {@code true} if the player chose to refuel, {@code false} otherwise.
+     * Handles the player's decision at a fuel stop event.
+     * @param refuel True if the player chooses to refuel, false otherwise.
      */
     private void handleFuelStop(boolean refuel) {
-        fuelStopPopup.setVisible(false); // Hide the popup
-        raceManager.handleFuelStop(refuel); // Let manager handle the logic
-        updateUI(); // Update UI to reflect changes (e.g., fuel level)
-        raceTimeline.play(); // Resume race simulation
-        timerTimeline.play(); // Resume timer
+        fuelStopPopup.setVisible(false);
+        raceManager.handleFuelStop(refuel);
+        updateUI();
+        raceTimeline.play();
+        timerTimeline.play();
     }
 
     /**
-     * Handles the player's choice at a breakdown event.
-     * If the player chooses to pay for repairs, it checks for sufficient funds,
-     * deducts money, and resumes the race after a short wait. If funds are insufficient,
-     * an error is displayed. If the player chooses not to pay, they withdraw from the race.
-     * @param pay {@code true} if the player chose to pay for repairs, {@code false} otherwise.
-     * @throws IOException If there's an issue with scene navigation (e.g., FXML loading) when finishing the race.
+     * Handles the player's decision during a car breakdown event.
+     * @param pay True if the player chooses to pay for repairs, false to withdraw.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
      */
     private void handleRepair(boolean pay) throws IOException {
-        breakdownPopup.setVisible(false); // Hide the breakdown popup
-        final int REPAIR_COST = 250; // Defined as a constant for clarity
-
+        breakdownPopup.setVisible(false);
         if (pay) {
-            if (gameEnvironment.getBalance() < REPAIR_COST) {
-                // Show error if funds are insufficient
+            if (gameEnvironment.getBalance() < 250) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Insufficient Funds");
+                alert.setTitle("Invalid Funds");
                 alert.setHeaderText(null);
-                alert.setContentText("You do not have the required funds to repair your car. You must withdraw from the race.");
+                alert.setContentText("You do not have the required funds to repair");
                 alert.showAndWait();
-                // Re-show breakdown popup as player cannot pay and needs to choose again
                 breakdownPopup.setVisible(true);
-                return; // Exit method, do not proceed with repair/resume race
+                return;
             }
-            raceManager.handleRepair(true, gameEnvironment); // Player pays for repair
+            raceManager.handleRepair(true, gameEnvironment);
         } else {
-            // Player chose NOT to pay (withdraw)
-            raceManager.handleRepair(false, gameEnvironment); // Player withdraws
-            finishRace(); // Immediately finish the race due to withdrawal
-            return; // Exit method as race is finished
+
+            raceManager.handleRepair(false, gameEnvironment);
+            finishRace();
+            return;
         }
-        raceTimeline.play(); // Resume race simulation
-        timerTimeline.play(); // Resume timer
+        raceTimeline.play();
+        timerTimeline.play();
     }
 
+
     /**
-     * Handles the player's choice at a traveler event.
-     * If the player chooses to pick up the traveler, a temporary "pay" popup is displayed,
-     * and the race resumes after a short wait. Otherwise, the race simply resumes.
-     * @param pickUp {@code true} if the player chose to pick up the traveler, {@code false} otherwise.
+     * Handles the player's decision during a traveler event.
+     * @param pickUp True if the player chooses to pick up the traveler, false to drive past.
      */
     private void handleTraveler(boolean pickUp) {
-        travelerPopup.setVisible(false); // Hide the traveler popup
+        travelerPopup.setVisible(false);
         if (pickUp) {
-            travelerPayPopup.setVisible(true); // Show temporary pay popup
-            travelerPayTimeline.playFromStart(); // Start timer for pay popup
-            raceManager.handleTraveler(true, gameEnvironment); // Let manager handle profit and wait
-            raceTimeline.play(); // Resume race simulation
-            timerTimeline.play(); // Resume timer
+            travelerPayPopup.setVisible(true);
+            travelerPayTimeline.playFromStart();
+            raceManager.handleTraveler(true, gameEnvironment);
+            raceTimeline.play();
+            timerTimeline.play();
         } else {
-            raceManager.handleTraveler(false, gameEnvironment); // Let manager handle simply clearing event
-            raceTimeline.play(); // Resume race simulation
-            timerTimeline.play(); // Resume timer
+            raceManager.handleTraveler(false, gameEnvironment);
+            raceTimeline.play();
+            timerTimeline.play();
         }
     }
 
     /**
-     * Handles the player's decision to continue after a weather event.
-     * Hides the weather popup, instructs the race manager to handle the weather event
-     * (which typically cancels the race), and then triggers the race finish sequence.
-     * @throws IOException If there's an issue with scene navigation (e.g., FXML loading) when finishing the race.
+     * Handles the continuation after a weather event, which cancels the race.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
      */
     private void handleWeatherContinue() throws IOException {
-        weatherPopup.setVisible(false); // Hide the weather popup
-        raceManager.handleWeather(gameEnvironment); // Let manager handle weather effects (race cancellation)
-        raceTimeline.play(); // Resume race simulation (briefly, before finish)
-        timerTimeline.play(); // Resume timer (briefly, before finish)
-        finishRace(); // Trigger finish sequence to reflect cancellation
+        weatherPopup.setVisible(false);
+        raceManager.handleWeather(gameEnvironment);
+        raceTimeline.play();
+        timerTimeline.play();
+        finishRace();
     }
 
+
     /**
-     * Finalizes the race, stopping all timelines and transitioning to the race finish scene.
-     * It retrieves all final race results and statistics from the {@link RaceManager}.
-     * @throws IOException If there's an issue with scene navigation (e.g., FXML loading).
+     * Concludes the race simulation. Stops all timelines, retrieves race results
+     * from the RaceManager, awards prize money, updates game environment stats,
+     * and navigates to the Race Finish Scene.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
      */
     private void finishRace() throws IOException {
-        raceTimeline.stop(); // Stop the main race simulation
-        timerTimeline.stop(); // Stop the race timer
-
-        // Let RaceManager handle all post-race updates to GameEnvironment
-        raceManager.processRaceOutcome(gameEnvironment);
-
-        // Retrieve final results for display
+        raceTimeline.stop();
+        timerTimeline.stop();
         String reason = raceManager.getFinishReason();
-        String placementText = raceManager.getFinalPlacementText();
         List<String> leaderboard = raceManager.getLeaderboardStrings();
         int earnings = raceManager.getMoneyEarned();
+        if (!raceManager.isRaceCancelled()) {
+            raceManager.awardPrizeMoney(gameEnvironment);
+        }
+        int placement;
+        if (Objects.equals(reason, "Car broke down! You withdrew from the race.") || Objects.equals(reason, "Weather has cancelled the race!") || Objects.equals(reason, "Out of fuel!")) {
+            placement = raceManager.getOpponents().size() + 1;
+        } else {
+            placement = raceManager.getPlayerPlacement();
+        }
 
-        // Navigate to the race finish scene with all relevant data
+        String placementText;
+        if (Objects.equals(reason, "Weather has cancelled the race!")) {
+            placementText = "Race Cancelled Due to Weather";
+        } else if (Objects.equals(reason, "Out of fuel!")) {
+            placementText = "Ran out of fuel!";
+        } else if (Objects.equals(reason, "Time ran out!")) {
+            placementText = "Time ran out!";
+        } else if (Objects.equals(reason, "Finished the race!")) {
+            switch (placement) {
+                case 1:
+                    placementText = "🏆 You finished 1st!";
+                    break;
+                case 2:
+                    placementText = "🥈 You finished 2nd!";
+                    break;
+                case 3:
+                    placementText = "🥉 You finished 3rd!";
+                    break;
+                default:
+                    placementText = "You finished " + placement + "th.";
+                    break;
+            }
+        } else {
+            placementText = "Race Over";
+        }
+        gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
+        gameEnvironment.getShopService().unlockNewCars();
+        gameEnvironment.addRacePlacement(placement);
+        gameEnvironment.addPrizeMoney(earnings);
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
     }
 }

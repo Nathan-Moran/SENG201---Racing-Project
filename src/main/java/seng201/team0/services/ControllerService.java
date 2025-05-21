@@ -31,13 +31,11 @@ public class ControllerService {
      * @param startingCarsGarage The {@link StarterCarInventory} containing the initial car choices.
      */
     public void storeLeftOverCars(StarterCarInventory startingCarsGarage) {
-        // Check if there are still cars in the starter inventory (meaning player didn't pick all or some were left)
         if (!gameEnvironment.getStarterCarInventory().getCarList().isEmpty()) {
-            System.out.println(gameEnvironment.getPlayerInventory().getCarList()); // Debug print, consider removing
-            // Add all remaining starter cars to the shop's car list
-            gameEnvironment.getShopInventory().getCarList().addAll(startingCarsGarage.getCarList());
-            // Clear the starter car inventory as they are now in the shop
+            System.out.println(gameEnvironment.getPlayerInventory().getCarList());
+            gameEnvironment.getShopInventory().getAllAvailableCars().addAll(startingCarsGarage.getCarList());
             startingCarsGarage.getCarList().clear();
+            gameEnvironment.getShopInventory().setShopInventory();
         }
     }
 
@@ -60,13 +58,13 @@ public class ControllerService {
         if (activeCar != null) {
             switch (stat) {
                 case "Speed":
-                    label = String.valueOf(activeCar.getSpeed());
+                    label = activeCar.getSpeedString();
                     break;
                 case "Fuel":
-                    label = String.valueOf(activeCar.getFuelEconomy());
+                    label = activeCar.getFuelEconomyString();
                     break;
                 case "Handling":
-                    label = String.valueOf(activeCar.getHandling());
+                    label = activeCar.getHandlingPercent();
                     break;
                 case "Model":
                     if (activeCar.getCustomName() == null) {
@@ -76,34 +74,33 @@ public class ControllerService {
                     }
                     break;
                 case "Reliability":
-                    label = String.valueOf(activeCar.getReliability());
+                    label = activeCar.getReliabilityPercent();
                     break;
                 case "SpeedUpgrade":
                     if (activeCar.getSpeedUpgrade() != null) {
                         label = String.valueOf(activeCar.getSpeedUpgrade().getName());
                     } else {
-                        label = "-"; // Indicate no upgrade
+                        label = "-";
                     }
                     break;
                 case "HandlingUpgrade":
                     if (activeCar.getHandlingUpgrade() != null) {
                         label = String.valueOf(activeCar.getHandlingUpgrade().getName());
                     } else {
-                        label = "-"; // Indicate no upgrade
+                        label = "-";
                     }
                     break;
                 default:
-                    label = "-"; // For unrecognized stats
+                    label = "-";
                     break;
             }
         } else {
-            label = "-"; // No car selected
+            label = "-";
         }
         return label;
     }
 
 
-    //StartMenuController specific methods
 
     /**
      * Helper variable to store the validation prompt message.
@@ -128,30 +125,23 @@ public class ControllerService {
     public String nameChecker(String name) {
         invalidNameLength = false;
         invalidNameCharacters = false;
-        prompt = "Valid Name"; // Default to valid
+        prompt = "Valid Name";
 
-        // Check length
         if (!(name.length() >= 3 && name.length() <= 15)) {
             invalidNameLength = true;
         }
 
-        // Check for special characters
         for (int i = 0; i < name.length(); i++) {
             if (!Character.isLetterOrDigit(name.charAt(i))) {
                 invalidNameCharacters = true;
-                break; // No need to check further if one invalid character is found
+                break;
             }
         }
-
-        // Determine the prompt message based on validation flags
         if (invalidNameLength) {
             prompt = "Name must be between 3 and 15 characters";
         } else if (invalidNameCharacters) {
             prompt = "Name must not contain special characters";
         }
-        // If both are true, the length error is prioritized as it's typically checked first.
-        // If neither is true, prompt remains "Valid Name".
-
         return prompt;
     }
 }

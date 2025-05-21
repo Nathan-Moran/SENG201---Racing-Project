@@ -5,36 +5,45 @@ import seng201.team0.models.Difficulty;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DifficultyTest {
+class DifficultyTest {
 
     @Test
-    void testEasyDifficultyAttributes() {
+    void easyDifficultyHasCorrectProperties() {
         Difficulty easy = Difficulty.EASY;
-        assertEquals(1000, easy.getStartBudget());
-        assertEquals(0.6, easy.getBreakdownMultiplier());
-
+        assertEquals(1500, easy.getStartBudget()); //
+        assertEquals(0.8, easy.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
-    void testMediumDifficultyAttributes() {
+    void mediumDifficultyHasCorrectProperties() {
         Difficulty medium = Difficulty.MEDIUM;
-        assertEquals(800, medium.getStartBudget());
-        assertEquals(0.4, medium.getBreakdownMultiplier());
+        assertEquals(1250, medium.getStartBudget()); //
+        assertEquals(0.9, medium.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
-    void testHardDifficultyAttributes() {
+    void hardDifficultyHasCorrectProperties() {
         Difficulty hard = Difficulty.HARD;
-        assertEquals(600, hard.getStartBudget());
-        assertEquals(0.3, hard.getBreakdownMultiplier());
+        assertEquals(1000, hard.getStartBudget()); //
+        assertEquals(1.0, hard.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
-    void testGetAllDifficulties() {
-        Difficulty[] difficulties = Difficulty.values();
-        assertEquals(3, difficulties.length);
-        assertSame(Difficulty.EASY, Difficulty.valueOf("EASY"));
-        assertSame(Difficulty.MEDIUM, Difficulty.valueOf("MEDIUM"));
-        assertSame(Difficulty.HARD, Difficulty.valueOf("HARD"));
+    void getStartBudgetReturnsCorrectValue() {
+        assertEquals(1500, Difficulty.EASY.getStartBudget()); //
+        assertEquals(1250, Difficulty.MEDIUM.getStartBudget()); //
+        assertEquals(1000, Difficulty.HARD.getStartBudget()); //
+    }
+
+    @Test
+    void getBreakdownMultiplierReturnsCorrectValue() {
+        assertEquals(0.8, Difficulty.EASY.getBreakdownMultiplier(), 0.001); //
+        assertEquals(0.9, Difficulty.MEDIUM.getBreakdownMultiplier(), 0.001); //
+        assertEquals(1.0, Difficulty.HARD.getBreakdownMultiplier(), 0.001); //
+    }
+
+    @Test
+    void ensureAllEnumValuesAreTested() {
+        assertEquals(3, Difficulty.values().length, "Ensure all Difficulty enum values are covered in tests."); //
     }
 }

@@ -1,15 +1,14 @@
 package seng201.team0.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
 
 
 import javafx.event.ActionEvent;
-import seng201.team0.models.SetupCarTable;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
@@ -25,24 +24,84 @@ import java.util.ResourceBundle;
  * @author Nathan Moran
  */
 public class GarageController implements Initializable {
+
     /**
-     * The game environment, providing access to game state and services.
+     * The game environment instance, providing access to global game state and services.
      */
     protected GameEnvironment gameEnvironment;
     /**
-     * The scene navigator, used for switching between different scenes in the application.
+     * The scene navigator instance, used for switching between different application scenes.
      */
     protected SceneNavigator sceneNavigator;
     /**
-     * The currently active car selected by the player in the garage.
+     * The currently active car in the garage, which is the car the player is currently managing or using.
      */
     protected Car activeCar;
     /**
-     * Manager for handling controller-specific logic, such as label formatting.
+     * The ControllerService instance, providing various UI-related logic and validation services.
      */
     private final ControllerService controllerLogicManager;
-
+    /**
+     * Helper class for setting up and configuring {@link TableView} for {@link Car} objects.
+     */
     private SetupCarTable setupCarTable;
+
+    /**
+     * TableView for displaying the player's collection of cars.
+     */
+    @FXML private TableView<Car> carTable;
+    /**
+     * TableColumn for displaying the model name of cars in the table.
+     */
+    @FXML private TableColumn<Car, String> modelColumn;
+    /**
+     * TableColumn for displaying the reliability stat of cars in the table.
+     */
+    @FXML private TableColumn<Car, String> reliabilityColumn;
+    /**
+     * TableColumn for displaying the fuel economy stat of cars in the table.
+     */
+    @FXML private TableColumn<Car, String> fuelColumn;
+    /**
+     * TableColumn for displaying the handling stat of cars in the table.
+     */
+    @FXML private TableColumn<Car, String> handlingColumn;
+    /**
+     * TableColumn for displaying the speed stat of cars in the table.
+     */
+    @FXML private TableColumn<Car, String> speedColumn;
+    /**
+     * Label for displaying the fuel economy of the currently selected car.
+     */
+    @FXML private Label selectedCarFuelLabel;
+    /**
+     * Label for displaying the handling stat of the currently selected car.
+     */
+    @FXML private Label selectedCarHandlingLabel;
+    /**
+     * Label for displaying the handling upgrade applied to the currently selected car.
+     */
+    @FXML private Label selectedCarHandlingUpgradeLabel;
+    /**
+     * Label for displaying the model name (or custom name) of the currently selected car.
+     */
+    @FXML private Label selectedCarModelLabel;
+    /**
+     * Label for displaying the reliability stat of the currently selected car.
+     */
+    @FXML private Label selectedCarReliabilityLabel;
+    /**
+     * Label for displaying the speed stat of the currently selected car.
+     */
+    @FXML private Label selectedCarSpeedLabel;
+    /**
+     * Label for displaying the speed upgrade applied to the currently selected car.
+     */
+    @FXML private Label selectedCarSpeedUpgradeLabel;
+    /**
+     * TextField for entering a custom name to rename the currently selected car.
+     */
+    @FXML private TextField renameCarTextField;
 
     /**
      * Constructs a GarageController with the given game environment and scene navigator.
@@ -69,88 +128,6 @@ public class GarageController implements Initializable {
     }
 
     /**
-     * TableView to display the player's cars.
-     */
-    @FXML
-    private TableView<Car> carTable;
-
-    /**
-     * TableColumn for displaying the model of the car.
-     */
-    @FXML
-    private TableColumn<Car, String> modelColumn;
-
-    /**
-     * TableColumn for displaying the reliability of the car.
-     */
-    @FXML
-    private TableColumn<Car, String> reliabilityColumn;
-
-    /**
-     * TableColumn for displaying the fuel economy of the car.
-     */
-    @FXML
-    private TableColumn<Car, Integer> fuelColumn;
-
-    /**
-     * TableColumn for displaying the handling of the car.
-     */
-    @FXML
-    private TableColumn<Car, Double> handlingColumn;
-
-    /**
-     * TableColumn for displaying the speed of the car.
-     */
-    @FXML
-    private TableColumn<Car, Double> speedColumn;
-
-    /**
-     * Label to display the fuel economy of the selected car.
-     */
-    @FXML
-    private Label selectedCarFuelLabel;
-
-    /**
-     * Label to display the handling stat of the selected car.
-     */
-    @FXML
-    private Label selectedCarHandlingLabel;
-
-    /**
-     * Label to display the handling upgrade status of the selected car.
-     */
-    @FXML
-    private Label selectedCarHandlingUpgradeLabel;
-
-    /**
-     * Label to display the model name of the selected car.
-     */
-    @FXML
-    private Label selectedCarModelLabel;
-
-    /**
-     * Label to display the reliability stat of the selected car.
-     */
-    @FXML
-    private Label selectedCarReliabilityLabel;
-
-    /**
-     * Label to display the speed stat of the selected car.
-     */
-    @FXML
-    private Label selectedCarSpeedLabel;
-
-    /**
-     * Label to display the speed upgrade status of the selected car.
-     */
-    @FXML
-    private Label selectedCarSpeedUpgradeLabel;
-
-    @FXML
-    private TextField renameCarTextField;
-
-
-    /**
      * Handles the action of selecting a car from the table.
      * If a car is selected, it is set as the player's currently active car,
      * the table selection is cleared, and the GUI is updated to reflect the new selection.
@@ -167,6 +144,14 @@ public class GarageController implements Initializable {
         }
     }
 
+    /**
+     * Handles the action of renaming the currently selected car.
+     * It validates the entered name using {@link ControllerService#nameChecker(String)}.
+     * If the name is valid, the car's custom name is updated, and the UI is refreshed.
+     * Otherwise, an error message is displayed in the text field.
+     *
+     * @param event The action event triggered by the rename car button or pressing Enter in the text field.
+     */
     @FXML
     public void renameCar(ActionEvent event) {
         Car selectedCar = gameEnvironment.getSelectedCar();
@@ -206,7 +191,7 @@ public class GarageController implements Initializable {
             setupCarTable.setupCarTable(
                     carTable,
                     modelColumn,
-                    null,
+                    null, // No price column in garage car table
                     speedColumn,
                     handlingColumn,
                     reliabilityColumn,

@@ -85,14 +85,13 @@ public class GameEnvironment {
      * It sets up services, inventories, and initializes the course win tracking.
      */
     public GameEnvironment() {
+        this.itemCatalogue = new ItemCatalogue();
         this.shopService = new ShopService(this);
         this.controllerService = new ControllerService(this);
-        this.shopInventory = new Shop();
-        this.starterCarInventory = new StarterCarInventory();
-        setupShop(); // Populate shop inventory
-        setBalance(); // Set initial balance based on difficulty (default to 0 if not set yet)
-        this.itemCatalogue = new ItemCatalogue(); // Initialize item catalogue
-        // Initialize all courses as "not won" for the first time
+        this.shopInventory = new Shop(this);
+        this.starterCarInventory = new StarterCarInventory(this);
+        setupShop();
+        setBalance();
         for (Course course : Course.values()) {
             hasWonCourse.put(course, false);
         }
@@ -301,11 +300,12 @@ public class GameEnvironment {
      * If no difficulty is selected, the balance defaults to 0.
      */
     public void setBalance() {
-        if (selectedDifficulty != null) {
-            this.balance = selectedDifficulty.getStartBudget();
-        } else {
-            this.balance = 0; // Default or error state
-        }
+//        if (selectedDifficulty != null) {
+//            this.balance = selectedDifficulty.getStartBudget();
+//        } else {
+//            this.balance = 0; // Default or error state
+//        }
+        this.balance = 100000;
     }
 
     /**
