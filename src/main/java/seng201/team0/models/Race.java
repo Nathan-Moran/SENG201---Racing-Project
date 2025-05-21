@@ -6,7 +6,7 @@ public class Race {
     private Course course;
     private Route route;
     private List<OpponentCar> opponents;
-    private Difficulty difficulty;  // Add a field for difficulty
+    private final Difficulty difficulty;  // Add a field for difficulty
 
     // Modify the constructor to accept difficulty
     public Race(Course course, Route route, Difficulty difficulty) {

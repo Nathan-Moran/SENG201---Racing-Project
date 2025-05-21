@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Season {
-    private int length;
-    private List<Race> races;
+    private final int length;
+    private final List<Race> races;
     private int currentRaceIndex = 0;
 
 

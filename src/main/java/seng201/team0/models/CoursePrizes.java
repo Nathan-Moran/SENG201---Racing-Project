@@ -1,9 +1,9 @@
 package seng201.team0.models;
 
 public class CoursePrizes {
-    private int firstPlacePrize;
-    private int secondPlacePrize;
-    private int thirdPlacePrize;
+    private final int firstPlacePrize;
+    private final int secondPlacePrize;
+    private final int thirdPlacePrize;
 
     public CoursePrizes(int firstPlacePrize, int secondPlacePrize, int thirdPlacePrize) {
         this.firstPlacePrize = firstPlacePrize;

@@ -12,7 +12,7 @@ public class SetupCarTable {
             TableColumn<Car, Integer> priceColumn,
             TableColumn<Car, Double> speedColumn,
             TableColumn<Car, Double> handlingColumn,
-            TableColumn<Car, Integer> reliabilityColumn,
+            TableColumn<Car, String> reliabilityColumn,
             TableColumn<Car, Integer> fuelColumn) {
 
         if (modelColumn != null) {
@@ -28,7 +28,7 @@ public class SetupCarTable {
             handlingColumn.setCellValueFactory(new PropertyValueFactory<>("handling"));
         }
         if (reliabilityColumn != null) {
-            reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliability"));
+            reliabilityColumn.setCellValueFactory(new PropertyValueFactory<>("reliabilityPercent"));
         }
         if (fuelColumn != null) {
             fuelColumn.setCellValueFactory(new PropertyValueFactory<>("fuelEconomy"));

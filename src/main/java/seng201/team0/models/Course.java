@@ -6,10 +6,10 @@ public enum Course {
     COUNTRY("Country", 500, new CoursePrizes(1500, 1000, 800), 4),
     CITY("City", 1000, new CoursePrizes(3000, 0, 0), 2);
 
-    private String name;
-    private int entryFee;
-    private CoursePrizes prizes;
-    private int numberOfOpponents;
+    private final String name;
+    private final int entryFee;
+    private final CoursePrizes prizes;
+    private final int numberOfOpponents;
     Course(String name, int entryFee, CoursePrizes prizes, int numberOfOpponents) {
         this.name = name;
         this.entryFee = entryFee;

@@ -1,7 +1,7 @@
 package seng201.team0.models;
 
 public class OpponentCar {
-    private double speed;  // Constant speed for the opponent (in km/h)
+    private final double speed;  // Constant speed for the opponent (in km/h)
     private double currentDistance = 0;  // Distance traveled by the opponent (in kilometers)
 
     public OpponentCar(double speed) {
