@@ -41,6 +41,7 @@ public class RaceFinishController {
         leaderboardListView.setItems(FXCollections.observableArrayList(leaderboard));
         moneyEarned.setText("Money Earned: $" + earnings);
 
+
         if (gameEnvironment.getRacesRemaining() <= 0) {
             mainMenuButton.setVisible(false);
             mainMenuButton.setManaged(false);

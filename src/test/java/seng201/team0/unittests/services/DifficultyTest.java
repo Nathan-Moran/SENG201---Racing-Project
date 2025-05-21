@@ -11,24 +11,22 @@ public class DifficultyTest {
     void testEasyDifficultyAttributes() {
         Difficulty easy = Difficulty.EASY;
         assertEquals(1000, easy.getStartBudget());
-        assertEquals(0.6, easy.getRandomEventRate());
-        assertEquals(1.0, easy.getOpponentSpeed());
+        assertEquals(0.6, easy.getBreakdownMultiplier());
+
     }
 
     @Test
     void testMediumDifficultyAttributes() {
         Difficulty medium = Difficulty.MEDIUM;
         assertEquals(800, medium.getStartBudget());
-        assertEquals(0.4, medium.getRandomEventRate());
-        assertEquals(1.1, medium.getOpponentSpeed());
+        assertEquals(0.4, medium.getBreakdownMultiplier());
     }
 
     @Test
     void testHardDifficultyAttributes() {
         Difficulty hard = Difficulty.HARD;
         assertEquals(600, hard.getStartBudget());
-        assertEquals(0.3, hard.getRandomEventRate());
-        assertEquals(1.2, hard.getOpponentSpeed());
+        assertEquals(0.3, hard.getBreakdownMultiplier());
     }
 
     @Test

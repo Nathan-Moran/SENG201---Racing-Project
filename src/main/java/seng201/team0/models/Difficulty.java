@@ -4,30 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Difficulty {
-    EASY(1500, 0.6, 1),
-    MEDIUM(1250, 0.4, 1.1),
-    HARD(1000, 0.3, 1.2);
+    EASY(1500, 0.6),
+    MEDIUM(1250, 0.4),
+    HARD(1000, 0.3);
 
     private final int startBudget;
-    private final double randomEventRate;
-    private final double opponentSpeed;
+    private final double breakdownMultiplier;
 
-    Difficulty(int startBudget, double randomEventRate, double opponentSpeed) {
+    Difficulty(int startBudget, double breakdownMultiplier) {
         this.startBudget = startBudget;
-        this.randomEventRate = randomEventRate;
-        this.opponentSpeed = opponentSpeed;
+        this.breakdownMultiplier = breakdownMultiplier;
     }
 
     public int getStartBudget() {
         return startBudget;
     }
 
-    public double getRandomEventRate() {
-        return randomEventRate;
+    public double getBreakdownMultiplier() {
+        return breakdownMultiplier;
     }
-
-    public double getOpponentSpeed() {
-        return opponentSpeed;
-    }
-
 }

@@ -55,9 +55,9 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="EASY" textFill="#00ff15">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="87.0" text="EASY" textFill="#00ff15">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -80,6 +80,11 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <Label fx:id="desertCompletedLabel" alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="40.0" text="✓" textFill="#00ff00" visible="false">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
@@ -93,9 +98,9 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="MEDIUM" textFill="#ffc300">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="87.0" text="MEDIUM" textFill="#ffc300">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -118,6 +123,11 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <Label fx:id="mountainCompletedLabel" alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="40.0" text="✓" textFill="#00ff00" visible="false">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
@@ -131,9 +141,9 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="MEDIUM" textFill="#ffc200">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="87.0" text="MEDIUM" textFill="#ffc200">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -156,6 +166,11 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <Label fx:id="countryCompletedLabel" alignment="CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="40.0" text="✓" textFill="#00ff00" visible="false">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
@@ -169,9 +184,9 @@
                               <Font name="SansSerif Bold" size="37.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="127.0" text="HARD" textFill="RED">
+                        <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="87.0" text="HARD" textFill="RED">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <HBox>
@@ -194,6 +209,11 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <Label fx:id="cityCompletedLabel" alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="40.0" text="✓" textFill="#00ff00" visible="false">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
