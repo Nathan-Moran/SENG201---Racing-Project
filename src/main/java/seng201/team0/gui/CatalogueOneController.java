@@ -52,7 +52,7 @@ public class CatalogueOneController {
         setupCarTable.setupCarTable(shopCarTable, modelColumn1, priceColumn1, speedColumn1, handlingColumn1, reliabilityColumn1, fuelColumn1);
 
         if (gameEnvironment != null && gameEnvironment.getItemCatalogue() != null) {
-            starterCarTable.setItems(gameEnvironment.getItemCatalogue().getCarList());
+            starterCarTable.setItems(gameEnvironment.getItemCatalogue().getStarterCarPool());
             shopCarTable.setItems(gameEnvironment.getItemCatalogue().getShopCarList());
         }
 
