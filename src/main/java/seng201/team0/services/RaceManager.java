@@ -6,34 +6,118 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Manages the core logic of a single race, including player and opponent progress,
+ * fuel management, event triggers, and race completion.
+ * It simulates race progression tick by tick.
+ */
 public class RaceManager {
+    /**
+     * The {@link Race} instance this manager is controlling.
+     */
     private Race race;
+    /**
+     * The player's {@link Car} participating in this race.
+     */
     private Car playerCar;
+    /**
+     * The list of {@link OpponentCar} objects in this race.
+     */
     private List<OpponentCar> opponents;
+    /**
+     * The current distance covered by the player's car.
+     */
     private double playerDistance = 0;
+    /**
+     * The current fuel level of the player's car, represented as a fraction (0.0 to 1.0).
+     */
     private double fuelLevel = 1.0;
+    /**
+     * A counter for the number of simulation ticks that have passed.
+     */
     private int tickCount = 0;
+    /**
+     * Flag indicating if the race is currently active.
+     */
     private boolean isRacing = true;
+    /**
+     * Flag indicating if the player is currently waiting due to an event (e.g., fuel stop, repair).
+     */
     private boolean isWaiting = false;
+    /**
+     * The number of ticks remaining for a current wait period.
+     */
     private int waitTicksRemaining = 0;
+    /**
+     * The effective speed of the player's car, calculated considering route attributes.
+     */
     private double speed;
+    /**
+     * The rate at which the player's car consumes fuel.
+     */
     private double fuelConsumptionRate;
+    /**
+     * The distance at which a random event might be triggered.
+     */
     private double eventTriggerDistance;
+    /**
+     * The distance at which a breakdown event might be triggered.
+     */
     private double breakdownTriggerDistance;
+    /**
+     * A {@link Random} instance for generating random events.
+     */
     private final Random random = new Random();
+    /**
+     * The {@link RaceEvent} currently affecting the player, if any.
+     */
     private RaceEvent currentEvent = null;
+    /**
+     * Flag to ensure the random event is triggered only once.
+     */
     private boolean eventDone = false;
+    /**
+     * Flag to ensure the breakdown event is triggered only once.
+     */
     private boolean breakdownDone = false;
+    /**
+     * A list of distances where fuel stops are mandated.
+     */
     private List<Double> fuelStopDistances;
+    /**
+     * The index of the next mandatory fuel stop to be encountered.
+     */
     private int nextFuelStopIndex = 0;
+    /**
+     * A constant used to indicate an indefinite wait, requiring user interaction to proceed.
+     */
     private static final int INDEFINITE_WAIT = 9999;
+    /**
+     * A string describing why the race finished (e.g., "Out of fuel!", "Finished the race!").
+     */
     private String finishReason = "";
+    /**
+     * The tick count at which the player finished the race.
+     */
     private int playerFinishTick = -1;
+    /**
+     * Flag indicating if the player's car has officially finished the race (either by reaching end, running out of fuel, or time).
+     */
     private boolean playerFinished = false;
+    /**
+     * The total duration of the race in seconds.
+     */
     private double raceDurationSeconds;
+    /**
+     * The time elapsed in the race in seconds.
+     */
     private double timeElapsedSeconds = 0;
+    /**
+     * Flag indicating if the race was cancelled, for example, due to severe weather.
+     */
     private boolean raceCancelled = false;
 
+    // Constants for event-related wait times and costs/profits
     private static final int REPAIR_WAIT_TICKS = 2;
     private static final int TRAVELER_WAIT_TICKS = 2;
     private static final int REFUEL_WAIT_TICKS = 1;
@@ -41,6 +125,17 @@ public class RaceManager {
     private static final int TRAVELER_PROFIT = 250;
 
 
+    /**
+     * Constructs a new RaceManager.
+     * Initializes the race with the given race details, player car, opponents,
+     * calculated speed, and fuel consumption rate.
+     *
+     * @param race The {@link Race} object containing course and route details.
+     * @param playerCar The player's {@link Car}.
+     * @param opponents A {@link List} of {@link OpponentCar} objects.
+     * @param speed The effective speed of the player's car for this race.
+     * @param fuelConsumptionRate The fuel consumption rate of the player's car for this race.
+     */
     public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
         this.race = race;
         this.playerCar = playerCar;
@@ -53,90 +148,133 @@ public class RaceManager {
         this.raceDurationSeconds = race.getRoute().getRaceDuration();
     }
 
+    /**
+     * Advances the race simulation by one tick (a small unit of time).
+     * This method updates opponent distances, player distance (if not waiting),
+     * fuel level, checks for time limits, and triggers random/breakdown events or fuel stops.
+     */
     public void advanceRaceTick() {
-        if (!isRacing || raceCancelled) return;
+        if (!isRacing || raceCancelled) return; // Stop if race is over or cancelled
         tickCount++;
-        updateOpponentDistances();
+        updateOpponentDistances(); // Opponents always advance
+
         if (isWaiting) {
             waitTicksRemaining--;
             if (waitTicksRemaining <= 0) {
-                isWaiting = false;
+                isWaiting = false; // Waiting period is over
             }
-            return; // Don't advance player during wait
+            return; // Player car does not advance during wait
         }
+
         playerDistance += speed;
         fuelLevel -= fuelConsumptionRate;
-        timeElapsedSeconds += (1.0 / 2);
+        timeElapsedSeconds += (1.0 / 2); // Assuming 1 tick = 0.5 seconds for duration calculation
+
+        // Check for race-ending conditions
         if (fuelLevel <= 0) {
-            fuelLevel = 0;
+            fuelLevel = 0; // Ensure fuel doesn't go negative
             finishRace("Out of fuel!");
+            return; // End race simulation for player
         }
         if (timeElapsedSeconds >= raceDurationSeconds && !playerFinished) {
             finishRace("Time ran out!");
+            return; // End race simulation for player
         }
+
+        // Trigger random events
         if (playerDistance >= eventTriggerDistance && !eventDone) {
             maybeTriggerRandomEvent();
-            eventDone = true;
+            eventDone = true; // Ensure it only triggers once
         }
+        // Trigger breakdown event
         if (playerDistance >= breakdownTriggerDistance && !breakdownDone) {
             maybeTriggerBreakdownEvent();
-            breakdownDone = true;
+            breakdownDone = true; // Ensure it only triggers once
         }
+
+        // Handle mandatory fuel stops
         if (nextFuelStopIndex < fuelStopDistances.size() && playerDistance >= fuelStopDistances.get(nextFuelStopIndex)) {
             isWaiting = true;
-            waitTicksRemaining = INDEFINITE_WAIT;
+            waitTicksRemaining = INDEFINITE_WAIT; // Player must interact to continue
             currentEvent = new RaceEvent(RaceEventType.FUEL_STOP);
             nextFuelStopIndex++;
         }
+
+        // Check if player has finished the race route
         if (playerDistance >= race.getRoute().getLength() && !playerFinished) {
-            finishRace("Finished the race!");
+            playerFinished(); // Mark player as finished
         }
     }
 
+    /**
+     * Explicitly marks the player as having finished the race, if they haven't already.
+     * This is called when the player crosses the finish line.
+     */
     public void playerFinished() {
         if (isRacing && !playerFinished && !raceCancelled) {
             playerFinished = true;
-            playerFinishTick = tickCount;
-            finishRace("Finished the race!");
+            playerFinishTick = tickCount; // Record the tick at which player finished
+            finishRace("Finished the race!"); // Set the reason for finishing
         }
     }
 
-
+    /**
+     * Attempts to trigger a random event (Traveler or Weather) based on probability.
+     * If an event is triggered, the player enters a waiting state.
+     */
     private void maybeTriggerRandomEvent() {
-        int roll = random.nextInt(100);
-        if (roll < 25) {
+        int roll = random.nextInt(100); // 0-99
+        if (roll < 25) { // 25% chance for Traveler
             currentEvent = new RaceEvent(RaceEventType.TRAVELER);
-        } else if (roll < 40) {
+        } else if (roll < 40) { // 15% chance for Weather (total 40% chance for any random event)
             currentEvent = new RaceEvent(RaceEventType.WEATHER);
         } else {
-            // No event occurs
+            // No event occurs (60% chance)
             return;
         }
         isWaiting = true;
-        waitTicksRemaining = INDEFINITE_WAIT; // stops game till continue
+        waitTicksRemaining = INDEFINITE_WAIT; // Player must interact to proceed
     }
 
+    /**
+     * Attempts to trigger a car breakdown event based on the car's effective reliability
+     * and the game's difficulty breakdown multiplier.
+     * If a breakdown occurs, the player enters a waiting state.
+     */
     private void maybeTriggerBreakdownEvent() {
-        double reliability = RaceCalculations.calculateEffectiveReliability(playerCar, race.getRoute()); // e.g., 0.85
-        double breakdownChance = (1.0 - reliability) * 100 * race.getDifficulty().getBreakdownMultiplier(); // e.g., 15.0
-        int roll = random.nextInt(100); // random number between 0 and 99 inclusive
-        if (roll < breakdownChance) {   // triggers breakdown with probability = breakdownChance%
+        double reliability = RaceCalculations.calculateEffectiveReliability(playerCar, race.getRoute());
+        // Breakdown chance inversely proportional to reliability, adjusted by difficulty
+        double breakdownChance = (1.0 - reliability) * 100 * race.getDifficulty().getBreakdownMultiplier();
+        int roll = random.nextInt(100); // 0-99
+
+        if (roll < breakdownChance) { // Trigger breakdown if roll is within breakdown chance
             currentEvent = new RaceEvent(RaceEventType.BREAKDOWN);
             isWaiting = true;
-            waitTicksRemaining = INDEFINITE_WAIT;
+            waitTicksRemaining = INDEFINITE_WAIT; // Player must interact to proceed
         }
     }
 
+    /**
+     * Clears the {@link #currentEvent}, signaling that the event has been handled.
+     */
     public void clearCurrentEvent() {
         currentEvent = null;
     }
 
+    /**
+     * Updates the distance traveled by all opponent cars for the current tick.
+     */
     public void updateOpponentDistances() {
         for (OpponentCar opponent : opponents) {
             opponent.advanceTick();
         }
     }
 
+    /**
+     * Generates a sorted list of {@link LeaderboardEntry} objects, including the player and all opponents.
+     * The list is sorted in descending order of distance covered.
+     * @return A sorted {@link List} of leaderboard entries.
+     */
     public List<LeaderboardEntry> getLeaderboardStandings() {
         List<LeaderboardEntry> standings = new ArrayList<>();
 
@@ -145,11 +283,16 @@ public class RaceManager {
             standings.add(new LeaderboardEntry("Opponent " + (i + 1), opponents.get(i).getCurrentDistance()));
         }
 
-        standings.sort((a, b) -> Double.compare(b.getDistance(), a.getDistance())); // Sort descending
+        // Sort the standings by distance in descending order
+        standings.sort((a, b) -> Double.compare(b.getDistance(), a.getDistance()));
 
         return standings;
     }
 
+    /**
+     * Returns a list of formatted strings representing the current leaderboard standings.
+     * @return A {@link List} of strings, each showing a position, name, and distance.
+     */
     public List<String> getLeaderboardStrings() {
         List<LeaderboardEntry> standings = getLeaderboardStandings();
         List<String> leaderboardStrings = new ArrayList<>();
@@ -163,109 +306,184 @@ public class RaceManager {
         return leaderboardStrings;
     }
 
+    /**
+     * Determines the player's current placement in the race based on distance.
+     * @return The player's 1-based placement (e.g., 1 for 1st place), or -1 if the player is not found.
+     */
     public int getPlayerPlacement() {
         List<LeaderboardEntry> standings = getLeaderboardStandings();
 
         for (int i = 0; i < standings.size(); i++) {
             if (standings.get(i).getName().equals("Player")) {
-                return i + 1; // +1 to make it 1-based (1st place, 2nd place, etc.)
+                return i + 1; // +1 to convert from 0-based index to 1-based placement
             }
         }
-        return -1; // Should not happen unless "Player" is missing
+        return -1; // Should theoretically not happen if player is always on leaderboard
     }
 
+    /**
+     * Handles the scenario where the player withdraws from the race due to a breakdown.
+     * Sets race state to finished and updates the finish reason.
+     */
     public void playerWithdrawDueToBreakdown() {
         isRacing = false;
-        playerFinished = true;
+        playerFinished = true; // Player's race is considered finished
         finishReason = "Car broke down! You withdrew from the race.";
     }
 
+    /**
+     * Concludes the race simulation and sets the reason for finishing.
+     * Ensures the race state transitions correctly to "not racing".
+     *
+     * @param reason A string describing why the race concluded (e.g., "Finished the race!", "Out of fuel!").
+     */
     public void finishRace(String reason) {
         if (isRacing && !raceCancelled) {
             isRacing = false;
             finishReason = reason;
+            // Ensure playerFinished and playerFinishTick are set correctly
             if (!playerFinished && reason.equals("Finished the race!")) {
                 playerFinished = true;
                 playerFinishTick = tickCount;
             } else if (reason.equals("Time ran out!") && !playerFinished) {
-                playerFinished = true; // Mark as finished due to time
-                playerFinishTick = tickCount; // Record the tick count when time ran out
+                playerFinished = true;
+                playerFinishTick = tickCount;
             }
         }
     }
 
+    /**
+     * Handles the outcome of a fuel stop event.
+     * If {@code refuel} is true, the player's fuel level is restored and a waiting period is initiated.
+     * Otherwise, the waiting state is simply cleared.
+     *
+     * @param refuel {@code true} if the player chooses to refuel, {@code false} otherwise.
+     */
     public void handleFuelStop(boolean refuel) {
         if (refuel) {
-            refuel();
-            setWaiting(true, REFUEL_WAIT_TICKS);
+            refuel(); // Refill fuel
+            setWaiting(true, REFUEL_WAIT_TICKS); // Short wait for refueling
         } else {
-            setWaiting(false, 0);
+            setWaiting(false, 0); // No refueling, no wait
         }
-        clearCurrentEvent();
+        clearCurrentEvent(); // Event handled
     }
 
+    /**
+     * Handles the outcome of a breakdown event.
+     * If {@code pay} is true, the player pays for repairs, incurs a waiting period, and the car is fixed.
+     * Otherwise, the player withdraws from the race due to the breakdown.
+     *
+     * @param pay {@code true} if the player chooses to pay for repairs, {@code false} otherwise.
+     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
+     */
     public void handleRepair(boolean pay, GameEnvironment gameEnvironment) {
         if (pay) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - REPAIR_COST);
-            setWaiting(true, REPAIR_WAIT_TICKS);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - REPAIR_COST); // Deduct cost
+            setWaiting(true, REPAIR_WAIT_TICKS); // Wait for repair
         } else {
-            playerWithdrawDueToBreakdown();
+            playerWithdrawDueToBreakdown(); // Player withdraws
         }
-        clearCurrentEvent();
+        clearCurrentEvent(); // Event handled
     }
 
+    /**
+     * Handles the outcome of a traveler event.
+     * If {@code pickUp} is true, the player gains profit and incurs a waiting period.
+     * Otherwise, no action is taken besides clearing the event.
+     *
+     * @param pickUp {@code true} if the player chooses to pick up the traveler, {@code false} otherwise.
+     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
+     */
     public void handleTraveler(boolean pickUp, GameEnvironment gameEnvironment) {
         if (pickUp) {
-            gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT);
-            setWaiting(true, TRAVELER_WAIT_TICKS);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT); // Add profit
+            setWaiting(true, TRAVELER_WAIT_TICKS); // Wait for traveler interaction
         } else {
-            setWaiting(false, 0);
+            setWaiting(false, 0); // No interaction, no wait
         }
-        clearCurrentEvent();
+        clearCurrentEvent(); // Event handled
     }
 
+    /**
+     * Handles a weather event, leading to the cancellation of the race.
+     * The player's entry fee is refunded, and the race count is adjusted.
+     *
+     * @param gameEnvironment The {@link GameEnvironment} to update balance and race count.
+     */
     public void handleWeather(GameEnvironment gameEnvironment) {
         raceCancelled = true;
         isRacing = false;
-        playerFinished = true;
+        playerFinished = true; // Race is finished due to cancellation
         int entryFee = race.getCourse().getEntryFee();
-        gameEnvironment.setBalance(gameEnvironment.getBalance() + entryFee);
-        gameEnvironment.setRacesRemaining(gameEnvironment.getRacesRemaining() + 1);
+        gameEnvironment.setBalance(gameEnvironment.getBalance() + entryFee); // Refund entry fee
+        gameEnvironment.setRacesRemaining(gameEnvironment.getRacesRemaining() + 1); // Race doesn't count against remaining
         finishReason = "Weather has cancelled the race!";
     }
 
-
+    /**
+     * Checks if the race has concluded (either by finishing, withdrawal, or cancellation).
+     * @return {@code true} if the race is finished, {@code false} otherwise.
+     */
     public boolean isRaceFinished() {
         return !isRacing;
     }
 
+    /**
+     * Checks if the race was cancelled (e.g., due to weather).
+     * @return {@code true} if the race was cancelled, {@code false} otherwise.
+     */
     public boolean isRaceCancelled() {
         return raceCancelled;
     }
 
-    // Getters and setters for UI to read state
+    // --- Getters for UI to read state ---
 
+    /**
+     * Gets the player's current distance traveled in the race.
+     * @return The player's distance.
+     */
     public double getPlayerDistance() {
         return playerDistance;
     }
 
+    /**
+     * Gets the player's current fuel level (0.0 to 1.0).
+     * @return The fuel level.
+     */
     public double getFuelLevel() {
         return fuelLevel;
     }
 
+    /**
+     * Gets the {@link RaceEvent} that is currently active, if any.
+     * @return The current event, or null if no event is active.
+     */
     public RaceEvent getCurrentEvent() {
         return currentEvent;
     }
 
+    /**
+     * Gets the reason why the race finished.
+     * @return A string explaining the race's conclusion.
+     */
     public String getFinishReason() {
         return finishReason;
     }
 
+    /**
+     * Gets the tick count at which the player finished the race.
+     * @return The finish tick count, or -1 if not yet finished.
+     */
     public int getPlayerFinishTick() {
         return playerFinishTick;
     }
 
-
+    /**
+     * Calculates the money earned by the player based on their placement in the race.
+     * Returns 0 if the race was cancelled.
+     * @return The prize money earned.
+     */
     public int getMoneyEarned() {
         if (raceCancelled) {
             return 0; // No earnings if race is cancelled
@@ -277,10 +495,15 @@ public class RaceManager {
             case 1 -> prizes.getFirstPlacePrize();
             case 2 -> prizes.getSecondPlacePrize();
             case 3 -> prizes.getThirdPlacePrize();
-            default -> 0;
+            default -> 0; // No prize for 4th place or lower
         };
     }
 
+    /**
+     * Deducts the entry fee for the current race from the player's balance.
+     * This is not applied if the race was cancelled.
+     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
+     */
     public void deductEntryFee(GameEnvironment gameEnvironment) {
         if (!raceCancelled) {
             int entryFee = race.getCourse().getEntryFee();
@@ -288,56 +511,106 @@ public class RaceManager {
         }
     }
 
+    /**
+     * Awards prize money to the player's balance if the player has finished the race
+     * and the race was not cancelled.
+     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
+     * @return The amount of prize money awarded.
+     */
     public int awardPrizeMoney(GameEnvironment gameEnvironment) {
         if (playerFinished && !raceCancelled) {
             int prize = getMoneyEarned();
             gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
             return prize;
         }
-        return 0;
+        return 0; // No prize awarded
     }
 
+    /**
+     * Checks if the player has finished the race.
+     * @return {@code true} if the player has finished, {@code false} otherwise.
+     */
     public boolean hasPlayerFinished() {
         return playerFinished;
     }
 
+    /**
+     * Checks if the game simulation is currently in a waiting state (e.g., for user interaction).
+     * @return {@code true} if waiting, {@code false} otherwise.
+     */
     public boolean isWaiting() {
         return isWaiting;
     }
 
+    /**
+     * Sets the waiting state and the number of ticks for which to wait.
+     * @param waiting {@code true} to enter waiting state, {@code false} to exit.
+     * @param ticks The number of ticks to wait. Use {@link #INDEFINITE_WAIT} for indefinite waits.
+     */
     public void setWaiting(boolean waiting, int ticks) {
         this.isWaiting = waiting;
         this.waitTicksRemaining = ticks;
     }
 
+    /**
+     * Gets the list of {@link OpponentCar} objects for the race.
+     * @return The list of opponents.
+     */
     public List<OpponentCar> getOpponents() {
         return opponents;
     }
 
+    /**
+     * Gets the {@link Race} object associated with this manager.
+     * @return The race object.
+     */
     public Race getRace() {
         return race;
     }
 
+    /**
+     * Gets the player's {@link Car} in this race.
+     * @return The player's car.
+     */
     public Car getPlayerCar() {
         return playerCar;
     }
 
+    /**
+     * Gets the total duration of the race in seconds.
+     * @return The race duration.
+     */
     public double getRaceDurationSeconds() {
         return raceDurationSeconds;
     }
 
+    /**
+     * Gets the time elapsed in the race in seconds.
+     * @return The elapsed time.
+     */
     public double getTimeElapsedSeconds() {
         return timeElapsedSeconds;
     }
 
+    /**
+     * Gets the current tick count of the race simulation.
+     * @return The tick count.
+     */
     public int getTickCount() {
         return tickCount;
     }
 
+    /**
+     * Refuels the player's car to full capacity (fuel level 1.0).
+     */
     public void refuel() {
         fuelLevel = 1.0;
     }
 
+    /**
+     * Checks if the race is currently ongoing.
+     * @return {@code true} if the race is active, {@code false} otherwise.
+     */
     public boolean isRacing() {
         return isRacing;
     }
