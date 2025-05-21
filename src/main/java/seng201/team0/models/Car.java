@@ -52,6 +52,10 @@ public class Car extends Purchasable {
         this.baseFuelEconomy = fuelEconomy;
     }
 
+    public String getReliabilityPercent() {
+        return String.format("%.0f%%", baseReliability * 100);
+    }
+
     /**
      * Gets the current speed of the car, including any boost from an installed speed upgrade.
      *

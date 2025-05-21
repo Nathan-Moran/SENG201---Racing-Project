@@ -84,7 +84,7 @@ public class GarageController implements Initializable {
      * TableColumn for displaying the reliability of the car.
      */
     @FXML
-    private TableColumn<Car, Integer> reliabilityColumn;
+    private TableColumn<Car, String> reliabilityColumn;
 
     /**
      * TableColumn for displaying the fuel economy of the car.

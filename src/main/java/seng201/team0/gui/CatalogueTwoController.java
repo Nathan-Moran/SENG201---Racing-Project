@@ -24,7 +24,7 @@ public class CatalogueTwoController {
     @FXML private TableColumn<Car, Integer> priceColumn;
     @FXML private TableColumn<Car, Double> speedColumn;
     @FXML private TableColumn<Car, Double> handlingColumn;
-    @FXML private TableColumn<Car, Integer> reliabilityColumn;
+    @FXML private TableColumn<Car, String> reliabilityColumn;
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
     @FXML private TableView<TuningPart> tuningPartTable;

@@ -27,7 +27,7 @@ public class CatalogueOneController {
     @FXML private TableColumn<Car, Integer> priceColumn;
     @FXML private TableColumn<Car, Double> speedColumn;
     @FXML private TableColumn<Car, Double> handlingColumn;
-    @FXML private TableColumn<Car, Integer> reliabilityColumn;
+    @FXML private TableColumn<Car, String> reliabilityColumn;
     @FXML private TableColumn<Car, Integer> fuelColumn;
 
     @FXML private TableView<Car> shopCarTable;
@@ -35,7 +35,7 @@ public class CatalogueOneController {
     @FXML private TableColumn<Car, Integer> priceColumn1;
     @FXML private TableColumn<Car, Double> speedColumn1;
     @FXML private TableColumn<Car, Double> handlingColumn1;
-    @FXML private TableColumn<Car, Integer> reliabilityColumn1;
+    @FXML private TableColumn<Car, String> reliabilityColumn1;
     @FXML private TableColumn<Car, Integer> fuelColumn1;
 
     private Object lastSelectedItem;
