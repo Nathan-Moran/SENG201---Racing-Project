@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CarSelectorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CarSelectorController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
@@ -32,11 +32,11 @@
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Starter Cars" />
                 <TableView fx:id="carTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;">
                     <columns>
-                        <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🚗" />
-                        <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="💲" />
-                        <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="💨" />
+                        <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🛻" />
+                        <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="\$" />
+                        <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⚡" />
                         <TableColumn fx:id="handlingColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🎮" />
-                        <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🔧" />
+                        <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🛠️" />
                         <TableColumn fx:id="fuelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⛽" />
                     </columns>
                 </TableView>
@@ -47,7 +47,7 @@
                 <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 8 0;" text="Column Key" />
                 <Separator prefWidth="200.0" />
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="🚗" />
+                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="🛻" />
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Model" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -55,7 +55,7 @@
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Price" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="💨" />
+                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="⚡" />
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Speed" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -63,12 +63,12 @@
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Handling" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="🔧" />
+                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="🛠️" />
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Reliability" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER;" text="⛽" />
-                    <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Fuel Capacity" />
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: #455A64;" text="Fuel Economy" />
                 </HBox>
             </VBox>
         </HBox>

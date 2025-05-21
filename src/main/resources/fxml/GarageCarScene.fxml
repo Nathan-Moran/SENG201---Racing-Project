@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
@@ -69,15 +69,16 @@
                 </VBox>
             </VBox>
 
-            <VBox minWidth="280.0" prefWidth="300.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
+            <VBox minWidth="280.0" prefHeight="421.0" prefWidth="352.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Reserve Cars" />
-                <TableView fx:id="carTable" prefHeight="250.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;" VBox.vgrow="ALWAYS">
+                <TableView fx:id="carTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;" VBox.vgrow="ALWAYS">
                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
                     <columns>
-                        <TableColumn fx:id="modelColumn" prefWidth="90.0" text="🚗" /> <TableColumn fx:id="speedColumn" prefWidth="50.0" text="💨" />
-                        <TableColumn fx:id="handlingColumn" prefWidth="50.0" text="🎮" />
-                        <TableColumn fx:id="reliabilityColumn" prefWidth="50.0" text="🔧" />
-                        <TableColumn fx:id="fuelColumn" prefWidth="50.0" text="⛽" />
+                        <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🛻" /> <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="\$" />
+                        <TableColumn fx:id="handlingColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⚡" />
+                        <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🎮" />
+                        <TableColumn fx:id="fuelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🛠️" />
+                  <TableColumn fx:id="fuelColumn1" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⛽" />
                     </columns>
                 </TableView>
                 <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">

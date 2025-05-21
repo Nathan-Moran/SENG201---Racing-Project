@@ -44,9 +44,9 @@ public class Shop extends ItemStorage {
         addTuningPart(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
 
         // Initial cars available in the shop
-        addCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23.0, 6500));
-        addCar(new Car("Mustang", 0.92, 0.78, 0.80, 19.0, 6800));
-        addCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15.0, 12500));
+        addCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500));
+        addCar(new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800));
+        addCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15, 12500));
 
         // Locked tuning parts that become available after winning specific courses
         lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
@@ -59,10 +59,10 @@ public class Shop extends ItemStorage {
         ));
 
         // Locked cars that become available after winning specific courses
-        lockedCarsMap.put(Course.DESERT, new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));
-        lockedCarsMap.put(Course.MOUNTAIN, new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));
-        lockedCarsMap.put(Course.COUNTRY, new Car("Cliff Climber", 0.6, 0.5, 0.9, 20.0, 2600));
-        lockedCarsMap.put(Course.CITY, new Car("Ridge Racer", 0.5, 0.9, 0.7, 28.0, 3000));
+        lockedCarsMap.put(Course.DESERT, new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));
+        lockedCarsMap.put(Course.MOUNTAIN, new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));
+        lockedCarsMap.put(Course.COUNTRY, new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));
+        lockedCarsMap.put(Course.CITY, new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000));
     }
 
     /**

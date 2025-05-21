@@ -42,9 +42,9 @@ public class ItemCatalogue extends ItemStorage {
         addCar(new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 1000));
 
         // Cars available in the main shop from the start
-        addShopCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23.0, 6500));
-        addShopCar(new Car("Mustang", 0.92, 0.78, 0.80, 19.0, 6800));
-        addShopCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15.0, 12500));
+        addShopCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500));
+        addShopCar(new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800));
+        addShopCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15, 12500));
 
         // Tuning parts available in the main shop from the start
         addTuningPart(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
@@ -55,14 +55,14 @@ public class ItemCatalogue extends ItemStorage {
         addTuningPart(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
 
         // Cars that are initially locked and get unlocked via course completion (example associations)
-        addLockedCar(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22.0, 2200));         //Unlocked by Desert Course
-        addLockedCar(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25.0, 2800));    //Unlocked by Desert Course
-        addLockedCar(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20.0, 2600));        //Unlocked by Mountain Course
-        addLockedCar(new Car("Ridge Racer", 0.5, 0.9, 0.7, 28.0, 3000));          //Unlocked by Mountain Course
-        addLockedCar(new Car("Farmers Flyer", 0.9, 0.4, 0.9, 30.0, 3800));        //Unlocked by Country Course
-        addLockedCar(new Car("Vineyard Viper", 0.6, 0.8, 0.8, 24.0, 3000));       //Unlocked by Country Course
-        addLockedCar(new Car("Alley Cat", 0.8, 0.5, 0.7, 23.0, 2600));            //Unlocked by City Course
-        addLockedCar(new Car("Commuter King", 0.4, 0.7, 0.9, 28.0, 3300));        //Unlocked by City Course
+        addLockedCar(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));         //Unlocked by Desert Course
+        addLockedCar(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));    //Unlocked by Desert Course
+        addLockedCar(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));        //Unlocked by Mountain Course
+        addLockedCar(new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000));          //Unlocked by Mountain Course
+        addLockedCar(new Car("Farmers Flyer", 0.9, 0.4, 0.9, 30, 3800));        //Unlocked by Country Course
+        addLockedCar(new Car("Vineyard Viper", 0.6, 0.8, 0.8, 24, 3000));       //Unlocked by Country Course
+        addLockedCar(new Car("Alley Cat", 0.8, 0.5, 0.7, 23, 2600));            //Unlocked by City Course
+        addLockedCar(new Car("Commuter King", 0.4, 0.7, 0.9, 28, 3300));        //Unlocked by City Course
     }
 
     /**

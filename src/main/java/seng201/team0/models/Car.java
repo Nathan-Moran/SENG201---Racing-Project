@@ -22,7 +22,7 @@ public class Car extends Purchasable {
     /**
      * The base fuel economy of the car, representing max distance (km) on a full tank.
      */
-    private final double baseFuelEconomy;
+    private final int baseFuelEconomy;
     /**
      * The currently installed handling upgrade tuning part. Null if no upgrade is installed.
      */
@@ -44,7 +44,7 @@ public class Car extends Purchasable {
      * @param fuelEconomy  The base fuel economy (max distance) of the car.
      * @param price        The purchase price of the car.
      */
-    public Car(String name, double speed, double handling, double reliability, double fuelEconomy, int price) {
+    public Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price) {
         super(name, price);
         this.baseSpeed = speed;
         this.baseHandling = handling;
@@ -57,15 +57,15 @@ public class Car extends Purchasable {
     }
 
     public String getSpeedString() {
-        return String.format("%.2fkm/h", baseSpeed * 300);
+        return String.format("%.0f", baseSpeed * 350);
     }
 
     public String getHandlingPercent() {
-        return String.format("%.2f%%", baseHandling * 100);
+        return String.format("%.0f%%", baseHandling * 100);
     }
 
     public String getFuelEconomyString() {
-        return String.format("%.2f%%", baseFuelEconomy * 300);
+        return String.format("%d", baseFuelEconomy * 30);
     }
 
 
