@@ -25,24 +25,27 @@ import java.util.ResourceBundle;
  * @author Nathan Moran
  */
 public class GarageController implements Initializable {
-    /**
-     * The game environment, providing access to game state and services.
-     */
-    protected GameEnvironment gameEnvironment;
-    /**
-     * The scene navigator, used for switching between different scenes in the application.
-     */
-    protected SceneNavigator sceneNavigator;
-    /**
-     * The currently active car selected by the player in the garage.
-     */
-    protected Car activeCar;
-    /**
-     * Manager for handling controller-specific logic, such as label formatting.
-     */
-    private final ControllerService controllerLogicManager;
 
+    protected GameEnvironment gameEnvironment;
+    protected SceneNavigator sceneNavigator;
+    protected Car activeCar;
+    private final ControllerService controllerLogicManager;
     private SetupCarTable setupCarTable;
+
+    @FXML private TableView<Car> carTable;
+    @FXML private TableColumn<Car, String> modelColumn;
+    @FXML private TableColumn<Car, String> reliabilityColumn;
+    @FXML private TableColumn<Car, String> fuelColumn;
+    @FXML private TableColumn<Car, String> handlingColumn;
+    @FXML private TableColumn<Car, String> speedColumn;
+    @FXML private Label selectedCarFuelLabel;
+    @FXML private Label selectedCarHandlingLabel;
+    @FXML private Label selectedCarHandlingUpgradeLabel;
+    @FXML private Label selectedCarModelLabel;
+    @FXML private Label selectedCarReliabilityLabel;
+    @FXML private Label selectedCarSpeedLabel;
+    @FXML private Label selectedCarSpeedUpgradeLabel;
+    @FXML private TextField renameCarTextField;
 
     /**
      * Constructs a GarageController with the given game environment and scene navigator.
@@ -62,61 +65,6 @@ public class GarageController implements Initializable {
     public void switchToMainMenu(ActionEvent event) throws IOException {
         sceneNavigator.switchToSceneMainMenu(event);
     }
-
-
-    @FXML
-    private TableView<Car> carTable;
-
-
-    @FXML
-    private TableColumn<Car, String> modelColumn;
-
-    @FXML
-    private TableColumn<Car, String> reliabilityColumn;
-
-
-    @FXML
-    private TableColumn<Car, String> fuelColumn;
-
-
-    @FXML
-    private TableColumn<Car, String> handlingColumn;
-
-
-    @FXML
-    private TableColumn<Car, String> speedColumn;
-
-
-    @FXML
-    private Label selectedCarFuelLabel;
-
-
-    @FXML
-    private Label selectedCarHandlingLabel;
-
-
-    @FXML
-    private Label selectedCarHandlingUpgradeLabel;
-
-
-    @FXML
-    private Label selectedCarModelLabel;
-
-
-    @FXML
-    private Label selectedCarReliabilityLabel;
-
-
-    @FXML
-    private Label selectedCarSpeedLabel;
-
-
-    @FXML
-    private Label selectedCarSpeedUpgradeLabel;
-
-    @FXML
-    private TextField renameCarTextField;
-
 
     /**
      * Handles the action of selecting a car from the table.

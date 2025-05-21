@@ -130,10 +130,14 @@ public class Garage extends ItemStorage {
 
     /**
      * Sets the initial starter car for the player. This is typically used at the beginning of the game.
-     * @param newStarterCar The {@link Car} chosen as the starter car.
+     * @param newStarterCarTemplate The {@link Car} chosen as the starter car.
      */
-    public void setStarterCar(Car newStarterCar) {
-        this.selectedCar = newStarterCar;
+    public void setStarterCar(Car newStarterCarTemplate) {
+        if (newStarterCarTemplate != null) {
+            this.selectedCar = new Car(newStarterCarTemplate); // Use the copy constructor
+        } else {
+            this.selectedCar = null;
+        }
     }
 
     /**

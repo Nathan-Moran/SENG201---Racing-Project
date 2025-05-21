@@ -32,22 +32,22 @@ public class ItemCatalogue extends ItemStorage {
      * and need to be unlocked through progression.
      */
     public void setupCatalogue() {
-        Car honda = new Car("Honda", 0.6, 0.5, 0.7, 20, 1000);
-        Car mazda = new Car("Mazda", 0.5, 0.7, 0.7, 20, 1000);
-        Car nissan = new Car("Nissan", 0.5, 0.6, 0.8, 20, 1000);
+        Car honda = new Car("Honda Civic", 0.6, 0.5, 0.7, 20, 1000);
+        Car mazda = new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 1000);
+        Car nissan = new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 1000);
 
         Car supra = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500);
         Car mustang = new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800);
         Car ferrari = new Car("Ferrari", 0.96, 0.96, 0.90, 15, 12500);
 
         Car duneDrifter = new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200);
-        Car sandstormStrider = new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800);
-        Car cliffClimber = new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600);
-        Car ridgeRacer = new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000);
+        Car ridgeRacer = new Car("Ridge Racer", 0.8, 0.5, 0.8, 25, 2800);
+        Car vineyardViper = new Car("Vineyard Viper", 0.6, 0.5, 0.9, 20, 2600);
+        Car commuterKing = new Car("CommuterKing", 0.5, 0.9, 0.7, 28, 3000);
 
         starterCarPool.addAll(honda, mazda, nissan);
         shopCarListInternal.addAll(supra, mustang, ferrari);
-        lockedCarListInternal.addAll(duneDrifter, sandstormStrider, cliffClimber, ridgeRacer);
+        lockedCarListInternal.addAll(duneDrifter, ridgeRacer, vineyardViper, commuterKing);
 
         TuningPart ethanol = new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1);
         TuningPart superCharger = new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3);

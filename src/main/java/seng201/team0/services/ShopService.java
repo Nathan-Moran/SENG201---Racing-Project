@@ -43,19 +43,20 @@ public class ShopService {
      * Handles the selection and purchase of a starter car at the beginning of the game.
      * Deducts the car's price from the player's balance and adds the car to their garage.
      *
-     * @param selectedCar The {@link Car} chosen by the player as their starter car.
+     * @param selectedCarTemplate The {@link Car} chosen by the player as their starter car.
      */
-    public void chooseStarterCar(Car selectedCar) {
-        if (selectedCar != null && !notEnoughBalance(selectedCar.getPrice())) {
+    public void chooseStarterCar(Car selectedCarTemplate) {
+        if (selectedCarTemplate != null && !notEnoughBalance(selectedCarTemplate.getPrice())) {
+            gameEnvironment.getStarterCarInventory().removeCar(selectedCarTemplate);
             if (gameEnvironment.getSelectedCar() == null) {
-                gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
-                gameEnvironment.getPlayerInventory().setStarterCar(selectedCar);
+
+                gameEnvironment.getPlayerInventory().setStarterCar(selectedCarTemplate);
             } else {
-                gameEnvironment.getStarterCarInventory().removeCar(selectedCar);
-                gameEnvironment.getPlayerInventory().addCar(selectedCar);
+                Car playerOwnedCar = new Car(selectedCarTemplate);
+                gameEnvironment.getPlayerInventory().addCar(playerOwnedCar);
             }
             // Deduct cost
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCarTemplate.getPrice());
         }
     }
 
@@ -64,14 +65,16 @@ public class ShopService {
      * Removes the car from the shop inventory, adds it to the player's garage,
      * and deducts its price from the player's balance.
      *
-     * @param selectedCar The {@link Car} to be bought.
+     * @param selectedCarTemplate The {@link Car} to be bought.
      */
-    public void buySelectedCar(Car selectedCar) {
-        if (selectedCar != null && !notEnoughBalance(selectedCar.getPrice())) {
-            gameEnvironment.getShopInventory().removeCar(selectedCar);
-            gameEnvironment.getShopInventory().removeCarFromAllAvailable(selectedCar);
-            gameEnvironment.getPlayerInventory().addCar(selectedCar);
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCar.getPrice());
+    public void buySelectedCar(Car selectedCarTemplate) {
+        if (selectedCarTemplate != null && !notEnoughBalance(selectedCarTemplate.getPrice())) {
+            Car playerOwnedCar = new Car(selectedCarTemplate);
+
+            gameEnvironment.getShopInventory().removeCar(selectedCarTemplate);
+            gameEnvironment.getShopInventory().removeCarFromAllAvailable(selectedCarTemplate);
+            gameEnvironment.getPlayerInventory().addCar(playerOwnedCar);
+            gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCarTemplate.getPrice());
         }
     }
 

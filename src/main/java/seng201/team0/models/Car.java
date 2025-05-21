@@ -52,20 +52,31 @@ public class Car extends Purchasable {
         this.baseFuelEconomy = fuelEconomy;
     }
 
+    public Car(Car other) {
+        super(other.getName(), other.getPrice());
+        this.baseSpeed = other.baseSpeed;
+        this.baseHandling = other.baseHandling;
+        this.baseReliability = other.baseReliability;
+        this.baseFuelEconomy = other.baseFuelEconomy;
+        this.speedUpgrade = null;
+        this.handlingUpgrade = null;
+        this.customName = null;
+    }
+
     public String getReliabilityPercent() {
-        return String.format("%.0f%%", baseReliability * 100);
+        return String.format("%.0f%%", getReliability() * 100);
     }
 
     public String getSpeedString() {
-        return String.format("%.0f", baseSpeed * 350);
+        return String.format("%.0f", getSpeed() * 350);
     }
 
     public String getHandlingPercent() {
-        return String.format("%.0f%%", baseHandling * 100);
+        return String.format("%.0f%%", getHandling() * 100);
     }
 
     public String getFuelEconomyString() {
-        return String.format("%d", baseFuelEconomy * 30);
+        return String.format("%.0f", getFuelEconomy() * 30);
     }
 
 
