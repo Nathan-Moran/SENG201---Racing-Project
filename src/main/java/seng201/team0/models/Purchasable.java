@@ -2,7 +2,7 @@ package seng201.team0.models;
 
 public abstract class Purchasable {
     private String name;
-    private int price;
+    private final int price;
 
     public Purchasable(String name, int price) {
         this.name = name;

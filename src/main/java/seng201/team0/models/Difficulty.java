@@ -1,8 +1,5 @@
 package seng201.team0.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public enum Difficulty {
     EASY(1500, 0.8),
     MEDIUM(1250, 0.9),

@@ -13,12 +13,12 @@ public enum     Route {
     CITY_ALLEYS("City Alleys", new RouteAttributes(1.2, 1.2, 1), 35, 3, 1.6, 30),
     CITY_TRAFFIC("City Cut Line", new RouteAttributes(0.4, 1, 1.5), 15, 2, 1.6, 15);
 
-    private String routeName;
-    private RouteAttributes attributes;
-    private int length;
-    private int fuelstops;
-    private double opponentSpeed;
-    private double duration;
+    private final String routeName;
+    private final RouteAttributes attributes;
+    private final int length;
+    private final int fuelstops;
+    private final double opponentSpeed;
+    private final double duration;
 
 
     Route(String routeName, RouteAttributes attributes, int length, int fuelstops, double opponentSpeed, double duration) {
