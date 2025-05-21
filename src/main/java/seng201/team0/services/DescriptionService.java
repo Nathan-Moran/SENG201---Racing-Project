@@ -3,11 +3,25 @@ package seng201.team0.services;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Provides static descriptions for various cars and tuning parts in the game.
+ * This service acts as a centralized lookup for explanatory text that can be
+ * displayed in the UI (e.g., in shop or garage screens).
+ */
 public class DescriptionService {
 
+    /**
+     * A static map storing descriptions for different car models.
+     * Keys are car names (String), values are their descriptions (String).
+     */
     private static final Map<String, String> carDescriptions = new HashMap<>();
+    /**
+     * A static map storing descriptions for different tuning parts.
+     * Keys are tuning part names (String), values are their descriptions (String).
+     */
     private static final Map<String, String> tuningPartDescriptions = new HashMap<>();
 
+    // Static initializer block to populate the description maps when the class is loaded
     static {
         carDescriptions.put("Honda Civic R", "A well-rounded entry point, the Civic R offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.");
         carDescriptions.put("Mazda MPS", "The Mazda MPS shines with its notably agile handling among the starters, making it nimble on more technical early tracks like Desert Drift or Mountain Curves. Its straight-line speed is modest, but it's a dependable and fuel-efficient companion for those who prefer precision driving.");
@@ -32,10 +46,20 @@ public class DescriptionService {
         tuningPartDescriptions.put("RacingWheels", "Maximizes handling performance with professional-grade slick tires for ultimate track grip.");
     }
 
+    /**
+     * Retrieves the descriptive text for a given car model.
+     * @param carName The name of the car.
+     * @return The description of the car, or a default message if no description is found.
+     */
     public static String getCarDescription(String carName) {
         return carDescriptions.getOrDefault(carName, "Car has not description");
     }
 
+    /**
+     * Retrieves the descriptive text for a given tuning part.
+     * @param partName The name of the tuning part.
+     * @return The description of the tuning part, or a default message if no description is found.
+     */
     public static String getTuningPartDescription(String partName) {
         return tuningPartDescriptions.getOrDefault(partName, "Part has not description");
     }
