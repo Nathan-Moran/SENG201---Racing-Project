@@ -64,7 +64,7 @@ public class GaragePartsController implements Initializable {
      * @param event The action event triggered by the installation part button.
      */
     @FXML
-    void installPart(ActionEvent event) {
+    public void installPart(ActionEvent event) {
         TuningPart selectedTuningPart = tuningPartTable.getSelectionModel().getSelectedItem();
         if (selectedTuningPart != null) {
             if (gameEnvironment.getPlayerInventory().installTuningPart(selectedTuningPart)) {
@@ -87,7 +87,7 @@ public class GaragePartsController implements Initializable {
      * @param event The action event triggered by the remove part button.
      */
     @FXML
-    void removePart(ActionEvent event) {
+    public void removePart(ActionEvent event) {
         TuningPart selectedTuningPart = tuningPartTable1.getSelectionModel().getSelectedItem();
         if (selectedTuningPart != null) {
             gameEnvironment.getPlayerInventory().uninstallTuningPart(selectedTuningPart);

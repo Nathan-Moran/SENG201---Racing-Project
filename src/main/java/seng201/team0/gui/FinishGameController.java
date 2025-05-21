@@ -28,11 +28,9 @@ public class FinishGameController implements Initializable {
     private Label totalPrizeMoneyLabel;
 
     private GameEnvironment gameEnvironment;
-    private SceneNavigator sceneNavigator;
 
     public FinishGameController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
-        this.sceneNavigator = sceneNavigator;
     }
 
     void updateEndScreen() {
@@ -48,15 +46,6 @@ public class FinishGameController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateEndScreen();
-    }
-
-    @FXML
-    void switchToMainMenu(ActionEvent event) throws IOException {
-        if (sceneNavigator != null) {
-            sceneNavigator.switchToSceneMainMenu(event);
-        } else {
-            System.err.println("SceneNavigator not set in EndOfSeasonController.");
-        }
     }
 
     @FXML

@@ -168,7 +168,7 @@ public class GarageController implements Initializable {
     }
 
     @FXML
-    void renameCar(ActionEvent event) {
+    public void renameCar(ActionEvent event) {
         Car selectedCar = gameEnvironment.getSelectedCar();
         if (selectedCar != null) {
             String name = renameCarTextField.getText();
@@ -199,7 +199,7 @@ public class GarageController implements Initializable {
      * This includes populating the car table with the player's cars and
      * updating the labels to display the stats of the currently selected active car.
      */
-    public void setGUI () {
+    public void setGUI() {
         this.activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
 
         if (carTable != null) {

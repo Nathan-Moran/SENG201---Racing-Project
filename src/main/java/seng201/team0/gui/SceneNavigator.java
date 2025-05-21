@@ -42,11 +42,6 @@ public class SceneNavigator {
         this.gameEnvironment = gameEnvironment;
         this.stage = stage;
     }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     /**
      * Switches the current scene to the Garage scene.
      *

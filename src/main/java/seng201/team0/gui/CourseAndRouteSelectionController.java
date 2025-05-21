@@ -45,8 +45,6 @@ public class CourseAndRouteSelectionController implements Initializable {
     private Map<Course, Label> courseLabels = new HashMap<>();
 
     private Course selectedCourse;
-    private Route selectedRoute;
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
         courseMenu.setVisible(true);
         courseMenu.setManaged(true);
@@ -68,7 +66,6 @@ public class CourseAndRouteSelectionController implements Initializable {
         cityRouteMenu.setManaged(false);
 
         selectedCourse = null;
-        selectedRoute = null;
 
         // Initialize the courseLabels map.  This makes it easy to access the labels.
         courseLabels.put(Course.DESERT, desertCompletedLabel);
@@ -203,7 +200,7 @@ public class CourseAndRouteSelectionController implements Initializable {
         createRaceAndStart(Route.CITY_TRAFFIC, event);
     }
 
-    void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
+    public void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
         Difficulty difficulty = gameEnvironment.getDifficulty();
         if (selectedCourse == null || selectedRoute == null || difficulty == null) {
             System.err.println("Course, Route, or Difficulty not selected!");

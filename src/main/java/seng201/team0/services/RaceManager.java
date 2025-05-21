@@ -4,6 +4,7 @@ import seng201.team0.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects; // Import Objects
 import java.util.Random;
 
 /**
@@ -116,6 +117,10 @@ public class RaceManager {
      * Flag indicating if the race was cancelled, for example, due to severe weather.
      */
     private boolean raceCancelled = false;
+    /**
+     * The amount of money earned by the player in the race.
+     */
+    private int moneyEarned = 0;
 
     // Constants for event-related wait times and costs/profits
     private static final int REPAIR_WAIT_TICKS = 2;
@@ -146,6 +151,7 @@ public class RaceManager {
         this.eventTriggerDistance = RaceCalculations.calculateEventTriggerDistance(race.getRoute().getLength());
         this.breakdownTriggerDistance = RaceCalculations.calculateBreakdownTriggerDistance(race.getRoute().getLength());
         this.raceDurationSeconds = race.getRoute().getRaceDuration();
+        this.moneyEarned = 0; // Initialize earnings
     }
 
     /**
@@ -398,6 +404,7 @@ public class RaceManager {
     public void handleTraveler(boolean pickUp, GameEnvironment gameEnvironment) {
         if (pickUp) {
             gameEnvironment.setBalance(gameEnvironment.getBalance() + TRAVELER_PROFIT); // Add profit
+            moneyEarned += TRAVELER_PROFIT; // Track money earned
             setWaiting(true, TRAVELER_WAIT_TICKS); // Wait for traveler interaction
         } else {
             setWaiting(false, 0); // No interaction, no wait
@@ -420,6 +427,97 @@ public class RaceManager {
         gameEnvironment.setRacesRemaining(gameEnvironment.getRacesRemaining() + 1); // Race doesn't count against remaining
         finishReason = "Weather has cancelled the race!";
     }
+
+    /**
+     * Concludes the race and processes all post-race updates.
+     * This includes awarding prize money, updating win/loss status for the course,
+     * unlocking new parts, and updating overall game statistics.
+     * This method encapsulates all the logic previously in RaceController.finishRace()
+     * that dealt with game environment updates.
+     *
+     * @param gameEnvironment The {@link GameEnvironment} to update.
+     */
+    public void processRaceOutcome(GameEnvironment gameEnvironment) {
+        // Award prize money if the race wasn't cancelled
+        if (!raceCancelled) {
+            awardPrizeMoney(gameEnvironment);
+        }
+
+        // Determine final placement and update game environment
+        int finalPlacement;
+        if (Objects.equals(finishReason, "Car broke down! You withdrew from the race.") ||
+                Objects.equals(finishReason, "Weather has cancelled the race!") ||
+                Objects.equals(finishReason, "Out of fuel!") ||
+                Objects.equals(finishReason, "Time ran out!")) {
+            finalPlacement = opponents.size() + 1; // Last place or indicates withdrawal/cancellation
+        } else {
+            finalPlacement = getPlayerPlacement();
+        }
+
+        gameEnvironment.updateHasWonCourse(race.getCourse(), finalPlacement);
+        gameEnvironment.getShopService().unlockNewPartsAndCars();
+        gameEnvironment.addRacePlacement(finalPlacement);
+        gameEnvironment.addPrizeMoney(moneyEarned); // Add total earnings for the race
+    }
+
+    /**
+     * Awards prize money to the player based on their final placement in the race.
+     * Prize money is added to the total money earned.
+     * @param gameEnvironment The game environment to update the player's balance.
+     */
+    public void awardPrizeMoney(GameEnvironment gameEnvironment) {
+        int prize = 0;
+        int placement = getPlayerPlacement();
+
+        // Assuming prize money depends on placement for the current race's course
+        switch (placement) {
+            case 1:
+                prize = race.getCourse().getPrizes().getFirstPlacePrize();
+                break;
+            case 2:
+                prize = race.getCourse().getPrizes().getSecondPlacePrize();
+                break;
+            case 3:
+                prize = race.getCourse().getPrizes().getThirdPlacePrize();
+                break;
+            default:
+                prize = 0; // No prize for finishing beyond 3rd
+                break;
+        }
+        gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
+        moneyEarned += prize; // Accumulate total earnings from race
+    }
+
+    /**
+     * Generates the final placement text for the race results screen.
+     * This method encapsulates the complex string formatting logic.
+     * @return A formatted string describing the player's race outcome.
+     */
+    public String getFinalPlacementText() {
+        if (Objects.equals(finishReason, "Weather has cancelled the race!")) {
+            return "Race Cancelled Due to Weather";
+        } else if (Objects.equals(finishReason, "Out of fuel!")) {
+            return "Ran out of fuel!";
+        } else if (Objects.equals(finishReason, "Time ran out!")) {
+            return "Time ran out!";
+        } else if (Objects.equals(finishReason, "Car broke down! You withdrew from the race.")) {
+            return "Car broke down! You withdrew from the race."; // Specific text for withdrawal
+        } else if (Objects.equals(finishReason, "Finished the race!")) {
+            int placement = getPlayerPlacement();
+            switch (placement) {
+                case 1:
+                    return "🏆 You finished 1st!";
+                case 2:
+                    return "🥈 You finished 2nd!";
+                case 3:
+                    return "🥉 You finished 3rd!";
+                default:
+                    return "You finished " + placement + "th.";
+            }
+        }
+        return "Race Over"; // Default message
+    }
+
 
     /**
      * Checks if the race has concluded (either by finishing, withdrawal, or cancellation).
@@ -448,132 +546,35 @@ public class RaceManager {
     }
 
     /**
-     * Gets the player's current fuel level (0.0 to 1.0).
-     * @return The fuel level.
+     * Gets the current fuel level of the player's car.
+     * @return The fuel level as a fraction (0.0 to 1.0).
      */
     public double getFuelLevel() {
         return fuelLevel;
     }
 
     /**
-     * Gets the {@link RaceEvent} that is currently active, if any.
-     * @return The current event, or null if no event is active.
-     */
-    public RaceEvent getCurrentEvent() {
-        return currentEvent;
-    }
-
-    /**
-     * Gets the reason why the race finished.
-     * @return A string explaining the race's conclusion.
-     */
-    public String getFinishReason() {
-        return finishReason;
-    }
-
-    /**
-     * Gets the tick count at which the player finished the race.
-     * @return The finish tick count, or -1 if not yet finished.
-     */
-    public int getPlayerFinishTick() {
-        return playerFinishTick;
-    }
-
-    /**
-     * Calculates the money earned by the player based on their placement in the race.
-     * Returns 0 if the race was cancelled.
-     * @return The prize money earned.
-     */
-    public int getMoneyEarned() {
-        if (raceCancelled) {
-            return 0; // No earnings if race is cancelled
-        }
-        int placement = getPlayerPlacement();
-        CoursePrizes prizes = race.getCourse().getPrizes();
-
-        return switch (placement) {
-            case 1 -> prizes.getFirstPlacePrize();
-            case 2 -> prizes.getSecondPlacePrize();
-            case 3 -> prizes.getThirdPlacePrize();
-            default -> 0; // No prize for 4th place or lower
-        };
-    }
-
-    /**
-     * Deducts the entry fee for the current race from the player's balance.
-     * This is not applied if the race was cancelled.
-     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
-     */
-    public void deductEntryFee(GameEnvironment gameEnvironment) {
-        if (!raceCancelled) {
-            int entryFee = race.getCourse().getEntryFee();
-            gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
-        }
-    }
-
-    /**
-     * Awards prize money to the player's balance if the player has finished the race
-     * and the race was not cancelled.
-     * @param gameEnvironment The {@link GameEnvironment} to update player balance.
-     * @return The amount of prize money awarded.
-     */
-    public int awardPrizeMoney(GameEnvironment gameEnvironment) {
-        if (playerFinished && !raceCancelled) {
-            int prize = getMoneyEarned();
-            gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
-            return prize;
-        }
-        return 0; // No prize awarded
-    }
-
-    /**
-     * Checks if the player has finished the race.
-     * @return {@code true} if the player has finished, {@code false} otherwise.
-     */
-    public boolean hasPlayerFinished() {
-        return playerFinished;
-    }
-
-    /**
-     * Checks if the game simulation is currently in a waiting state (e.g., for user interaction).
-     * @return {@code true} if waiting, {@code false} otherwise.
-     */
-    public boolean isWaiting() {
-        return isWaiting;
-    }
-
-    /**
-     * Sets the waiting state and the number of ticks for which to wait.
-     * @param waiting {@code true} to enter waiting state, {@code false} to exit.
-     * @param ticks The number of ticks to wait. Use {@link #INDEFINITE_WAIT} for indefinite waits.
-     */
-    public void setWaiting(boolean waiting, int ticks) {
-        this.isWaiting = waiting;
-        this.waitTicksRemaining = ticks;
-    }
-
-    /**
-     * Gets the list of {@link OpponentCar} objects for the race.
-     * @return The list of opponents.
+     * Gets the list of opponent cars.
+     * @return A list of {@link OpponentCar} objects.
      */
     public List<OpponentCar> getOpponents() {
         return opponents;
     }
 
     /**
-     * Gets the {@link Race} object associated with this manager.
-     * @return The race object.
+     * Gets the current event affecting the player.
+     * @return The {@link RaceEvent} object, or null if no event is active.
      */
-    public Race getRace() {
-        return race;
+    public RaceEvent getCurrentEvent() {
+        return currentEvent;
     }
 
     /**
-     * Gets the player's {@link Car} in this race.
-     * @return The player's car.
+     * Checks if the player is currently in a waiting state due to an event.
+     * @return {@code true} if waiting, {@code false} otherwise.
      */
-    public Car getPlayerCar() {
-        return playerCar;
+    public boolean isWaiting() {
+        return isWaiting;
     }
 
     /**
@@ -593,24 +594,54 @@ public class RaceManager {
     }
 
     /**
-     * Gets the current tick count of the race simulation.
-     * @return The tick count.
+     * Gets the reason the race finished.
+     * @return A string describing the finish reason.
      */
-    public int getTickCount() {
-        return tickCount;
+    public String getFinishReason() {
+        return finishReason;
     }
 
     /**
-     * Refuels the player's car to full capacity (fuel level 1.0).
+     * Gets the total money earned by the player in the race, including event profits and prize money.
+     * @return The total money earned.
      */
-    public void refuel() {
+    public int getMoneyEarned() {
+        return moneyEarned;
+    }
+
+    /**
+     * Refuels the player's car to full.
+     */
+    private void refuel() {
         fuelLevel = 1.0;
     }
 
     /**
-     * Checks if the race is currently ongoing.
-     * @return {@code true} if the race is active, {@code false} otherwise.
+     * Sets the waiting state for the player.
+     * @param waiting True to set waiting, false to clear.
+     * @param ticks The number of ticks to wait if setting to waiting.
      */
+    public void setWaiting(boolean waiting, int ticks) {
+        this.isWaiting = waiting;
+        this.waitTicksRemaining = ticks;
+    }
+
+    // Existing methods like deductEntryFee, calculateFuelStopDistances, etc.
+    // should remain in RaceManager or RaceCalculations as appropriate.
+
+    /**
+     * Deducts the entry fee for the current race from the game environment balance.
+     * @param gameEnvironment The {@link GameEnvironment} to update the balance.
+     */
+    public void deductEntryFee(GameEnvironment gameEnvironment) {
+        int entryFee = race.getCourse().getEntryFee();
+        gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
     public boolean isRacing() {
         return isRacing;
     }

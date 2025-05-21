@@ -2,6 +2,7 @@ package seng201.team0.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import seng201.team0.services.GameEnvironment;
@@ -9,9 +10,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class RaceFinishController {
+public class RaceFinishController implements Initializable {
 
     @FXML private Label finishReason;
     @FXML private Label placementMessage;
@@ -70,7 +73,7 @@ public class RaceFinishController {
     }
 
     @FXML
-    private void initialize() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         mainMenuButton.setOnAction(event -> { // Lambda for the main menu button
             try {
                 sceneNavigator.switchToSceneMainMenu(event);
@@ -87,11 +90,5 @@ public class RaceFinishController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
-    }
-
-
-    @FXML
-    void quitGame(ActionEvent event) {
-        gameEnvironment.quit();
     }
 }
