@@ -21,7 +21,6 @@ public class DescriptionService {
      */
     private static final Map<String, String> tuningPartDescriptions = new HashMap<>();
 
-    // Static initializer block to populate the description maps when the class is loaded
     static {
         carDescriptions.put("Honda Civic", "A well-rounded entry point, the Civic R offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.");
         carDescriptions.put("Mazda MPS", "The Mazda MPS shines with its notably agile handling among the starters, making it nimble on more technical early tracks like Desert Drift or Mountain Curves. Its straight-line speed is modest, but it's a dependable and fuel-efficient companion for those who prefer precision driving.");
@@ -31,8 +30,8 @@ public class DescriptionService {
         carDescriptions.put("Ferrari", "An exotic masterpiece delivering blistering top speed and almost telepathic handling. The Ferrari 458 is a top-tier performer, capable of dominating almost any route if driven skillfully. High reliability ensures it can take the heat, but its racing pedigree means it consumes fuel quickly. A dream machine for ambitious racers.");
 
         carDescriptions.put("Dune Drifter", "Unlocked by conquering the Desert, the Dune Drifter is a true handling specialist. Its modest top speed is more than offset by its incredible agility on loose surfaces, making it dance where others struggle. Good reliability and fuel economy make it a smart choice for technical desert stages.");
-        carDescriptions.put("Ridge Racer", "Victory on Mountain Curves unlocks the Ridge Racer, a car that lives for corners thanks to its superb road-holding. Its outright speed is secondary to its incredible ability to dissect technical sections with precision. Good reliability and impressive fuel economy make it an efficient choice for twisty routes.");
-        carDescriptions.put("Vineyard Viper", "Unlocked by winning Country Twist, this car excels in agility, feeling light and responsive through corners. It's perfect for flowing through sequences of bends, with adequate speed, good reliability, and solid fuel economy.");
+        carDescriptions.put("Ridge Racer", "Victory on the Mountain unlocks the Ridge Racer, a car that lives for corners thanks to its superb road-holding. Its outright speed is secondary to its incredible ability to dissect technical sections with precision. Good reliability and impressive fuel economy make it an efficient choice for twisty routes.");
+        carDescriptions.put("Vineyard Viper", "Unlocked by winning in the Country, this car excels in agility, feeling light and responsive through corners. It's perfect for flowing through sequences of bends, with adequate speed, good reliability, and solid fuel economy.");
         carDescriptions.put("CommuterKing", "Master the chaos of the City to unlock the Commuter King. Its standout feature is its rock-solid dependability, ensuring it won't let you down. While not built for outright speed, its decent handling helps navigate jams, and its excellent fuel efficiency makes it a surprisingly effective urban tool.");
 
         tuningPartDescriptions.put("Ethanol", "Boosts speed by improving engine combustion with high-octane fuel.");
