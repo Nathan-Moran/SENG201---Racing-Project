@@ -10,14 +10,9 @@ import javafx.collections.ObservableList;
  * It serves as a central repository for all game items.
  */
 public class ItemCatalogue extends ItemStorage {
-    /**
-     * A list of cars that are initially locked and become available through gameplay progression.
-     */
-    private final ObservableList<Car> lockedCarList;
-    /**
-     * A list of cars that are always available for purchase in the shop from the start of the game.
-     */
-    private final ObservableList<Car> shopCarList;
+    private final ObservableList<Car> lockedCarListInternal;
+    private final ObservableList<Car> shopCarListInternal;
+    private final ObservableList<Car> starterCarPool;
 
     /**
      * Constructs a new ItemCatalogue instance.
@@ -25,8 +20,9 @@ public class ItemCatalogue extends ItemStorage {
      */
     public ItemCatalogue() {
         super();
-        this.lockedCarList = FXCollections.observableArrayList();
-        this.shopCarList = FXCollections.observableArrayList();
+        this.lockedCarListInternal = FXCollections.observableArrayList();
+        this.shopCarListInternal = FXCollections.observableArrayList();
+        this.starterCarPool = FXCollections.observableArrayList();
         setupCatalogue();
     }
 
@@ -36,65 +32,45 @@ public class ItemCatalogue extends ItemStorage {
      * and need to be unlocked through progression.
      */
     public void setupCatalogue() {
-        // Starter cars
-        addCar(new Car("Honda Civic R", 0.6, 0.5, 0.7, 20, 1000));
-        addCar(new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 1000));
-        addCar(new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 1000));
+        Car honda = new Car("Honda", 0.6, 0.5, 0.7, 20, 1000);
+        Car mazda = new Car("Mazda", 0.5, 0.7, 0.7, 20, 1000);
+        Car nissan = new Car("Nissan", 0.5, 0.6, 0.8, 20, 1000);
 
-        // Cars available in the main shop from the start
-        addShopCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500));
-        addShopCar(new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800));
-        addShopCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15, 12500));
+        Car supra = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500);
+        Car mustang = new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800);
+        Car ferrari = new Car("Ferrari", 0.96, 0.96, 0.90, 15, 12500);
 
-        // Tuning parts available in the main shop from the start
-        addTuningPart(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
-        addTuningPart(new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3));
-        addTuningPart(new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5));
-        addTuningPart(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
-        addTuningPart(new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3));
-        addTuningPart(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
+        Car duneDrifter = new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200);
+        Car sandstormStrider = new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800);
+        Car cliffClimber = new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600);
+        Car ridgeRacer = new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000);
 
-        // Cars that are initially locked and get unlocked via course completion
-        addLockedCar(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));         //Unlocked by Desert Course
-        addLockedCar(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));    //Unlocked by Desert Course
-        addLockedCar(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));        //Unlocked by Mountain Course
-        addLockedCar(new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000));          //Unlocked by Mountain Course
-        addLockedCar(new Car("Farmers Flyer", 0.9, 0.4, 0.9, 30, 3800));        //Unlocked by Country Course
-        addLockedCar(new Car("Vineyard Viper", 0.6, 0.8, 0.8, 24, 3000));       //Unlocked by Country Course
-        addLockedCar(new Car("Alley Cat", 0.8, 0.5, 0.7, 23, 2600));            //Unlocked by City Course
-        addLockedCar(new Car("Commuter King", 0.4, 0.7, 0.9, 28, 3300));        //Unlocked by City Course
+        starterCarPool.addAll(honda, mazda, nissan);
+        shopCarListInternal.addAll(supra, mustang, ferrari);
+        lockedCarListInternal.addAll(duneDrifter, sandstormStrider, cliffClimber, ridgeRacer);
+
+        TuningPart ethanol = new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1);
+        TuningPart superCharger = new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3);
+        TuningPart turboKit = new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5);
+        TuningPart streetWheels = new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1);
+        TuningPart sportsWheels = new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3);
+        TuningPart racingWheels = new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5);
+
+        super.getTuningPartList().addAll(ethanol, superCharger, turboKit, streetWheels, sportsWheels, racingWheels);
     }
 
-    /**
-     * Adds a car to the list of initially locked cars. These cars are not immediately
-     * available in the shop but can be unlocked through gameplay.
-     * @param car The {@link Car} to add to the locked list.
-     */
-    public void addLockedCar(Car car) {
-        lockedCarList.add(car);
+
+    public ObservableList<Car> getStarterCarPool() {
+        return starterCarPool;
     }
 
-    /**
-     * Gets the list of cars that are currently locked in the catalogue.
-     * @return An {@link ObservableList} of locked cars.
-     */
-    public ObservableList<Car> getLockedCarList() {
-        return lockedCarList;
+
+    public ObservableList<Car> getShopCarList() { // Already exists
+        return shopCarListInternal;
     }
 
-    /**
-     * Gets the list of cars that are available for purchase in the main shop.
-     * @return An {@link ObservableList} of shop-available cars.
-     */
-    public ObservableList<Car> getShopCarList() {
-        return shopCarList;
-    }
 
-    /**
-     * Adds a car to the list of cars available in the main shop.
-     * @param car The {@link Car} to add to the shop list.
-     */
-    public void addShopCar(Car car) {
-        shopCarList.add(car);
+    public ObservableList<Car> getLockedCarList() { // Already exists
+        return lockedCarListInternal;
     }
 }

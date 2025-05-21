@@ -380,7 +380,7 @@ public class RaceController {
             placementText = "Race Over";
         }
         gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
-        gameEnvironment.getShopService().unlockNewPartsAndCars();
+        gameEnvironment.getShopService().unlockNewCars();
         gameEnvironment.addRacePlacement(placement);
         gameEnvironment.addPrizeMoney(earnings);
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
