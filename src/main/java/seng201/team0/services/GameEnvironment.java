@@ -202,4 +202,14 @@ public class GameEnvironment {
     public boolean hasWonCourse(Course course) {
         return hasWonCourse.get(course);
     }
+
+    /**
+     * Adds a new race placement to the list of historical placements.
+     *
+     * @param placement The player's placement in the most recently completed race (e.g., 1 for 1st, 2 for 2nd, etc.).
+     */
+    public void addRacePlacement(int placement) {
+        this.racePlacements.add(placement);
+    }
+
 }
