@@ -331,7 +331,7 @@ public class SceneNavigator {
         title = "How to Play";
         // Ensure the FXML file path matches where you saved TutorialScreen.fxml
         // For example, if it's in resources/gui/TutorialScreen.fxml, use "/gui/TutorialScreen.fxml"
-        fxml = "/fxml/TutorialScene.fxml";
+        fxml = "/fxml/Tutorial2Scene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
