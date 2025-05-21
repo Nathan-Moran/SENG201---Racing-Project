@@ -329,7 +329,7 @@ public class SceneNavigator {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
-                new TutorialController(this.gameEnvironment, this)
+                new TutorialController(this)
         );
 
         Parent parent = loader.load();
