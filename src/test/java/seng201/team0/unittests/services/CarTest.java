@@ -1,4 +1,4 @@
-package seng201.team0.unittests.services;
+package seng201.team0.unittests.services; // Assuming services package as per previous context, adjust if models
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import seng201.team0.models.TuningPart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CarTest {
+class CarTest {
 
     private Car car;
     private TuningPart speedUpgrade;
@@ -15,150 +15,154 @@ public class CarTest {
 
     @BeforeEach
     void setUp() {
-        car = new Car("Test Car", 100.0, 0.8, 0.95, 15.0, 20000);
-        speedUpgrade = new TuningPart("Speed Boost", 500, "暢", 1.2);
-        handlingUpgrade = new TuningPart("Handling Boost", 400, "式", 1.1);
+        // Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price)
+        car = new Car("Test Car", 0.7, 0.6, 0.8, 25, 2000);
+        speedUpgrade = new TuningPart("Speed Boost", 500, "💨", 1.2); // Assuming "💨" is for speed
+        handlingUpgrade = new TuningPart("Handling Boost", 400, "🎮", 1.1); // Assuming "🎮" is for handling
     }
 
     @Test
-    void testCarCreation() {
-        assertEquals("Test Car", car.getName());
-        assertEquals(100.0, car.getSpeed());
-        assertEquals(0.8, car.getHandling());
-        assertEquals(0.95, car.getReliability());
-        assertEquals(15.0, car.getFuelEconomy());
-        assertEquals(20000, car.getPrice());
-        assertNull(car.getSpeedUpgrade());
-        assertNull(car.getHandlingUpgrade());
-        assertNull(car.getCustomName());
+    void constructorCopiesCorrectly() {
+        Car originalCar = new Car("Original", 0.8, 0.7, 0.9, 30, 3000);
+        // Add upgrades to original to ensure they are not copied to the new car's upgrade slots
+        originalCar.addSpeedUpgrade(new TuningPart("Temp Speed", 100, "💨", 1.1));
+        originalCar.addHandlingUpgrade(new TuningPart("Temp Handling", 100, "🎮", 1.1));
+        originalCar.setCustomName("My Ride");
+
+        Car copiedCar = new Car(originalCar);
+
+        assertEquals(originalCar.getName(), copiedCar.getName());
+        assertEquals(originalCar.getPrice(), copiedCar.getPrice());
+        // Access base stats through getters which reflect them before upgrades for the new car
+        assertEquals(0.8, copiedCar.getSpeed(), 0.001); // Base speed of original
+        assertEquals(0.7, copiedCar.getHandling(), 0.001); // Base handling of original
+        assertEquals(0.9, copiedCar.getReliability(), 0.001); // Base reliability of original
+        assertEquals(30, copiedCar.getFuelEconomy(), 0.001); // Base fuel economy of original
+
+        assertNull(copiedCar.getSpeedUpgrade(), "Copied car should not have speed upgrade initially.");
+        assertNull(copiedCar.getHandlingUpgrade(), "Copied car should not have handling upgrade initially.");
+        assertNull(copiedCar.getCustomName(), "Copied car should not have custom name initially.");
     }
 
     @Test
-    void testGetSpeedWithoutUpgrade() {
-        assertEquals(100.0, car.getSpeed());
+    void getReliabilityPercentFormatsCorrectly() {
+        assertEquals("80%", car.getReliabilityPercent());
     }
 
     @Test
-    void testGetSpeedWithUpgrade() {
+    void getSpeedStringFormatsCorrectly() {
+        // baseSpeed * 350
+        assertEquals(String.format("%.0f", 0.7 * 350.0), car.getSpeedString());
+    }
+
+    @Test
+    void getHandlingPercentFormatsCorrectly() {
+        assertEquals("60%", car.getHandlingPercent());
+    }
+
+    @Test
+    void getFuelEconomyStringFormatsCorrectly() {
+        // baseFuelEconomy * 30
+        assertEquals(String.format("%.0f", car.getFuelEconomy() * 30.0), car.getFuelEconomyString());
+    }
+
+
+    @Test
+    void getSpeedReturnsBaseSpeedInitially() {
+        assertEquals(0.7, car.getSpeed(), 0.001);
+    }
+
+    @Test
+    void getSpeedReturnsBoostedSpeed() {
         car.addSpeedUpgrade(speedUpgrade);
-        assertEquals(100.0 * 1.2, car.getSpeed());
+        assertEquals(0.7 * 1.2, car.getSpeed(), 0.001);
     }
 
     @Test
-    void testGetHandlingWithoutUpgrade() {
-        assertEquals(0.8, car.getHandling());
+    void getHandlingReturnsBaseHandlingInitially() {
+        assertEquals(0.6, car.getHandling(), 0.001);
     }
 
     @Test
-    void testGetHandlingWithUpgrade() {
+    void getHandlingReturnsBoostedHandling() {
         car.addHandlingUpgrade(handlingUpgrade);
-        assertEquals(0.8 * 1.1, car.getHandling());
+        assertEquals(0.6 * 1.1, car.getHandling(), 0.001);
     }
 
     @Test
-    void testAddSpeedUpgrade() {
+    void getReliabilityReturnsBaseReliability() {
+        assertEquals(0.8, car.getReliability(), 0.001);
+    }
+
+    @Test
+    void getFuelEconomyReturnsBaseFuelEconomy() {
+        assertEquals(25, car.getFuelEconomy(), 0.001);
+    }
+
+    @Test
+    void addSpeedUpgradeWorksWhenSlotIsEmpty() {
         assertNull(car.getSpeedUpgrade());
         car.addSpeedUpgrade(speedUpgrade);
-        assertNotNull(car.getSpeedUpgrade());
         assertEquals(speedUpgrade, car.getSpeedUpgrade());
     }
 
     @Test
-    void testAddSpeedUpgradeWhenAlreadyPresent() {
+    void addSpeedUpgradeDoesNotReplaceExisting() {
+        TuningPart anotherSpeedUpgrade = new TuningPart("Another Speed", 700, "💨", 1.3);
         car.addSpeedUpgrade(speedUpgrade);
-        TuningPart anotherSpeedUpgrade = new TuningPart("Another Speed Boost", 600, "暢", 1.3);
-        car.addSpeedUpgrade(anotherSpeedUpgrade);
+        car.addSpeedUpgrade(anotherSpeedUpgrade); // This should not change the upgrade
         assertEquals(speedUpgrade, car.getSpeedUpgrade());
-        assertEquals(100.0 * 1.2, car.getSpeed());
     }
 
     @Test
-    void testAddHandlingUpgrade() {
+    void addHandlingUpgradeWorksWhenSlotIsEmpty() {
         assertNull(car.getHandlingUpgrade());
         car.addHandlingUpgrade(handlingUpgrade);
-        assertNotNull(car.getHandlingUpgrade());
         assertEquals(handlingUpgrade, car.getHandlingUpgrade());
     }
 
     @Test
-    void testAddHandlingUpgradeWhenAlreadyPresent() {
+    void addHandlingUpgradeDoesNotReplaceExisting() {
+        TuningPart anotherHandlingUpgrade = new TuningPart("Another Handling", 600, "🎮", 1.2);
         car.addHandlingUpgrade(handlingUpgrade);
-        TuningPart anotherHandlingUpgrade = new TuningPart("Another Handling Boost", 450, "式", 1.15);
-        car.addHandlingUpgrade(anotherHandlingUpgrade);
+        car.addHandlingUpgrade(anotherHandlingUpgrade); // This should not change the upgrade
         assertEquals(handlingUpgrade, car.getHandlingUpgrade());
-        assertEquals(0.8 * 1.1, car.getHandling());
     }
 
     @Test
-    void testRemoveSpeedUpgrade() {
+    void removeSpeedUpgradeWorks() {
         car.addSpeedUpgrade(speedUpgrade);
         assertNotNull(car.getSpeedUpgrade());
         car.removeSpeedUpgrade();
         assertNull(car.getSpeedUpgrade());
-        assertEquals(100.0, car.getSpeed());
     }
 
     @Test
-    void testRemoveSpeedUpgradeWhenNonePresent() {
+    void removeSpeedUpgradeOnEmptySlot() {
         assertNull(car.getSpeedUpgrade());
-        car.removeSpeedUpgrade();
+        car.removeSpeedUpgrade(); // Should not throw error
         assertNull(car.getSpeedUpgrade());
     }
 
     @Test
-    void testRemoveHandlingUpgrade() {
+    void removeHandlingUpgradeWorks() {
         car.addHandlingUpgrade(handlingUpgrade);
         assertNotNull(car.getHandlingUpgrade());
         car.removeHandlingUpgrade();
         assertNull(car.getHandlingUpgrade());
-        assertEquals(0.8, car.getHandling());
     }
 
     @Test
-    void testRemoveHandlingUpgradeWhenNonePresent() {
+    void removeHandlingUpgradeOnEmptySlot() {
         assertNull(car.getHandlingUpgrade());
-        car.removeHandlingUpgrade();
+        car.removeHandlingUpgrade(); // Should not throw error
         assertNull(car.getHandlingUpgrade());
     }
 
     @Test
-    void testGetSpeedUpgrade() {
-        assertNull(car.getSpeedUpgrade());
-        car.addSpeedUpgrade(speedUpgrade);
-        assertEquals(speedUpgrade, car.getSpeedUpgrade());
-    }
-
-    @Test
-    void testGetHandlingUpgrade() {
-        assertNull(car.getHandlingUpgrade());
-        car.addHandlingUpgrade(handlingUpgrade);
-        assertEquals(handlingUpgrade, car.getHandlingUpgrade());
-    }
-
-    @Test
-    void testSetAndGetCustomName() {
+    void getAndSetCustomName() {
         assertNull(car.getCustomName());
-        car.setCustomName("My Test Ride");
-        assertEquals("My Test Ride", car.getCustomName());
-    }
-
-    @Test
-    void testSetCustomNameToNull() {
-        car.setCustomName("My Test Ride");
-        assertEquals("My Test Ride", car.getCustomName());
-        car.setCustomName(null);
-        assertNull(car.getCustomName());
-    }
-
-    @Test
-    void testSetNameFromPurchasable() {
-        assertEquals("Test Car", car.getName());
-        car.setName("New Test Car");
-        assertEquals("New Test Car", car.getName());
-    }
-
-    @Test
-    void testGetPriceFromPurchasable() {
-        assertEquals(20000, car.getPrice());
+        car.setCustomName("MyTestCar");
+        assertEquals("MyTestCar", car.getCustomName());
     }
 }

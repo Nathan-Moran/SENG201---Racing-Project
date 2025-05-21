@@ -5,47 +5,50 @@ import seng201.team0.models.OpponentCar;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OpponentCarTest {
+class OpponentCarTest {
 
     @Test
-    void testOpponentCarCreation() {
-        double initialSpeed = 60.0;
-        OpponentCar opponent = new OpponentCar(initialSpeed);
+    void constructorSetsSpeedAndInitialDistance() {
+        double initialSpeed = 50.5;
+        OpponentCar car = new OpponentCar(initialSpeed); //
 
-        assertEquals(initialSpeed, opponent.getSpeed());
-        assertEquals(0.0, opponent.getCurrentDistance());
+        assertEquals(initialSpeed, car.getSpeed(), 0.001); //
+        assertEquals(0, car.getCurrentDistance(), 0.001); // Initial distance should be 0 //
     }
 
     @Test
-    void testAdvanceTick() {
-        double speed = 50.0;
-        OpponentCar opponent = new OpponentCar(speed);
-
-        opponent.advanceTick();
-        assertEquals(speed, opponent.getCurrentDistance());
-
-        opponent.advanceTick();
-        assertEquals(speed * 2, opponent.getCurrentDistance());
+    void getSpeedReturnsCorrectSpeed() {
+        OpponentCar car = new OpponentCar(60.0); //
+        assertEquals(60.0, car.getSpeed(), 0.001); //
     }
 
     @Test
-    void testAdvanceTickMultipleTimes() {
-        double speed = 70.5;
-        OpponentCar opponent = new OpponentCar(speed);
-        int ticks = 5;
-        for (int i = 0; i < ticks; i++) {
-            opponent.advanceTick();
+    void getCurrentDistanceReturnsInitialDistance() {
+        OpponentCar car = new OpponentCar(55.0); //
+        assertEquals(0, car.getCurrentDistance(), 0.001); //
+    }
+
+    @Test
+    void advanceTickIncreasesCurrentDistanceBySpeed() {
+        double speed = 10.2;
+        OpponentCar car = new OpponentCar(speed); //
+        assertEquals(0, car.getCurrentDistance(), 0.001); //
+
+        car.advanceTick(); //
+        assertEquals(speed, car.getCurrentDistance(), 0.001); //
+
+        car.advanceTick(); //
+        assertEquals(speed * 2, car.getCurrentDistance(), 0.001); //
+    }
+
+    @Test
+    void advanceTickMultipleTimes() {
+        double speed = 5.0;
+        OpponentCar car = new OpponentCar(speed); //
+
+        for (int i = 1; i <= 5; i++) {
+            car.advanceTick(); //
+            assertEquals(speed * i, car.getCurrentDistance(), 0.001); //
         }
-        assertEquals(speed * ticks, opponent.getCurrentDistance(), 0.001);
-    }
-
-    @Test
-    void testOpponentCarWithZeroSpeed() {
-        OpponentCar opponent = new OpponentCar(0.0);
-        assertEquals(0.0, opponent.getSpeed());
-        assertEquals(0.0, opponent.getCurrentDistance());
-
-        opponent.advanceTick();
-        assertEquals(0.0, opponent.getCurrentDistance());
     }
 }

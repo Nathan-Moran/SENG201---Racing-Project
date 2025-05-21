@@ -145,4 +145,7 @@ public class Shop extends ItemStorage {
         allAvailableTuningParts.add(part);
     }
 
+    public List<TuningPart> getAllAvailableTuningParts() {
+        return allAvailableTuningParts;
+    }
 }

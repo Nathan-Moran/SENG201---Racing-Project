@@ -7,9 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
-import seng201.team0.models.SetupCarTable;
 import seng201.team0.models.StarterCarInventory;
 import seng201.team0.services.GameEnvironment;
 

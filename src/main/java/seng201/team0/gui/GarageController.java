@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import seng201.team0.models.Car;
 
 
 import javafx.event.ActionEvent;
-import seng201.team0.models.SetupCarTable;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 

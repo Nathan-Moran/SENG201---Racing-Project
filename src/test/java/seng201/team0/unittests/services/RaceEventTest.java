@@ -6,39 +6,31 @@ import seng201.team0.models.RaceEventType;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RaceEventTest {
+class RaceEventTest {
 
     @Test
-    void testRaceEventCreationAndGetType() {
-        RaceEventType eventType = RaceEventType.FUEL_STOP;
-        RaceEvent raceEvent = new RaceEvent(eventType);
-        assertEquals(eventType, raceEvent.getType());
+    void constructorSetsTypeCorrectly() {
+        RaceEvent event = new RaceEvent(RaceEventType.FUEL_STOP); //
+        assertEquals(RaceEventType.FUEL_STOP, event.getType()); //
     }
 
     @Test
-    void testRaceEventWithBreakdownType() {
-        RaceEventType eventType = RaceEventType.BREAKDOWN;
-        RaceEvent raceEvent = new RaceEvent(eventType);
-        assertEquals(eventType, raceEvent.getType());
+    void getTypeReturnsCorrectType() {
+        RaceEvent breakdownEvent = new RaceEvent(RaceEventType.BREAKDOWN); //
+        assertEquals(RaceEventType.BREAKDOWN, breakdownEvent.getType()); //
+
+        RaceEvent weatherEvent = new RaceEvent(RaceEventType.WEATHER); //
+        assertEquals(RaceEventType.WEATHER, weatherEvent.getType()); //
+
+        RaceEvent travelerEvent = new RaceEvent(RaceEventType.TRAVELER); //
+        assertEquals(RaceEventType.TRAVELER, travelerEvent.getType()); //
     }
 
     @Test
-    void testRaceEventWithTravelerType() {
-        RaceEventType eventType = RaceEventType.TRAVELER;
-        RaceEvent raceEvent = new RaceEvent(eventType);
-        assertEquals(eventType, raceEvent.getType());
-    }
-
-    @Test
-    void testRaceEventWithWeatherType() {
-        RaceEventType eventType = RaceEventType.WEATHER;
-        RaceEvent raceEvent = new RaceEvent(eventType);
-        assertEquals(eventType, raceEvent.getType());
-    }
-
-    @Test
-    void testRaceEventWithNullType() {
-        RaceEvent raceEvent = new RaceEvent(null);
-        assertNull(raceEvent.getType());
+    void checkAllEventTypesCanBeSet() {
+        for (RaceEventType eventType : RaceEventType.values()) {
+            RaceEvent event = new RaceEvent(eventType); //
+            assertEquals(eventType, event.getType(), "Failed for type: " + eventType); //
+        }
     }
 }

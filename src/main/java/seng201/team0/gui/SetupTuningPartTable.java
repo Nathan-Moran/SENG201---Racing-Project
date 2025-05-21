@@ -1,8 +1,9 @@
-package seng201.team0.models;
+package seng201.team0.gui;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng201.team0.models.TuningPart;
 
 /**
  * A utility class responsible for setting up and configuring a JavaFX {@link TableView}

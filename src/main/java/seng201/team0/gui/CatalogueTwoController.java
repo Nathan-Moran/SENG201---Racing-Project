@@ -6,8 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import seng201.team0.models.Car;
-import seng201.team0.models.SetupCarTable;
-import seng201.team0.models.SetupTuningPartTable;
 import seng201.team0.models.TuningPart;
 import seng201.team0.services.DescriptionService;
 import seng201.team0.services.GameEnvironment;

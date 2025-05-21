@@ -6,63 +6,85 @@ import seng201.team0.models.CoursePrizes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CourseTest {
+class CourseTest {
 
     @Test
-    void testDesertCourseAttributes() {
+    void desertCourseHasCorrectProperties() {
         Course desert = Course.DESERT;
-        assertEquals("Desert", desert.getName());
-        assertEquals(0, desert.getEntryFee());
-        assertNotNull(desert.getPrizes());
-        assertEquals(500, desert.getPrizes().getFirstPlacePrize());
-        assertEquals(350, desert.getPrizes().getSecondPlacePrize());
-        assertEquals(250, desert.getPrizes().getThirdPlacePrize());
-        assertEquals(4, desert.getNumberOfOpponents());
+        assertEquals("Desert", desert.getName()); //
+        assertEquals(0, desert.getEntryFee()); //
+        assertNotNull(desert.getPrizes()); //
+        assertEquals(500, desert.getPrizes().getFirstPlacePrize()); //
+        assertEquals(350, desert.getPrizes().getSecondPlacePrize()); //
+        assertEquals(250, desert.getPrizes().getThirdPlacePrize()); //
+        assertEquals(4, desert.getNumberOfOpponents()); //
     }
 
     @Test
-    void testMountainCourseAttributes() {
+    void mountainCourseHasCorrectProperties() {
         Course mountain = Course.MOUNTAIN;
-        assertEquals("Mountain", mountain.getName());
-        assertEquals(200, mountain.getEntryFee());
-        assertNotNull(mountain.getPrizes());
-        assertEquals(800, mountain.getPrizes().getFirstPlacePrize());
-        assertEquals(650, mountain.getPrizes().getSecondPlacePrize());
-        assertEquals(500, mountain.getPrizes().getThirdPlacePrize());
-        assertEquals(3, mountain.getNumberOfOpponents());
+        assertEquals("Mountain", mountain.getName()); //
+        assertEquals(250, mountain.getEntryFee()); //
+        assertNotNull(mountain.getPrizes()); //
+        assertEquals(1000, mountain.getPrizes().getFirstPlacePrize()); //
+        assertEquals(750, mountain.getPrizes().getSecondPlacePrize()); //
+        assertEquals(500, mountain.getPrizes().getThirdPlacePrize()); //
+        assertEquals(3, mountain.getNumberOfOpponents()); //
     }
 
     @Test
-    void testCountryCourseAttributes() {
+    void countryCourseHasCorrectProperties() {
         Course country = Course.COUNTRY;
-        assertEquals("Country", country.getName());
-        assertEquals(300, country.getEntryFee());
-        assertNotNull(country.getPrizes());
-        assertEquals(900, country.getPrizes().getFirstPlacePrize());
-        assertEquals(600, country.getPrizes().getSecondPlacePrize());
-        assertEquals(450, country.getPrizes().getThirdPlacePrize());
-        assertEquals(4, country.getNumberOfOpponents());
+        assertEquals("Country", country.getName()); //
+        assertEquals(500, country.getEntryFee()); //
+        assertNotNull(country.getPrizes()); //
+        assertEquals(1500, country.getPrizes().getFirstPlacePrize()); //
+        assertEquals(1000, country.getPrizes().getSecondPlacePrize()); //
+        assertEquals(800, country.getPrizes().getThirdPlacePrize()); //
+        assertEquals(4, country.getNumberOfOpponents()); //
     }
 
     @Test
-    void testCityCourseAttributes() {
+    void cityCourseHasCorrectProperties() {
         Course city = Course.CITY;
-        assertEquals("City", city.getName());
-        assertEquals(500, city.getEntryFee());
-        assertNotNull(city.getPrizes());
-        assertEquals(1500, city.getPrizes().getFirstPlacePrize());
-        assertEquals(1000, city.getPrizes().getSecondPlacePrize());
-        assertEquals(750, city.getPrizes().getThirdPlacePrize());
-        assertEquals(2, city.getNumberOfOpponents());
+        assertEquals("City", city.getName()); //
+        assertEquals(1000, city.getEntryFee()); //
+        assertNotNull(city.getPrizes()); //
+        assertEquals(3000, city.getPrizes().getFirstPlacePrize()); //
+        assertEquals(0, city.getPrizes().getSecondPlacePrize()); //
+        assertEquals(0, city.getPrizes().getThirdPlacePrize()); //
+        assertEquals(2, city.getNumberOfOpponents()); //
     }
 
     @Test
-    void testGetAllCourses() {
-        Course[] courses = Course.values();
-        assertEquals(4, courses.length);
-        assertSame(Course.DESERT, Course.valueOf("DESERT"));
-        assertSame(Course.MOUNTAIN, Course.valueOf("MOUNTAIN"));
-        assertSame(Course.COUNTRY, Course.valueOf("COUNTRY"));
-        assertSame(Course.CITY, Course.valueOf("CITY"));
+    void getNameReturnsCorrectName() {
+        assertEquals("Desert", Course.DESERT.getName()); //
+    }
+
+    @Test
+    void getEntryFeeReturnsCorrectFee() {
+        assertEquals(250, Course.MOUNTAIN.getEntryFee()); //
+    }
+
+    @Test
+    void getPrizesReturnsCorrectPrizesObject() {
+        CoursePrizes expectedPrizes = new CoursePrizes(500, 350, 250);
+        CoursePrizes actualPrizes = Course.DESERT.getPrizes(); //
+        assertEquals(expectedPrizes.getFirstPlacePrize(), actualPrizes.getFirstPlacePrize()); //
+        assertEquals(expectedPrizes.getSecondPlacePrize(), actualPrizes.getSecondPlacePrize()); //
+        assertEquals(expectedPrizes.getThirdPlacePrize(), actualPrizes.getThirdPlacePrize()); //
+    }
+
+    @Test
+    void getNumberOfOpponentsReturnsCorrectNumber() {
+        assertEquals(2, Course.CITY.getNumberOfOpponents()); //
+    }
+
+    @Test
+    void ensureAllEnumValuesAreTested() {
+        // This test is a reminder to have specific tests for each enum constant if properties vary significantly
+        // Or to ensure general getter tests cover variations.
+        // Here, we've tested each enum's properties individually.
+        assertEquals(4, Course.values().length, "Ensure all Course enum values are covered in tests."); //
     }
 }

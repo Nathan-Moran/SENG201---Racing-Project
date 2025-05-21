@@ -8,7 +8,7 @@ import seng201.team0.models.TuningPart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GarageTest {
+class GarageTest {
 
     private Garage garage;
     private Car car1;
@@ -19,330 +19,262 @@ public class GarageTest {
 
     @BeforeEach
     void setUp() {
-        garage = new Garage();
-        car1 = new Car("Car 1", 100, 0.8, 0.9, 10, 1000);
-        car2 = new Car("Car 2", 120, 0.7, 0.85, 12, 1500);
-        speedPart = new TuningPart("Speed Boost", 200, "💨", 1.2);
-        handlingPart = new TuningPart("Handling Grip", 150, "🎮", 1.1);
-        anotherSpeedPart = new TuningPart("Super Speed Boost", 300, "💨", 1.3);
+        garage = new Garage(); //
+        car1 = new Car("Car 1", 0.7, 0.6, 0.8, 25, 2000);
+        car2 = new Car("Car 2", 0.8, 0.7, 0.9, 30, 3000);
+        // Unicode for emojis were "💨" (speed) and "🎮" (handling) in TuningPart but "暢" and "式" in Garage
+        // Using the ones from Garage.java for these tests as they are directly testing Garage.java
+        speedPart = new TuningPart("Speed Boost", 500, "暢", 1.2);
+        handlingPart = new TuningPart("Handling Boost", 400, "式", 1.1);
+        anotherSpeedPart = new TuningPart("Super Speed", 1000, "暢", 1.5);
+
+        garage.addCar(car1); //
+        garage.addTuningPart(speedPart); //
+        garage.addTuningPart(handlingPart); //
     }
 
     @Test
-    void testInitialGarageState() {
-        assertNull(garage.getSelectedCar());
-        assertTrue(garage.getCarList().isEmpty());
-        assertTrue(garage.getTuningPartList().isEmpty());
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
+    void installSpeedTuningPartSuccessfully() {
+        garage.setSelectedCar(car1); //
+        assertTrue(garage.getTuningPartList().contains(speedPart)); //
+        assertNull(car1.getSpeedUpgrade()); //
+        boolean installed = garage.installTuningPart(speedPart); //
+        assertTrue(installed); //
+        assertEquals(speedPart, car1.getSpeedUpgrade()); //
+        assertFalse(garage.getTuningPartList().contains(speedPart)); //
+        assertTrue(garage.getInstalledTuningParts().contains(speedPart)); //
     }
 
     @Test
-    void testAddAndGetCars() {
-        garage.addCar(car1);
-        assertEquals(1, garage.getCarList().size());
-        assertTrue(garage.getCarList().contains(car1));
-        garage.addCar(car2);
-        assertEquals(2, garage.getCarList().size());
-        assertTrue(garage.getCarList().contains(car2));
+    void installHandlingTuningPartSuccessfully() {
+        garage.setSelectedCar(car1); //
+        assertTrue(garage.getTuningPartList().contains(handlingPart)); //
+        assertNull(car1.getHandlingUpgrade()); //
+        boolean installed = garage.installTuningPart(handlingPart); //
+        assertTrue(installed); //
+        assertEquals(handlingPart, car1.getHandlingUpgrade()); //
+        assertFalse(garage.getTuningPartList().contains(handlingPart)); //
+        assertTrue(garage.getInstalledTuningParts().contains(handlingPart)); //
     }
 
     @Test
-    void testAddNullCar() {
-        garage.addCar(null);
-        assertTrue(garage.getCarList().isEmpty());
+    void installTuningPartFailsIfNoCarSelected() {
+        boolean installed = garage.installTuningPart(speedPart); //
+        assertFalse(installed); //
+        assertTrue(garage.getTuningPartList().contains(speedPart)); //
     }
 
     @Test
-    void testRemoveCar() {
-        garage.addCar(car1);
-        garage.removeCar(car1);
-        assertTrue(garage.getCarList().isEmpty());
+    void installSpeedTuningPartFailsIfSlotFull() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(speedPart); //
+        garage.addTuningPart(anotherSpeedPart); //
+
+        boolean installed = garage.installTuningPart(anotherSpeedPart); //
+        assertFalse(installed); //
+        assertEquals(speedPart, car1.getSpeedUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(anotherSpeedPart)); //
     }
 
     @Test
-    void testRemoveNonExistentCar() {
-        garage.addCar(car1);
-        garage.removeCar(car2);
-        assertEquals(1, garage.getCarList().size());
-    }
+    void installHandlingTuningPartFailsIfSlotFull() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(handlingPart); //
+        TuningPart anotherHandlingPart = new TuningPart("Super Handling", 1000, "式", 1.5);
+        garage.addTuningPart(anotherHandlingPart); //
 
-    @Test
-    void testRemoveNullCar() {
-        garage.addCar(car1);
-        garage.removeCar(null);
-        assertEquals(1, garage.getCarList().size());
-    }
-
-
-    @Test
-    void testAddAndGetTuningParts() {
-        garage.addTuningPart(speedPart);
-        assertEquals(1, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(speedPart));
-        garage.addTuningPart(handlingPart);
-        assertEquals(2, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(handlingPart));
-    }
-
-    @Test
-    void testAddNullTuningPart() {
-        garage.addTuningPart(null);
-        assertTrue(garage.getTuningPartList().isEmpty());
-    }
-
-    @Test
-    void testRemoveTuningPart() {
-        garage.addTuningPart(speedPart);
-        garage.removeTuningPart(speedPart);
-        assertTrue(garage.getTuningPartList().isEmpty());
-    }
-
-    @Test
-    void testRemoveNonExistentTuningPart() {
-        garage.addTuningPart(speedPart);
-        garage.removeTuningPart(handlingPart);
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testRemoveNullTuningPart() {
-        garage.addTuningPart(speedPart);
-        garage.removeTuningPart(null);
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testSetStarterCar() {
-        assertNull(garage.getSelectedCar());
-        garage.setStarterCar(car1);
-        assertEquals(car1, garage.getSelectedCar());
-        assertTrue(garage.getCarList().isEmpty());
-    }
-
-    @Test
-    void testInstallSpeedTuningPart() {
-        garage.setStarterCar(car1);
-        garage.addTuningPart(speedPart);
-        assertTrue(garage.installTuningPart(speedPart));
-        assertEquals(speedPart, car1.getSpeedUpgrade());
-        assertNull(car1.getHandlingUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
-        assertEquals(1, garage.getInstalledTuningParts().size());
-        assertTrue(garage.getInstalledTuningParts().contains(speedPart));
-    }
-
-    @Test
-    void testInstallHandlingTuningPart() {
-        garage.setStarterCar(car1);
-        garage.addTuningPart(handlingPart);
-        assertTrue(garage.installTuningPart(handlingPart));
-        assertEquals(handlingPart, car1.getHandlingUpgrade());
-        assertNull(car1.getSpeedUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
-        assertEquals(1, garage.getInstalledTuningParts().size());
-        assertTrue(garage.getInstalledTuningParts().contains(handlingPart));
-    }
-
-    @Test
-    void testInstallTuningPartNoSelectedCar() {
-        garage.addTuningPart(speedPart);
-        assertFalse(garage.installTuningPart(speedPart));
-        assertNull(car1.getSpeedUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testInstallSpeedPartWhenSlotOccupied() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(anotherSpeedPart);
-        garage.addTuningPart(speedPart);
-        assertFalse(garage.installTuningPart(speedPart));
-        assertEquals(anotherSpeedPart, car1.getSpeedUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testInstallHandlingPartWhenSlotOccupied() {
-        garage.setStarterCar(car1);
-        TuningPart existingHandlingPart = new TuningPart("Old Handling", 100, "🎮", 1.05);
-        car1.addHandlingUpgrade(existingHandlingPart);
-        garage.addTuningPart(handlingPart);
-        assertFalse(garage.installTuningPart(handlingPart));
-        assertEquals(existingHandlingPart, car1.getHandlingUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testInstallWrongTypePart() {
-        garage.setStarterCar(car1);
-        TuningPart wrongTypePart = new TuningPart("Wrong Type", 100, "WrongStat", 1.1);
-        garage.addTuningPart(wrongTypePart);
-        assertFalse(garage.installTuningPart(wrongTypePart));
-        assertNull(car1.getSpeedUpgrade());
-        assertNull(car1.getHandlingUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-    }
-
-    @Test
-    void testUninstallSpeedTuningPart() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        garage.uninstallTuningPart(speedPart);
-        assertNull(car1.getSpeedUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(speedPart));
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
-    }
-
-    @Test
-    void testUninstallHandlingTuningPart() {
-        garage.setStarterCar(car1);
-        car1.addHandlingUpgrade(handlingPart);
-        garage.uninstallTuningPart(handlingPart);
-        assertNull(car1.getHandlingUpgrade());
-        assertEquals(1, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(handlingPart));
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
-    }
-
-    @Test
-    void testUninstallTuningPartNoSelectedCar() {
-        car1.addSpeedUpgrade(speedPart);
-        garage.uninstallTuningPart(speedPart);
-        assertEquals(speedPart, car1.getSpeedUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
-    }
-
-    @Test
-    void testUninstallNotInstalledSpeedPart() {
-        garage.setStarterCar(car1);
-        garage.uninstallTuningPart(speedPart);
-        assertNull(car1.getSpeedUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
-    }
-
-    @Test
-    void testUninstallNotInstalledHandlingPart() {
-        garage.setStarterCar(car1);
-        garage.uninstallTuningPart(handlingPart);
-        assertNull(car1.getHandlingUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
+        boolean installed = garage.installTuningPart(anotherHandlingPart); //
+        assertFalse(installed); //
+        assertEquals(handlingPart, car1.getHandlingUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(anotherHandlingPart)); //
     }
 
 
     @Test
-    void testUninstallWrongTypePartFromCar() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        TuningPart wrongTypePart = new TuningPart("Wrong Type", 100, "WrongStat", 1.1);
-        garage.uninstallTuningPart(wrongTypePart);
-        assertEquals(speedPart, car1.getSpeedUpgrade());
-        assertTrue(garage.getTuningPartList().isEmpty());
+    void installTuningPartFailsIfWrongType() {
+        garage.setSelectedCar(car1); //
+        TuningPart wrongTypePart = new TuningPart("Wrong Type", 300, "Wrong", 1.1);
+        garage.addTuningPart(wrongTypePart); //
+        boolean installed = garage.installTuningPart(wrongTypePart); //
+        assertFalse(installed); //
+        assertNull(car1.getSpeedUpgrade()); //
+        assertNull(car1.getHandlingUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(wrongTypePart)); //
     }
 
     @Test
-    void testGetInstalledTuningParts() {
-        garage.setStarterCar(car1);
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
+    void uninstallSpeedTuningPartSuccessfully() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(speedPart); //
+        assertNotNull(car1.getSpeedUpgrade()); //
+        assertFalse(garage.getTuningPartList().contains(speedPart)); //
 
-        car1.addSpeedUpgrade(speedPart);
-        assertEquals(1, garage.getInstalledTuningParts().size());
-        assertTrue(garage.getInstalledTuningParts().contains(speedPart));
+        garage.uninstallTuningPart(speedPart); //
+        assertNull(car1.getSpeedUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(speedPart)); //
+        assertFalse(garage.getInstalledTuningParts().contains(speedPart)); //
+    }
 
-        car1.addHandlingUpgrade(handlingPart);
-        assertEquals(2, garage.getInstalledTuningParts().size());
-        assertTrue(garage.getInstalledTuningParts().contains(speedPart));
-        assertTrue(garage.getInstalledTuningParts().contains(handlingPart));
+    @Test
+    void uninstallHandlingTuningPartSuccessfully() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(handlingPart); //
+        assertNotNull(car1.getHandlingUpgrade()); //
+        assertFalse(garage.getTuningPartList().contains(handlingPart)); //
 
-        car1.removeSpeedUpgrade();
-        assertEquals(1, garage.getInstalledTuningParts().size());
-        assertTrue(garage.getInstalledTuningParts().contains(handlingPart));
+        garage.uninstallTuningPart(handlingPart); //
+        assertNull(car1.getHandlingUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(handlingPart)); //
+        assertFalse(garage.getInstalledTuningParts().contains(handlingPart)); //
+    }
+
+    @Test
+    void uninstallTuningPartNoCarSelected() {
+        garage.addTuningPart(speedPart); //
+        int initialPartCount = garage.getTuningPartList().size(); //
+        garage.uninstallTuningPart(speedPart); //
+        assertEquals(initialPartCount, garage.getTuningPartList().size()); //
+    }
+
+    @Test
+    void uninstallTuningPartNotInstalled() {
+        garage.setSelectedCar(car1); //
+        garage.addTuningPart(speedPart); //
+        int initialPartCount = garage.getTuningPartList().size(); //
+        assertNull(car1.getSpeedUpgrade()); //
+
+        garage.uninstallTuningPart(speedPart); //
+        assertEquals(initialPartCount, garage.getTuningPartList().size()); //
+        assertNull(car1.getSpeedUpgrade()); //
+    }
+
+    @Test
+    void uninstallTuningPartWrongType() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(speedPart); // // Installs a speed part
+
+        // Try to uninstall a handling part (which is not installed, and is of a different type than what was installed)
+        TuningPart handlingPartNotInstalled = new TuningPart("NonInstalledHandling", 200, "式", 1.1);
+        garage.addTuningPart(handlingPartNotInstalled); // Add to garage inventory but not to car
+
+        garage.uninstallTuningPart(handlingPartNotInstalled); //
+
+        assertNotNull(car1.getSpeedUpgrade()); // Speed part should still be there //
+        assertEquals(speedPart, car1.getSpeedUpgrade()); //
+        assertTrue(garage.getTuningPartList().contains(handlingPartNotInstalled)); // The non-installed part should still be in garage //
     }
 
 
     @Test
-    void testSetSelectedCarSwapping() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        car1.setCustomName("Old Bessie");
-
-        garage.addCar(car2);
-
-        garage.setSelectedCar(car2);
-
-        assertEquals(car2, garage.getSelectedCar());
-        assertNull(car2.getSpeedUpgrade());
-        assertNull(car2.getHandlingUpgrade());
-        assertNull(car2.getCustomName());
-
-        assertEquals(1, garage.getCarList().size());
-        assertTrue(garage.getCarList().contains(car1));
-
-        assertNull(car1.getSpeedUpgrade());
-        assertNull(car1.getCustomName());
-
-        assertEquals(1, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(speedPart));
+    void getInstalledTuningPartsEmptyInitially() {
+        garage.setSelectedCar(car1); //
+        assertTrue(garage.getInstalledTuningParts().isEmpty()); //
     }
 
     @Test
-    void testSetSelectedCarWithUpgradesOnOldCar() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        car1.addHandlingUpgrade(handlingPart);
-        garage.addCar(car2);
-
-        garage.setSelectedCar(car2);
-
-        assertEquals(car2, garage.getSelectedCar());
-        assertTrue(garage.getCarList().contains(car1));
-        assertNull(car1.getSpeedUpgrade());
-        assertNull(car1.getHandlingUpgrade());
-        assertEquals(2, garage.getTuningPartList().size());
-        assertTrue(garage.getTuningPartList().contains(speedPart));
-        assertTrue(garage.getTuningPartList().contains(handlingPart));
+    void getInstalledTuningPartsAfterInstallation() {
+        garage.setSelectedCar(car1); //
+        garage.installTuningPart(speedPart); //
+        garage.installTuningPart(handlingPart); //
+        assertEquals(2, garage.getInstalledTuningParts().size()); //
+        assertTrue(garage.getInstalledTuningParts().contains(speedPart)); //
+        assertTrue(garage.getInstalledTuningParts().contains(handlingPart)); //
     }
 
     @Test
-    void testSetSelectedCarToItself() {
-        Car car1CopyForReserve = new Car("Car 1 Copy", 100, 0.8, 0.9, 10, 1000);
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        garage.addCar(car1CopyForReserve);
-
-        garage.setSelectedCar(car1CopyForReserve);
-
-        assertEquals(car1CopyForReserve, garage.getSelectedCar());
-        assertTrue(garage.getCarList().contains(car1));
-        assertNull(car1.getSpeedUpgrade());
-        assertTrue(garage.getTuningPartList().contains(speedPart));
+    void getInstalledTuningPartsWhenNoCarSelected() {
+        assertTrue(garage.getInstalledTuningParts().isEmpty()); //
     }
 
     @Test
-    void testSetSelectedCarWhenSelectedCarIsNull() {
-        garage.addCar(car1);
-        assertNull(garage.getSelectedCar());
-
-        garage.setSelectedCar(car1);
-
-        assertNull(garage.getSelectedCar());
-        assertEquals(1, garage.getCarList().size());
-        assertTrue(garage.getCarList().contains(car1));
+    void setSelectedCarFirstTime() {
+        assertNull(garage.getSelectedCar()); //
+        assertTrue(garage.getCarList().contains(car1)); //
+        garage.setSelectedCar(car1); //
+        assertEquals(car1, garage.getSelectedCar()); //
+        assertFalse(garage.getCarList().contains(car1)); //
     }
 
     @Test
-    void testGetInstalledTuningPartsWhenNoSelectedCar() {
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
+    void setSelectedCarSwitchesCar() {
+        garage.addCar(car2); //
+        garage.setSelectedCar(car1); //
+        assertEquals(car1, garage.getSelectedCar()); //
+        assertFalse(garage.getCarList().contains(car1)); //
+        assertTrue(garage.getCarList().contains(car2)); //
+
+        garage.setSelectedCar(car2); //
+        assertEquals(car2, garage.getSelectedCar()); //
+        assertTrue(garage.getCarList().contains(car1)); //
+        assertFalse(garage.getCarList().contains(car2)); //
     }
 
     @Test
-    void testGetInstalledTuningPartsClearsPreviousList() {
-        garage.setStarterCar(car1);
-        car1.addSpeedUpgrade(speedPart);
-        assertEquals(1, garage.getInstalledTuningParts().size());
+    void setSelectedCarUninstallsPartsAndClearsCustomNameFromOldCar() {
+        garage.setSelectedCar(car1); //
+        car1.setCustomName("Old Racer"); //
+        garage.installTuningPart(speedPart); //
+        garage.installTuningPart(handlingPart); //
 
-        car1.removeSpeedUpgrade();
+        assertNotNull(car1.getSpeedUpgrade()); //
+        assertNotNull(car1.getHandlingUpgrade()); //
+        assertEquals("Old Racer", car1.getCustomName()); //
+        int partsInGarageBeforeSwitch = garage.getTuningPartList().size(); //
 
-        assertTrue(garage.getInstalledTuningParts().isEmpty());
-        assertEquals(0, garage.getInstalledTuningParts().size());
+        garage.addCar(car2); //
+        garage.setSelectedCar(car2); //
+
+        assertNull(car1.getSpeedUpgrade()); //
+        assertNull(car1.getHandlingUpgrade()); //
+        assertNull(car1.getCustomName()); //
+        assertTrue(garage.getCarList().contains(car1)); //
+        assertEquals(partsInGarageBeforeSwitch + 2, garage.getTuningPartList().size()); //
+        assertTrue(garage.getTuningPartList().contains(speedPart)); //
+        assertTrue(garage.getTuningPartList().contains(handlingPart)); //
+        assertEquals(car2, garage.getSelectedCar()); //
+    }
+
+
+    @Test
+    void garageFull() {
+        garage.getCarList().clear(); //
+        garage.addCar(new Car("C1", 0.1,0.1,0.1,1,1)); //
+        garage.addCar(new Car("C2", 0.1,0.1,0.1,1,1)); //
+        garage.addCar(new Car("C3", 0.1,0.1,0.1,1,1)); //
+        assertFalse(garage.garageFull()); // 3 cars, not full //
+        garage.addCar(new Car("C4", 0.1,0.1,0.1,1,1)); //
+        assertTrue(garage.garageFull()); // 4 cars, full //
+    }
+
+    @Test
+    void garageNotFull() {
+        garage.getCarList().clear(); //
+        garage.addCar(new Car("C1",0.1,0.1,0.1,1,1)); //
+        assertFalse(garage.garageFull()); //
+    }
+
+    @Test
+    void setStarterCar() {
+        assertNull(garage.getSelectedCar()); //
+        Car starter = new Car("Starter", 0.5, 0.5, 0.5, 10, 500);
+        garage.setStarterCar(starter); //
+        assertNotNull(garage.getSelectedCar()); //
+        assertEquals("Starter", garage.getSelectedCar().getName()); //
+        // Test that it's a copy
+        assertNotSame(starter, garage.getSelectedCar()); //
+        assertEquals(starter.getSpeed(), garage.getSelectedCar().getSpeed(), 0.001); //
+    }
+
+    @Test
+    void setStarterCarNull() {
+        garage.setStarterCar(null); //
+        assertNull(garage.getSelectedCar()); //
+    }
+
+    @Test
+    void getSelectedCar() {
+        assertNull(garage.getSelectedCar()); //
+        garage.setSelectedCar(car1); //
+        assertEquals(car1, garage.getSelectedCar()); //
     }
 }

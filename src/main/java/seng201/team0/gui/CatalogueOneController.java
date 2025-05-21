@@ -1,20 +1,14 @@
 package seng201.team0.gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
-import seng201.team0.models.ItemCatalogue; // Ensure this is imported
 import seng201.team0.services.GameEnvironment;
 import seng201.team0.models.Car;
-import seng201.team0.models.SetupCarTable;
 import seng201.team0.services.DescriptionService;
 import java.io.IOException;
-import java.util.List;
 
 public class CatalogueOneController {
 
