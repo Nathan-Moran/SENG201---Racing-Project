@@ -123,17 +123,33 @@ public class RaceManager {
     private int moneyEarned = 0;
 
     // Constants for event-related wait times and costs/profits
+    /**
+     * The number of ticks the player must wait for a car repair.
+     */
     private static final int REPAIR_WAIT_TICKS = 2;
+    /**
+     * The number of ticks the player must wait for a traveler interaction.
+     */
     private static final int TRAVELER_WAIT_TICKS = 2;
+    /**
+     * The number of ticks the player must wait for refueling.
+     */
     private static final int REFUEL_WAIT_TICKS = 1;
+    /**
+     * The cost incurred for repairing the car after a breakdown.
+     */
     private static final int REPAIR_COST = 250;
+    /**
+     * The profit gained from picking up a traveler.
+     */
     private static final int TRAVELER_PROFIT = 250;
 
 
     /**
      * Constructs a new RaceManager.
      * Initializes the race with the given race details, player car, opponents,
-     * calculated speed, and fuel consumption rate.
+     * calculated speed, and fuel consumption rate. It also calculates and sets up
+     * fuel stop distances, event trigger distances, and race duration.
      *
      * @param race The {@link Race} object containing course and route details.
      * @param playerCar The player's {@link Car}.
@@ -455,7 +471,7 @@ public class RaceManager {
         }
 
         gameEnvironment.updateHasWonCourse(race.getCourse(), finalPlacement);
-        gameEnvironment.getShopService().unlockNewPartsAndCars();
+        gameEnvironment.getShopService().unlockNewCars(); // Corrected to unlockNewCars based on ShopService
         gameEnvironment.addRacePlacement(finalPlacement);
         gameEnvironment.addPrizeMoney(moneyEarned); // Add total earnings for the race
     }
@@ -528,7 +544,7 @@ public class RaceManager {
     }
 
     /**
-     * Checks if the race was cancelled (e.g., due to weather).
+     * Checks if the race was cancelled (e.g., due to severe weather).
      * @return {@code true} if the race was cancelled, {@code false} otherwise.
      */
     public boolean isRaceCancelled() {
@@ -638,11 +654,46 @@ public class RaceManager {
         gameEnvironment.setBalance(gameEnvironment.getBalance() - entryFee);
     }
 
+    /**
+     * Gets the current {@link Race} object being managed.
+     * @return The {@link Race} instance.
+     */
     public Race getRace() {
         return race;
     }
 
+    /**
+     * Checks if the race simulation is currently ongoing.
+     * @return {@code true} if the race is active, {@code false} otherwise.
+     */
     public boolean isRacing() {
         return isRacing;
+    }
+
+    /**
+     * Gets the player's car participating in this race.
+     * @return The {@link Car} object representing the player's car.
+     */
+    public Car getPlayerCar() {
+        return playerCar;
+    }
+
+    /**
+     * Checks if the player has officially finished the race (either by reaching the end, running out of fuel, or time).
+     * This flag is set by {@link #playerFinished()} or {@link #finishRace(String)} under relevant conditions.
+     * @return {@code true} if the player has finished, {@code false} otherwise.
+     */
+    public boolean hasPlayerFinished() {
+        return playerFinished;
+    }
+
+    /**
+     * Gets the tick count at which the player officially finished the race.
+     * This value is set when {@link #playerFinished()} is called or when the race ends due to time/fuel
+     * and the player is marked as finished.
+     * @return The tick count when the player finished, or -1 if the player has not yet finished.
+     */
+    public int getPlayerFinishTick() {
+        return playerFinishTick;
     }
 }

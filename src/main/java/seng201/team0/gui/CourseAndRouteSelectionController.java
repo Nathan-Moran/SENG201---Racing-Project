@@ -97,10 +97,6 @@ public class CourseAndRouteSelectionController implements Initializable {
      * The currently selected {@link Course} for the race.
      */
     private Course selectedCourse;
-    /**
-     * The currently selected {@link Route} within the chosen course for the race.
-     */
-    private Route selectedRoute;
 
     /**
      * Initializes the controller. This method is automatically called by the FXMLLoader
@@ -130,7 +126,6 @@ public class CourseAndRouteSelectionController implements Initializable {
         cityRouteMenu.setManaged(false);
 
         selectedCourse = null;
-        selectedRoute = null;
 
 
         courseLabels.put(Course.DESERT, desertCompletedLabel);

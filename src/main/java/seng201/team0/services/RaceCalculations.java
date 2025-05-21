@@ -67,7 +67,7 @@ public final class RaceCalculations { // Made final as it's a utility class with
     public static List<OpponentCar> getFinishedOpponents(Race race) {
         return race.getOpponents().stream()
                 .filter(o -> o.getCurrentDistance() >= race.getRoute().getLength())
-                .toList(); // Using Java 16+ toList() for immutable list
+                .toList();
     }
 
     /**

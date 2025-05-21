@@ -19,11 +19,11 @@ public class RaceCalculationsTest {
 
     @BeforeEach
     void setUp() {
-        testCar = new Car("Test Car", 100, 0.8, 0.9, 10, 0);
+        testCar = new Car("Test Car", 1, 0.8, 0.9, 10, 0);
         testRoute = Route.DESERT_DRIFT;
         opponents = new ArrayList<>();
-        opponents.add(new OpponentCar(50));
-        opponents.add(new OpponentCar(60));
+        opponents.add(new OpponentCar(1));
+        opponents.add(new OpponentCar(1.1));
 
         testRace = new Race(Course.DESERT, testRoute, Difficulty.EASY);
         testRace.setOpponents(opponents);

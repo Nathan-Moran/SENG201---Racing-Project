@@ -395,38 +395,4 @@ public class GameEnvironment {
         this.racePlacements.add(placement);
     }
 
-    /**
-     * Retrieves a list of the player's placements in completed races.
-     * Each integer in the list represents the player's final position
-     * in a specific race, where 1 indicates first place.
-     *
-     * @return A {@code List} of {@code Integer} objects, where each integer
-     * is a race placement. The list is empty if no races have been completed.
-     */
-    public List<Integer> getRacePlacements() {
-        return racePlacements;
-    }
-
-    /**
-     * Sets the {@link ShopService} instance for this game environment.
-     * This method is typically used during the initial setup of the game
-     * to provide the game environment with access to shop-related business logic.
-     *
-     * @param shopService The {@link ShopService} instance to be used by this game environment.
-     */
-    public void setShopService(ShopService shopService) {
-        // Implementation would likely involve setting an instance variable:
-        // this.shopService = shopService;
-    }
-
-    /**
-     * Sets the currently selected {@link Course} for the game.
-     * This is often used before a race begins to define which course the player will compete on.
-     *
-     * @param course The {@link Course} to be set as the currently selected course.
-     */
-    public void setSelectedCourse(Course course) {
-        // Implementation would likely involve setting an instance variable:
-        // this.selectedCourse = course;
-    }
 }
