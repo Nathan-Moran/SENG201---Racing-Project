@@ -32,10 +32,13 @@ public class Car extends Purchasable {
      */
     private TuningPart speedUpgrade;
 
+    /**
+     * A custom name given to the car by the player. Null if no custom name is set.
+     */
     private String customName;
 
     /**
-     * Constructs a new Car instance.
+     * Constructs a new Car instance with specified base statistics and price.
      *
      * @param name         The name of the car model.
      * @param speed        The base speed of the car.
@@ -52,29 +55,51 @@ public class Car extends Purchasable {
         this.baseFuelEconomy = fuelEconomy;
     }
 
+    /**
+     * Constructs a new Car instance as a copy of an existing Car object.
+     * This is useful for creating new instances without carrying over installed upgrades or custom names.
+     *
+     * @param other The {@link Car} object to copy.
+     */
     public Car(Car other) {
         super(other.getName(), other.getPrice());
         this.baseSpeed = other.baseSpeed;
         this.baseHandling = other.baseHandling;
         this.baseReliability = other.baseReliability;
         this.baseFuelEconomy = other.baseFuelEconomy;
-        this.speedUpgrade = null;
-        this.handlingUpgrade = null;
-        this.customName = null;
+        this.speedUpgrade = null; // Copy constructor should typically not copy transient state like upgrades
+        this.handlingUpgrade = null; // Copy constructor should typically not copy transient state like upgrades
+        this.customName = null; // Custom name is not copied
     }
 
+    /**
+     * Gets the reliability of the car formatted as a percentage string.
+     * @return A string representing the reliability (e.g., "70%").
+     */
     public String getReliabilityPercent() {
         return String.format("%.0f%%", getReliability() * 100);
     }
 
+    /**
+     * Gets the current speed of the car formatted as a string, scaled for display.
+     * @return A string representing the scaled speed.
+     */
     public String getSpeedString() {
         return String.format("%.0f", getSpeed() * 350);
     }
 
+    /**
+     * Gets the current handling of the car formatted as a percentage string.
+     * @return A string representing the handling (e.g., "80%").
+     */
     public String getHandlingPercent() {
         return String.format("%.0f%%", getHandling() * 100);
     }
 
+    /**
+     * Gets the current fuel economy of the car formatted as a string, scaled for display.
+     * @return A string representing the scaled fuel economy.
+     */
     public String getFuelEconomyString() {
         return String.format("%.0f", getFuelEconomy() * 30);
     }
@@ -172,7 +197,7 @@ public class Car extends Purchasable {
      * @return The installed speed {@link TuningPart}, or null if no speed upgrade is installed.
      */
     public TuningPart getSpeedUpgrade() {
-            return speedUpgrade;
+        return speedUpgrade;
     }
 
     /**
@@ -181,13 +206,21 @@ public class Car extends Purchasable {
      * @return The installed handling {@link TuningPart}, or null if no handling upgrade is installed.
      */
     public TuningPart getHandlingUpgrade() {
-            return handlingUpgrade;
+        return handlingUpgrade;
     }
 
+    /**
+     * Gets the custom name of the car.
+     * @return The custom name, or null if no custom name has been set.
+     */
     public String getCustomName() {
         return customName;
     }
 
+    /**
+     * Sets a custom name for the car.
+     * @param name The new custom name for the car.
+     */
     public void setCustomName(String name) {
         this.customName = name;
     }

@@ -7,6 +7,7 @@ import java.util.Map;
  * Provides static descriptions for various cars and tuning parts in the game.
  * This service acts as a centralized lookup for explanatory text that can be
  * displayed in the UI (e.g., in shop or garage screens).
+ * It is a utility class, and therefore its constructor is private to prevent instantiation.
  */
 public class DescriptionService {
 
@@ -20,6 +21,14 @@ public class DescriptionService {
      * Keys are tuning part names (String), values are their descriptions (String).
      */
     private static final Map<String, String> tuningPartDescriptions = new HashMap<>();
+
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     * All methods in this class are static and can be accessed directly.
+     */
+    private DescriptionService() {
+        // Private constructor to prevent instantiation
+    }
 
     static {
         carDescriptions.put("Honda Civic", "A well-rounded entry point, the Civic R offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.");

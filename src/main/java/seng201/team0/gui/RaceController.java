@@ -16,74 +16,177 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controller for the Race Scene. Manages the real-time simulation and
+ * visual representation of a race, including player and opponent progress,
+ * fuel levels, event pop-ups, and race conclusion logic.
+ */
 public class RaceController {
 
+    /**
+     * ImageView for displaying the background image of the race route.
+     */
     @FXML
     private ImageView routeImage;
+    /**
+     * Label for displaying the player's current money.
+     */
     @FXML
     private Label moneyLabel;
+    /**
+     * Label for displaying the total length of the current race route.
+     */
     @FXML
     private Label raceLengthLabel;
+    /**
+     * ProgressBar for visualizing the player's current fuel level.
+     */
     @FXML
     private ProgressBar fuelGauge;
+    /**
+     * VBox container for displaying the race leaderboard.
+     */
     @FXML
     private VBox leaderboardBox;
+    /**
+     * Label for displaying the remaining time in the race.
+     */
     @FXML
     private Label timerLabel;
 
     // Popups
+    /**
+     * VBox container for the fuel stop event popup.
+     */
     @FXML
     private VBox fuelStopPopup;
+    /**
+     * VBox container for the breakdown event popup.
+     */
     @FXML
     private VBox breakdownPopup;
+    /**
+     * VBox container for the traveler event popup.
+     */
     @FXML
     private VBox travelerPopup;
+    /**
+     * VBox container for the weather event popup.
+     */
     @FXML
     private VBox weatherPopup;
+    /**
+     * VBox container for the traveler pay confirmation popup.
+     */
     @FXML
     private VBox travelerPayPopup;
 
+    /**
+     * Button to stop for fuel during a fuel stop event.
+     */
     @FXML
     private Button stopForFuelButton;
+    /**
+     * Button to continue without fueling during a fuel stop event.
+     */
     @FXML
     private Button continueWithoutFuelButton;
+    /**
+     * Button to withdraw from the race (typically due to breakdown).
+     */
     @FXML
     private Button withdrawButton;
+    /**
+     * Button to repair the car during a breakdown event.
+     */
     @FXML
     private Button repairButton;
+    /**
+     * Button to pick up a traveler during a traveler event.
+     */
     @FXML
     private Button pickUpButton;
+    /**
+     * Button to drive past a traveler during a traveler event.
+     */
     @FXML
     private Button drivePastButton;
+    /**
+     * Button to continue after a weather event (race cancellation).
+     */
     @FXML
     private Button continueAfterWeatherButton;
 
     //Race animations
+    /**
+     * Rectangle representing the visual race track line for car animation.
+     */
     @FXML
     private Rectangle raceTrackLine;
+    /**
+     * ImageView for displaying the start flag.
+     */
     @FXML
     private ImageView startFlagImageView;
+    /**
+     * ImageView for displaying the finish flag.
+     */
     @FXML
     private ImageView finishFlagImageView;
+    /**
+     * ImageView for displaying the player's car during the race animation.
+     */
     @FXML
     private ImageView carImage;
+    /**
+     * Label for displaying the time left in the race (redundant with timerLabel, but present in FXML).
+     */
     @FXML
     private Label timeLeftLabel;
 
 
+    /**
+     * The game environment, providing access to game state and services.
+     */
     protected GameEnvironment gameEnvironment;
+    /**
+     * The scene navigator for switching between different application scenes.
+     */
     protected SceneNavigator sceneNavigator;
 
+    /**
+     * The RaceManager instance handling the core race simulation logic.
+     */
     private RaceManager raceManager;
+    /**
+     * Timeline for advancing the race simulation ticks.
+     */
     private Timeline raceTimeline;
+    /**
+     * Timeline for updating the on-screen timer.
+     */
     private Timeline timerTimeline;
+    /**
+     * Timeline for controlling the visibility of the traveler pay popup.
+     */
     private Timeline travelerPayTimeline;
 
+    /**
+     * Constructs a RaceController.
+     * @param gameEnvironment The current game environment.
+     * @param sceneNavigator The scene navigator for scene transitions.
+     */
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
     }
 
+    /**
+     * Initializes the Race Scene controller. This method is automatically called
+     * by the FXMLLoader after the FXML file has been loaded. It sets up the
+     * RaceManager, initializes UI elements, configures event handlers for pop-up buttons,
+     * and starts the race simulation timelines.
+     */
     public void initialize() {
         Race currentRace = gameEnvironment.getCurrentRace();
         Car currentCar = gameEnvironment.getSelectedCar();
@@ -169,6 +272,11 @@ public class RaceController {
         startRace();
     }
 
+    /**
+     * Determines the image path for the race background based on the selected course.
+     * @param course The Course enum representing the selected course.
+     * @return The string path to the background image resource.
+     */
     private String getImagePathForCourse(Course course) {
         switch (course.getName().toLowerCase()) {
             case "desert":
@@ -184,11 +292,20 @@ public class RaceController {
         }
     }
 
+    /**
+     * Starts the race simulation by playing the race and timer timelines.
+     */
     private void startRace() {
         raceTimeline.play();
         timerTimeline.play();
     }
 
+    /**
+     * Advances the race simulation by one tick. This method is called repeatedly
+     * by the {@code raceTimeline}. It updates the race manager, checks for events,
+     * updates the UI, and triggers the race finish sequence if the race concludes.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
+     */
     private void advanceRace() throws IOException {
         if (raceManager.isRacing()) {
             raceManager.advanceRaceTick();
@@ -200,6 +317,10 @@ public class RaceController {
         }
     }
 
+    /**
+     * Updates all dynamic UI elements on the race screen, including money,
+     * race length, fuel gauge, leaderboard, and car animation.
+     */
     private void updateUI() {
         moneyLabel.setText(String.valueOf((int) gameEnvironment.getBalance()));
         raceLengthLabel.setText((int) raceManager.getRace().getRoute().getLength() + " km");
@@ -229,7 +350,10 @@ public class RaceController {
     }
 
 
-
+    /**
+     * Updates the color of the fuel gauge based on the current fuel level
+     * to provide visual warnings for low fuel.
+     */
     private void updateFuelGauge() {
         double fuelLevel = raceManager.getFuelLevel();
         if (fuelLevel < 0.2) {
@@ -241,6 +365,9 @@ public class RaceController {
         }
     }
 
+    /**
+     * Updates the leaderboard display in the UI, showing player and opponent distances.
+     */
     private void updateLeaderboardDisplay() {
         leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size());
 
@@ -258,6 +385,10 @@ public class RaceController {
     }
 
 
+    /**
+     * Checks for active race events (breakdown, traveler, weather, fuel stop)
+     * and pauses the race timeline to display the corresponding pop-up.
+     */
     private void eventChecker() {
         RaceEvent event = raceManager.getCurrentEvent();
         if (event != null && raceManager.isWaiting()) {
@@ -282,6 +413,10 @@ public class RaceController {
         }
     }
 
+    /**
+     * Handles the player's decision at a fuel stop event.
+     * @param refuel True if the player chooses to refuel, false otherwise.
+     */
     private void handleFuelStop(boolean refuel) {
         fuelStopPopup.setVisible(false);
         raceManager.handleFuelStop(refuel);
@@ -290,6 +425,11 @@ public class RaceController {
         timerTimeline.play();
     }
 
+    /**
+     * Handles the player's decision during a car breakdown event.
+     * @param pay True if the player chooses to pay for repairs, false to withdraw.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
+     */
     private void handleRepair(boolean pay) throws IOException {
         breakdownPopup.setVisible(false);
         if (pay) {
@@ -314,6 +454,10 @@ public class RaceController {
     }
 
 
+    /**
+     * Handles the player's decision during a traveler event.
+     * @param pickUp True if the player chooses to pick up the traveler, false to drive past.
+     */
     private void handleTraveler(boolean pickUp) {
         travelerPopup.setVisible(false);
         if (pickUp) {
@@ -329,6 +473,10 @@ public class RaceController {
         }
     }
 
+    /**
+     * Handles the continuation after a weather event, which cancels the race.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
+     */
     private void handleWeatherContinue() throws IOException {
         weatherPopup.setVisible(false);
         raceManager.handleWeather(gameEnvironment);
@@ -338,6 +486,12 @@ public class RaceController {
     }
 
 
+    /**
+     * Concludes the race simulation. Stops all timelines, retrieves race results
+     * from the RaceManager, awards prize money, updates game environment stats,
+     * and navigates to the Race Finish Scene.
+     * @throws IOException If an error occurs during scene transition to the finish screen.
+     */
     private void finishRace() throws IOException {
         raceTimeline.stop();
         timerTimeline.stop();

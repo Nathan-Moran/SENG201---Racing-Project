@@ -22,18 +22,54 @@ import java.util.ResourceBundle;
  */
 public class GaragePartsController implements Initializable {
 
+    /**
+     * The game environment instance, providing access to global game state and services.
+     */
     protected GameEnvironment gameEnvironment;
+    /**
+     * The scene navigator instance, used for switching between different application scenes.
+     */
     protected SceneNavigator sceneNavigator;
+    /**
+     * The currently active car in the garage, on which tuning parts can be installed or uninstalled.
+     */
     protected Car activeCar;
+    /**
+     * Helper class for setting up and configuring {@link TableView} for {@link TuningPart} objects.
+     */
     private SetupTuningPartTable setupTuningPartTable;
 
+    /**
+     * TableColumn for displaying the boost value of tuning parts in the reserve inventory.
+     */
     @FXML private TableColumn<TuningPart, Double> reservePartBoostColumn;
+    /**
+     * TableColumn for displaying the boost value of tuning parts currently installed on the active car.
+     */
     @FXML private TableColumn<TuningPart, Double> installedPartBoostColumn;
+    /**
+     * TableColumn for displaying the name of tuning parts in the reserve inventory.
+     */
     @FXML private TableColumn<TuningPart, String> reservePartNameColumn;
+    /**
+     * TableColumn for displaying the name of tuning parts currently installed on the active car.
+     */
     @FXML private TableColumn<TuningPart, String> installedPartNameColumn;
+    /**
+     * TableColumn for displaying the affected stat of tuning parts in the reserve inventory.
+     */
     @FXML private TableColumn<TuningPart, String> reservePartStatColumn;
+    /**
+     * TableColumn for displaying the affected stat of tuning parts currently installed on the active car.
+     */
     @FXML private TableColumn<TuningPart, String> installedPartStatColumn;
+    /**
+     * TableView for displaying tuning parts that are in the player's general inventory (reserve).
+     */
     @FXML private TableView<TuningPart> reserveTuningPartTable;
+    /**
+     * TableView for displaying tuning parts that are currently installed on the {@link #activeCar}.
+     */
     @FXML private TableView<TuningPart> installedTuningPartTable;
 
     /**
@@ -62,6 +98,7 @@ public class GaragePartsController implements Initializable {
     /**
      * Handles the action of installing a selected tuning part from the reserve parts table to the active car.
      * If a part is selected, it is installed, and both the installed and reserve parts tables are updated.
+     * An alert is shown if the part is incompatible (e.g., trying to install two of the same type).
      *
      * @param event The action event triggered by the installation part button.
      */
@@ -84,7 +121,8 @@ public class GaragePartsController implements Initializable {
 
     /**
      * Handles the action of removing a selected tuning part from the installed parts table of the active car.
-     * If a part is selected, it is removed and moved to reserve, and both tables are updated.
+     * If a part is selected, it is removed from the active car and moved back to the player's reserve inventory,
+     * and both tables are subsequently updated to reflect these changes.
      *
      * @param event The action event triggered by the remove part button.
      */
@@ -126,15 +164,15 @@ public class GaragePartsController implements Initializable {
     }
 
     /**
-     * Sets up the columns for the installed tuning parts table (tuningPartTable1),
-     * binding them to the properties of the TuningPart class and populating it with
+     * Sets up the columns for the installed tuning parts table ({@link #installedTuningPartTable}),
+     * binding them to the properties of the {@link TuningPart} class and populating it with
      * parts currently installed on the active car.
      */
     protected void setupInstalledPartsTable() {
         setupTuningPartTable.setupTuningPartTable(
                 installedTuningPartTable,
                 installedPartNameColumn,
-                null,
+                null, // Price column is not applicable for installed parts display
                 installedPartStatColumn,
                 installedPartBoostColumn
         );
@@ -142,15 +180,15 @@ public class GaragePartsController implements Initializable {
     }
 
     /**
-     * Sets up the columns for the reserve tuning parts table (tuningPartTable),
-     * binding them to the properties of the TuningPart class and populating it with
-     * tuning parts in the player's general inventory (not installed).
+     * Sets up the columns for the reserve tuning parts table ({@link #reserveTuningPartTable}),
+     * binding them to the properties of the {@link TuningPart} class and populating it with
+     * tuning parts in the player's general inventory (not installed on a car).
      */
     protected void setupReservePartsTable() {
         setupTuningPartTable.setupTuningPartTable(
                 reserveTuningPartTable,
                 reservePartNameColumn,
-                null,
+                null, // Price column is not applicable for reserve parts display in this context
                 reservePartStatColumn,
                 reservePartBoostColumn
         );

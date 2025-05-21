@@ -24,7 +24,9 @@ public class Shop extends ItemStorage {
 
     /**
      * Constructs a new Shop instance.
-     * Initializes the maps for locked cars and tuning parts.
+     * Initializes the maps for locked cars and tuning parts, and populates
+     * the master lists of all available items.
+     * @param gameEnvironment The {@link GameEnvironment} instance for accessing item catalogue.
      */
     public Shop(GameEnvironment gameEnvironment) {
         super();
@@ -39,7 +41,9 @@ public class Shop extends ItemStorage {
     }
 
     /**
-     * Populates the master lists with standard, non-starter items.
+     * Populates the master lists with standard, non-starter items from the item catalogue.
+     * This includes all cars and tuning parts that can eventually appear in the shop,
+     * whether initially available or locked.
      */
     private void populateBaseMasterLists() {
         ItemCatalogue catalogue = gameEnvironment.getItemCatalogue();
@@ -62,6 +66,8 @@ public class Shop extends ItemStorage {
 
     /**
      * Sets up the mappings for items that are initially locked.
+     * This method associates specific cars and tuning parts with the {@link Course}
+     * that needs to be completed to unlock them.
      */
     private void setupLockedItems() {
 
@@ -86,9 +92,8 @@ public class Shop extends ItemStorage {
     }
 
     /**
-     * Populates the shop's initial inventory with available cars and tuning parts.
-     * This method also sets up the mapping for locked items that will be unlocked
-     * by winning specific courses.
+     * Populates the shop's initial inventory with a randomized selection of available cars and tuning parts.
+     * This method is typically called at the start of a new shop session to display items for purchase.
      */
     public void setShopInventory() {
         getCarList().clear();
@@ -107,6 +112,10 @@ public class Shop extends ItemStorage {
         }
     }
 
+    /**
+     * Retrieves the master list of all cars that can potentially be available in the shop.
+     * @return A {@link List} of all available {@link Car} objects.
+     */
     public List<Car> getAllAvailableCars() {
         return allAvailableCars;
     }
@@ -129,18 +138,38 @@ public class Shop extends ItemStorage {
         lockedCarsMap.remove(course);
     }
 
+    /**
+     * Removes a specific car from the master list of all available cars.
+     * This is typically called when a car is purchased by the player.
+     * @param car The {@link Car} to be removed.
+     */
     public void removeCarFromAllAvailable(Car car) {
         allAvailableCars.remove(car);
     }
 
+    /**
+     * Removes a specific tuning part from the master list of all available tuning parts.
+     * This is typically called when a tuning part is purchased by the player.
+     * @param part The {@link TuningPart} to be removed.
+     */
     public void removePartFromAllAvailable(TuningPart part) {
         allAvailableTuningParts.remove(part);
     }
 
+    /**
+     * Adds a specific car back to the master list of all available cars.
+     * This is typically called when a car is sold by the player back to the shop.
+     * @param car The {@link Car} to be added.
+     */
     public void addCarToAllAvailable(Car car) {
         allAvailableCars.add(car);
     }
 
+    /**
+     * Adds a specific tuning part back to the master list of all available tuning parts.
+     * This is typically called when a tuning part is sold by the player back to the shop.
+     * @param part The {@link TuningPart} to be added.
+     */
     public void addPartToAllAvailable(TuningPart part) {
         allAvailableTuningParts.add(part);
     }
