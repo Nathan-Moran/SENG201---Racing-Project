@@ -151,7 +151,6 @@ public class SceneNavigator {
         fxml = "/fxml/courseSelector.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
-        // Set the controller using controller factory
         loader.setControllerFactory(ignoredControllerClass ->
                 new CourseAndRouteSelectionController(this.gameEnvironment, this)
         );
@@ -251,19 +250,16 @@ public class SceneNavigator {
         title = "Race Results";
         fxml = "/fxml/RaceFinishScreen.fxml";
 
-        // Set controller factory to inject GameEnvironment and SceneNavigator
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         loader.setControllerFactory(ignoredClass -> new RaceFinishController(this.gameEnvironment, this));
 
         Parent parent = loader.load();
 
-        // Get the controller instance created via factory
         RaceFinishController controller = loader.getController();
 
-        // Set the race results after FXML has loaded
         controller.setRaceResults(reason, placement, leaderboard, earnings);
 
-        // Create and show the new scene
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setTitle(title);
@@ -329,23 +325,20 @@ public class SceneNavigator {
      */
     public void switchToSceneTutorial(ActionEvent event) throws IOException {
         title = "How to Play";
-        // Ensure the FXML file path matches where you saved TutorialScreen.fxml
-        // For example, if it's in resources/gui/TutorialScreen.fxml, use "/gui/TutorialScreen.fxml"
         fxml = "/fxml/Tutorial2Scene.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 
         loader.setControllerFactory(ignoredControllerClass ->
-                new TutorialController(this.gameEnvironment, this) // Pass gameEnvironment to your TutorialController
+                new TutorialController(this.gameEnvironment, this)
         );
 
         Parent parent = loader.load();
-        // Get the current stage from the event source to ensure the correct window is used
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
 
         stage.setScene(scene);
         stage.setTitle(title);
-        stage.show(); // Make sure the stage is shown if it wasn't already
+        stage.show();
     }
 
 

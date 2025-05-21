@@ -46,7 +46,7 @@ public class RaceFinishController {
             mainMenuButton.setVisible(false);
             mainMenuButton.setManaged(false);
             newRaceButton.setText("View End Screen");
-            newRaceButton.setOnAction(event -> { // Lambda for the end screen button
+            newRaceButton.setOnAction(event -> {
                 try {
                     sceneNavigator.switchToFinishGameScene(event);
                 } catch (IOException e) {
@@ -58,7 +58,7 @@ public class RaceFinishController {
             mainMenuButton.setVisible(true);
             mainMenuButton.setManaged(true);
             newRaceButton.setText("New Race");
-            newRaceButton.setOnAction(event -> { // Lambda for the new race button
+            newRaceButton.setOnAction(event -> {
                 try {
                     sceneNavigator.switchToSceneCourseAndRoute(event);
                 } catch (IOException e) {
@@ -71,7 +71,7 @@ public class RaceFinishController {
 
     @FXML
     private void initialize() {
-        mainMenuButton.setOnAction(event -> { // Lambda for the main menu button
+        mainMenuButton.setOnAction(event -> {
             try {
                 sceneNavigator.switchToSceneMainMenu(event);
             } catch (IOException e) {

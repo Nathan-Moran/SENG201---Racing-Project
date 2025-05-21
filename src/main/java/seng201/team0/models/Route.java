@@ -96,7 +96,6 @@ public enum Route {
     public List<OpponentCar> generateOpponents(int count) {
         List<OpponentCar> opponents = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            // Speed of opponents slightly increases with their "rank" for a more challenging race
             double speed = opponentSpeed + (i * 0.1);
             opponents.add(new OpponentCar(speed));
         }

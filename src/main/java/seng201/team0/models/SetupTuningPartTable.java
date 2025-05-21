@@ -26,10 +26,10 @@ public class SetupTuningPartTable {
             TableView<TuningPart> tuningPartTable,
             TableColumn<TuningPart, String> partNameColumn,
             TableColumn<TuningPart, Integer> partPriceColumn,
-            TableColumn<TuningPart, String> partStatColumn, // Assuming stat is a String (emoji)
+            TableColumn<TuningPart, String> partStatColumn,
             TableColumn<TuningPart, Double> partBoostColumn) {
 
-        // Use PropertyValueFactory to link table columns to TuningPart object properties
+
         if (partNameColumn != null) {
             partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         }

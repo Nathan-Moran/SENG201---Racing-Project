@@ -46,9 +46,6 @@ public class Season {
      */
     public void addRace(Course course, Route route, List<OpponentCar> opponents, double raceDuration, Difficulty difficulty) {
         if (races.size() < length) {
-            // Note: The 'opponents' and 'raceDuration' parameters passed here are redundant
-            // because the Race constructor already generates opponents based on course and route,
-            // and route itself holds duration. Consider simplifying this method signature.
             races.add(new Race(course, route, difficulty));
         } else {
             System.out.println("Season is full. Cannot add more races.");

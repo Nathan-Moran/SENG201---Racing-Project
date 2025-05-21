@@ -9,21 +9,17 @@ import java.io.IOException;
 
 public class TutorialController {
 
-    private GameEnvironment gameEnvironment; // Reference to your GameEnvironment
+    private GameEnvironment gameEnvironment;
     private SceneNavigator sceneNavigator;
 
-    // Constructor to inject GameEnvironment (if your app setup uses this pattern)
+
     public TutorialController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
     }
 
-    // Default constructor if your FXML Loader needs one (e.g., if not using ControllerFactory)
     public TutorialController() {
-        // You'll need to set the gameEnvironment later if you use this,
-        // or ensure your FXML loader handles dependency injection.
     }
-
 
     @FXML
     private void onMenuButtonClicked(ActionEvent event) throws IOException {

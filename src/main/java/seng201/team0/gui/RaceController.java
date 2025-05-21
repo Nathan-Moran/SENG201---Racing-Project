@@ -29,7 +29,7 @@ public class RaceController {
     @FXML
     private VBox leaderboardBox;
     @FXML
-    private Label timerLabel; // Added timer label
+    private Label timerLabel;
 
     // Popups
     @FXML
@@ -58,7 +58,7 @@ public class RaceController {
     @FXML
     private Button continueAfterWeatherButton;
 
-    //Added some stuff for race animations
+    //Race animations
     @FXML
     private Rectangle raceTrackLine;
     @FXML
@@ -85,7 +85,6 @@ public class RaceController {
     }
 
     public void initialize() {
-        // Setup race manager
         Race currentRace = gameEnvironment.getCurrentRace();
         Car currentCar = gameEnvironment.getSelectedCar();
         Course selectedCourse = gameEnvironment.getSelectedCourse();
@@ -97,7 +96,6 @@ public class RaceController {
                     routeImage.setImage(backgroundImage);
                 } catch (NullPointerException e) {
                     System.err.println("Error loading background image: " + imagePath);
-                    // Optionally set a default image here if loading fails
                 }
             } else {
 
@@ -172,7 +170,6 @@ public class RaceController {
     }
 
     private String getImagePathForCourse(Course course) {
-        // You'll need to define the logic to map courses to image paths
         switch (course.getName().toLowerCase()) {
             case "desert":
                 return "/fxml/desert.jpg";
@@ -183,7 +180,7 @@ public class RaceController {
             case "city":
                 return "/fxml/city.png";
             default:
-                return "/fxml/desert.png"; // Default image
+                return "/fxml/desert.png";
         }
     }
 
@@ -209,8 +206,7 @@ public class RaceController {
         fuelGauge.setProgress(raceManager.getFuelLevel());
         updateLeaderboardDisplay();
         updateFuelGauge();
-        //some code for the car animation
-        //might want to move this code to a controller
+
         if (carImage != null && raceTrackLine != null && raceManager != null && raceManager.getRace().getRoute().getLength() > 0) {
             double playerDistance = raceManager.getPlayerDistance();
             double routeLength = raceManager.getRace().getRoute().getLength();
@@ -246,7 +242,7 @@ public class RaceController {
     }
 
     private void updateLeaderboardDisplay() {
-        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size()); // Keep title, remove old entries
+        leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size());
 
         // Player
         Label playerLabel = new Label("Player: " + (int) raceManager.getPlayerDistance() + " km");
@@ -266,7 +262,7 @@ public class RaceController {
         RaceEvent event = raceManager.getCurrentEvent();
         if (event != null && raceManager.isWaiting()) {
             raceTimeline.pause();
-            timerTimeline.pause(); // Pause the timer during events
+            timerTimeline.pause();
             switch (event.getType()) {
                 case BREAKDOWN:
                     breakdownPopup.setVisible(true);
@@ -282,7 +278,7 @@ public class RaceController {
                     break;
             }
         } else if (!raceManager.isWaiting() && raceManager.getCurrentEvent() == null && travelerPayPopup.isVisible()) {
-            travelerPayPopup.setVisible(false); // Ensure it's hidden if waiting ends without a new event
+            travelerPayPopup.setVisible(false);
         }
     }
 
@@ -291,31 +287,30 @@ public class RaceController {
         raceManager.handleFuelStop(refuel);
         updateUI();
         raceTimeline.play();
-        timerTimeline.play(); // Resume timer
+        timerTimeline.play();
     }
 
-    private void handleRepair(boolean pay) throws IOException { // Add throws IOException here
+    private void handleRepair(boolean pay) throws IOException {
         breakdownPopup.setVisible(false);
         if (pay) {
-            if (gameEnvironment.getBalance() < 250) { // Assuming REPAIR_COST is 250
+            if (gameEnvironment.getBalance() < 250) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Funds");
                 alert.setHeaderText(null);
                 alert.setContentText("You do not have the required funds to repair");
                 alert.showAndWait();
-                // If funds are insufficient, stay in breakdown state, don't resume race
-                breakdownPopup.setVisible(true); // Re-show popup
-                return; // Exit method
+                breakdownPopup.setVisible(true);
+                return;
             }
-            raceManager.handleRepair(true, gameEnvironment); // Pass true as player chose to pay
+            raceManager.handleRepair(true, gameEnvironment);
         } else {
-            // Player chose NOT to pay (withdraw)
-            raceManager.handleRepair(false, gameEnvironment); // Pass false for pay
-            finishRace(); // Immediately finish the race
-            return; // Exit method
+
+            raceManager.handleRepair(false, gameEnvironment);
+            finishRace();
+            return;
         }
         raceTimeline.play();
-        timerTimeline.play(); // Resume timer
+        timerTimeline.play();
     }
 
 
@@ -338,8 +333,8 @@ public class RaceController {
         weatherPopup.setVisible(false);
         raceManager.handleWeather(gameEnvironment);
         raceTimeline.play();
-        timerTimeline.play(); // Resume timer
-        finishRace(); // Trigger finish sequence to show cancellation
+        timerTimeline.play();
+        finishRace();
     }
 
 
@@ -354,7 +349,7 @@ public class RaceController {
         }
         int placement;
         if (Objects.equals(reason, "Car broke down! You withdrew from the race.") || Objects.equals(reason, "Weather has cancelled the race!") || Objects.equals(reason, "Out of fuel!")) {
-            placement = raceManager.getOpponents().size() + 1; // Last place or indicates withdrawal/cancellation
+            placement = raceManager.getOpponents().size() + 1;
         } else {
             placement = raceManager.getPlayerPlacement();
         }
@@ -382,7 +377,7 @@ public class RaceController {
                     break;
             }
         } else {
-            placementText = "Race Over"; // Default message
+            placementText = "Race Over";
         }
         gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
         gameEnvironment.getShopService().unlockNewPartsAndCars();

@@ -37,7 +37,6 @@ public class Race {
         this.course = course;
         this.route = route;
         this.difficulty = difficulty;
-        // Generate opponents based on the route's method and the course's required number of opponents
         this.opponents = route.generateOpponents(course.getNumberOfOpponents());
     }
 

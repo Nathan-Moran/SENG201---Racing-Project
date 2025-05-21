@@ -28,7 +28,7 @@ public class Shop extends ItemStorage {
      * Initializes the maps for locked cars and tuning parts.
      */
     public Shop() {
-        super(); // Call the constructor of ItemStorage to initialize carList and tuningPartList
+        super();
         this.lockedCarsMap = new HashMap<>();
         this.lockedTuningPartMap = new HashMap<>();
     }

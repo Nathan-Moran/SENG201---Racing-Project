@@ -35,13 +35,13 @@ public class CourseAndRouteSelectionController implements Initializable {
     @FXML private VBox countryRouteMenu;
     @FXML private VBox cityRouteMenu;
 
-    // Labels to indicate completed courses
+
     @FXML private Label desertCompletedLabel;
     @FXML private Label mountainCompletedLabel;
     @FXML private Label countryCompletedLabel;
     @FXML private Label cityCompletedLabel;
 
-    // Map to hold the course labels for easier access.
+
     private Map<Course, Label> courseLabels = new HashMap<>();
 
     private Course selectedCourse;
@@ -70,15 +70,15 @@ public class CourseAndRouteSelectionController implements Initializable {
         selectedCourse = null;
         selectedRoute = null;
 
-        // Initialize the courseLabels map.  This makes it easy to access the labels.
+
         courseLabels.put(Course.DESERT, desertCompletedLabel);
         courseLabels.put(Course.MOUNTAIN, mountainCompletedLabel);
         courseLabels.put(Course.COUNTRY, countryCompletedLabel);
         courseLabels.put(Course.CITY, cityCompletedLabel);
 
-        // Loop through the courses and set the visibility of the labels.
+
         for (Course course : Course.values()) {
-            Label label = courseLabels.get(course); //gets the label
+            Label label = courseLabels.get(course);
             if (gameEnvironment.hasWonCourse(course)) {
                 label.setVisible(true);
             } else {
@@ -93,7 +93,7 @@ public class CourseAndRouteSelectionController implements Initializable {
         selectedCourse = Course.DESERT;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
             showAlert("Invalid Funds", "You do not have the required funds to pick this course");
-            return; // Stop execution if funds are insufficient
+            return;
         }
         showRouteMenu(desertRouteMenu);
     }
@@ -103,7 +103,7 @@ public class CourseAndRouteSelectionController implements Initializable {
         selectedCourse = Course.MOUNTAIN;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
             showAlert("Invalid Funds", "You do not have the required funds to pick this course");
-            return; // Stop execution if funds are insufficient
+            return;
         }
         showRouteMenu(mountainRouteMenu);
     }
@@ -113,7 +113,7 @@ public class CourseAndRouteSelectionController implements Initializable {
         selectedCourse = Course.COUNTRY;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
             showAlert("Invalid Funds", "You do not have the required funds to pick this course");
-            return; // Stop execution if funds are insufficient
+            return;
         }
         showRouteMenu(countryRouteMenu);
     }
@@ -123,13 +123,12 @@ public class CourseAndRouteSelectionController implements Initializable {
         selectedCourse = Course.CITY;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
             showAlert("Invalid Funds", "You do not have the required funds to pick this course");
-            return; // Stop execution if funds are insufficient
+            return;
         }
         showRouteMenu(cityRouteMenu);
     }
 
-    // ---
-    // Helper method for showing alerts
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -137,7 +136,7 @@ public class CourseAndRouteSelectionController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    // ---
+
 
     void showRouteMenu(VBox routeMenu) {
         courseMenu.setVisible(false);

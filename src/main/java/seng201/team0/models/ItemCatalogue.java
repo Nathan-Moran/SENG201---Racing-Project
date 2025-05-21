@@ -36,7 +36,7 @@ public class ItemCatalogue extends ItemStorage {
      * and need to be unlocked through progression.
      */
     public void setupCatalogue() {
-        // Starter cars (assuming these are available initially and maybe cheaper/lower tier)
+        // Starter cars
         addCar(new Car("Honda Civic R", 0.6, 0.5, 0.7, 20, 1000));
         addCar(new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 1000));
         addCar(new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 1000));
@@ -54,7 +54,7 @@ public class ItemCatalogue extends ItemStorage {
         addTuningPart(new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3));
         addTuningPart(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
 
-        // Cars that are initially locked and get unlocked via course completion (example associations)
+        // Cars that are initially locked and get unlocked via course completion
         addLockedCar(new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));         //Unlocked by Desert Course
         addLockedCar(new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));    //Unlocked by Desert Course
         addLockedCar(new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));        //Unlocked by Mountain Course
