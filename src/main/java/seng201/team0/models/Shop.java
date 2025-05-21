@@ -1,9 +1,6 @@
 package seng201.team0.models;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents the in-game shop where players can buy and sell cars and tuning parts.
@@ -22,6 +19,8 @@ public class Shop extends ItemStorage {
      * whose completion unlocks them.
      */
     private Map<Course, List<TuningPart>> lockedTuningPartMap;
+    List<Car> allAvailableCars;
+    List<TuningPart> allAvailableTuningParts;
 
     /**
      * Constructs a new Shop instance.
@@ -31,6 +30,42 @@ public class Shop extends ItemStorage {
         super();
         this.lockedCarsMap = new HashMap<>();
         this.lockedTuningPartMap = new HashMap<>();
+        this.allAvailableCars = new ArrayList<>();
+        this.allAvailableTuningParts = new ArrayList<>();
+
+        populateBaseMasterLists();
+        setupLockedItems();
+    }
+
+    /**
+     * Populates the master lists with standard, non-starter items.
+     */
+    private void populateBaseMasterLists() {
+        // Standard cars available in the shop's random pool
+        this.allAvailableCars.add(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500));
+        this.allAvailableCars.add(new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800));
+        this.allAvailableCars.add(new Car("Ferrari", 0.96, 0.96, 0.90, 15, 12500));
+        // Add any other standard cars you want in the initial random pool here
+
+        // Standard tuning parts
+        this.allAvailableTuningParts.add(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
+        this.allAvailableTuningParts.add(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
+        this.allAvailableTuningParts.add(new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3));
+        this.allAvailableTuningParts.add(new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3));
+        this.allAvailableTuningParts.add(new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5));
+        this.allAvailableTuningParts.add(new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5));
+        // Add any other standard tuning parts
+    }
+
+    /**
+     * Sets up the mappings for items that are initially locked.
+     */
+    private void setupLockedItems() {
+        // Locked cars
+        lockedCarsMap.put(Course.DESERT, new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));
+        lockedCarsMap.put(Course.MOUNTAIN, new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));
+        lockedCarsMap.put(Course.COUNTRY, new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));
+        lockedCarsMap.put(Course.CITY, new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000));
     }
 
     /**
@@ -39,30 +74,24 @@ public class Shop extends ItemStorage {
      * by winning specific courses.
      */
     public void setShopInventory() {
-        // Initial tuning parts available in the shop
-        addTuningPart(new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1));
-        addTuningPart(new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1));
+        getCarList().clear();
+        getTuningPartList().clear();
 
-        // Initial cars available in the shop
-        addCar(new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500));
-        addCar(new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800));
-        addCar(new Car("Ferrari 458", 0.96, 0.96, 0.90, 15, 12500));
+        Collections.shuffle(allAvailableCars);
+        int carsToDisplayCount = Math.min(3, allAvailableCars.size());
+        for (int i = 0; i < carsToDisplayCount; i++) {
+            super.addCar(allAvailableCars.get(i));
+        }
 
-        // Locked tuning parts that become available after winning specific courses
-        lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
-                new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3),
-                new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3)
-        ));
-        lockedTuningPartMap.put(Course.CITY, Arrays.asList(
-                new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5),
-                new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5)
-        ));
+        Collections.shuffle(allAvailableTuningParts);
+        int partsToDisplayCount = Math.min(3, allAvailableTuningParts.size());
+        for (int i = 0; i < partsToDisplayCount; i++) {
+            super.addTuningPart(allAvailableTuningParts.get(i));
+        }
+    }
 
-        // Locked cars that become available after winning specific courses
-        lockedCarsMap.put(Course.DESERT, new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200));
-        lockedCarsMap.put(Course.MOUNTAIN, new Car("Sandstorm Strider", 0.8, 0.5, 0.8, 25, 2800));
-        lockedCarsMap.put(Course.COUNTRY, new Car("Cliff Climber", 0.6, 0.5, 0.9, 20, 2600));
-        lockedCarsMap.put(Course.CITY, new Car("Ridge Racer", 0.5, 0.9, 0.7, 28, 3000));
+    public List<Car> getAllAvailableCars() {
+        return allAvailableCars;
     }
 
     /**
