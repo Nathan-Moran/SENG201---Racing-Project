@@ -144,8 +144,20 @@ public class RaceController {
 
         stopForFuelButton.setOnAction(event -> handleFuelStop(true));
         continueWithoutFuelButton.setOnAction(event -> handleFuelStop(false));
-        repairButton.setOnAction(event -> handleRepair(true));
-        withdrawButton.setOnAction(event -> handleRepair(false));
+        repairButton.setOnAction(event -> {
+            try {
+                handleRepair(true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        withdrawButton.setOnAction(event -> {
+            try {
+                handleRepair(false);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         pickUpButton.setOnAction(event -> handleTraveler(true));
         drivePastButton.setOnAction(event -> handleTraveler(false));
         continueAfterWeatherButton.setOnAction(event -> {
@@ -198,7 +210,7 @@ public class RaceController {
         updateLeaderboardDisplay();
         updateFuelGauge();
         //some code for the car animation
-        //might wanna move this code to a controller
+        //might want to move this code to a controller
         if (carImage != null && raceTrackLine != null && raceManager != null && raceManager.getRace().getRoute().getLength() > 0) {
             double playerDistance = raceManager.getPlayerDistance();
             double routeLength = raceManager.getRace().getRoute().getLength();
@@ -282,16 +294,26 @@ public class RaceController {
         timerTimeline.play(); // Resume timer
     }
 
-    private void handleRepair(boolean pay) {
+    private void handleRepair(boolean pay) throws IOException { // Add throws IOException here
         breakdownPopup.setVisible(false);
-        if (pay && gameEnvironment.getBalance() < 250) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Funds");
-            alert.setHeaderText(null);
-            alert.setContentText("You do not have the required funds to repair");
-            alert.showAndWait();
+        if (pay) {
+            if (gameEnvironment.getBalance() < 250) { // Assuming REPAIR_COST is 250
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Funds");
+                alert.setHeaderText(null);
+                alert.setContentText("You do not have the required funds to repair");
+                alert.showAndWait();
+                // If funds are insufficient, stay in breakdown state, don't resume race
+                breakdownPopup.setVisible(true); // Re-show popup
+                return; // Exit method
+            }
+            raceManager.handleRepair(true, gameEnvironment); // Pass true as player chose to pay
+        } else {
+            // Player chose NOT to pay (withdraw)
+            raceManager.handleRepair(false, gameEnvironment); // Pass false for pay
+            finishRace(); // Immediately finish the race
+            return; // Exit method
         }
-        raceManager.handleRepair(pay, gameEnvironment);
         raceTimeline.play();
         timerTimeline.play(); // Resume timer
     }
@@ -314,20 +336,12 @@ public class RaceController {
 
     private void handleWeatherContinue() throws IOException {
         weatherPopup.setVisible(false);
-        // Do NOT decrement races remaining or change balance here.
-        // RaceManager.handleWeather() sets the cancelled flag.
         raceManager.handleWeather(gameEnvironment);
         raceTimeline.play();
         timerTimeline.play(); // Resume timer
         finishRace(); // Trigger finish sequence to show cancellation
     }
 
-    public void playerFinishedRace() throws IOException {
-        if (raceManager.isRacing() && !raceManager.isRaceCancelled()) {
-            raceManager.playerFinished();
-            finishRace();
-        }
-    }
 
     private void finishRace() throws IOException {
         raceTimeline.stop();
@@ -339,7 +353,7 @@ public class RaceController {
             raceManager.awardPrizeMoney(gameEnvironment);
         }
         int placement;
-        if (Objects.equals(reason, "Car broke down! You withdrew from the race.") || Objects.equals(reason, "Weather has cancelled the race!")) {
+        if (Objects.equals(reason, "Car broke down! You withdrew from the race.") || Objects.equals(reason, "Weather has cancelled the race!") || Objects.equals(reason, "Out of fuel!")) {
             placement = raceManager.getOpponents().size() + 1; // Last place or indicates withdrawal/cancellation
         } else {
             placement = raceManager.getPlayerPlacement();
@@ -371,6 +385,7 @@ public class RaceController {
             placementText = "Race Over"; // Default message
         }
         gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
+        gameEnvironment.getShopService().unlockNewPartsAndCars();
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
     }
 }

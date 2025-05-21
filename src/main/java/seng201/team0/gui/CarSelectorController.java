@@ -93,7 +93,7 @@ public class CarSelectorController implements Initializable {
     private void switchToMainMenu(ActionEvent event) throws IOException {
         if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
             gameEnvironment.getControllerService().storeLeftOverCars(startingCarsGarage);
-            sceneNavigator.switchToSceneMainMenu(event);
+            sceneNavigator.switchToSceneTutorial(event);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

@@ -44,4 +44,8 @@ public class Race {
     public String toString() {
         return course.getName() + " - " + route.getRouteName();
     }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
 }

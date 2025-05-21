@@ -1,7 +1,10 @@
 package seng201.team0.services;
 
 import seng201.team0.models.Car;
+import seng201.team0.models.Course;
 import seng201.team0.models.TuningPart;
+
+import java.util.List;
 
 
 public class ShopService {
@@ -64,4 +67,24 @@ public class ShopService {
             gameEnvironment.setBalance(gameEnvironment.getBalance() + selectedPart.getPrice());
         }
     }
+
+    public void unlockNewPartsAndCars() {
+        for (Course course : Course.values()) {
+            if (gameEnvironment.hasWonCourse(course)) { // Or gameEnvironment.hasWonCourseFirst(course)
+                Car carToUnlock = (Car) gameEnvironment.getShopInventory().getLockedCarsMap().get(course);
+                if (carToUnlock != null && gameEnvironment.getShopInventory().getLockedCarsMap().containsKey(course)) {
+                    gameEnvironment.getShopInventory().addCar(carToUnlock);
+                    gameEnvironment.getShopInventory().removeLockedCar(course);
+                }
+                List<TuningPart> tuningPartsToUnlock = (List<TuningPart>) gameEnvironment.getShopInventory().getLockedTuningPartMap().get(course);
+                if (tuningPartsToUnlock != null && !tuningPartsToUnlock.isEmpty() && gameEnvironment.getShopInventory().getLockedTuningPartMap().containsKey(course)) {
+                    for (TuningPart part : tuningPartsToUnlock) {
+                        gameEnvironment.getShopInventory().addTuningPart(part);
+                    }
+                    gameEnvironment.getShopInventory().removeLockedTuningParts(course);
+                }
+            }
+        }
+    }
 }
+

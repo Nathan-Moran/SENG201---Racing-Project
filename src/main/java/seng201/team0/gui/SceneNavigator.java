@@ -321,6 +321,32 @@ public class SceneNavigator {
         stage.show();
     }
 
+    /**
+     * Switches the current scene to the Tutorial screen.
+     *
+     * @param event The action event that triggered this navigation.
+     * @throws IOException If an error occurs during FXML loading.
+     */
+    public void switchToSceneTutorial(ActionEvent event) throws IOException {
+        title = "How to Play";
+        // Ensure the FXML file path matches where you saved TutorialScreen.fxml
+        // For example, if it's in resources/gui/TutorialScreen.fxml, use "/gui/TutorialScreen.fxml"
+        fxml = "/fxml/TutorialScene.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+
+        loader.setControllerFactory(ignoredControllerClass ->
+                new TutorialController(this.gameEnvironment, this) // Pass gameEnvironment to your TutorialController
+        );
+
+        Parent parent = loader.load();
+        // Get the current stage from the event source to ensure the correct window is used
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show(); // Make sure the stage is shown if it wasn't already
+    }
 
 
 }

@@ -118,7 +118,7 @@ public class RaceManager {
 
     private void maybeTriggerBreakdownEvent() {
         double reliability = RaceCalculations.calculateEffectiveReliability(playerCar, race.getRoute()); // e.g., 0.85
-        double breakdownChance = (1.0 - reliability) * 100; // e.g., 15.0
+        double breakdownChance = (1.0 - reliability) * 100 * race.getDifficulty().getBreakdownMultiplier(); // e.g., 15.0
         int roll = random.nextInt(100); // random number between 0 and 99 inclusive
         if (roll < breakdownChance) {   // triggers breakdown with probability = breakdownChance%
             currentEvent = new RaceEvent(RaceEventType.BREAKDOWN);
@@ -228,9 +228,10 @@ public class RaceManager {
         raceCancelled = true;
         isRacing = false;
         playerFinished = true;
+        int entryFee = race.getCourse().getEntryFee();
+        gameEnvironment.setBalance(gameEnvironment.getBalance() + entryFee);
         gameEnvironment.setRacesRemaining(gameEnvironment.getRacesRemaining() + 1);
         finishReason = "Weather has cancelled the race!";
-        // No balance change or races remaining decrement here, handled in GUI
     }
 
 

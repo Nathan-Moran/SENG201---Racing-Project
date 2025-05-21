@@ -76,7 +76,7 @@
       <StackPane alignment="CENTER" layoutX="-24.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="0.0">
 
          <VBox fx:id="breakdownPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="420.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="420.0" spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #444; -fx-border-width: 2; -fx-padding: 16; -fx-opacity: 0.95;" visible="false">
-            <Label text="🚨 Your car broke down! Withdraw or pay $500 to repair. Delay: 10s." wrapText="true" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="🚨 Your car broke down! Withdraw and get free insurance or pay $250 to repair. Delay: 1s." textAlignment="CENTER" wrapText="true" />
             <HBox alignment="CENTER" spacing="10">
                <Button fx:id="withdrawButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #c0392b; -fx-text-fill: white;" text="Withdraw" />
                <Button fx:id="repairButton" style="-fx-font-size: 13px; -fx-background-radius: 6; -fx-background-color: #27ae60; -fx-text-fill: white;" text="Pay and Continue" />
