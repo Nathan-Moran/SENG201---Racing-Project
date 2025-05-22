@@ -11,8 +11,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import seng201.team0.models.*;
 import seng201.team0.services.*;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -170,6 +173,7 @@ public class RaceController {
      * Timeline for controlling the visibility of the traveler pay popup.
      */
     private Timeline travelerPayTimeline;
+    private MediaPlayer musicPlayer;
 
     /**
      * Constructs a RaceController.
@@ -179,6 +183,7 @@ public class RaceController {
     public RaceController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
+        gameEnvironment.getMusicManager().initializeMusic("/music/RaceMusic.mp3");
     }
 
     /**
@@ -533,6 +538,8 @@ public class RaceController {
         } else {
             placementText = "Race Over";
         }
+        gameEnvironment.getMusicManager().stopMusic();
+        gameEnvironment.getMusicManager().initializeMusic("/music/MenuMusic.mp3");
         gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
         gameEnvironment.getShopService().unlockNewCars();
         gameEnvironment.addRacePlacement(placement);

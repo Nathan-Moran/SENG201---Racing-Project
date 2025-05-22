@@ -1,5 +1,6 @@
 package seng201.team0.services;
 
+import javafx.scene.media.MediaPlayer;
 import seng201.team0.gui.CourseAndRouteSelectionController;
 import seng201.team0.models.*;
 
@@ -80,6 +81,8 @@ public class GameEnvironment {
      */
     private ItemCatalogue itemCatalogue;
 
+    private MusicManager musicManager;
+
     /**
      * Constructs a new GameEnvironment, initializing all game-related components.
      * It sets up services, inventories, and initializes the course win tracking.
@@ -90,11 +93,16 @@ public class GameEnvironment {
         this.controllerService = new ControllerService(this);
         this.shopInventory = new Shop(this);
         this.starterCarInventory = new StarterCarInventory(this);
+        this.musicManager = new MusicManager();
         setupShop();
         setBalance();
         for (Course course : Course.values()) {
             hasWonCourse.put(course, false);
         }
+    }
+
+    public MusicManager getMusicManager() {
+        return this.musicManager;
     }
 
     /**

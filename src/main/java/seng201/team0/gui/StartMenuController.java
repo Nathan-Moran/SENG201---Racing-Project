@@ -12,6 +12,9 @@ import javafx.scene.input.MouseEvent;
 import seng201.team0.models.Difficulty;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
+import java.net.URL;
 
 /**
  * Controller for the start menu screen.
@@ -20,6 +23,27 @@ import seng201.team0.services.GameEnvironment;
  * @author Nathan Moran
  */
 public class StartMenuController {
+
+    /**
+     * TextField for the player to enter their name.
+     */
+    @FXML private TextField nameField;
+    /**
+     * Slider for the player to select the season length.
+     */
+    @FXML private Slider seasonSlider;
+    /**
+     * Label to display the currently selected difficulty.
+     */
+    @FXML private Label displayDifficultyLabel;
+    /**
+     * Label to display the name entered by the player.
+     */
+    @FXML private Label displayNameLabel;
+    /**
+     * Label to display the currently selected season length.
+     */
+    @FXML private Label displaySeasonLengthLabel;
     /**
      * The game environment, used to configure game settings like difficulty and season length.
      */
@@ -47,6 +71,7 @@ public class StartMenuController {
         this.gameEnvironment = gameEnvironment;
         this.sceneNavigator = sceneNavigator;
         this.controllerLogicManager = gameEnvironment.getControllerService();
+        gameEnvironment.getMusicManager().initializeMusic("/music/MenuMusic.mp3");
     }
 
     /**
@@ -106,7 +131,6 @@ public class StartMenuController {
             gameEnvironment.setBalance();
             sceneNavigator.switchToSceneCarSelector(event);
         }
-
     }
 
     /**
@@ -141,27 +165,6 @@ public class StartMenuController {
         displayDifficultyLabel.setText("Hard");
         gameEnvironment.setDifficulty(Difficulty.HARD);
     }
-
-    /**
-     * TextField for the player to enter their name.
-     */
-    @FXML private TextField nameField;
-    /**
-     * Slider for the player to select the season length.
-     */
-    @FXML private Slider seasonSlider;
-    /**
-     * Label to display the currently selected difficulty.
-     */
-    @FXML private Label displayDifficultyLabel;
-    /**
-     * Label to display the name entered by the player.
-     */
-    @FXML private Label displayNameLabel;
-    /**
-     * Label to display the currently selected season length.
-     */
-    @FXML private Label displaySeasonLengthLabel;
 }
 
 

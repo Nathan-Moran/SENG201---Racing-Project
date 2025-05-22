@@ -10,12 +10,14 @@ import seng201.team0.models.Difficulty;
 import seng201.team0.models.Race;
 import seng201.team0.models.Route;
 import seng201.team0.services.GameEnvironment;
-
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.Media;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 
 /**
  * Controller for the Course and Route Selection Scene. Allows the player to
@@ -32,10 +34,13 @@ public class CourseAndRouteSelectionController implements Initializable {
      */
     protected SceneNavigator sceneNavigator;
 
+    private MediaPlayer musicPlayer;
+
     /**
      * Constructs a CourseAndRouteSelectionController.
+     *
      * @param gameEnvironment The current game environment.
-     * @param sceneNavigator The scene navigator for scene transitions.
+     * @param sceneNavigator  The scene navigator for scene transitions.
      */
     public CourseAndRouteSelectionController(GameEnvironment gameEnvironment, SceneNavigator sceneNavigator) {
         this.gameEnvironment = gameEnvironment;
@@ -45,48 +50,59 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * VBox container for the main course selection menu.
      */
-    @FXML private VBox courseMenu;
+    @FXML
+    private VBox courseMenu;
     /**
      * Label displaying the player's current money.
      */
-    @FXML private Label moneyLabel;
+    @FXML
+    private Label moneyLabel;
     /**
      * Label displaying the number of races remaining in the season.
      */
-    @FXML private Label racesRemainingLabel;
+    @FXML
+    private Label racesRemainingLabel;
     /**
      * VBox container for the desert route selection menu.
      */
-    @FXML private VBox desertRouteMenu;
+    @FXML
+    private VBox desertRouteMenu;
     /**
      * VBox container for the mountain route selection menu.
      */
-    @FXML private VBox mountainRouteMenu;
+    @FXML
+    private VBox mountainRouteMenu;
     /**
      * VBox container for the country route selection menu.
      */
-    @FXML private VBox countryRouteMenu;
+    @FXML
+    private VBox countryRouteMenu;
     /**
      * VBox container for the city route selection menu.
      */
-    @FXML private VBox cityRouteMenu;
+    @FXML
+    private VBox cityRouteMenu;
 
     /**
      * Label indicating if the Desert course has been completed.
      */
-    @FXML private Label desertCompletedLabel;
+    @FXML
+    private Label desertCompletedLabel;
     /**
      * Label indicating if the Mountain course has been completed.
      */
-    @FXML private Label mountainCompletedLabel;
+    @FXML
+    private Label mountainCompletedLabel;
     /**
      * Label indicating if the Country course has been completed.
      */
-    @FXML private Label countryCompletedLabel;
+    @FXML
+    private Label countryCompletedLabel;
     /**
      * Label indicating if the City course has been completed.
      */
-    @FXML private Label cityCompletedLabel;
+    @FXML
+    private Label cityCompletedLabel;
 
     /**
      * A map linking Course enum values to their corresponding completion labels.
@@ -102,7 +118,8 @@ public class CourseAndRouteSelectionController implements Initializable {
      * Initializes the controller. This method is automatically called by the FXMLLoader
      * after the FXML file has been loaded. It sets up initial UI visibility,
      * updates money and races remaining labels, and displays completion indicators for courses.
-     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     *
+     * @param url            The location used to resolve relative paths for the root object, or null if the location is not known.
      * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -148,6 +165,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * Handles the selection of the Desert course. Checks for sufficient funds
      * and then displays the desert route selection menu.
+     *
      * @param event The MouseEvent that triggered this method.
      */
     @FXML
@@ -163,6 +181,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * Handles the selection of the Mountain course. Checks for sufficient funds
      * and then displays the mountain route selection menu.
+     *
      * @param event The MouseEvent that triggered this method.
      */
     @FXML
@@ -178,6 +197,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * Handles the selection of the Country course. Checks for sufficient funds
      * and then displays the country route selection menu.
+     *
      * @param event The MouseEvent that triggered this method.
      */
     @FXML
@@ -193,6 +213,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * Handles the selection of the City course. Checks for sufficient funds
      * and then displays the city route selection menu.
+     *
      * @param event The MouseEvent that triggered this method.
      */
     @FXML
@@ -207,7 +228,8 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Displays an error alert dialog with a specified title and message.
-     * @param title The title of the alert dialog.
+     *
+     * @param title   The title of the alert dialog.
      * @param message The main message content of the alert dialog.
      */
     private void showAlert(String title, String message) {
@@ -220,6 +242,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Hides all course and route menus, then makes the specified route menu visible.
+     *
      * @param routeMenu The VBox representing the route menu to be displayed.
      */
     void showRouteMenu(VBox routeMenu) {
@@ -244,6 +267,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Desert Drift route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -254,6 +278,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Desert Long route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -264,6 +289,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Mountain Steep route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -274,6 +300,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Mountain Curves route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -284,6 +311,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Country Straight route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -294,6 +322,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the Country Twisty route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -304,6 +333,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the City Alleys route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -314,6 +344,7 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Handles the selection of the City Traffic route. Creates and starts a new race.
+     *
      * @param event The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
@@ -325,8 +356,9 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * Creates a new {@link Race} instance with the selected course, route, and current difficulty,
      * then switches the scene to the Race simulation.
+     *
      * @param selectedRoute The {@link Route} chosen for the race.
-     * @param event The MouseEvent that triggered this method.
+     * @param event         The MouseEvent that triggered this method.
      * @throws IOException If an error occurs during scene transition to the race scene.
      */
     void createRaceAndStart(Route selectedRoute, javafx.scene.input.MouseEvent event) throws IOException {
@@ -335,9 +367,9 @@ public class CourseAndRouteSelectionController implements Initializable {
             System.err.println("Course, Route, or Difficulty not selected!");
             return;
         }
+        gameEnvironment.getMusicManager().stopMusic();
         Race newRace = new Race(selectedCourse, selectedRoute, difficulty);
         gameEnvironment.setCurrentRace(newRace);
         sceneNavigator.switchToSceneRace(event);
     }
-
 }
