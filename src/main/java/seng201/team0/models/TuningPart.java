@@ -6,7 +6,7 @@ package seng201.team0.models;
  */
 public class TuningPart extends Purchasable {
     /**
-     * The stat that this tuning part affects (e.g., "💨" for speed, "🎮" for handling).
+     * The stat that this tuning part affects (e.g., "⚡" for speed, "🎮" for handling).
      */
     String stat;
     /**
@@ -20,7 +20,7 @@ public class TuningPart extends Purchasable {
      *
      * @param name The name of the tuning part.
      * @param price The price of the tuning part.
-     * @param stat The string identifier for the stat this part boosts (e.g., an emoji like "💨" or "🎮").
+     * @param stat The string identifier for the stat this part boosts (e.g., an emoji like "⚡" or "🎮").
      * @param boost The multiplier for the stat boost.
      */
     public TuningPart(String name, int price, String stat, double boost) {

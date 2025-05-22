@@ -27,11 +27,10 @@ public class DescriptionService {
      * All methods in this class are static and can be accessed directly.
      */
     private DescriptionService() {
-        // Private constructor to prevent instantiation
     }
 
     static {
-        carDescriptions.put("Honda Civic", "A well-rounded entry point, the Civic R offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.");
+        carDescriptions.put("Honda Civic", "A well-rounded entry point, the Civic offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.");
         carDescriptions.put("Mazda MPS", "The Mazda MPS shines with its notably agile handling among the starters, making it nimble on more technical early tracks like Desert Drift or Mountain Curves. Its straight-line speed is modest, but it's a dependable and fuel-efficient companion for those who prefer precision driving.");
         carDescriptions.put("Nissan Z", "If durability is your priority, the Nissan Z boasts excellent reliability for a starter car, inspiring confidence. Its speed and handling are competent, making it a trusty steed for challenging early routes where finishing is paramount, like a careful run on Mountain Steep. Good fuel economy adds to its pragmatism.");
         carDescriptions.put("Toyota Supra", "A legend for a reason. The Supra delivers a potent combination of high top speeds and impressively sharp handling, backed by solid reliability. Its versatility makes it a strong contender for a wide array of tracks, from the fast Desert Long to the demanding Country Twist. It also manages its fuel well for its class.");

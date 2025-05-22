@@ -17,7 +17,7 @@ class CarTest {
     void setUp() {
         // Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price)
         car = new Car("Test Car", 0.7, 0.6, 0.8, 25, 2000);
-        speedUpgrade = new TuningPart("Speed Boost", 500, "💨", 1.2); // Assuming "💨" is for speed
+        speedUpgrade = new TuningPart("Speed Boost", 500, "⚡", 1.2); // Assuming "💨" is for speed
         handlingUpgrade = new TuningPart("Handling Boost", 400, "🎮", 1.1); // Assuming "🎮" is for handling
     }
 
@@ -25,7 +25,7 @@ class CarTest {
     void constructorCopiesCorrectly() {
         Car originalCar = new Car("Original", 0.8, 0.7, 0.9, 30, 3000);
         // Add upgrades to original to ensure they are not copied to the new car's upgrade slots
-        originalCar.addSpeedUpgrade(new TuningPart("Temp Speed", 100, "💨", 1.1));
+        originalCar.addSpeedUpgrade(new TuningPart("Temp Speed", 100, "⚡", 1.1));
         originalCar.addHandlingUpgrade(new TuningPart("Temp Handling", 100, "🎮", 1.1));
         originalCar.setCustomName("My Ride");
 
@@ -108,7 +108,7 @@ class CarTest {
 
     @Test
     void addSpeedUpgradeDoesNotReplaceExisting() {
-        TuningPart anotherSpeedUpgrade = new TuningPart("Another Speed", 700, "💨", 1.3);
+        TuningPart anotherSpeedUpgrade = new TuningPart("Another Speed", 700, "⚡", 1.3);
         car.addSpeedUpgrade(speedUpgrade);
         car.addSpeedUpgrade(anotherSpeedUpgrade); // This should not change the upgrade
         assertEquals(speedUpgrade, car.getSpeedUpgrade());

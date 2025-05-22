@@ -62,9 +62,9 @@ public class ItemCatalogue extends ItemStorage {
         shopCarListInternal.addAll(supra, mustang, ferrari);
         lockedCarListInternal.addAll(duneDrifter, ridgeRacer, vineyardViper, commuterKing);
 
-        TuningPart ethanol = new TuningPart("Ethanol", 250, "\uD83D\uDCA8", 1.1);
-        TuningPart superCharger = new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3);
-        TuningPart turboKit = new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5);
+        TuningPart ethanol = new TuningPart("Ethanol", 250, "⚡", 1.1);
+        TuningPart superCharger = new TuningPart("SuperCharger", 1000, "⚡", 1.3);
+        TuningPart turboKit = new TuningPart("TurboKit", 2500, "⚡", 1.5);
         TuningPart streetWheels = new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1);
         TuningPart sportsWheels = new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3);
         TuningPart racingWheels = new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5);

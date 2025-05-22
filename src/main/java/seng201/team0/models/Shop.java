@@ -16,11 +16,7 @@ public class Shop extends ItemStorage {
      * whose completion unlocks them.
      */
     private Map<Course, Car> lockedCarsMap;
-    /**
-     * A map storing lists of tuning parts that are initially locked, mapped to the {@link Course}
-     * whose completion unlocks them.
-     */
-    private Map<Course, List<TuningPart>> lockedTuningPartMap;
+
 
     /**
      * A master list of all cars that can potentially be available in the shop,
@@ -51,7 +47,6 @@ public class Shop extends ItemStorage {
         super();
         this.gameEnvironment = gameEnvironment;
         this.lockedCarsMap = new HashMap<>();
-        this.lockedTuningPartMap = new HashMap<>(); // Initialize this map
         this.allAvailableCars = new ArrayList<>();
         this.allAvailableTuningParts = new ArrayList<>();
         this.lockedCarList = new ArrayList<>();
@@ -92,7 +87,6 @@ public class Shop extends ItemStorage {
     private void setupLockedItems() {
 
         this.lockedCarsMap.clear();
-        this.lockedTuningPartMap.clear(); // Clear tuning parts map too
 
         // Populate lockedCarsMap
         for (Car carFromPool : this.lockedCarList) {
@@ -111,14 +105,6 @@ public class Shop extends ItemStorage {
                     break;
             }
         }
-        this.lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
-                new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3),
-                new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3)
-        ));
-        this.lockedTuningPartMap.put(Course.CITY, Arrays.asList(
-                new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5),
-                new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5)
-        ));
     }
 
     /**
@@ -161,6 +147,7 @@ public class Shop extends ItemStorage {
         return lockedCarsMap;
     }
 
+
     /**
      * Removes a specific locked car from the map, typically after it has been unlocked and
      * moved to the main shop inventory.
@@ -169,6 +156,7 @@ public class Shop extends ItemStorage {
     public void removeLockedCar(Course course) {
         lockedCarsMap.remove(course);
     }
+
 
     /**
      * Removes a specific car from the master list of all available cars.
