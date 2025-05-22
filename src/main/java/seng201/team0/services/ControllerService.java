@@ -39,7 +39,7 @@ public class ControllerService {
         }
     }
 
-    //Garage Controller specific methods
+    //Garage Controller methods
 
     /**
      * Helper variable used to store the label text for display.

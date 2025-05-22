@@ -67,9 +67,9 @@ public class Car extends Purchasable {
         this.baseHandling = other.baseHandling;
         this.baseReliability = other.baseReliability;
         this.baseFuelEconomy = other.baseFuelEconomy;
-        this.speedUpgrade = null; // Copy constructor should typically not copy transient state like upgrades
-        this.handlingUpgrade = null; // Copy constructor should typically not copy transient state like upgrades
-        this.customName = null; // Custom name is not copied
+        this.speedUpgrade = null;
+        this.handlingUpgrade = null;
+        this.customName = null;
     }
 
     /**

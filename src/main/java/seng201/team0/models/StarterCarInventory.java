@@ -2,9 +2,6 @@ package seng201.team0.models;
 
 import seng201.team0.services.GameEnvironment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents a collection of starter cars available to the player at the beginning of the game.
  * This class extends {@link ItemStorage} to manage a specific set of {@link Car} objects

@@ -42,11 +42,11 @@ public class Garage extends ItemStorage {
         if (selectedCar != null) {
             if (part.getStat().equals("⚡") && selectedCar.getSpeedUpgrade() == null) {
                 selectedCar.addSpeedUpgrade(part);
-                removeTuningPart(part); // Remove from garage's general parts list
+                removeTuningPart(part);
                 return true;
             } else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() == null) {
                 selectedCar.addHandlingUpgrade(part);
-                removeTuningPart(part); // Remove from garage's general parts list
+                removeTuningPart(part);
                 return true;
             }
         }

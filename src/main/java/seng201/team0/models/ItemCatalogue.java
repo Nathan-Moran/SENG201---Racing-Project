@@ -69,7 +69,7 @@ public class ItemCatalogue extends ItemStorage {
         TuningPart sportsWheels = new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3);
         TuningPart racingWheels = new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5);
 
-        // Add all tuning parts to the inherited tuning part list from ItemStorage
+
         super.getTuningPartList().addAll(ethanol, superCharger, turboKit, streetWheels, sportsWheels, racingWheels);
     }
 

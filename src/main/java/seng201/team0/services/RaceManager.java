@@ -534,7 +534,7 @@ public class RaceManager {
                     return "You finished " + placement + "th.";
             }
         }
-        return "Race Over"; // Default message
+        return "Race Over";
     }
 
 

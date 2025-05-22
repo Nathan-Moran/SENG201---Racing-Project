@@ -88,7 +88,6 @@ public class Shop extends ItemStorage {
 
         this.lockedCarsMap.clear();
 
-        // Populate lockedCarsMap
         for (Car carFromPool : this.lockedCarList) {
             switch (carFromPool.getName()) {
                 case "Dune Drifter":
@@ -112,19 +111,19 @@ public class Shop extends ItemStorage {
      * This method is typically called at the start of a new shop session to display items for purchase.
      */
     public void setShopInventory() {
-        getCarList().clear(); // Clear current shop display
-        getTuningPartList().clear(); // Clear current shop display
+        getCarList().clear();
+        getTuningPartList().clear();
 
-        // Add a random selection of cars from allAvailableCars to the shop's display list
+
         Collections.shuffle(allAvailableCars);
-        int carsToDisplayCount = Math.min(3, allAvailableCars.size()); // Display up to 3 cars
+        int carsToDisplayCount = Math.min(3, allAvailableCars.size());
         for (int i = 0; i < carsToDisplayCount; i++) {
             super.addCar(allAvailableCars.get(i));
         }
 
-        // Add a random selection of tuning parts from allAvailableTuningParts to the shop's display list
+
         Collections.shuffle(allAvailableTuningParts);
-        int partsToDisplayCount = Math.min(3, allAvailableTuningParts.size()); // Display up to 3 parts
+        int partsToDisplayCount = Math.min(3, allAvailableTuningParts.size());
         for (int i = 0; i < partsToDisplayCount; i++) {
             super.addTuningPart(allAvailableTuningParts.get(i));
         }
