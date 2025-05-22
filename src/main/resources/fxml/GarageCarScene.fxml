@@ -6,92 +6,103 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
+<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
+    <children>
+        <StackPane fx:id="contentAreaHolder" prefHeight="622.0" prefWidth="726.0">
+            <children>
+                <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
+                    <image>
+                        <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
+                    </image>
+                </ImageView>
 
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
-            <HBox alignment="CENTER" style="-fx-background-color: #FFFFFF; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 1.5px;">
-                <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #37474F;" text="Car Manager" />
-            </HBox>
-            <Region HBox.hgrow="ALWAYS" />
-        </HBox>
-    </top>
-
-    <center>
-        <HBox spacing="20" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
-
-            <VBox spacing="20" HBox.hgrow="ALWAYS">
-                <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);" VBox.vgrow="NEVER"> <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 8 0; -fx-alignment: CENTER;" text="Active Car Details" />
-                    <Separator prefWidth="200.0" />
-                    <VBox spacing="8" style="-fx-padding: 10 0 0 0;">
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Model:" />
-                            <Label fx:id="selectedCarModelLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
+                <BorderPane prefHeight="622.0" prefWidth="726.0" maxHeight="622.0" maxWidth="726.0" style="-fx-background-color: transparent;">
+                    <top>
+                        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: transparent;">
+                            <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
+                                <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Car Manager" />
+                            </HBox>
+                            <Region HBox.hgrow="ALWAYS" />
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Speed (km/h):" />
-                            <Label fx:id="selectedCarSpeedLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
+                    </top>
+                    <center>
+                        <HBox spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
+                            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                <VBox spacing="8" style="-fx-padding: 10; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                                    <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Active Car Details" />
+                                    <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
+                                    <VBox spacing="5" style="-fx-padding: 8 0 0 0;">
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Model:" />
+                                            <Label fx:id="selectedCarModelLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Speed (km/h):" />
+                                            <Label fx:id="selectedCarSpeedLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Handling:" />
+                                            <Label fx:id="selectedCarHandlingLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Reliability:" />
+                                            <Label fx:id="selectedCarReliabilityLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Fuel Economy (km):" />
+                                            <Label fx:id="selectedCarFuelLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Speed Upgrade:" />
+                                            <Label fx:id="selectedCarSpeedUpgradeLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="5">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: white; -fx-pref-width: 140;" text="Handling Upgrade:" />
+                                            <Label fx:id="selectedCarHandlingUpgradeLabel" style="-fx-font-size: 13px; -fx-text-fill: white;" text="-" />
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+                                <VBox spacing="8" style="-fx-padding: 10; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                                    <TextField fx:id="renameCarTextField" promptText="Enter new name for active car" style="-fx-font-size: 13px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.8);" />
+                                    <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
+                                        <Button mnemonicParsing="false" onAction="#renameCar" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 5 15 5 15; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Rename" />
+                                    </HBox>
+                                </VBox>
+                            </VBox>
+                            <VBox minWidth="280.0" prefWidth="352.0" spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Reserve Cars" />
+                                <TableView fx:id="carTable" prefHeight="250.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-control-inner-background: rgba(0,0,0,0.2); -fx-selection-bar: rgba(255,255,255,0.3); -fx-selection-bar-text: white; -fx-text-fill: white;">
+                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
+                                    <columns>
+                                        <TableColumn fx:id="modelColumn" prefWidth="90.0" text="🛻" />
+                                        <TableColumn fx:id="speedColumn" prefWidth="60.0" text="⚡" />
+                                        <TableColumn fx:id="handlingColumn" prefWidth="40.0" text="🎮" />
+                                        <TableColumn fx:id="reliabilityColumn" prefWidth="40.0" text="🛠️" />
+                                        <TableColumn fx:id="fuelColumn" prefWidth="40.0" text="⛽" />
+                                    </columns>
+                                </TableView>
+                                <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
+                                    <Button mnemonicParsing="false" onAction="#selectCar" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Select Active Car" />
+                                </HBox>
+                            </VBox>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Handling:" />
-                            <Label fx:id="selectedCarHandlingLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Reliability:" />
-                            <Label fx:id="selectedCarReliabilityLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Fuel Economy (km):" />
-                            <Label fx:id="selectedCarFuelLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Speed Upgrade:" />
-                            <Label fx:id="selectedCarSpeedUpgradeLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 150;" text="Handling Upgrade:" />
-                            <Label fx:id="selectedCarHandlingUpgradeLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-                        </HBox>
-                    </VBox>
-                </VBox>
-
-                <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);" VBox.vgrow="NEVER">
-                    <TextField fx:id="renameCarTextField" promptText="Enter new name for active car" style="-fx-font-size: 14px;" />
-                    <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
-                        <Button mnemonicParsing="false" onAction="#renameCar" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Rename" />
-                    </HBox>
-                </VBox>
-            </VBox>
-
-            <VBox minWidth="280.0" prefHeight="421.0" prefWidth="352.0" spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Reserve Cars" />
-                <TableView fx:id="carTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;" VBox.vgrow="ALWAYS">
-                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
-                    <columns>
-                        <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="90.0" text="🛻" /> <TableColumn fx:id="speedColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="⚡" />
-                        <TableColumn fx:id="handlingColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🎮" />
-                        <TableColumn fx:id="reliabilityColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="🛠️" />
-                        <TableColumn fx:id="fuelColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="40.0" text="⛽" />
-                    </columns>
-                </TableView>
-                <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
-                    <Button mnemonicParsing="false" onAction="#selectCar" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Select Active Car" />
-                </HBox>
-            </VBox>
-        </HBox>
-    </center>
-
-    <bottom>
-        <StackPane style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
-            <Button onAction="#switchToMainMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Main Menu" StackPane.alignment="CENTER_LEFT" />
-
-            <Button mnemonicParsing="false" onAction="#switchToPartsMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Parts Menu" StackPane.alignment="CENTER_RIGHT" />
+                    </center>
+                    <bottom>
+                        <StackPane style="-fx-padding: 15; -fx-background-color: transparent;">
+                            <Button onAction="#switchToMainMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Main Menu" StackPane.alignment="CENTER_LEFT" />
+                            <Button mnemonicParsing="false" onAction="#switchToPartsMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Parts Menu" StackPane.alignment="CENTER_RIGHT" />
+                        </StackPane>
+                    </bottom>
+                </BorderPane>
+            </children>
         </StackPane>
-    </bottom>
-</BorderPane>
+    </children>
+</StackPane>

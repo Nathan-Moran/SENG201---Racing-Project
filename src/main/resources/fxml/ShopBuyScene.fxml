@@ -4,69 +4,81 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.ShopBuyController">
+<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.ShopBuyController">
+   <children>
+      <StackPane fx:id="contentAreaHolder" prefHeight="524.0" prefWidth="726.0">
+         <children>
+            <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
+               <image>
+                  <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
+               </image>
+            </ImageView>
 
-   <top>
-      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
-         <HBox alignment="CENTER" style="-fx-background-color: #FFFFFF; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1.5px; -fx-border-color: #B0BEC5;">
-            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #37474F;" text="Buy Menu" />
-         </HBox>
-         <Region HBox.hgrow="ALWAYS" />
-         <HBox alignment="CENTER_RIGHT" spacing="5" style="-fx-background-color: #CFD8DC; -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
-            <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Balance:" />
-            <Label fx:id="moneyLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
-         </HBox>
-      </HBox>
-   </top>
-
-   <center>
-      <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
-         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Cars for Sale" />
-            <TableView fx:id="carTable" prefHeight="215.0" prefWidth="310.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;" VBox.vgrow="ALWAYS">
-               <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
-               <columns>
-                  <TableColumn fx:id="modelColumn" prefWidth="90.0" text="🛻" />
-                  <TableColumn fx:id="priceColumn" prefWidth="60.0" text="\$" />
-                  <TableColumn fx:id="speedColumn" prefWidth="40.0" text="⚡" />
-                  <TableColumn fx:id="handlingColumn" prefWidth="40.0" text="🎮" />
-                  <TableColumn fx:id="reliabilityColumn" prefWidth="40.0" text="🛠️" />
-                  <TableColumn fx:id="fuelColumn" prefWidth="40.0" text="⛽" />
-               </columns>
-            </TableView>
-            <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
-               <Button onAction="#buyCar" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Buy Car" />
-            </HBox>
-         </VBox>
-
-         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Parts for Sale" />
-            <TableView fx:id="tuningPartTable" prefHeight="217.0" prefWidth="230.0" style="-fx-background-color: #FFFFFF; -fx-selection-bar: #B0BEC5; -fx-selection-bar-text: #263238;" VBox.vgrow="ALWAYS">
-               <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
-               <columns>
-                  <TableColumn fx:id="partNameColumn" prefWidth="90.0" text="⚙" />
-                  <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="\$" />
-                  <TableColumn fx:id="partStatColumn" prefWidth="40.0" text="⬆" />
-                  <TableColumn fx:id="partBoostColumn" prefWidth="40.0" text="📈" />
-               </columns>
-            </TableView>
-            <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
-               <Button onAction="#buyPart" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Buy Part" />
-            </HBox>
-         </VBox>
-      </HBox>
-   </center>
-
-   <bottom>
-      <StackPane style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
-         <Button onAction="#switchToSceneMenu" onMouseClicked="#switchToSceneShopSell" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Menu" StackPane.alignment="CENTER_LEFT" />
-         <Button fx:id="menuButton" mnemonicParsing="false" onAction="#switchToSceneShopSell" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Go to Sell Page" StackPane.alignment="CENTER_RIGHT" />
+            <BorderPane fx:id="rootPane" prefHeight="524.0" prefWidth="726.0" maxHeight="524.0" maxWidth="726.0" style="-fx-background-color: transparent;">
+               <top>
+                  <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: transparent;">
+                     <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
+                        <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Buy Menu" />
+                     </HBox>
+                     <Region HBox.hgrow="ALWAYS" />
+                     <HBox alignment="CENTER_RIGHT" spacing="5" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Balance:" />
+                        <Label fx:id="moneyLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="0" />
+                     </HBox>
+                  </HBox>
+               </top>
+               <center>
+                  <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: transparent;">
+                     <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Cars for Sale" />
+                        <TableView fx:id="carTable" prefHeight="215.0" prefWidth="310.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-control-inner-background: rgba(0,0,0,0.2); -fx-selection-bar: rgba(255,255,255,0.3); -fx-selection-bar-text: white; -fx-text-fill: white;">
+                           <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="modelColumn" prefWidth="90.0" text="🛻" />
+                              <TableColumn fx:id="priceColumn" prefWidth="60.0" text="\$" />
+                              <TableColumn fx:id="speedColumn" prefWidth="40.0" text="⚡" />
+                              <TableColumn fx:id="handlingColumn" prefWidth="40.0" text="🎮" />
+                              <TableColumn fx:id="reliabilityColumn" prefWidth="40.0" text="🛠️" />
+                              <TableColumn fx:id="fuelColumn" prefWidth="40.0" text="⛽" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                           <Button onAction="#buyCar" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Buy Car" />
+                        </HBox>
+                     </VBox>
+                     <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Parts for Sale" />
+                        <TableView fx:id="tuningPartTable" prefHeight="217.0" prefWidth="230.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-control-inner-background: rgba(0,0,0,0.2); -fx-selection-bar: rgba(255,255,255,0.3); -fx-selection-bar-text: white; -fx-text-fill: white;">
+                           <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="partNameColumn" prefWidth="90.0" text="⚙" />
+                              <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="\$" />
+                              <TableColumn fx:id="partStatColumn" prefWidth="40.0" text="⬆" />
+                              <TableColumn fx:id="partBoostColumn" prefWidth="40.0" text="📈" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                           <Button onAction="#buyPart" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Buy Part" />
+                        </HBox>
+                     </VBox>
+                  </HBox>
+               </center>
+               <bottom>
+                  <StackPane style="-fx-padding: 15; -fx-background-color: transparent;">
+                     <Button onAction="#switchToSceneMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Menu" StackPane.alignment="CENTER_LEFT" />
+                     <Button fx:id="menuButton" mnemonicParsing="false" onAction="#switchToSceneShopSell" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Go to Sell Page" StackPane.alignment="CENTER_RIGHT" />
+                  </StackPane>
+               </bottom>
+            </BorderPane>
+         </children>
       </StackPane>
-   </bottom>
-</BorderPane>
+   </children>
+</StackPane>

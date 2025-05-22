@@ -2,48 +2,100 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainMenuController">
-   <top>
-      <HBox alignment="CENTER" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
-         <HBox alignment="CENTER" prefHeight="67.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 1.5px;">
-            <Label prefHeight="29.0" prefWidth="166.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F;" text="Main Menu">
-               <font>
-                  <Font size="10.0" />
-               </font></Label>
-         </HBox>
-         <Region HBox.hgrow="ALWAYS" /> <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 0 5 0 0;">
-         <HBox alignment="CENTER" spacing="5" style="-fx-background-color: #CFD8DC; -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
-            <Label prefHeight="20.0" prefWidth="63.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Balance:" />
-            <Label fx:id="moneyLabel" prefHeight="20.0" prefWidth="48.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
-         </HBox>
-            <HBox alignment="CENTER" spacing="5" style="-fx-background-color: #CFD8DC; -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
+<StackPane fx:id="rootStackPane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainMenuController">
+   <children>
+      <ImageView fx:id="backgroundImageView" fitHeight="${rootStackPane.height}" fitWidth="${rootStackPane.width}" pickOnBounds="true" preserveRatio="false">
+         <image>
+            <Image url="@country.png" />
+         </image>
+      </ImageView>
+
+      <BorderPane prefHeight="524.0" prefWidth="726.0" style="-fx-background-color: transparent;">
+         <top>
+            <HBox alignment="CENTER" spacing="20" style="-fx-padding: 15; -fx-background-color: transparent;">
                <children>
-                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64;" text="Races Remaining:" />
-                  <Label fx:id="racesRemainingLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="7.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="/" />
-                  <Label fx:id="seasonLengthLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2a75be;" text="0" />
+                  <HBox alignment="CENTER" prefHeight="67.0" prefWidth="160.0" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="166.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" text="Main Menu">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 0 5 0 0;">
+                     <children>
+                        <HBox alignment="CENTER" spacing="5" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
+                           <children>
+                              <Label prefHeight="20.0" prefWidth="63.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Balance:" />
+                              <Label fx:id="moneyLabel" prefHeight="20.0" prefWidth="48.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 6 12 6 12; -fx-border-radius: 15; -fx-background-radius: 15;">
+                           <children>
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Races Remaining:" />
+                              <Label fx:id="racesRemainingLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="20.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="0" />
+                              <Label prefHeight="20.0" prefWidth="7.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="/" />
+                              <Label fx:id="seasonLengthLabel" prefHeight="20.0" prefWidth="20.0" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-      </HBox>
-      </HBox>
-   </top>
-   <center>
-      <VBox alignment="CENTER" spacing="25" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
-         <Button mnemonicParsing="false" onAction="#startRace" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 15 40 15 40; -fx-min-width: 220.0; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Start Race" />
-         <Button mnemonicParsing="false" onAction="#goToGarage" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Garage" />
-         <Button mnemonicParsing="false" onAction="#goToShop" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Shop" />
-         <Button mnemonicParsing="false" onAction="#goToItemCatalogue" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 12 35 12 35; -fx-min-width: 220.0; -fx-background-color: #B0BEC5; -fx-text-fill: #263238; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.1, 0, 2);" text="Item Catalogue" />
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
-         <Button mnemonicParsing="false" onAction="#quitGame" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #EF5350; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Quit" />
-      </HBox>
-   </bottom>
-</BorderPane>
+         </top>
+         <center>
+            <StackPane fx:id="centerStackPane" style="-fx-background-color: transparent;">
+               <children>
+                  <VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 20; -fx-background-color: transparent;">
+                     <children>
+                        <Button contentDisplay="LEFT" graphicTextGap="8" onAction="#startRace" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 12 20 12 20; -fx-min-width: 220.0; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.2, 0, 3);" text="Start Race">
+                           <graphic>
+                              <Text style="-fx-font-size: 22px; -fx-fill: white;" text="🏁" />
+                           </graphic>
+                        </Button>
+                        <HBox alignment="CENTER" spacing="15.0">
+                           <children>
+                              <Button contentDisplay="LEFT" graphicTextGap="8" onAction="#goToGarage" prefWidth="190.0" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 10 15 10 15; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Garage">
+                                 <graphic>
+                                    <Text style="-fx-font-size: 20px; -fx-fill: white;" text="🛠️" />
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="LEFT" graphicTextGap="8" onAction="#goToShop" prefWidth="190.0" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 10 15 10 15; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Shop">
+                                 <graphic>
+                                    <Text style="-fx-font-size: 20px; -fx-fill: white;" text="🛒" />
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="LEFT" graphicTextGap="8" onAction="#goToItemCatalogue" prefWidth="190.0" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 10 15 10 15; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Item Catalogue">
+                                 <graphic>
+                                    <Text style="-fx-font-size: 20px; -fx-fill: white;" text="📚" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" style="-fx-padding: 15; -fx-background-color: transparent;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#quitGame" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);" text="Quit" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

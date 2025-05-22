@@ -5,73 +5,84 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="524.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.StartMenuController">
+<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.StartMenuController">
+   <children>
+      <StackPane fx:id="contentAreaHolder" prefHeight="524.0" prefWidth="726.0">
+         <children>
+            <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
+               <image>
+                  <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
+               </image>
+            </ImageView>
 
-   <top>
-      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 0 0 1 0;">
-         <HBox alignment="CENTER" style="-fx-background-color: #FFFFFF; -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 1.5px;">
-            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #37474F;" text="Game Setup" />
-         </HBox>
-         <Region HBox.hgrow="ALWAYS" />
-      </HBox>
-   </top>
-
-   <center>
-      <HBox spacing="20" style="-fx-padding: 20; -fx-background-color: #FAFAFA;">
-         <VBox spacing="20" HBox.hgrow="ALWAYS">
-            <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-               <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Enter Your Name" />
-               <TextField fx:id="nameField" onKeyTyped="#setName" prefWidth="300.0" promptText="Starman" style="-fx-font-size: 14px;" />
-               <Label fx:id="nameErrorLabel" managed="false" style="-fx-text-fill: #EF5350; -fx-font-weight: bold; -fx-padding: 5 0 0 0;" visible="false" />
-            </VBox>
-
-            <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-               <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Select Difficulty" />
-               <HBox alignment="CENTER_LEFT" spacing="15">
-                  <Button onAction="#setdifficultyEasy" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: #A5D6A7; -fx-text-fill: #1B5E20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.1, 0, 1);" text="Easy" />
-                  <Button onAction="#setdifficultyMedium" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: #FFEE58; -fx-text-fill: #625B00; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.1, 0, 1);" text="Medium" />
-                  <Button onAction="#setdifficultyHard" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: #FF8A65; -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0.1, 0, 1);" text="Hard" />
-               </HBox>
-               <Label fx:id="difficultyErrorLabel" managed="false" style="-fx-text-fill: #EF5350; -fx-font-weight: bold; -fx-padding: 5 0 0 0;" text="" visible="false" />
-            </VBox>
-
-            <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-               <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 5 0;" text="Season Length" />
-               <HBox alignment="CENTER_LEFT" spacing="10">
-                  <Slider fx:id="seasonSlider" blockIncrement="1" majorTickUnit="1" max="15.0" min="5.0" minorTickCount="0" onMouseClicked="#setSeasonLength" prefWidth="350.0" showTickLabels="true" snapToTicks="true" />
-               </HBox>
-            </VBox>
-         </VBox>
-
-         <VBox minWidth="220.0" prefWidth="240.0" spacing="15" style="-fx-padding: 20; -fx-background-color: #FFFFFF; -fx-border-color: #CFD8DC; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.1, 0, 1);">
-            <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #37474F; -fx-padding: 0 0 10 0; -fx-alignment: CENTER;" text="Your Setup" />
-            <Separator prefWidth="200.0" />
-            <VBox spacing="10" style="-fx-padding: 10 0 0 0;">
-               <HBox alignment="CENTER_LEFT" spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 80;" text="Name:" />
-                  <Label fx:id="displayNameLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-               </HBox>
-               <HBox alignment="CENTER_LEFT" spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 80;" text="Difficulty:" />
-                  <Label fx:id="displayDifficultyLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-               </HBox>
-               <HBox alignment="CENTER_LEFT" spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #455A64; -fx-pref-width: 80;" text="Races:" />
-                  <Label fx:id="displaySeasonLengthLabel" style="-fx-font-size: 14px; -fx-text-fill: #2a75be;" text="-" />
-               </HBox>
-            </VBox>
-         </VBox>
-      </HBox>
-   </center>
-
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" style="-fx-padding: 15; -fx-background-color: #ECEFF1; -fx-border-color: #CFD8DC; -fx-border-width: 1 0 0 0;">
-         <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#acceptButton" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: #66BB6A; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" text="Start Game" />
-      </HBox>
-   </bottom>
-</BorderPane>
+            <BorderPane fx:id="root" prefHeight="524.0" prefWidth="726.0" maxHeight="524.0" maxWidth="726.0" style="-fx-background-color: transparent;">
+               <top>
+                  <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: transparent;">
+                     <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
+                        <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Game Setup" />
+                     </HBox>
+                     <Region HBox.hgrow="ALWAYS" />
+                  </HBox>
+               </top>
+               <center>
+                  <HBox spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
+                     <VBox spacing="20">
+                        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Enter Your Name" />
+                           <TextField fx:id="nameField" onKeyTyped="#setName" prefWidth="300.0" promptText="Starman" style="-fx-font-size: 14px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.8);" />
+                           <Label fx:id="nameErrorLabel" managed="false" style="-fx-text-fill: #FF8A80; -fx-font-weight: bold; -fx-padding: 5 0 0 0;" visible="false" />
+                        </VBox>
+                        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Select Difficulty" />
+                           <HBox alignment="CENTER_LEFT" spacing="15">
+                              <Button onAction="#setdifficultyEasy" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Easy" />
+                              <Button onAction="#setdifficultyMedium" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Medium" />
+                              <Button onAction="#setdifficultyHard" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-min-width: 120.0; -fx-pref-height: 50.0; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Hard" />
+                           </HBox>
+                           <Label fx:id="difficultyErrorLabel" managed="false" style="-fx-text-fill: #FF8A80; -fx-font-weight: bold; -fx-padding: 5 0 0 0;" text="" visible="false" />
+                        </VBox>
+                        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Season Length" />
+                           <HBox alignment="CENTER_LEFT" spacing="10">
+                              <Slider fx:id="seasonSlider" blockIncrement="1" majorTickUnit="1" max="15.0" min="5.0" minorTickCount="0" onMouseClicked="#setSeasonLength" prefWidth="350.0" showTickLabels="true" snapToTicks="true" style="-fx-text-fill: white;"/>
+                           </HBox>
+                        </VBox>
+                     </VBox>
+                     <VBox minWidth="220.0" prefWidth="240.0" spacing="15" style="-fx-padding: 20; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                        <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 10 0;" text="Your Setup" />
+                        <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
+                        <VBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                           <HBox alignment="CENTER_LEFT" spacing="5">
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white; -fx-pref-width: 80;" text="Name:" />
+                              <Label fx:id="displayNameLabel" style="-fx-font-size: 14px; -fx-text-fill: white;" text="-" />
+                           </HBox>
+                           <HBox alignment="CENTER_LEFT" spacing="5">
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white; -fx-pref-width: 80;" text="Difficulty:" />
+                              <Label fx:id="displayDifficultyLabel" style="-fx-font-size: 14px; -fx-text-fill: white;" text="-" />
+                           </HBox>
+                           <HBox alignment="CENTER_LEFT" spacing="5">
+                              <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white; -fx-pref-width: 80;" text="Races:" />
+                              <Label fx:id="displaySeasonLengthLabel" style="-fx-font-size: 14px; -fx-text-fill: white;" text="-" />
+                           </HBox>
+                        </VBox>
+                     </VBox>
+                  </HBox>
+               </center>
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" style="-fx-padding: 15; -fx-background-color: transparent;">
+                     <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#acceptButton" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 22 10 22; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Start Game" />
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</StackPane>

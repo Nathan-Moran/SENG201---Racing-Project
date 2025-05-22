@@ -162,8 +162,8 @@ public class CatalogueTwoController {
      * @throws IOException If an error occurs during FXML loading.
      */
     @FXML
-    private void switchToSceneMenu(ActionEvent event) throws IOException {
-        sceneNavigator.switchToSceneMainMenu(event);
+    private void switchToSceneIconKey(ActionEvent event) throws IOException {
+        sceneNavigator.switchIconKeyScene(event);
     }
 
     /**
