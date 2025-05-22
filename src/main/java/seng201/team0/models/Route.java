@@ -20,11 +20,11 @@ public enum Route {
     /**
      * A steep mountain route, favoring reliability and handling.
      */
-    MOUNTAIN_STEEP("Mountain Steep", new RouteAttributes(1, 0.8, 1.2), 15, 1, 1, 10),
+    MOUNTAIN_STEEP("Mountain Steep", new RouteAttributes(1, 0.8, 1.2), 15, 1, 0.9, 10),
     /**
      * A curvy mountain route, where handling is crucial.
      */
-    MOUNTAIN_CURVES("Mountain Curves", new RouteAttributes(0.8, 1.3, 1.2), 20, 1, 1, 12),
+    MOUNTAIN_CURVES("Mountain Curves", new RouteAttributes(0.8, 1.3, 1.2), 20, 1, 0.9, 12),
     /**
      * A straight country road, ideal for high speeds.
      */
@@ -36,11 +36,11 @@ public enum Route {
     /**
      * City alleys, requiring good handling and reliability.
      */
-    CITY_ALLEYS("City Alleys", new RouteAttributes(1.2, 1.2, 1), 35, 3, 1.3, 15),
+    CITY_ALLEYS("City Alleys", new RouteAttributes(1.2, 1.2, 1), 35, 3, 1.2, 15),
     /**
      * City traffic route, testing handling and reliability in congested areas.
      */
-    CITY_TRAFFIC("City Cut Line", new RouteAttributes(0.4, 1, 1.5), 15, 2, 1.3, 10);
+    CITY_TRAFFIC("City Cut Line", new RouteAttributes(0.4, 1, 1.5), 15, 2, 1.2, 10);
 
     /**
      * The display name of the route.
