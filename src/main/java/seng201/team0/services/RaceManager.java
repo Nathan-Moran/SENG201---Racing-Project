@@ -370,6 +370,9 @@ public class RaceManager {
             } else if (reason.equals("Time ran out!") && !playerFinished) {
                 playerFinished = true;
                 playerFinishTick = tickCount;
+            } else if (reason.equals("Out of fuel!") && !playerFinished) {
+                playerFinished = true;
+                playerFinishTick = tickCount;
             }
         }
     }
