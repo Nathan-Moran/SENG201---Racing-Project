@@ -3,13 +3,16 @@ package seng201.team0.unittests.services;
 import org.junit.jupiter.api.Test;
 import seng201.team0.services.DescriptionService;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DescriptionServiceTest {
 
     @Test
     void getCarDescriptionForKnownCar() {
-        String expected = "A well-rounded entry point, the Civic R offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.";
+        String expected = "A well-rounded entry point, the Civic offers a good blend of peppy acceleration and commendable dependability, with decent fuel usage. Its cornering ability is adequate for learning the ropes. A solid choice for early events like Desert Drift or for a driver who values a reliable all-rounder.";
         assertEquals(expected, DescriptionService.getCarDescription("Honda Civic")); //
     }
 
@@ -28,13 +31,13 @@ class DescriptionServiceTest {
 
     @Test
     void getCarDescriptionForUnknownCar() {
-        String expectedDefault = "Car has not description";
+        String expectedDefault = "Car has no description";
         assertEquals(expectedDefault, DescriptionService.getCarDescription("Unknown Car Model")); //
     }
 
     @Test
     void getCarDescriptionWithNullName() {
-        String expectedDefault = "Car has not description";
+        String expectedDefault = "Car has no description";
         assertEquals(expectedDefault, DescriptionService.getCarDescription(null)); //
     }
 
@@ -52,24 +55,58 @@ class DescriptionServiceTest {
 
     @Test
     void getTuningPartDescriptionForUnknownPart() {
-        String expectedDefault = "Part has not description";
+        String expectedDefault = "Part has no description";
         assertEquals(expectedDefault, DescriptionService.getTuningPartDescription("Unknown Tuning Part")); //
     }
 
     @Test
     void getTuningPartDescriptionWithNullName() {
-        String expectedDefault = "Part has not description";
+        String expectedDefault = "Part has no description";
         assertEquals(expectedDefault, DescriptionService.getTuningPartDescription(null)); //
     }
 
     @Test
     void staticBlockInitializesMaps() {
         // Test a few entries to ensure the static block ran.
-        assertNotEquals("Car has not description", DescriptionService.getCarDescription("Honda Civic")); //
-        assertNotEquals("Part has not description", DescriptionService.getTuningPartDescription("Ethanol")); //
+        assertNotEquals("Car has no description", DescriptionService.getCarDescription("Honda Civic")); //
+        assertNotEquals("Part has no description", DescriptionService.getTuningPartDescription("Ethanol")); //
         // Count check could be an option if exact number of entries is stable and known
         // For example, if there are exactly 10 car descriptions and 6 part descriptions
         // This would require reflection to access the map sizes or adding methods to get counts.
         // For now, checking a few known entries is sufficient to confirm initialization.
+    }
+
+    @Test
+    void getCarDescriptionCaseInsensitive() {
+        // HashMaps are case-sensitive by default, so this should return the default.
+        String expectedDefault = "Car has no description"; //
+        assertEquals(expectedDefault, DescriptionService.getCarDescription("honda civic"));
+    }
+
+    @Test
+    void getTuningPartDescriptionCaseInsensitive() {
+        // HashMaps are case-sensitive by default, so this should return the default.
+        String expectedDefault = "Part has no description"; //
+        assertEquals(expectedDefault, DescriptionService.getTuningPartDescription("ethanol"));
+    }
+
+    @Test
+    void getCarDescriptionEmptyString() {
+        String expectedDefault = "Car has no description"; //
+        assertEquals(expectedDefault, DescriptionService.getCarDescription(""));
+    }
+
+    @Test
+    void getTuningPartDescriptionEmptyString() {
+        String expectedDefault = "Part has no description"; //
+        assertEquals(expectedDefault, DescriptionService.getTuningPartDescription(""));
+    }
+
+    @Test
+    void testPrivateConstructor() throws Exception {
+        Constructor<DescriptionService> constructor = DescriptionService.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()), "Constructor should be private.");
+        constructor.setAccessible(true);
+        assertNotNull(constructor.newInstance(), "Instance should be creatable via reflection for coverage.");
     }
 }

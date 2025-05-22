@@ -56,7 +56,7 @@ public class DescriptionService {
      * @return The description of the car, or a default message if no description is found.
      */
     public static String getCarDescription(String carName) {
-        return carDescriptions.getOrDefault(carName, "Car has not description");
+        return carDescriptions.getOrDefault(carName, "Car has no description");
     }
 
     /**
@@ -65,6 +65,6 @@ public class DescriptionService {
      * @return The description of the tuning part, or a default message if no description is found.
      */
     public static String getTuningPartDescription(String partName) {
-        return tuningPartDescriptions.getOrDefault(partName, "Part has not description");
+        return tuningPartDescriptions.getOrDefault(partName, "Part has no description");
     }
 }
