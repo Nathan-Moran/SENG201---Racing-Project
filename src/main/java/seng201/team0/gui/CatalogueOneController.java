@@ -142,8 +142,7 @@ public class CatalogueOneController {
     @FXML
     private void getDescription(ActionEvent event) {
         if (lastSelectedItem != null) {
-            if (lastSelectedItem instanceof Car) {
-                Car selectedCar = (Car) lastSelectedItem;
+            if (lastSelectedItem instanceof Car selectedCar) {
                 String carName = selectedCar.getName();
                 String description = DescriptionService.getCarDescription(carName);
                 String title = carName + " - Description";
