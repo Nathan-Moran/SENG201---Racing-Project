@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GaragePartsController">
+<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GaragePartsController">
     <children>
-        <StackPane fx:id="contentAreaHolder" prefHeight="524.0" prefWidth="726.0">
+        <StackPane fx:id="contentAreaHolder" prefWidth="800.0" prefHeight="600.0">
             <children>
                 <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                     <image>
@@ -23,53 +23,53 @@
                     </image>
                 </ImageView>
 
-                <BorderPane prefHeight="524.0" prefWidth="726.0" maxHeight="524.0" maxWidth="726.0" style="-fx-background-color: transparent;">
+                <BorderPane prefWidth="800.0" prefHeight="600.0" maxWidth="800.0" maxHeight="600.0" style="-fx-background-color: transparent;">
                     <top>
-                        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: transparent;">
-                            <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.4); -fx-padding: 8 18 8 18; -fx-border-radius: 10; -fx-background-radius: 10;">
-                                <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Parts Manager" />
+                        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
+                            <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 10 20 10 20; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1;">
+                                <Label style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;" text="Parts Manager" />
                             </HBox>
                             <Region HBox.hgrow="ALWAYS" />
                         </HBox>
                     </top>
                     <center>
-                        <HBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
-                            <VBox minWidth="280.0" prefWidth="300.0" spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
-                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Available Parts" />
-                                <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
-                                <TableView fx:id="reserveTuningPartTable" prefHeight="200.0" prefWidth="180.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-control-inner-background: rgba(0,0,0,0.2); -fx-selection-bar: rgba(255,255,255,0.3); -fx-selection-bar-text: white; -fx-text-fill: white;">
-                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
+                        <HBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 10 20 20 20; -fx-background-color: transparent;">
+                            <VBox minWidth="350.0" prefWidth="370.0" spacing="15" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
+                                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Available Parts" />
+                                <Separator style="-fx-background-color: rgba(255,255,255,0.4);" />
+                                <TableView fx:id="reserveTuningPartTable" prefHeight="300.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
+                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="reservePartNameColumn" prefWidth="50.0" text="⚙" />
-                                        <TableColumn fx:id="reservePartStatColumn" prefWidth="50.0" text="⬆" />
-                                        <TableColumn fx:id="reservePartBoostColumn" prefWidth="50.0" text="📈" />
+                                        <TableColumn fx:id="reservePartNameColumn" prefWidth="150.0" text="⚙ Name" />
+                                        <TableColumn fx:id="reservePartStatColumn" prefWidth="100.0" text="⬆ Stat" />
+                                        <TableColumn fx:id="reservePartBoostColumn" prefWidth="100.0" text="📈 Boost" />
                                     </columns>
                                 </TableView>
                                 <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
-                                    <Button mnemonicParsing="false" onAction="#installPart" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Install Part" />
+                                    <Button mnemonicParsing="false" onAction="#installPart" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Install Part" />
                                 </HBox>
                             </VBox>
-                            <VBox minWidth="280.0" prefWidth="300.0" spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.4); -fx-border-color: rgba(255,255,255,0.2); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
-                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Installed Parts" />
-                                <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
-                                <TableView fx:id="installedTuningPartTable" prefHeight="200.0" prefWidth="180.0" style="-fx-background-color: rgba(0,0,0,0.2); -fx-control-inner-background: rgba(0,0,0,0.2); -fx-selection-bar: rgba(255,255,255,0.3); -fx-selection-bar-text: white; -fx-text-fill: white;">
-                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
+                            <VBox minWidth="350.0" prefWidth="370.0" spacing="15" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
+                                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Installed Parts" />
+                                <Separator style="-fx-background-color: rgba(255,255,255,0.4);" />
+                                <TableView fx:id="installedTuningPartTable" prefHeight="300.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
+                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="installedPartNameColumn" prefWidth="50.0" text="⚙" />
-                                        <TableColumn fx:id="installedPartStatColumn" prefWidth="50.0" text="⬆" />
-                                        <TableColumn fx:id="installedPartBoostColumn" prefWidth="50.0" text="📈" />
+                                        <TableColumn fx:id="installedPartNameColumn" prefWidth="150.0" text="⚙ Name" />
+                                        <TableColumn fx:id="installedPartStatColumn" prefWidth="100.0" text="⬆ Stat" />
+                                        <TableColumn fx:id="installedPartBoostColumn" prefWidth="100.0" text="📈 Boost" />
                                     </columns>
                                 </TableView>
                                 <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
-                                    <Button mnemonicParsing="false" onAction="#removePart" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 16 6 16; -fx-background-color: rgba(0,0,0,0.45); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Remove Part" />
+                                    <Button mnemonicParsing="false" onAction="#removePart" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Remove Part" />
                                 </HBox>
                             </VBox>
                         </HBox>
                     </center>
                     <bottom>
-                        <StackPane style="-fx-padding: 15; -fx-background-color: transparent;">
-                            <Button mnemonicParsing="false" onAction="#switchToCarMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Car Menu" StackPane.alignment="CENTER_LEFT" />
-                            <Button onAction="#switchToMainMenu" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 8 18 8 18; -fx-background-color: rgba(0,0,0,0.4); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8;" text="Main Menu" StackPane.alignment="CENTER_RIGHT" />
+                        <StackPane style="-fx-padding: 20; -fx-background-color: transparent;">
+                            <Button mnemonicParsing="false" onAction="#switchToCarMenu" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Car Menu" StackPane.alignment="CENTER_LEFT"/>
+                            <Button onAction="#switchToMainMenu" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Main Menu" StackPane.alignment="CENTER_RIGHT"/>
                         </StackPane>
                     </bottom>
                 </BorderPane>
