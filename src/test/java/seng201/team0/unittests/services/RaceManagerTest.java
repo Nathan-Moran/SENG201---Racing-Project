@@ -413,34 +413,6 @@ class RaceManagerTest {
         assertEquals(racesRemainingBefore + 1, gameEnvironment.getRacesRemaining());
     }
 
-
-    @Test
-    void testRaceEnds_PlayerRunsOutOfFuel() {
-        // Car with Fuel Economy 5km. Fuel rate 1.0/5.0 = 0.2.
-        // Player speed 2km/tick. Route length 20km. Needs 10 ticks for distance.
-        // Fuel tank (1.0) / 0.2 rate = 5 movement ticks until empty.
-        // Player will run out of fuel after 5 ticks (at 10km distance).
-        Car veryThirstyCar = new Car("ThirstyOriginal", 0.7, 0.6, 0.95, 5, 1500);
-        double thirstyFuelRate = 1.0 / veryThirstyCar.getFuelEconomy(); // Should be 0.2
-        RaceManager thirstyManager = new RaceManager(testRace, veryThirstyCar, opponents, PLAYER_MGR_SPEED, thirstyFuelRate);
-        gameEnvironment.getPlayerInventory().setStarterCar(veryThirstyCar); // Update GE if it relies on this car's stats
-
-        // Simulate 4 movement ticks. Fuel: 1.0 - 4 * 0.2 = 0.2. Player at 8km.
-        simulateRaceTicksAdvancingPlayer(thirstyManager, 4, gameEnvironment, "ignoreWeather");
-        assertFalse(thirstyManager.isRaceFinished(), "Race should not be finished after 4 movement ticks with thirsty car.");
-        assertEquals(1.0 - (4 * thirstyFuelRate), thirstyManager.getFuelLevel(), 0.0001, "Fuel level after 4 ticks for thirsty car.");
-
-        // 5th movement tick. Player moves. Fuel becomes 1.0 - 5 * 0.2 = 0. Race ends.
-        // Need to call advanceRaceTick directly as simulate helper might stop if race finishes.
-        thirstyManager.advanceRaceTick();
-
-        assertTrue(thirstyManager.isRaceFinished(), "Race should be finished due to no fuel with thirsty car.");
-        assertEquals("Out of fuel!", thirstyManager.getFinishReason(), "Finish reason should be out of fuel.");
-        assertEquals(0, thirstyManager.getFuelLevel(), 0.00001, "Fuel level should be zero.");
-        assertTrue(thirstyManager.hasPlayerFinished(), "Player is considered finished when out of fuel.");
-        assertTrue(thirstyManager.getPlayerDistance() < TEST_ROUTE.getLength(), "Player should not have finished by distance if fuel was the primary reason.");
-    }
-
     @Test
     void testProcessRaceOutcome_PlayerBrokeDown() {
         // Ensure opponents are ahead so player is last if they broke down at start

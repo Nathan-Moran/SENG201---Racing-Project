@@ -111,16 +111,6 @@ public class Shop extends ItemStorage {
                     break;
             }
         }
-
-        // Example for lockedTuningPartMap - you'd expand this based on your game's design
-        // For demonstration, let's assume Desert unlocks "SuperCharger" and "SportsWheels"
-        // and City unlocks "TurboKit" and "RacingWheels"
-        // You'll need to get these from your itemCatalogue or define them here.
-        // This part needs to be consistent with how you define and retrieve TuningParts
-        // that are meant to be locked.
-        // For now, I'm using placeholder new TuningPart objects.
-        // NOTE: This part needs to be carefully aligned with your ItemCatalogue's actual tuning parts.
-        // For a full implementation, you'd fetch these from the ItemCatalogue based on name or ID.
         this.lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
                 new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3),
                 new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3)
@@ -172,29 +162,12 @@ public class Shop extends ItemStorage {
     }
 
     /**
-     * Gets the map of tuning parts that are currently locked, associated with the course
-     * that unlocks them.
-     * @return A {@link Map} where keys are {@link Course} and values are {@link List} of {@link TuningPart} objects.
-     */
-    public Map<Course, List<TuningPart>> getLockedTuningPartMap() {
-        return lockedTuningPartMap;
-    }
-
-    /**
      * Removes a specific locked car from the map, typically after it has been unlocked and
      * moved to the main shop inventory.
      * @param course The {@link Course} associated with the locked car to be removed.
      */
     public void removeLockedCar(Course course) {
         lockedCarsMap.remove(course);
-    }
-
-    /**
-     * Removes a specific tuning part from the locked tuning parts map, typically after it has been unlocked.
-     * @param course The {@link Course} associated with the locked tuning part to be removed.
-     */
-    public void removeLockedTuningPart(Course course) {
-        lockedTuningPartMap.remove(course);
     }
 
     /**

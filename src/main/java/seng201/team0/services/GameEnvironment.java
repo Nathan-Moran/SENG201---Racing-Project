@@ -100,6 +100,11 @@ public class GameEnvironment {
         }
     }
 
+    /**
+     * Gets the {@link MusicController} instance responsible for managing background music.
+     *
+     * @return The {@link MusicController} currently in use.
+     */
     public MusicController getMusicManager() {
         return this.musicManager;
     }
