@@ -1,7 +1,6 @@
 package seng201.team0.services;
 
-import javafx.scene.media.MediaPlayer;
-import seng201.team0.gui.CourseAndRouteSelectionController;
+import seng201.team0.gui.MusicController;
 import seng201.team0.models.*;
 
 import java.util.ArrayList;
@@ -81,7 +80,7 @@ public class GameEnvironment {
      */
     private ItemCatalogue itemCatalogue;
 
-    private MusicManager musicManager;
+    private MusicController musicManager;
 
     /**
      * Constructs a new GameEnvironment, initializing all game-related components.
@@ -93,7 +92,7 @@ public class GameEnvironment {
         this.controllerService = new ControllerService(this);
         this.shopInventory = new Shop(this);
         this.starterCarInventory = new StarterCarInventory(this);
-        this.musicManager = new MusicManager();
+        this.musicManager = new MusicController();
         setupShop();
         setBalance();
         for (Course course : Course.values()) {
@@ -101,7 +100,7 @@ public class GameEnvironment {
         }
     }
 
-    public MusicManager getMusicManager() {
+    public MusicController getMusicManager() {
         return this.musicManager;
     }
 

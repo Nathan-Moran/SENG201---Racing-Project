@@ -24,9 +24,9 @@ class GarageTest {
         car2 = new Car("Car 2", 0.8, 0.7, 0.9, 30, 3000);
         // Unicode for emojis were "💨" (speed) and "🎮" (handling) in TuningPart but "暢" and "式" in Garage
         // Using the ones from Garage.java for these tests as they are directly testing Garage.java
-        speedPart = new TuningPart("Speed Boost", 500, "暢", 1.2);
-        handlingPart = new TuningPart("Handling Boost", 400, "式", 1.1);
-        anotherSpeedPart = new TuningPart("Super Speed", 1000, "暢", 1.5);
+        speedPart = new TuningPart("Speed Boost", 500, "\uD83D\uDCA8", 1.2);
+        handlingPart = new TuningPart("Handling Boost", 400, "\uD83C\uDFAE", 1.1);
+        anotherSpeedPart = new TuningPart("Super Speed", 1000, "\uD83D\uDCA8", 1.5);
 
         garage.addCar(car1); //
         garage.addTuningPart(speedPart); //
