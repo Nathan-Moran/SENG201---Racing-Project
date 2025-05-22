@@ -192,7 +192,6 @@ public class GaragePartsController implements Initializable {
                 reservePartStatColumn,
                 reservePartBoostColumn
         );
-
         reserveTuningPartTable.setItems(gameEnvironment.getPlayerInventory().getTuningPartList());
     }
 }

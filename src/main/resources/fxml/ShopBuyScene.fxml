@@ -51,7 +51,7 @@
                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS" /></columnResizePolicy>
                <columns>
                   <TableColumn fx:id="partNameColumn" prefWidth="90.0" text="⚙" />
-                  <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="💲" />
+                  <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="\$" />
                   <TableColumn fx:id="partStatColumn" prefWidth="40.0" text="⬆" />
                   <TableColumn fx:id="partBoostColumn" prefWidth="40.0" text="📈" />
                </columns>

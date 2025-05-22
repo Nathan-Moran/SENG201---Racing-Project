@@ -16,11 +16,7 @@ public class Shop extends ItemStorage {
      * whose completion unlocks them.
      */
     private Map<Course, Car> lockedCarsMap;
-    /**
-     * A map storing lists of tuning parts that are initially locked, mapped to the {@link Course}
-     * whose completion unlocks them.
-     */
-    private Map<Course, List<TuningPart>> lockedTuningPartMap;
+
 
     /**
      * A master list of all cars that can potentially be available in the shop,
@@ -51,7 +47,6 @@ public class Shop extends ItemStorage {
         super();
         this.gameEnvironment = gameEnvironment;
         this.lockedCarsMap = new HashMap<>();
-        this.lockedTuningPartMap = new HashMap<>(); // Initialize this map
         this.allAvailableCars = new ArrayList<>();
         this.allAvailableTuningParts = new ArrayList<>();
         this.lockedCarList = new ArrayList<>();
@@ -92,7 +87,6 @@ public class Shop extends ItemStorage {
     private void setupLockedItems() {
 
         this.lockedCarsMap.clear();
-        this.lockedTuningPartMap.clear(); // Clear tuning parts map too
 
         // Populate lockedCarsMap
         for (Car carFromPool : this.lockedCarList) {
@@ -111,24 +105,6 @@ public class Shop extends ItemStorage {
                     break;
             }
         }
-
-        // Example for lockedTuningPartMap - you'd expand this based on your game's design
-        // For demonstration, let's assume Desert unlocks "SuperCharger" and "SportsWheels"
-        // and City unlocks "TurboKit" and "RacingWheels"
-        // You'll need to get these from your itemCatalogue or define them here.
-        // This part needs to be consistent with how you define and retrieve TuningParts
-        // that are meant to be locked.
-        // For now, I'm using placeholder new TuningPart objects.
-        // NOTE: This part needs to be carefully aligned with your ItemCatalogue's actual tuning parts.
-        // For a full implementation, you'd fetch these from the ItemCatalogue based on name or ID.
-        this.lockedTuningPartMap.put(Course.DESERT, Arrays.asList(
-                new TuningPart("SuperCharger", 1000, "\uD83D\uDCA8", 1.3),
-                new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3)
-        ));
-        this.lockedTuningPartMap.put(Course.CITY, Arrays.asList(
-                new TuningPart("TurboKit", 2500, "\uD83D\uDCA8", 1.5),
-                new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5)
-        ));
     }
 
     /**
@@ -171,14 +147,6 @@ public class Shop extends ItemStorage {
         return lockedCarsMap;
     }
 
-    /**
-     * Gets the map of tuning parts that are currently locked, associated with the course
-     * that unlocks them.
-     * @return A {@link Map} where keys are {@link Course} and values are {@link List} of {@link TuningPart} objects.
-     */
-    public Map<Course, List<TuningPart>> getLockedTuningPartMap() {
-        return lockedTuningPartMap;
-    }
 
     /**
      * Removes a specific locked car from the map, typically after it has been unlocked and
@@ -189,13 +157,6 @@ public class Shop extends ItemStorage {
         lockedCarsMap.remove(course);
     }
 
-    /**
-     * Removes a specific tuning part from the locked tuning parts map, typically after it has been unlocked.
-     * @param course The {@link Course} associated with the locked tuning part to be removed.
-     */
-    public void removeLockedTuningPart(Course course) {
-        lockedTuningPartMap.remove(course);
-    }
 
     /**
      * Removes a specific car from the master list of all available cars.

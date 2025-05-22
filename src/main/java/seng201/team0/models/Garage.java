@@ -40,7 +40,7 @@ public class Garage extends ItemStorage {
      */
     public boolean installTuningPart(TuningPart part) {
         if (selectedCar != null) {
-            if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() == null) {
+            if (part.getStat().equals("⚡") && selectedCar.getSpeedUpgrade() == null) {
                 selectedCar.addSpeedUpgrade(part);
                 removeTuningPart(part); // Remove from garage's general parts list
                 return true;
@@ -61,12 +61,12 @@ public class Garage extends ItemStorage {
      */
     public void uninstallTuningPart(TuningPart part) {
         if (selectedCar != null) {
-            if (part.getStat().equals("💨") && selectedCar.getSpeedUpgrade() != null) {
-                addTuningPart(selectedCar.getSpeedUpgrade()); // Add back to garage's general parts list
+            if (part.getStat().equals("⚡") && selectedCar.getSpeedUpgrade() != null) {
+                addTuningPart(selectedCar.getSpeedUpgrade());
                 selectedCar.removeSpeedUpgrade();
             }
             else if (part.getStat().equals("🎮") && selectedCar.getHandlingUpgrade() != null) {
-                addTuningPart(selectedCar.getHandlingUpgrade()); // Add back to garage's general parts list
+                addTuningPart(selectedCar.getHandlingUpgrade());
                 selectedCar.removeHandlingUpgrade();
             }
         }
@@ -134,7 +134,7 @@ public class Garage extends ItemStorage {
      */
     public void setStarterCar(Car newStarterCarTemplate) {
         if (newStarterCarTemplate != null) {
-            this.selectedCar = new Car(newStarterCarTemplate); // Use the copy constructor
+            this.selectedCar = new Car(newStarterCarTemplate);
         } else {
             this.selectedCar = null;
         }
