@@ -1,7 +1,5 @@
-# SENG201 Template Project Overview
-Welcome to the template project for SENG201 which you will transform into your own.
-This README file includes some useful information to help you get started.
-However, we expect that this README becomes your own.
+# SENG201 Project Overview
+This is a racing game About 5-15 minutes playtime. Enjoy playing!
 
 ## Notes
 Remember you are required to commit your code to the **main** branch of your repository before the deadline.

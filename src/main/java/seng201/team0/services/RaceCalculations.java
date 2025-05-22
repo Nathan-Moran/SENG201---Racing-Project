@@ -12,6 +12,14 @@ import java.util.List;
  */
 public final class RaceCalculations {
 
+
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     */
+    private RaceCalculations() {
+        // This is a utility class, so no instances should be created.
+    }
+
     /**
      * Calculates the effective speed of a car on a given route.
      * This combines the car's base speed and handling with the route's
