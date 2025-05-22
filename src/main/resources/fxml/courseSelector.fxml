@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CourseAndRouteSelectionController">
+<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.CourseAndRouteSelectionController">
    <children>
       <VBox fx:id="courseMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -14,7 +14,7 @@
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
                      <children>
-                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="16.0" prefWidth="150.0" text="Balance:" textAlignment="CENTER">
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="21.0" prefWidth="150.0" text="Balance:" textAlignment="CENTER">
                            <font>
                               <Font name="SansSerif Bold" size="16.0" />
                            </font>
@@ -52,7 +52,7 @@
                      <children>
                         <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="64.0" prefWidth="200.0" text="DESERT" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="37.0" />
+                              <Font name="SansSerif Bold" size="30.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="87.0" text="EASY" textFill="#00ff15">
@@ -95,7 +95,7 @@
                      <children>
                         <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="64.0" prefWidth="200.0" text="MOUNTAIN" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="37.0" />
+                              <Font name="SansSerif Bold" size="30.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="87.0" text="MEDIUM" textFill="#ffc300">
@@ -138,7 +138,7 @@
                      <children>
                         <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="200.0" text="COUNTRY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="37.0" />
+                              <Font name="SansSerif Bold" size="30.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="87.0" text="MEDIUM" textFill="#ffc200">
@@ -181,7 +181,7 @@
                      <children>
                         <Label alignment="CENTER" mouseTransparent="true" prefHeight="100.0" prefWidth="200.0" text="CITY" textAlignment="CENTER">
                            <font>
-                              <Font name="SansSerif Bold" size="37.0" />
+                              <Font name="SansSerif Bold" size="30.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" minWidth="-Infinity" prefHeight="90.0" prefWidth="87.0" text="HARD" textFill="RED">

@@ -133,8 +133,9 @@ public class ShopService {
         for (Course course : Course.values()) {
             if (gameEnvironment.hasWonCourse(course)) {
                 Car carToUnlock = gameEnvironment.getShopInventory().getLockedCarsMap().get(course);
-                if (carToUnlock != null && gameEnvironment.getShopInventory().getLockedCarsMap().containsKey(course)) {
+                if (carToUnlock != null) {
                     gameEnvironment.getShopInventory().addCar(carToUnlock);
+                    gameEnvironment.getShopInventory().addCarToAllAvailable(carToUnlock);
                     gameEnvironment.getShopInventory().removeLockedCar(course);
                 }
             }
