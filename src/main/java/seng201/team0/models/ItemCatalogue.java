@@ -45,18 +45,18 @@ public class ItemCatalogue extends ItemStorage {
      * and need to be unlocked through progression. It also adds all available tuning parts.
      */
     public void setupCatalogue() {
-        Car honda = new Car("Honda Civic", 0.6, 0.5, 0.7, 20, 1000);
-        Car mazda = new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 1000);
-        Car nissan = new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 1000);
+        Car honda = new Car("Honda Civic", 0.6, 0.5, 0.7, 20, 500);
+        Car mazda = new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 500);
+        Car nissan = new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 500);
 
-        Car supra = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 6500);
-        Car mustang = new Car("Mustang", 0.92, 0.78, 0.80, 19, 6800);
-        Car ferrari = new Car("Ferrari", 0.96, 0.96, 0.90, 15, 12500);
+        Car supra = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 2000);
+        Car mustang = new Car("Mustang", 0.92, 0.8, 0.80, 19, 2500);
+        Car ferrari = new Car("Ferrari", 0.96, 0.96, 0.90, 15, 4000);
 
-        Car duneDrifter = new Car("Dune Drifter", 0.5, 0.8, 0.7, 22, 2200);
-        Car ridgeRacer = new Car("Ridge Racer", 0.8, 0.5, 0.8, 25, 2800);
-        Car vineyardViper = new Car("Vineyard Viper", 0.6, 0.5, 0.9, 20, 2600);
-        Car commuterKing = new Car("CommuterKing", 0.5, 0.9, 0.7, 28, 3000);
+        Car duneDrifter = new Car("Dune Drifter", 0.7, 0.7, 0.7, 22, 1200);
+        Car ridgeRacer = new Car("Ridge Racer", 0.7, 0.8, 0.8, 25, 1500);
+        Car vineyardViper = new Car("Vineyard Viper", 0.85, 0.7, 0.9, 30, 2000);
+        Car commuterKing = new Car("CommuterKing", 0.9, 0.9, 0.7, 28, 3000);
 
         starterCarPool.addAll(honda, mazda, nissan);
         shopCarListInternal.addAll(supra, mustang, ferrari);
@@ -64,10 +64,10 @@ public class ItemCatalogue extends ItemStorage {
 
         TuningPart ethanol = new TuningPart("Ethanol", 250, "⚡", 1.1);
         TuningPart superCharger = new TuningPart("SuperCharger", 1000, "⚡", 1.3);
-        TuningPart turboKit = new TuningPart("TurboKit", 2500, "⚡", 1.5);
+        TuningPart turboKit = new TuningPart("TurboKit", 2000, "⚡", 1.5);
         TuningPart streetWheels = new TuningPart("StreetWheels", 250, "\uD83C\uDFAE", 1.1);
         TuningPart sportsWheels = new TuningPart("SportsWheels", 1000, "\uD83C\uDFAE", 1.3);
-        TuningPart racingWheels = new TuningPart("RacingWheels", 2500, "\uD83C\uDFAE", 1.5);
+        TuningPart racingWheels = new TuningPart("RacingWheels", 2000, "\uD83C\uDFAE", 1.5);
 
 
         super.getTuningPartList().addAll(ethanol, superCharger, turboKit, streetWheels, sportsWheels, racingWheels);
