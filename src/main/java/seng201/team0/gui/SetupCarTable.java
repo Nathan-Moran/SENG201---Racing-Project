@@ -13,17 +13,6 @@ import seng201.team0.models.Car;
 public class SetupCarTable {
 
     /**
-     * Default constructor for the SetupCarTable class.
-     * This constructor is implicitly provided by Java if no other constructors are defined.
-     * As this is a utility class primarily for setting up table columns,
-     * direct instantiation is typically not intended, but it is available.
-     */
-    public SetupCarTable() {
-        // This is an implicitly generated default constructor.
-        // No custom logic is needed here as it's a utility class.
-    }
-
-    /**
      * Configures the columns of a {@link TableView} to display car properties.
      * Each {@link TableColumn} is associated with a corresponding property name from the {@link Car} class.
      * If a column is null, it is skipped, allowing for flexible table configurations where not all car properties are displayed.

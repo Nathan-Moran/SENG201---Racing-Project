@@ -2,7 +2,6 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import seng201.team0.services.GameEnvironment;
 
 import java.io.IOException;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
  * @author Nathan Moran
  */
 public class IconKeyController {
-    private SceneNavigator sceneNavigator;
+    private final SceneNavigator sceneNavigator;
 
     /**
      * Constructs an {@code IconKeyController} with the specified game environment and scene navigator.

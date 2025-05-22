@@ -51,11 +51,11 @@ public class FinishGameController implements Initializable {
     /**
      * The game environment, providing access to game state and services.
      */
-    private GameEnvironment gameEnvironment;
+    private final GameEnvironment gameEnvironment;
     /**
      * The scene navigator for handling transitions between different scenes.
      */
-    private SceneNavigator sceneNavigator;
+    private final SceneNavigator sceneNavigator;
 
     /**
      * Constructs a FinishGameController.

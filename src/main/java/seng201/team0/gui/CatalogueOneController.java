@@ -37,27 +37,27 @@ public class CatalogueOneController {
     /**
      * TableColumn for the model name of starter cars.
      */
-    @FXML private TableColumn<Car, String> modelColumn;
+    @FXML private TableColumn<Car, String> starterModelColumn;
     /**
      * TableColumn for the price of starter cars.
      */
-    @FXML private TableColumn<Car, Integer> priceColumn;
+    @FXML private TableColumn<Car, Integer> starterPriceColumn;
     /**
      * TableColumn for the speed stat of starter cars.
      */
-    @FXML private TableColumn<Car, String> speedColumn;
+    @FXML private TableColumn<Car, String> starterSpeedColumn;
     /**
      * TableColumn for the handling stat of starter cars.
      */
-    @FXML private TableColumn<Car, String> handlingColumn;
+    @FXML private TableColumn<Car, String> starterHandlingColumn;
     /**
      * TableColumn for the reliability stat of starter cars.
      */
-    @FXML private TableColumn<Car, String> reliabilityColumn;
+    @FXML private TableColumn<Car, String> starterReliabilityColumn;
     /**
      * TableColumn for the fuel economy stat of starter cars.
      */
-    @FXML private TableColumn<Car, String> fuelColumn;
+    @FXML private TableColumn<Car, String> starterFuelColumn;
 
     /**
      * TableView for displaying general shop cars.
@@ -66,27 +66,27 @@ public class CatalogueOneController {
     /**
      * TableColumn for the model name of shop cars.
      */
-    @FXML private TableColumn<Car, String> modelColumn1;
+    @FXML private TableColumn<Car, String> shopModelColumn;
     /**
      * TableColumn for the price of shop cars.
      */
-    @FXML private TableColumn<Car, Integer> priceColumn1;
+    @FXML private TableColumn<Car, Integer> shopPriceColumn;
     /**
      * TableColumn for the speed stat of shop cars.
      */
-    @FXML private TableColumn<Car, String> speedColumn1;
+    @FXML private TableColumn<Car, String> shopSpeedColumn;
     /**
      * TableColumn for the handling stat of shop cars.
      */
-    @FXML private TableColumn<Car, String> handlingColumn1;
+    @FXML private TableColumn<Car, String> shopHandlingColumn;
     /**
      * TableColumn for the reliability stat of shop cars.
      */
-    @FXML private TableColumn<Car, String> reliabilityColumn1;
+    @FXML private TableColumn<Car, String> shopReliabilityColumn;
     /**
      * TableColumn for the fuel economy stat of shop cars.
      */
-    @FXML private TableColumn<Car, String> fuelColumn1;
+    @FXML private TableColumn<Car, String> shopFuelColumn;
 
     /**
      * Stores the last selected item (Car or TuningPart) from either table.
@@ -111,8 +111,8 @@ public class CatalogueOneController {
      */
     @FXML
     public void initialize() {
-        setupCarTable.setupCarTable(starterCarTable, modelColumn, priceColumn, speedColumn, handlingColumn, reliabilityColumn, fuelColumn);
-        setupCarTable.setupCarTable(shopCarTable, modelColumn1, priceColumn1, speedColumn1, handlingColumn1, reliabilityColumn1, fuelColumn1);
+        setupCarTable.setupCarTable(starterCarTable, starterModelColumn, starterPriceColumn, starterSpeedColumn, starterHandlingColumn, starterReliabilityColumn, starterFuelColumn);
+        setupCarTable.setupCarTable(shopCarTable, shopModelColumn, shopPriceColumn, shopSpeedColumn, shopHandlingColumn, shopReliabilityColumn, shopFuelColumn);
 
         if (gameEnvironment != null && gameEnvironment.getItemCatalogue() != null) {
             starterCarTable.setItems(gameEnvironment.getItemCatalogue().getStarterCarPool());

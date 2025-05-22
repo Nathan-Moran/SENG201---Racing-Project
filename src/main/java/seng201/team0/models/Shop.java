@@ -15,27 +15,27 @@ public class Shop extends ItemStorage {
      * A map storing cars that are initially locked, mapped to the {@link Course}
      * whose completion unlocks them.
      */
-    private Map<Course, Car> lockedCarsMap;
+    private final Map<Course, Car> lockedCarsMap;
 
 
     /**
      * A master list of all cars that can potentially be available in the shop,
      * including those initially locked.
      */
-    private List<Car> allAvailableCars;
+    private final List<Car> allAvailableCars;
     /**
      * A master list of all tuning parts that can potentially be available in the shop,
      * including those initially locked.
      */
-    private List<TuningPart> allAvailableTuningParts;
+    private final List<TuningPart> allAvailableTuningParts;
     /**
      * The game environment instance, providing access to global game state and services.
      */
-    private GameEnvironment gameEnvironment;
+    private final GameEnvironment gameEnvironment;
     /**
      * A list of cars that are initially locked and can be unlocked by winning specific courses.
      */
-    private ArrayList<Car> lockedCarList;
+    private final ArrayList<Car> lockedCarList;
 
     /**
      * Constructs a new Shop instance.
@@ -64,18 +64,12 @@ public class Shop extends ItemStorage {
         ItemCatalogue catalogue = gameEnvironment.getItemCatalogue();
         if (catalogue != null) {
             this.allAvailableCars.clear();
-            for (Car shopCar : catalogue.getShopCarList()) {
-                this.allAvailableCars.add(shopCar);
-            }
+            this.allAvailableCars.addAll(catalogue.getShopCarList());
 
             this.allAvailableTuningParts.clear();
-            for (TuningPart part : catalogue.getTuningPartList()) {
-                this.allAvailableTuningParts.add(part);
-            }
+            this.allAvailableTuningParts.addAll(catalogue.getTuningPartList());
             this.lockedCarList.clear();
-            for (Car lockedCar : catalogue.getLockedCarList()) {
-                this.lockedCarList.add(lockedCar);
-            }
+            this.lockedCarList.addAll(catalogue.getLockedCarList());
         }
     }
 

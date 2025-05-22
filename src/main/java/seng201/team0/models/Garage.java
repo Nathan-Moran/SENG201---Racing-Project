@@ -18,7 +18,7 @@ public class Garage extends ItemStorage {
      * An observable list of tuning parts currently installed on the {@link #selectedCar}.
      * This list is dynamically updated to reflect the selected car's upgrades.
      */
-    private ObservableList<TuningPart> selectedTuningPartList;
+    private final ObservableList<TuningPart> selectedTuningPartList;
 
     /**
      * Constructs a new Garage instance.

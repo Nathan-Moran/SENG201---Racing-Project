@@ -8,7 +8,7 @@ import seng201.team0.services.GameEnvironment;
  * that are pre-defined as initial choices.
  */
 public class StarterCarInventory extends ItemStorage {
-    private GameEnvironment gameEnvironment;
+    private final GameEnvironment gameEnvironment;
     /**
      * Constructs a new StarterCarInventory instance.
      * Calls the superclass constructor to initialize car and tuning part lists.

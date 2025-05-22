@@ -65,7 +65,7 @@ public class GameEnvironment {
     /**
      * A list storing the player's placement in each completed race.
      */
-    private List<Integer> racePlacements = new ArrayList<>();
+    private final List<Integer> racePlacements = new ArrayList<>();
     /**
      * The total prize money earned by the player across all races.
      */
@@ -74,13 +74,13 @@ public class GameEnvironment {
      * A map tracking whether the player has won each {@link Course} for the first time.
      * This is used to unlock new content.
      */
-    private Map<Course, Boolean> hasWonCourse = new HashMap<>();
+    private final Map<Course, Boolean> hasWonCourse = new HashMap<>();
     /**
      * The {@link ItemCatalogue} containing all possible cars and tuning parts in the game.
      */
-    private ItemCatalogue itemCatalogue;
+    private final ItemCatalogue itemCatalogue;
 
-    private MusicController musicManager;
+    private final MusicController musicManager;
 
     /**
      * Constructs a new GameEnvironment, initializing all game-related components.

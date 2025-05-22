@@ -104,7 +104,7 @@ public class RaceFinishController {
                 try {
                     sceneNavigator.switchToFinishGameScene(event);
                 } catch (IOException e) {
-                    showAlert("Error Loading Scene", "Could not load the End Game Screen: " + e.getMessage());
+                    showAlert("Could not load the End Game Screen: " + e.getMessage());
                     e.printStackTrace();
                 }
             });
@@ -116,7 +116,7 @@ public class RaceFinishController {
                 try {
                     sceneNavigator.switchToSceneCourseAndRoute(event);
                 } catch (IOException e) {
-                    showAlert("Error Loading Scene", "Could not load the Course and Route Selection: " + e.getMessage());
+                    showAlert("Could not load the Course and Route Selection: " + e.getMessage());
                     e.printStackTrace();
                 }
             });
@@ -133,7 +133,7 @@ public class RaceFinishController {
             try {
                 sceneNavigator.switchToSceneMainMenu(event);
             } catch (IOException e) {
-                showAlert("Error Loading Scene", "Could not load the Main Menu: " + e.getMessage());
+                showAlert("Could not load the Main Menu: " + e.getMessage());
                 e.printStackTrace();
             }
         });
@@ -141,12 +141,12 @@ public class RaceFinishController {
 
     /**
      * Displays an alert dialog with a specified title and content.
-     * @param title The title of the alert dialog.
+     *
      * @param content The main message content of the alert dialog.
      */
-    private void showAlert(String title, String content) {
+    private void showAlert(String content) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Error Loading Scene");
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();

@@ -87,7 +87,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void quitGame(ActionEvent event) throws IOException {
+    void quitGame(ActionEvent event) {
         gameEnvironment.quit();
     }
 

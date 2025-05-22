@@ -10,16 +10,7 @@ import java.util.List;
  * These calculations include effective car statistics, fuel consumption, opponent tracking,
  * and event trigger distances.
  */
-public final class RaceCalculations { // Made final as it's a utility class with only static methods
-    // Removed instance variable 'opponents' as all methods are static or take parameters.
-    // private List<OpponentCar> opponents;
-
-    /**
-     * Private constructor to prevent instantiation of this utility class.
-     */
-    private RaceCalculations() {
-        // This is a utility class, so no instances should be created.
-    }
+public final class RaceCalculations {
 
     /**
      * Calculates the effective speed of a car on a given route.

@@ -11,11 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import seng201.team0.models.*;
 import seng201.team0.services.*;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -122,31 +119,16 @@ public class RaceController {
 
     //Race animations
     /**
-     * Rectangle representing the visual race track line for car animation.
+     * Rectangle representing the visual racetrack line for car animation.
      */
     @FXML
     private Rectangle raceTrackLine;
-    /**
-     * ImageView for displaying the start flag.
-     */
-    @FXML
-    private ImageView startFlagImageView;
-    /**
-     * ImageView for displaying the finish flag.
-     */
-    @FXML
-    private ImageView finishFlagImageView;
+
     /**
      * ImageView for displaying the player's car during the race animation.
      */
     @FXML
     private ImageView carImage;
-    /**
-     * Label for displaying the time left in the race (redundant with timerLabel, but present in FXML).
-     */
-    @FXML
-    private Label timeLeftLabel;
-
 
     /**
      * The game environment, providing access to game state and services.
@@ -173,8 +155,6 @@ public class RaceController {
      * Timeline for controlling the visibility of the traveler pay popup.
      */
     private Timeline travelerPayTimeline;
-    private MediaPlayer musicPlayer;
-
     /**
      * Constructs a RaceController.
      * @param gameEnvironment The current game environment.
@@ -205,8 +185,6 @@ public class RaceController {
                 } catch (NullPointerException e) {
                     System.err.println("Error loading background image: " + imagePath);
                 }
-            } else {
-
             }
         }
         if (currentCar == null) {
@@ -283,18 +261,13 @@ public class RaceController {
      * @return The string path to the background image resource.
      */
     private String getImagePathForCourse(Course course) {
-        switch (course.getName().toLowerCase()) {
-            case "desert":
-                return "/fxml/desert.jpg";
-            case "mountain":
-                return "/fxml/mountain.png";
-            case "country":
-                return "/fxml/country.png";
-            case "city":
-                return "/fxml/city.png";
-            default:
-                return "/fxml/desert.png";
-        }
+        return switch (course.getName().toLowerCase()) {
+            case "desert" -> "/fxml/desert.jpg";
+            case "mountain" -> "/fxml/mountain.png";
+            case "country" -> "/fxml/country.png";
+            case "city" -> "/fxml/city.png";
+            default -> "/fxml/desert.png";
+        };
     }
 
     /**
@@ -327,31 +300,35 @@ public class RaceController {
      * race length, fuel gauge, leaderboard, and car animation.
      */
     private void updateUI() {
-        moneyLabel.setText(String.valueOf((int) gameEnvironment.getBalance()));
-        raceLengthLabel.setText((int) raceManager.getRace().getRoute().getLength() + " km");
+        moneyLabel.setText(String.valueOf(gameEnvironment.getBalance()));
+        raceLengthLabel.setText(raceManager.getRace().getRoute().getLength() + " km");
         fuelGauge.setProgress(raceManager.getFuelLevel());
         updateLeaderboardDisplay();
         updateFuelGauge();
 
         if (carImage != null && raceTrackLine != null && raceManager != null && raceManager.getRace().getRoute().getLength() > 0) {
-            double playerDistance = raceManager.getPlayerDistance();
-            double routeLength = raceManager.getRace().getRoute().getLength();
-            double progress = 0.0;
-
-            if (routeLength > 0) {
-                progress = playerDistance / routeLength;
-            }
-            progress = Math.max(0, Math.min(1, progress));
-
-            double startPosition = raceTrackLine.getLayoutX();
-            double trackVisualWidth = raceTrackLine.getWidth();
-            double carImageWidth = carImage.getFitWidth();
-
-            double updatedCarPosition = startPosition + (progress * (trackVisualWidth - carImageWidth));
+            double updatedCarPosition = getUpdatedCarPosition();
 
             carImage.setLayoutX(updatedCarPosition);
         }
 
+    }
+
+    private double getUpdatedCarPosition() {
+        double playerDistance = raceManager.getPlayerDistance();
+        double routeLength = raceManager.getRace().getRoute().getLength();
+        double progress = 0.0;
+
+        if (routeLength > 0) {
+            progress = playerDistance / routeLength;
+        }
+        progress = Math.max(0, Math.min(1, progress));
+
+        double startPosition = raceTrackLine.getLayoutX();
+        double trackVisualWidth = raceTrackLine.getWidth();
+        double carImageWidth = carImage.getFitWidth();
+
+        return startPosition + (progress * (trackVisualWidth - carImageWidth));
     }
 
 
@@ -469,13 +446,11 @@ public class RaceController {
             travelerPayPopup.setVisible(true);
             travelerPayTimeline.playFromStart();
             raceManager.handleTraveler(true, gameEnvironment);
-            raceTimeline.play();
-            timerTimeline.play();
         } else {
             raceManager.handleTraveler(false, gameEnvironment);
-            raceTimeline.play();
-            timerTimeline.play();
         }
+        raceTimeline.play();
+        timerTimeline.play();
     }
 
     /**
@@ -513,31 +488,7 @@ public class RaceController {
             placement = raceManager.getPlayerPlacement();
         }
 
-        String placementText;
-        if (Objects.equals(reason, "Weather has cancelled the race!")) {
-            placementText = "Race Cancelled Due to Weather";
-        } else if (Objects.equals(reason, "Out of fuel!")) {
-            placementText = "Ran out of fuel!";
-        } else if (Objects.equals(reason, "Time ran out!")) {
-            placementText = "Time ran out!";
-        } else if (Objects.equals(reason, "Finished the race!")) {
-            switch (placement) {
-                case 1:
-                    placementText = "🏆 You finished 1st!";
-                    break;
-                case 2:
-                    placementText = "🥈 You finished 2nd!";
-                    break;
-                case 3:
-                    placementText = "🥉 You finished 3rd!";
-                    break;
-                default:
-                    placementText = "You finished " + placement + "th.";
-                    break;
-            }
-        } else {
-            placementText = "Race Over";
-        }
+        String placementText = getString(reason, placement);
         gameEnvironment.getMusicManager().stopMusic();
         gameEnvironment.getMusicManager().initializeMusic("/music/MenuMusic.mp3");
         gameEnvironment.updateHasWonCourse(gameEnvironment.getSelectedCourse(), placement);
@@ -545,5 +496,22 @@ public class RaceController {
         gameEnvironment.addRacePlacement(placement);
         gameEnvironment.addPrizeMoney(earnings);
         sceneNavigator.switchToRaceFinishScene(reason, placementText, leaderboard, earnings);
+    }
+
+    private static String getString(String reason, int placement) {
+        String placementText;
+        switch (reason) {
+            case "Weather has cancelled the race!" -> placementText = "Race Cancelled Due to Weather";
+            case "Out of fuel!" -> placementText = "Ran out of fuel!";
+            case "Time ran out!" -> placementText = "Time ran out!";
+            case "Finished the race!" -> placementText = switch (placement) {
+                case 1 -> "🏆 You finished 1st!";
+                case 2 -> "🥈 You finished 2nd!";
+                case 3 -> "🥉 You finished 3rd!";
+                default -> "You finished " + placement + "th.";
+            };
+            case null, default -> placementText = "Race Over";
+        }
+        return placementText;
     }
 }

@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import seng201.team0.models.Car;
 import seng201.team0.models.TuningPart;
 import seng201.team0.services.GameEnvironment;
 
@@ -25,19 +24,15 @@ public class GaragePartsController implements Initializable {
     /**
      * The game environment instance, providing access to global game state and services.
      */
-    protected GameEnvironment gameEnvironment;
+    private final GameEnvironment gameEnvironment;
     /**
      * The scene navigator instance, used for switching between different application scenes.
      */
-    protected SceneNavigator sceneNavigator;
-    /**
-     * The currently active car in the garage, on which tuning parts can be installed or uninstalled.
-     */
-    protected Car activeCar;
+    private final SceneNavigator sceneNavigator;
     /**
      * Helper class for setting up and configuring {@link TableView} for {@link TuningPart} objects.
      */
-    private SetupTuningPartTable setupTuningPartTable;
+    private final SetupTuningPartTable setupTuningPartTable;
 
     /**
      * TableColumn for displaying the boost value of tuning parts in the reserve inventory.
@@ -68,7 +63,7 @@ public class GaragePartsController implements Initializable {
      */
     @FXML private TableView<TuningPart> reserveTuningPartTable;
     /**
-     * TableView for displaying tuning parts that are currently installed on the {@link #activeCar}.
+     * TableView for displaying tuning parts that are currently installed on the active Car.
      */
     @FXML private TableView<TuningPart> installedTuningPartTable;
 
@@ -159,8 +154,6 @@ public class GaragePartsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupInstalledPartsTable();
         setupReservePartsTable();
-
-        activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
     }
 
     /**

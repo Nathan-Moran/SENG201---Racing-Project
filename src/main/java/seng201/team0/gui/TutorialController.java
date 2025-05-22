@@ -2,8 +2,6 @@ package seng201.team0.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import seng201.team0.services.GameEnvironment; // Assuming you have this for navigation
 
 import java.io.IOException;
 
@@ -14,12 +12,9 @@ import java.io.IOException;
 public class TutorialController {
 
     /**
-     * The game environment, providing access to game state and services.
-     */
-    /**
      * The scene navigator for handling transitions between different scenes.
      */
-    private SceneNavigator sceneNavigator;
+    private final SceneNavigator sceneNavigator;
 
     /**
      * Constructs a TutorialController with injected dependencies.

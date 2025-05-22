@@ -4,8 +4,6 @@ import seng201.team0.models.Car;
 import seng201.team0.models.Course;
 import seng201.team0.models.TuningPart;
 
-import java.util.List;
-
 /**
  * Handles all business logic related to the in-game shop, including buying, selling,
  * and unlocking cars and tuning parts. It interacts with the {@link GameEnvironment}

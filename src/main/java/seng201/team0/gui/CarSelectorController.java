@@ -35,7 +35,7 @@ public class CarSelectorController implements Initializable {
     /**
      * The inventory of starter cars available for the player to choose from.
      */
-    protected StarterCarInventory startingCarsGarage;
+    protected StarterCarInventory starterCarsGarage;
 
     private SetupCarTable setupCarTable;
 
@@ -51,7 +51,7 @@ public class CarSelectorController implements Initializable {
         this.sceneNavigator = sceneNavigator;
         this.setupCarTable = new SetupCarTable();
         gameEnvironment.setupStarterCars();
-        startingCarsGarage = gameEnvironment.getStarterCarInventory();
+        starterCarsGarage = gameEnvironment.getStarterCarInventory();
     }
 
     /**
@@ -91,7 +91,7 @@ public class CarSelectorController implements Initializable {
     @FXML
     private void switchToMainMenu(ActionEvent event) throws IOException {
         if (gameEnvironment.getPlayerInventory().getSelectedCar() != null) {
-            gameEnvironment.getControllerService().storeLeftOverCars(startingCarsGarage);
+            gameEnvironment.getControllerService().storeLeftOverCars(starterCarsGarage);
             sceneNavigator.switchToSceneTutorial(event);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -177,10 +177,10 @@ public class CarSelectorController implements Initializable {
 
 
     /**
-     * Loads the starter cars from the `startingCarsGarage` into the car table.
+     * Loads the starter cars from the `starterCarsGarage` into the car table.
      */
     protected void loadCars() {
-        carTable.setItems(startingCarsGarage.getCarList());
+        carTable.setItems(starterCarsGarage.getCarList());
     }
 
 }

@@ -16,15 +16,15 @@ public class RaceManager {
     /**
      * The {@link Race} instance this manager is controlling.
      */
-    private Race race;
+    private final Race race;
     /**
      * The player's {@link Car} participating in this race.
      */
-    private Car playerCar;
+    private final Car playerCar;
     /**
      * The list of {@link OpponentCar} objects in this race.
      */
-    private List<OpponentCar> opponents;
+    private final List<OpponentCar> opponents;
     /**
      * The current distance covered by the player's car.
      */
@@ -52,19 +52,19 @@ public class RaceManager {
     /**
      * The effective speed of the player's car, calculated considering route attributes.
      */
-    private double speed;
+    private final double speed;
     /**
      * The rate at which the player's car consumes fuel.
      */
-    private double fuelConsumptionRate;
+    private final double fuelConsumptionRate;
     /**
      * The distance at which a random event might be triggered.
      */
-    private double eventTriggerDistance;
+    private final double eventTriggerDistance;
     /**
      * The distance at which a breakdown event might be triggered.
      */
-    private double breakdownTriggerDistance;
+    private final double breakdownTriggerDistance;
     /**
      * A {@link Random} instance for generating random events.
      */
@@ -84,7 +84,7 @@ public class RaceManager {
     /**
      * A list of distances where fuel stops are mandated.
      */
-    private List<Double> fuelStopDistances;
+    private final List<Double> fuelStopDistances;
     /**
      * The index of the next mandatory fuel stop to be encountered.
      */
@@ -108,7 +108,7 @@ public class RaceManager {
     /**
      * The total duration of the race in seconds.
      */
-    private double raceDurationSeconds;
+    private final double raceDurationSeconds;
     /**
      * The time elapsed in the race in seconds.
      */
@@ -120,7 +120,7 @@ public class RaceManager {
     /**
      * The amount of money earned by the player in the race.
      */
-    private int moneyEarned = 0;
+    private int moneyEarned;
 
     // Constants for event-related wait times and costs/profits
     /**
@@ -463,6 +463,15 @@ public class RaceManager {
         }
 
         // Determine final placement and update game environment
+        int finalPlacement = getFinalPlacement();
+
+        gameEnvironment.updateHasWonCourse(race.getCourse(), finalPlacement);
+        gameEnvironment.getShopService().unlockNewCars(); // Corrected to unlockNewCars based on ShopService
+        gameEnvironment.addRacePlacement(finalPlacement);
+        gameEnvironment.addPrizeMoney(moneyEarned); // Add total earnings for the race
+    }
+
+    private int getFinalPlacement() {
         int finalPlacement;
         if (Objects.equals(finishReason, "Car broke down! You withdrew from the race.") ||
                 Objects.equals(finishReason, "Weather has cancelled the race!") ||
@@ -472,11 +481,7 @@ public class RaceManager {
         } else {
             finalPlacement = getPlayerPlacement();
         }
-
-        gameEnvironment.updateHasWonCourse(race.getCourse(), finalPlacement);
-        gameEnvironment.getShopService().unlockNewCars(); // Corrected to unlockNewCars based on ShopService
-        gameEnvironment.addRacePlacement(finalPlacement);
-        gameEnvironment.addPrizeMoney(moneyEarned); // Add total earnings for the race
+        return finalPlacement;
     }
 
     /**
@@ -485,24 +490,16 @@ public class RaceManager {
      * @param gameEnvironment The game environment to update the player's balance.
      */
     public void awardPrizeMoney(GameEnvironment gameEnvironment) {
-        int prize = 0;
+        int prize;
         int placement = getPlayerPlacement();
 
         // Assuming prize money depends on placement for the current race's course
-        switch (placement) {
-            case 1:
-                prize = race.getCourse().getPrizes().getFirstPlacePrize();
-                break;
-            case 2:
-                prize = race.getCourse().getPrizes().getSecondPlacePrize();
-                break;
-            case 3:
-                prize = race.getCourse().getPrizes().getThirdPlacePrize();
-                break;
-            default:
-                prize = 0; // No prize for finishing beyond 3rd
-                break;
-        }
+        prize = switch (placement) {
+            case 1 -> race.getCourse().getPrizes().getFirstPlacePrize();
+            case 2 -> race.getCourse().getPrizes().getSecondPlacePrize();
+            case 3 -> race.getCourse().getPrizes().getThirdPlacePrize();
+            default -> 0;
+        };
         gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
         moneyEarned += prize; // Accumulate total earnings from race
     }
@@ -523,16 +520,12 @@ public class RaceManager {
             return "Car broke down! You withdrew from the race."; // Specific text for withdrawal
         } else if (Objects.equals(finishReason, "Finished the race!")) {
             int placement = getPlayerPlacement();
-            switch (placement) {
-                case 1:
-                    return "🏆 You finished 1st!";
-                case 2:
-                    return "🥈 You finished 2nd!";
-                case 3:
-                    return "🥉 You finished 3rd!";
-                default:
-                    return "You finished " + placement + "th.";
-            }
+            return switch (placement) {
+                case 1 -> "🏆 You finished 1st!";
+                case 2 -> "🥈 You finished 2nd!";
+                case 3 -> "🥉 You finished 3rd!";
+                default -> "You finished " + placement + "th.";
+            };
         }
         return "Race Over";
     }

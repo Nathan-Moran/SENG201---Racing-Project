@@ -7,8 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import seng201.team0.models.Car;
 
-
-import javafx.event.ActionEvent;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
 
@@ -28,15 +26,11 @@ public class GarageController implements Initializable {
     /**
      * The game environment instance, providing access to global game state and services.
      */
-    protected GameEnvironment gameEnvironment;
+    private final GameEnvironment gameEnvironment;
     /**
      * The scene navigator instance, used for switching between different application scenes.
      */
-    protected SceneNavigator sceneNavigator;
-    /**
-     * The currently active car in the garage, which is the car the player is currently managing or using.
-     */
-    protected Car activeCar;
+    private final SceneNavigator sceneNavigator;
     /**
      * The ControllerService instance, providing various UI-related logic and validation services.
      */
@@ -44,7 +38,7 @@ public class GarageController implements Initializable {
     /**
      * Helper class for setting up and configuring {@link TableView} for {@link Car} objects.
      */
-    private SetupCarTable setupCarTable;
+    private final SetupCarTable setupCarTable;
 
     /**
      * TableView for displaying the player's collection of cars.
@@ -185,8 +179,6 @@ public class GarageController implements Initializable {
      * updating the labels to display the stats of the currently selected active car.
      */
     public void setGUI() {
-        this.activeCar = gameEnvironment.getPlayerInventory().getSelectedCar();
-
         if (carTable != null) {
             setupCarTable.setupCarTable(
                     carTable,
@@ -199,7 +191,9 @@ public class GarageController implements Initializable {
             );
         }
 
-        carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
+        if (carTable != null) {
+            carTable.setItems(gameEnvironment.getPlayerInventory().getCarList());
+        }
 
         selectedCarFuelLabel.setText(controllerLogicManager.setLabels("Fuel"));
         selectedCarModelLabel.setText(controllerLogicManager.setLabels("Model"));

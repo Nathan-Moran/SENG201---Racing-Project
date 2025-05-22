@@ -12,9 +12,6 @@ import javafx.scene.input.MouseEvent;
 import seng201.team0.models.Difficulty;
 import seng201.team0.services.ControllerService;
 import seng201.team0.services.GameEnvironment;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
-import java.net.URL;
 
 /**
  * Controller for the start menu screen.

@@ -10,8 +10,7 @@ import seng201.team0.models.Difficulty;
 import seng201.team0.models.Race;
 import seng201.team0.models.Route;
 import seng201.team0.services.GameEnvironment;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -33,8 +32,6 @@ public class CourseAndRouteSelectionController implements Initializable {
      * The scene navigator for handling transitions between different scenes.
      */
     protected SceneNavigator sceneNavigator;
-
-    private MediaPlayer musicPlayer;
 
     /**
      * Constructs a CourseAndRouteSelectionController.
@@ -107,7 +104,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     /**
      * A map linking Course enum values to their corresponding completion labels.
      */
-    private Map<Course, Label> courseLabels = new HashMap<>();
+    private final Map<Course, Label> courseLabels = new HashMap<>();
 
     /**
      * The currently selected {@link Course} for the race.
@@ -172,7 +169,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     void onDesertSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.DESERT;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
-            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            showAlert();
             return;
         }
         showRouteMenu(desertRouteMenu);
@@ -188,7 +185,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     void onMountainSelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.MOUNTAIN;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
-            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            showAlert();
             return;
         }
         showRouteMenu(mountainRouteMenu);
@@ -204,7 +201,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     void onCountrySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.COUNTRY;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
-            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            showAlert();
             return;
         }
         showRouteMenu(countryRouteMenu);
@@ -220,7 +217,7 @@ public class CourseAndRouteSelectionController implements Initializable {
     void onCitySelected(javafx.scene.input.MouseEvent event) {
         selectedCourse = Course.CITY;
         if (gameEnvironment.getBalance() < selectedCourse.getEntryFee()) {
-            showAlert("Invalid Funds", "You do not have the required funds to pick this course");
+            showAlert();
             return;
         }
         showRouteMenu(cityRouteMenu);
@@ -228,15 +225,12 @@ public class CourseAndRouteSelectionController implements Initializable {
 
     /**
      * Displays an error alert dialog with a specified title and message.
-     *
-     * @param title   The title of the alert dialog.
-     * @param message The main message content of the alert dialog.
      */
-    private void showAlert(String title, String message) {
+    private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Invalid Funds");
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("You do not have the required funds to pick this course");
         alert.showAndWait();
     }
 

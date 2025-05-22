@@ -1,10 +1,8 @@
 package seng201.team0.gui;
 
 import javafx.event.ActionEvent;
-// import javafx.event.Event; // Retaining ActionEvent/MouseEvent specific to original signatures
-import javafx.scene.input.MouseEvent; // Explicitly import MouseEvent
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -31,7 +29,7 @@ public class SceneNavigator {
     /**
      * The primary stage of the application where scenes are rendered.
      */
-    private Stage stage;
+    private final Stage stage;
 
     /**
      * A functional interface for creating controller instances.
@@ -51,15 +49,6 @@ public class SceneNavigator {
      */
     public SceneNavigator(GameEnvironment gameEnvironment, Stage stage) {
         this.gameEnvironment = gameEnvironment;
-        this.stage = stage;
-    }
-
-    /**
-     * Updates the primary {@link Stage} used by this navigator.
-     *
-     * @param stage The new {@link Stage} to be used for scene transitions.
-     */
-    public void setStage(Stage stage) {
         this.stage = stage;
     }
 

@@ -139,15 +139,13 @@ public class CatalogueTwoController {
     @FXML
     private void getDescription(ActionEvent event) {
         if (lastSelectedItem != null) {
-            if (lastSelectedItem instanceof Car) {
-                Car selectedCar = (Car) lastSelectedItem;
+            if (lastSelectedItem instanceof Car selectedCar) {
                 String carName = selectedCar.getName();
                 String description = DescriptionService.getCarDescription(carName);
                 String title = carName + " - Description";
                 showAlert(title, description);
 
-            } else if (lastSelectedItem instanceof TuningPart) {
-                TuningPart selectedPart = (TuningPart) lastSelectedItem;
+            } else if (lastSelectedItem instanceof TuningPart selectedPart) {
                 String partName = selectedPart.getName();
                 String description = DescriptionService.getTuningPartDescription(partName);
                 String title = partName + " - Description";

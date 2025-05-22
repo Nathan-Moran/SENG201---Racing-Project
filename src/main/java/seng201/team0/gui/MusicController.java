@@ -16,16 +16,6 @@ public class MusicController {
     private MediaPlayer musicPlayer;
 
     /**
-     * Constructs a new MusicController.
-     * The music playback is not initialized at this stage;
-     * use the {@link #initializeMusic(String)} method to start playing music.
-     */
-    public MusicController() {
-        // Default constructor, no initialization logic here.
-        // Music playback is handled by initializeMusic method.
-    }
-
-    /**
      * Initializes and starts playing background music from a specified file.
      * The music will loop indefinitely and play at a low volume.
      * If the music file cannot be found or an error occurs during playback,
@@ -35,11 +25,10 @@ public class MusicController {
      */
     public void initializeMusic(String fileName) {
         try {
-            String musicFilePath = fileName;
-            URL musicResource = getClass().getResource(musicFilePath);
+            URL musicResource = getClass().getResource(fileName);
 
             if (musicResource == null) {
-                System.err.println("Cannot find music file: " + musicFilePath);
+                System.err.println("Cannot find music file: " + fileName);
                 return;
             }
             Media sound = new Media(musicResource.toExternalForm());
