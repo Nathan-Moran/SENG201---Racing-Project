@@ -312,12 +312,11 @@ public class GameEnvironment {
      * If no difficulty is selected, the balance defaults to 0.
      */
     public void setBalance() {
-//        if (selectedDifficulty != null) {
-//            this.balance = selectedDifficulty.getStartBudget();
-//        } else {
-//            this.balance = 0; // Default or error state
-//        }
-        this.balance = 100000;
+        if (selectedDifficulty != null) {
+            this.balance = selectedDifficulty.getStartBudget();
+        } else {
+            this.balance = 0; // Default or error state
+        }
     }
 
     /**

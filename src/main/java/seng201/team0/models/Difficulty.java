@@ -8,15 +8,15 @@ public enum Difficulty {
     /**
      * Easy difficulty: Higher starting budget, lower chance of car breakdown.
      */
-    EASY(1500, 0.8),
+    EASY(1000, 0.8),
     /**
      * Medium difficulty: Balanced starting budget and breakdown chance.
      */
-    MEDIUM(1250, 0.9),
+    MEDIUM(750, 0.9),
     /**
      * Hard difficulty: Lower starting budget, higher chance of car breakdown.
      */
-    HARD(1000, 1);
+    HARD(500, 1);
 
     /**
      * The initial amount of money the player starts with at this difficulty.
