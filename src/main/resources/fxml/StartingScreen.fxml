@@ -13,17 +13,17 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.StartMenuController">
+<StackPane fx:id="rootScenePane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.StartMenuController">
    <children>
-      <StackPane fx:id="contentAreaHolder" prefWidth="800.0" prefHeight="600.0">
+      <StackPane fx:id="contentAreaHolder" prefHeight="600.0" prefWidth="800.0">
          <children>
             <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                <image>
-                  <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
+                  <Image url="@2151710994.jpg" />
                </image>
             </ImageView>
 
-            <BorderPane fx:id="root" prefWidth="800.0" prefHeight="600.0" maxWidth="800.0" maxHeight="600.0" style="-fx-background-color: transparent;">
+            <BorderPane fx:id="root" maxHeight="600.0" maxWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent;">
                <top>
                   <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
                      <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 10 20 10 20; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1;">
@@ -33,8 +33,8 @@
                   </HBox>
                </top>
                <center>
-                  <HBox spacing="25" style="-fx-padding: 10 20 20 20; -fx-background-color: transparent;" alignment="TOP_CENTER">
-                     <VBox spacing="20" prefWidth="420.0">
+                  <HBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 10 20 20 20; -fx-background-color: transparent;">
+                     <VBox prefWidth="420.0" spacing="20">
                         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
                            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Enter Your Name" />
                            <TextField fx:id="nameField" onKeyTyped="#setName" promptText="E.g., StarRacer" style="-fx-font-size: 16px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.2);" />
@@ -51,7 +51,7 @@
                         </VBox>
                         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
                            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Season Length (Races)" />
-                           <Slider fx:id="seasonSlider" blockIncrement="1" majorTickUnit="1" max="15.0" min="5.0" minorTickCount="0" onMouseReleased="#setSeasonLength" prefWidth="380.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-control-inner-background: rgba(255,255,255,0.5);"/>
+                           <Slider fx:id="seasonSlider" blockIncrement="1" majorTickUnit="1" max="15.0" min="5.0" minorTickCount="0" onMouseReleased="#setSeasonLength" prefWidth="380.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" style="-fx-control-inner-background: rgba(255,255,255,0.5);" />
                         </VBox>
                      </VBox>
                      <VBox minWidth="280.0" prefWidth="300.0" spacing="15" style="-fx-padding: 20; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">

@@ -14,17 +14,17 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="rootScenePane" prefWidth="1024.0" prefHeight="768.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
+<StackPane fx:id="rootScenePane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.GarageController">
     <children>
-        <StackPane fx:id="contentAreaHolder" prefWidth="800.0" prefHeight="600.0">
+        <StackPane fx:id="contentAreaHolder" prefHeight="600.0" prefWidth="800.0">
             <children>
                 <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                     <image>
-                        <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
+                        <Image url="@GarageMenu_resized.jpg" />
                     </image>
                 </ImageView>
 
-                <BorderPane prefWidth="800.0" prefHeight="600.0" maxWidth="800.0" maxHeight="600.0" style="-fx-background-color: transparent;">
+                <BorderPane maxHeight="600.0" maxWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent;">
                     <top>
                         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: transparent;">
                             <HBox alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 10 20 10 20; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1;">
@@ -34,8 +34,8 @@
                         </HBox>
                     </top>
                     <center>
-                        <HBox spacing="20" style="-fx-padding: 10 20 20 20; -fx-background-color: transparent;" alignment="TOP_CENTER">
-                            <VBox spacing="15" HBox.hgrow="ALWAYS" maxWidth="360">
+                        <HBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 10 20 20 20; -fx-background-color: transparent;">
+                            <VBox maxWidth="360" spacing="15" HBox.hgrow="ALWAYS">
                                 <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
                                     <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 8 0;" text="Active Car Details" />
                                     <Separator style="-fx-background-color: rgba(255,255,255,0.4);" />
@@ -71,7 +71,7 @@
                                     </VBox>
                                 </VBox>
                                 <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
-                                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" text="Rename Active Car:"/>
+                                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" text="Rename Active Car:" />
                                     <TextField fx:id="renameCarTextField" promptText="Enter new name" style="-fx-font-size: 14px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.2);" />
                                     <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
                                         <Button mnemonicParsing="false" onAction="#renameCar" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Rename" />
