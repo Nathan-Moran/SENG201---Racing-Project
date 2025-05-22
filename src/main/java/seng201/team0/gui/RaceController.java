@@ -477,10 +477,13 @@ public class RaceController {
         timerTimeline.stop();
         String reason = raceManager.getFinishReason();
         List<String> leaderboard = raceManager.getLeaderboardStrings();
-        int earnings = raceManager.getMoneyEarned();
+
         if (!raceManager.isRaceCancelled()) {
             raceManager.awardPrizeMoney(gameEnvironment);
         }
+
+        int earnings = raceManager.getMoneyEarned();
+
         int placement;
         if (Objects.equals(reason, "Car broke down! You withdrew from the race.") || Objects.equals(reason, "Weather has cancelled the race!") || Objects.equals(reason, "Out of fuel!")) {
             placement = raceManager.getOpponents().size() + 1;
