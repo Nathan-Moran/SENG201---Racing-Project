@@ -466,9 +466,9 @@ public class RaceManager {
         int finalPlacement = getFinalPlacement();
 
         gameEnvironment.updateHasWonCourse(race.getCourse(), finalPlacement);
-        gameEnvironment.getShopService().unlockNewCars(); // Corrected to unlockNewCars based on ShopService
+        gameEnvironment.getShopService().unlockNewCars();
         gameEnvironment.addRacePlacement(finalPlacement);
-        gameEnvironment.addPrizeMoney(moneyEarned); // Add total earnings for the race
+        gameEnvironment.addPrizeMoney(moneyEarned);
     }
 
     private int getFinalPlacement() {
@@ -477,7 +477,7 @@ public class RaceManager {
                 Objects.equals(finishReason, "Weather has cancelled the race!") ||
                 Objects.equals(finishReason, "Out of fuel!") ||
                 Objects.equals(finishReason, "Time ran out!")) {
-            finalPlacement = opponents.size() + 1; // Last place or indicates withdrawal/cancellation
+            finalPlacement = opponents.size() + 1;
         } else {
             finalPlacement = getPlayerPlacement();
         }
@@ -493,7 +493,6 @@ public class RaceManager {
         int prize;
         int placement = getPlayerPlacement();
 
-        // Assuming prize money depends on placement for the current race's course
         prize = switch (placement) {
             case 1 -> race.getCourse().getPrizes().getFirstPlacePrize();
             case 2 -> race.getCourse().getPrizes().getSecondPlacePrize();
@@ -501,7 +500,7 @@ public class RaceManager {
             default -> 0;
         };
         gameEnvironment.setBalance(gameEnvironment.getBalance() + prize);
-        moneyEarned += prize; // Accumulate total earnings from race
+        moneyEarned += prize;
     }
 
     /**
@@ -517,7 +516,7 @@ public class RaceManager {
         } else if (Objects.equals(finishReason, "Time ran out!")) {
             return "Time ran out!";
         } else if (Objects.equals(finishReason, "Car broke down! You withdrew from the race.")) {
-            return "Car broke down! You withdrew from the race."; // Specific text for withdrawal
+            return "Car broke down! You withdrew from the race.";
         } else if (Objects.equals(finishReason, "Finished the race!")) {
             int placement = getPlayerPlacement();
             return switch (placement) {

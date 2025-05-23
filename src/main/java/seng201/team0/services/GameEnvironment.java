@@ -315,7 +315,7 @@ public class GameEnvironment {
         if (selectedDifficulty != null) {
             this.balance = selectedDifficulty.getStartBudget();
         } else {
-            this.balance = 0; // Default or error state
+            this.balance = 0;
         }
     }
 
@@ -334,7 +334,7 @@ public class GameEnvironment {
      */
     public double getAveragePlacement() {
         if (racePlacements.isEmpty()) {
-            return 0; // Avoid division by zero
+            return 0;
         }
         int sum = 0;
         for (int placement : racePlacements) {
@@ -382,7 +382,7 @@ public class GameEnvironment {
      * @param placement The player's placement in that race (1 for 1st, 2 for 2nd, etc.).
      */
     public void updateHasWonCourse(Course course, int placement) {
-        if (placement == 1) { // Only mark as won if the player came in 1st
+        if (placement == 1) {
             hasWonCourse.put(course, true);
         }
     }
@@ -395,7 +395,7 @@ public class GameEnvironment {
      * @return {@code true} if the player has won the course, {@code false} otherwise.
      */
     public boolean hasWonCourse(Course course) {
-        return hasWonCourse.getOrDefault(course, false); // Return false if course not in map
+        return hasWonCourse.getOrDefault(course, false);
     }
 
     /**

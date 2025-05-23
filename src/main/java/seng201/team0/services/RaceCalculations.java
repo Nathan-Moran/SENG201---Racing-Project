@@ -17,7 +17,6 @@ public final class RaceCalculations {
      * Private constructor to prevent instantiation of this utility class.
      */
     private RaceCalculations() {
-        // This is a utility class, so no instances should be created.
     }
 
     /**
@@ -49,9 +48,8 @@ public final class RaceCalculations {
      * @return The fuel consumption rate (e.g., units of fuel per tick).
      */
     public static double calculateFuelConsumptionRate(Car car) {
-        // Prevent division by zero if fuel economy is somehow 0
         if (car.getFuelEconomy() == 0) {
-            return Double.MAX_VALUE; // Represents infinite consumption rate
+            return Double.MAX_VALUE;
         }
         return 1.0 / car.getFuelEconomy();
     }
@@ -80,9 +78,9 @@ public final class RaceCalculations {
     public static List<Double> calculateFuelStopDistances(double length, int numStops) {
         List<Double> stops = new ArrayList<>();
         if (numStops <= 0) {
-            return stops; // No stops if numStops is 0 or less
+            return stops;
         }
-        // Distribute stops evenly, plus one for the start and one for the end
+
         double interval = length / (numStops + 1);
         for (int i = 1; i <= numStops; i++) {
             stops.add(interval * i);
