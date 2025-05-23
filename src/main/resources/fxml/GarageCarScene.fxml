@@ -20,7 +20,7 @@
             <children>
                 <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                     <image>
-                        <Image url="@GarageMenu_resized.jpg" />
+                        <Image url="@GarageBackground.jpg" />
                     </image>
                 </ImageView>
 

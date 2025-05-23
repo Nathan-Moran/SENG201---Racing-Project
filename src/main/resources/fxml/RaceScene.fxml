@@ -16,12 +16,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
+<StackPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RaceController">
 
-   <ImageView fx:id="routeImage" fitHeight="400" fitWidth="600" preserveRatio="false">
-      <image>
-         <Image url="@cartoon-desert-landscape-vector-51673450.jpg" />
-      </image></ImageView>
+   <ImageView fx:id="routeImage" fitHeight="400" fitWidth="600" preserveRatio="false" />
 
    <!-- Foreground UI overlay -->
    <AnchorPane pickOnBounds="false" prefHeight="400" prefWidth="600">

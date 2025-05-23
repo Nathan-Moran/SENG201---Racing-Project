@@ -19,7 +19,7 @@
          <children>
             <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                <image>
-                  <Image url="@2151710994.jpg" />
+                  <Image url="@MenuBackground.jpg" />
                </image>
             </ImageView>
 
@@ -37,7 +37,7 @@
                      <VBox prefWidth="420.0" spacing="20">
                         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">
                            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 5 0;" text="Enter Your Name" />
-                           <TextField fx:id="nameField" onKeyTyped="#setName" promptText="E.g., StarRacer" style="-fx-font-size: 16px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.2);" />
+                           <TextField fx:id="nameField" onKeyTyped="#setName" promptText="E.g StarMan" style="-fx-font-size: 16px; -fx-text-fill: black; -fx-prompt-text-fill: derive(-fx-text-fill, 50%); -fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.2);" />
                            <Label fx:id="nameErrorLabel" managed="false" style="-fx-text-fill: #FFB2A6; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5 0 0 0;" visible="false" />
                         </VBox>
                         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: rgba(0,0,0,0.5); -fx-border-color: rgba(255,255,255,0.25); -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;">

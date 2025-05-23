@@ -15,7 +15,7 @@
    <children>
       <ImageView fx:id="backgroundImageView" fitHeight="${rootScenePane.height}" fitWidth="${rootScenePane.width}" pickOnBounds="true" preserveRatio="false">
          <image>
-            <Image url="@2151710994.jpg" />
+            <Image url="@MenuBackground.jpg" />
          </image>
       </ImageView>
 
@@ -46,7 +46,7 @@
             <VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 20; -fx-background-color: transparent;">
                <Button contentDisplay="LEFT" graphicTextGap="10" onAction="#startRace" style="-fx-font-weight: bold; -fx-font-size: 20px; -fx-padding: 15 35 15 35; -fx-min-width: 280.0; -fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.3, 0, 4); -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Start Race">
                   <graphic>
-                     <Text style="-fx-font-size: 28px; -fx-fill: white;" text="🏁" />
+                     <Text style="-fx-font-size: 28px; -fx-fill: white;" text="▶️" />
                   </graphic>
                </Button>
                <HBox alignment="CENTER" spacing="20.0">
@@ -57,7 +57,7 @@
                   </Button>
                   <Button contentDisplay="TOP" graphicTextGap="8" onAction="#goToShop" prefHeight="100" prefWidth="180.0" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 15; -fx-background-color: rgba(0,0,0,0.55); -fx-text-fill: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.2, 0, 3); -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Shop">
                      <graphic>
-                        <Text style="-fx-font-size: 30px; -fx-fill: white;" text="🛒" />
+                        <Text style="-fx-font-size: 30px; -fx-fill: white;" text="🛍️" />
                      </graphic>
                   </Button>
                   <Button contentDisplay="TOP" graphicTextGap="8" onAction="#goToItemCatalogue" prefHeight="100" prefWidth="180.0" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-padding: 15; -fx-background-color: rgba(0,0,0,0.55); -fx-text-fill: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.2, 0, 3); -fx-border-color: rgba(255,255,255,0.3); -fx-border-width: 1;" text="Item Catalogue">

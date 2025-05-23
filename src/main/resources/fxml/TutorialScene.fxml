@@ -16,7 +16,7 @@
             <children>
                 <ImageView fx:id="backgroundImageView" fitHeight="${contentAreaHolder.height}" fitWidth="${contentAreaHolder.width}" pickOnBounds="true" preserveRatio="false">
                     <image>
-                        <Image url="@2151710994.jpg" />
+                        <Image url="@MenuBackground.jpg" />
                     </image>
                 </ImageView>
 
