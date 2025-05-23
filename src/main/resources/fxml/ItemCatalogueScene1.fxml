@@ -38,12 +38,12 @@
                                 <TableView fx:id="starterCarTable" prefHeight="280.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="starterModelColumn" prefWidth="100.0" text="🛻 Model" />
-                                        <TableColumn fx:id="starterPriceColumn" prefWidth="60.0" text="💲Price" />
-                                        <TableColumn fx:id="starterSpeedColumn" prefWidth="50.0" text="⚡Spd" />
-                                        <TableColumn fx:id="starterHandlingColumn" prefWidth="50.0" text="🎮Hnd" />
-                                        <TableColumn fx:id="starterReliabilityColumn" prefWidth="50.0" text="🛠️Rel" />
-                                        <TableColumn fx:id="starterFuelColumn" prefWidth="50.0" text="⛽Fuel" />
+                                        <TableColumn fx:id="starterModelColumn" prefWidth="100.0" text="🛻" />
+                                        <TableColumn fx:id="starterPriceColumn" prefWidth="60.0" text="💲" />
+                                        <TableColumn fx:id="starterSpeedColumn" prefWidth="50.0" text="⚡" />
+                                        <TableColumn fx:id="starterHandlingColumn" prefWidth="50.0" text="🎮" />
+                                        <TableColumn fx:id="starterReliabilityColumn" prefWidth="50.0" text="🛠️" />
+                                        <TableColumn fx:id="starterFuelColumn" prefWidth="50.0" text="⛽" />
                                     </columns>
                                 </TableView>
                             </VBox>
@@ -52,12 +52,12 @@
                                 <TableView fx:id="shopCarTable" prefHeight="280.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="shopModelColumn" prefWidth="100.0" text="🛻 Model" />
-                                        <TableColumn fx:id="shopPriceColumn" prefWidth="60.0" text="💲Price" />
-                                        <TableColumn fx:id="shopSpeedColumn" prefWidth="50.0" text="⚡Spd" />
-                                        <TableColumn fx:id="shopHandlingColumn" prefWidth="50.0" text="🎮Hnd" />
-                                        <TableColumn fx:id="shopReliabilityColumn" prefWidth="50.0" text="🛠️Rel" />
-                                        <TableColumn fx:id="shopFuelColumn" prefWidth="50.0" text="⛽Fuel" />
+                                        <TableColumn fx:id="shopModelColumn" prefWidth="100.0" text="🛻" />
+                                        <TableColumn fx:id="shopPriceColumn" prefWidth="60.0" text="💲" />
+                                        <TableColumn fx:id="shopSpeedColumn" prefWidth="50.0" text="⚡" />
+                                        <TableColumn fx:id="shopHandlingColumn" prefWidth="50.0" text="🎮" />
+                                        <TableColumn fx:id="shopReliabilityColumn" prefWidth="50.0" text="🛠️" />
+                                        <TableColumn fx:id="shopFuelColumn" prefWidth="50.0" text="⛽" />
                                     </columns>
                                 </TableView>
                             </VBox>

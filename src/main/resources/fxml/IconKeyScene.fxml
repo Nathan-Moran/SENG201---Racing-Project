@@ -45,7 +45,7 @@
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="12">
                                     <Label style="-fx-font-size: 22px; -fx-min-width: 35; -fx-alignment: CENTER; -fx-text-fill: white;" text="⚡" />
-                                    <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="Speed" />
+                                    <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="Speed (km/h)" />
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="12">
                                     <Label style="-fx-font-size: 22px; -fx-min-width: 35; -fx-alignment: CENTER; -fx-text-fill: white;" text="🎮" />

@@ -38,12 +38,12 @@
                                 <TableView fx:id="unlockableCarTable" prefHeight="280.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="modelColumn" prefWidth="100.0" text="🛻 Model" />
-                                        <TableColumn fx:id="priceColumn" prefWidth="60.0" text="💲Price" />
-                                        <TableColumn fx:id="speedColumn" prefWidth="50.0" text="⚡Spd" />
-                                        <TableColumn fx:id="handlingColumn" prefWidth="50.0" text="🎮Hnd" />
-                                        <TableColumn fx:id="reliabilityColumn" prefWidth="50.0" text="🛠️Rel" />
-                                        <TableColumn fx:id="fuelColumn" prefWidth="50.0" text="⛽Fuel" />
+                                        <TableColumn fx:id="modelColumn" prefWidth="100.0" text="🛻" />
+                                        <TableColumn fx:id="priceColumn" prefWidth="60.0" text="💲" />
+                                        <TableColumn fx:id="speedColumn" prefWidth="50.0" text="⚡" />
+                                        <TableColumn fx:id="handlingColumn" prefWidth="50.0" text="🎮" />
+                                        <TableColumn fx:id="reliabilityColumn" prefWidth="50.0" text="🛠" />
+                                        <TableColumn fx:id="fuelColumn" prefWidth="50.0" text="⛽" />
                                     </columns>
                                 </TableView>
                             </VBox>
@@ -52,10 +52,10 @@
                                 <TableView fx:id="tuningPartTable" prefHeight="280.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="partNameColumn" prefWidth="100.0" text="⚙ Name" />
-                                        <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="💲Price" />
-                                        <TableColumn fx:id="partStatColumn" prefWidth="60.0" text="⬆ Stat" />
-                                        <TableColumn fx:id="partBoostColumn" prefWidth="60.0" text="📈 Boost" />
+                                        <TableColumn fx:id="partNameColumn" prefWidth="100.0" text="⚙" />
+                                        <TableColumn fx:id="partPriceColumn" prefWidth="60.0" text="💲" />
+                                        <TableColumn fx:id="partStatColumn" prefWidth="60.0" text="⬆" />
+                                        <TableColumn fx:id="partBoostColumn" prefWidth="60.0" text="📈" />
                                     </columns>
                                 </TableView>
                             </VBox>

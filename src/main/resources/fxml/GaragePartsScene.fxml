@@ -40,9 +40,9 @@
                                 <TableView fx:id="reserveTuningPartTable" prefHeight="300.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="reservePartNameColumn" prefWidth="150.0" text="⚙ Name" />
-                                        <TableColumn fx:id="reservePartStatColumn" prefWidth="100.0" text="⬆ Stat" />
-                                        <TableColumn fx:id="reservePartBoostColumn" prefWidth="100.0" text="📈 Boost" />
+                                        <TableColumn fx:id="reservePartNameColumn" prefWidth="150.0" text="⚙" />
+                                        <TableColumn fx:id="reservePartStatColumn" prefWidth="100.0" text="⬆" />
+                                        <TableColumn fx:id="reservePartBoostColumn" prefWidth="100.0" text="📈" />
                                     </columns>
                                 </TableView>
                                 <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
@@ -55,9 +55,9 @@
                                 <TableView fx:id="installedTuningPartTable" prefHeight="300.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                                     <columns>
-                                        <TableColumn fx:id="installedPartNameColumn" prefWidth="150.0" text="⚙ Name" />
-                                        <TableColumn fx:id="installedPartStatColumn" prefWidth="100.0" text="⬆ Stat" />
-                                        <TableColumn fx:id="installedPartBoostColumn" prefWidth="100.0" text="📈 Boost" />
+                                        <TableColumn fx:id="installedPartNameColumn" prefWidth="150.0" text="⚙" />
+                                        <TableColumn fx:id="installedPartStatColumn" prefWidth="100.0" text="⬆" />
+                                        <TableColumn fx:id="installedPartBoostColumn" prefWidth="100.0" text="📈" />
                                     </columns>
                                 </TableView>
                                 <HBox alignment="CENTER_RIGHT" style="-fx-padding: 5 0 0 0;">
