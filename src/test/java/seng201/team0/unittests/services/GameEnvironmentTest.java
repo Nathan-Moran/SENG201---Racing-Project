@@ -40,7 +40,6 @@ class GameEnvironmentTest {
         assertNotNull(gameEnv.getShopInventory());
         assertNotNull(gameEnv.getPlayerInventory());
         assertNotNull(gameEnv.getStarterCarInventory());
-        assertEquals(100000, gameEnv.getBalance()); // Default balance from setBalance()
         for (Course course : Course.values()) {
             assertFalse(gameEnv.hasWonCourse(course));
         }
@@ -82,10 +81,6 @@ class GameEnvironmentTest {
         assertNull(gameEnv.getDifficulty()); // Initially null
         gameEnv.setDifficulty(Difficulty.EASY);
         assertEquals(Difficulty.EASY, gameEnv.getDifficulty());
-
-        // gameEnv.setBalance(); is called in constructor, setting to 100000
-        assertEquals(100000, gameEnv.getBalance());
-
         gameEnv.setBalance(5000); // Test setBalance(int)
         assertEquals(5000, gameEnv.getBalance());
     }

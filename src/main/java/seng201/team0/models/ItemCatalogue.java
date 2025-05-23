@@ -45,9 +45,9 @@ public class ItemCatalogue extends ItemStorage {
      * and need to be unlocked through progression. It also adds all available tuning parts.
      */
     public void setupCatalogue() {
-        Car honda = new Car("Honda Civic", 0.6, 0.5, 0.7, 20, 500);
-        Car mazda = new Car("Mazda MPS", 0.5, 0.7, 0.7, 20, 500);
-        Car nissan = new Car("Nissan Z", 0.5, 0.6, 0.8, 20, 500);
+        Car honda = new Car("Honda Civic", 0.6, 0.4, 0.7, 20, 500);
+        Car mazda = new Car("Mazda MPS", 0.4, 0.6, 0.7, 20, 500);
+        Car nissan = new Car("Nissan Z", 0.5, 0.5, 0.8, 20, 500);
 
         Car supra = new Car("Toyota Supra", 0.85, 0.85, 0.80, 23, 2000);
         Car mustang = new Car("Mustang", 0.92, 0.8, 0.80, 19, 2500);

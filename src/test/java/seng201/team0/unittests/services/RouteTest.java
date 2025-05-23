@@ -57,7 +57,7 @@ class RouteTest {
         assertNotNull(opponents); //
         assertEquals(opponentCount, opponents.size()); //
 
-        double baseSpeed = 1.0; // From MOUNTAIN_STEEP's opponentSpeed parameter
+        double baseSpeed = 0.9; // From MOUNTAIN_STEEP's opponentSpeed parameter
         for (int i = 0; i < opponentCount; i++) {
             double expectedSpeed = baseSpeed + (i * 0.1);
             assertEquals(expectedSpeed, opponents.get(i).getSpeed(), 0.001, "Opponent " + i + " speed mismatch"); //

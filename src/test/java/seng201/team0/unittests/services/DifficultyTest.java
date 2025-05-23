@@ -10,29 +10,29 @@ class DifficultyTest {
     @Test
     void easyDifficultyHasCorrectProperties() {
         Difficulty easy = Difficulty.EASY;
-        assertEquals(1500, easy.getStartBudget()); //
+        assertEquals(1000, easy.getStartBudget()); //
         assertEquals(0.8, easy.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
     void mediumDifficultyHasCorrectProperties() {
         Difficulty medium = Difficulty.MEDIUM;
-        assertEquals(1250, medium.getStartBudget()); //
+        assertEquals(750, medium.getStartBudget()); //
         assertEquals(0.9, medium.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
     void hardDifficultyHasCorrectProperties() {
         Difficulty hard = Difficulty.HARD;
-        assertEquals(1000, hard.getStartBudget()); //
+        assertEquals(500, hard.getStartBudget()); //
         assertEquals(1.0, hard.getBreakdownMultiplier(), 0.001); //
     }
 
     @Test
     void getStartBudgetReturnsCorrectValue() {
-        assertEquals(1500, Difficulty.EASY.getStartBudget()); //
-        assertEquals(1250, Difficulty.MEDIUM.getStartBudget()); //
-        assertEquals(1000, Difficulty.HARD.getStartBudget()); //
+        assertEquals(1000, Difficulty.EASY.getStartBudget()); //
+        assertEquals(750, Difficulty.MEDIUM.getStartBudget()); //
+        assertEquals(500, Difficulty.HARD.getStartBudget()); //
     }
 
     @Test

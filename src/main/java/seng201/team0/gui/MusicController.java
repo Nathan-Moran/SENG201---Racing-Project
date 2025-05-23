@@ -16,6 +16,16 @@ public class MusicController {
     private MediaPlayer musicPlayer;
 
     /**
+     * Constructs a new MusicController.
+     * This controller manages the playback of background music throughout the application.
+     */
+    public MusicController() {
+        // Default constructor logic, if any, goes here.
+        // It initializes the musicPlayer field, but the actual music playback
+        // is managed by initializeMusic method.
+    }
+
+    /**
      * Initializes and starts playing background music from a specified file.
      * The music will loop indefinitely and play at a low volume.
      * If the music file cannot be found or an error occurs during playback,
