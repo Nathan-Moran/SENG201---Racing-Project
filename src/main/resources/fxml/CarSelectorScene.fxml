@@ -43,7 +43,7 @@
                                 <TableView fx:id="carTable" prefHeight="280.0" prefWidth="400.0" style="-fx-background-color: rgba(0,0,0,0.3); -fx-control-inner-background: rgba(0,0,0,0.3); -fx-selection-bar: rgba(255,255,255,0.4); -fx-selection-bar-text: white; -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 5; -fx-background-radius: 5;">
                                     <columns>
                                         <TableColumn fx:id="modelColumn" prefWidth="120.0" text="🛻" />
-                                        <TableColumn fx:id="priceColumn" prefWidth="70.0" text="💲" />
+                                        <TableColumn fx:id="priceColumn" prefWidth="70.0" text="\$" />
                                         <TableColumn fx:id="speedColumn" prefWidth="60.0" text="⚡" />
                                         <TableColumn fx:id="handlingColumn" prefWidth="60.0" text="🎮" />
                                         <TableColumn fx:id="reliabilityColumn" prefWidth="60.0" text="🛠️" />
@@ -61,7 +61,7 @@
                                     <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Model" />
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER; -fx-text-fill: white;" text="💲" />
+                                    <Label style="-fx-font-size: 20px; -fx-min-width: 30; -fx-alignment: CENTER; -fx-text-fill: white;" text="\$" />
                                     <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Price" />
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
