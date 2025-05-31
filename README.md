@@ -1,13 +1,6 @@
 # SENG201 Project Overview
-This is a racing game About 5-15 minutes playtime. Enjoy playing!
+This is a racing game of about 5-15 minutes playtime. Enjoy playing!
 
-## Notes
-Remember you are required to commit your code to the **main** branch of your repository before the deadline.
-
-This project contains default naming of `team0` throughout.
-If you are interested you can update this to reflect your team number, however it is **not required**.
-This can be done by renaming any instance of `team0` with `team<x>` (where x is your number).
-IntelliJ can help with this using `ctrl+shift+f` to find all instances of a string, and `ctrl+shift+r` to replace them, though make sure to change the package names as well.
 
 ## Authors
 - Nathan Moran
