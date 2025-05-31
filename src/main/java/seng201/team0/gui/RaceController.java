@@ -354,7 +354,7 @@ public class RaceController {
         leaderboardBox.getChildren().remove(1, leaderboardBox.getChildren().size());
 
         // Player
-        Label playerLabel = new Label("Player: " + (int) raceManager.getPlayerDistance() + " km");
+        Label playerLabel = new Label(gameEnvironment.getName() + ": "+ (int) raceManager.getPlayerDistance() + " km");
         leaderboardBox.getChildren().add(playerLabel);
 
         // Opponents
