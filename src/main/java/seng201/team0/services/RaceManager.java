@@ -368,9 +368,11 @@ public class RaceManager {
             } else if (reason.equals("Time ran out!") && !playerFinished) {
                 playerFinished = true;
                 playerFinishTick = tickCount;
+                raceCancelled = true;
             } else if (reason.equals("Out of fuel!") && !playerFinished) {
                 playerFinished = true;
                 playerFinishTick = tickCount;
+                raceCancelled = true;
             }
         }
     }

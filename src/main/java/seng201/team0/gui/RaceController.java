@@ -265,7 +265,7 @@ public class RaceController {
             case "desert" -> "/fxml/desert.jpg";
             case "mountain" -> "/fxml/mountain.png";
             case "country" -> "/fxml/country.png";
-            case "city" -> "/fxml/city.png";
+            case "city" -> "/fxml/city.jpg";
             default -> "/fxml/desert.png";
         };
     }
