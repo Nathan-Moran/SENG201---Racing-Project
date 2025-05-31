@@ -95,9 +95,11 @@ public enum Route {
      */
     public List<OpponentCar> generateOpponents(int count) {
         List<OpponentCar> opponents = new ArrayList<>();
+        List<String> customOpponentNames = List.of("Commuter King", "Vineyard Viper", "Ridge Racer", "Dune Drifter");
         for (int i = 0; i < count; i++) {
+            String opponentName = customOpponentNames.get(i);
             double speed = opponentSpeed + (i * 0.1);
-            opponents.add(new OpponentCar(speed));
+            opponents.add(new OpponentCar(speed, opponentName));
         }
         return opponents;
     }

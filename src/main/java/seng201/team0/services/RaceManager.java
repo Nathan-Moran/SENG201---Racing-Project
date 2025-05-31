@@ -144,6 +144,11 @@ public class RaceManager {
      */
     private static final int TRAVELER_PROFIT = 250;
 
+    /**
+     * The instance of GameEnvironment
+     */
+    private GameEnvironment gameEnvironment;
+
 
     /**
      * Constructs a new RaceManager.
@@ -157,7 +162,8 @@ public class RaceManager {
      * @param speed The effective speed of the player's car for this race.
      * @param fuelConsumptionRate The fuel consumption rate of the player's car for this race.
      */
-    public RaceManager(Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
+    public RaceManager(GameEnvironment gameEnvironment, Race race, Car playerCar, List<OpponentCar> opponents, double speed, double fuelConsumptionRate) {
+        this.gameEnvironment = gameEnvironment;
         this.race = race;
         this.playerCar = playerCar;
         this.opponents = opponents;
@@ -298,9 +304,10 @@ public class RaceManager {
     public List<LeaderboardEntry> getLeaderboardStandings() {
         List<LeaderboardEntry> standings = new ArrayList<>();
 
-        standings.add(new LeaderboardEntry("Player", playerDistance));
-        for (int i = 0; i < opponents.size(); i++) {
-            standings.add(new LeaderboardEntry("Opponent " + (i + 1), opponents.get(i).getCurrentDistance()));
+        standings.add(new LeaderboardEntry(gameEnvironment.getName(), playerDistance));
+
+        for (OpponentCar opponent : opponents) {
+            standings.add(new LeaderboardEntry(opponent.getName(), opponent.getCurrentDistance()));
         }
 
         // Sort the standings by distance in descending order
@@ -334,7 +341,7 @@ public class RaceManager {
         List<LeaderboardEntry> standings = getLeaderboardStandings();
 
         for (int i = 0; i < standings.size(); i++) {
-            if (standings.get(i).getName().equals("Player")) {
+            if (standings.get(i).getName().equals(gameEnvironment.getName())) {
                 return i + 1;
             }
         }

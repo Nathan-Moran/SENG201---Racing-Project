@@ -197,7 +197,7 @@ public class RaceController {
 
         double speed = RaceCalculations.calculateEffectiveSpeed(currentCar, currentRace.getRoute());
         double fuelConsumptionRate = RaceCalculations.calculateFuelConsumptionRate(currentCar);
-        raceManager = new RaceManager(currentRace, currentCar, opponents, speed, fuelConsumptionRate);
+        raceManager = new RaceManager(gameEnvironment, currentRace, currentCar, opponents, speed, fuelConsumptionRate);
         fuelGauge.setProgress(1);
         raceManager.deductEntryFee(gameEnvironment);
         gameEnvironment.decrementRacesRemaining();
@@ -361,7 +361,7 @@ public class RaceController {
         List<OpponentCar> opponents = raceManager.getOpponents();
         for (int i = 0; i < opponents.size(); i++) {
             OpponentCar opponent = opponents.get(i);
-            Label opponentLabel = new Label("Opponent " + (i + 1) + ": " + (int) opponent.getCurrentDistance() + " km");
+            Label opponentLabel = new Label(opponent.getName() + " : " + (int) opponent.getCurrentDistance() + " km");
             leaderboardBox.getChildren().add(opponentLabel);
         }
     }

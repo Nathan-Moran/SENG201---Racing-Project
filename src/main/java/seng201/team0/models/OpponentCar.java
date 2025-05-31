@@ -16,11 +16,18 @@ public class OpponentCar {
     private double currentDistance = 0;
 
     /**
+     * The name of the generated opponentCar
+     */
+    private final String name;
+
+    /**
      * Constructs a new OpponentCar with a specified speed.
      * @param speed The constant speed at which this opponent car travels.
+     * @param name The name of the opponentCar
      */
-    public OpponentCar(double speed) {
+    public OpponentCar(double speed, String name) {
         this.speed = speed;
+        this.name = name;
     }
 
     /**
@@ -29,6 +36,14 @@ public class OpponentCar {
      */
     public double getSpeed() {
         return speed;
+    }
+
+    /**
+     * Gets the name of the opponent car.
+     * @return The name of the car.
+     */
+    public String getName() {
+        return name;
     }
 
     /**

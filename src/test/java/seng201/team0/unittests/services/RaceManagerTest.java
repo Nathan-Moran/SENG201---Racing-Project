@@ -127,7 +127,7 @@ class RaceManagerTest {
             testRace.setOpponents(opponents);
         }
 
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment,testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
 
         gameEnvironment = new GameEnvironment();
         gameEnvironment.setName("JUnit Player");
@@ -159,7 +159,7 @@ class RaceManagerTest {
 
     @Test
     void raceFinishesWhenTimeRunsOut() {
-        RaceManager timeTestManager = new RaceManager(testRace, playerCar, opponents, 0.01, 0.0001);
+        RaceManager timeTestManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, 0.01, 0.0001);
         simulateRaceTicksAdvancingPlayer(timeTestManager, 1801, gameEnvironment, "allowWeather");
 
         assertTrue(timeTestManager.isRaceFinished());
@@ -199,7 +199,7 @@ class RaceManagerTest {
         cityGameEnv.setCurrentRace(cityRace);
         cityGameEnv.getPlayerInventory().setStarterCar(playerCar);
 
-        RaceManager cityManager = new RaceManager(cityRace, playerCar, cityRace.getOpponents(), 3.0, PLAYER_MGR_FUEL_RATE);
+        RaceManager cityManager = new RaceManager(gameEnvironment, cityRace, playerCar, cityRace.getOpponents(), 3.0, PLAYER_MGR_FUEL_RATE);
 
         cityManager.deductEntryFee(cityGameEnv);
         assertEquals(5000 - cityCourse.getEntryFee(), cityGameEnv.getBalance());
@@ -283,7 +283,7 @@ class RaceManagerTest {
         gameEnvironment.setBalance(KNOWN_REPAIR_COST + 100);
 
         playerCar = new Car("BreakdownProne", 0.7, 0.6, 0.1, 100, 1500);
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         gameEnvironment.getPlayerInventory().setStarterCar(playerCar);
 
         boolean breakdownEventActive = simulateUntilProbabilisticEvent(raceManager, gameEnvironment, RaceEventType.BREAKDOWN, 1, 15);
@@ -309,7 +309,7 @@ class RaceManagerTest {
     @Test
     void testHandleRepair_NoPay_Withdraws() {
         playerCar = new Car("BreakdownProne2", 0.7, 0.6, 0.1, 100, 1500);
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         gameEnvironment.getPlayerInventory().setStarterCar(playerCar);
 
         boolean breakdownEventActive = simulateUntilProbabilisticEvent(raceManager, gameEnvironment, RaceEventType.BREAKDOWN, 1, 15);
@@ -384,7 +384,7 @@ class RaceManagerTest {
         gameEnvironment.setBalance(1000);
         gameEnvironment.setRacesRemaining(5);
 
-        RaceManager weatherRaceManager = new RaceManager(weatherRace, playerCar, weatherRace.getOpponents(), PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        RaceManager weatherRaceManager = new RaceManager(gameEnvironment, weatherRace, playerCar, weatherRace.getOpponents(), PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         weatherRaceManager.deductEntryFee(gameEnvironment);
 
         int racesRemainingBefore = gameEnvironment.getRacesRemaining();
@@ -445,7 +445,7 @@ class RaceManagerTest {
         for(int i=0; i < TEST_COURSE.getNumberOfOpponents() -1; ++i) {
             opponents.add(new OpponentCar(PLAYER_MGR_SPEED - 0.5));
         }
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         gameEnvironment.setBalance(10000);
         raceManager.deductEntryFee(gameEnvironment);
 
@@ -471,7 +471,7 @@ class RaceManagerTest {
         for(int i=0; i < TEST_COURSE.getNumberOfOpponents() -2; ++i) {
             opponents.add(new OpponentCar(PLAYER_MGR_SPEED - 0.5));
         }
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         gameEnvironment.setBalance(10000);
         raceManager.deductEntryFee(gameEnvironment);
 
@@ -501,7 +501,7 @@ class RaceManagerTest {
         }
 
 
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         gameEnvironment.setBalance(10000);
         raceManager.deductEntryFee(gameEnvironment);
 
@@ -539,7 +539,7 @@ class RaceManagerTest {
 
         opponents.clear();
         for(int i=0; i < TEST_COURSE.getNumberOfOpponents(); ++i) opponents.add(new OpponentCar(0.01));
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         simulateRaceTicksAdvancingPlayer(raceManager, (int)(TEST_ROUTE.getLength()/PLAYER_MGR_SPEED), gameEnvironment, "ignoreWeather");
         assertEquals("🏆 You finished 1st!", raceManager.getFinalPlacementText());
         setUp();
@@ -547,7 +547,7 @@ class RaceManagerTest {
         opponents.clear();
         opponents.add(new OpponentCar(PLAYER_MGR_SPEED * 2));
         for(int i=0; i < TEST_COURSE.getNumberOfOpponents() -1; ++i) opponents.add(new OpponentCar(0.01));
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         simulateRaceTicksAdvancingPlayer(raceManager, (int)(TEST_ROUTE.getLength()/PLAYER_MGR_SPEED), gameEnvironment, "ignoreWeather");
         assertEquals("🥈 You finished 2nd!", raceManager.getFinalPlacementText());
         setUp();
@@ -559,7 +559,7 @@ class RaceManagerTest {
         while(opponents.size() < TEST_COURSE.getNumberOfOpponents()) {
             opponents.add(new OpponentCar(PLAYER_MGR_SPEED * 0.1));
         }
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
         simulateRaceTicksAdvancingPlayer(raceManager, (int)(TEST_ROUTE.getLength()/PLAYER_MGR_SPEED), gameEnvironment, "ignoreWeather");
         assertEquals("You finished 4th.", raceManager.getFinalPlacementText());
     }
@@ -605,7 +605,7 @@ class RaceManagerTest {
     void testMultipleFuelStops() {
         Route countryStraight = Route.COUNTRY_STRAIGHT;
         Race multiStopRace = new Race(Course.COUNTRY, countryStraight, Difficulty.EASY);
-        raceManager = new RaceManager(multiStopRace, playerCar, multiStopRace.getOpponents(), PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, multiStopRace, playerCar, multiStopRace.getOpponents(), PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
 
         int fuelStopsHandled = 0;
         for (int i = 0; i < 35 && !raceManager.isRaceFinished(); i++) {
@@ -634,7 +634,7 @@ class RaceManagerTest {
         for(int i=0; i < TEST_COURSE.getNumberOfOpponents() -1; ++i) {
             opponents.add(new OpponentCar(PLAYER_MGR_SPEED * 0.5));
         }
-        raceManager = new RaceManager(testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
+        raceManager = new RaceManager(gameEnvironment, testRace, playerCar, opponents, PLAYER_MGR_SPEED, PLAYER_MGR_FUEL_RATE);
 
         simulateRaceTicksAdvancingPlayer(raceManager, 10, gameEnvironment, "ignoreWeather");
 
