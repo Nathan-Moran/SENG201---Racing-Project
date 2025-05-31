@@ -8,10 +8,9 @@ import seng201.team0.models.TuningPart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Concrete class for testing abstract ItemStorage
 class ConcreteItemStorage extends ItemStorage {
     public ConcreteItemStorage() {
-        super(); //
+        super();
     }
 }
 
@@ -34,123 +33,123 @@ class ItemStorageTest {
 
     @Test
     void addCarSuccessfully() {
-        assertTrue(itemStorage.getCarList().isEmpty()); //
-        itemStorage.addCar(car1); //
-        assertEquals(1, itemStorage.getCarList().size()); //
-        assertTrue(itemStorage.getCarList().contains(car1)); //
+        assertTrue(itemStorage.getCarList().isEmpty());
+        itemStorage.addCar(car1);
+        assertEquals(1, itemStorage.getCarList().size());
+        assertTrue(itemStorage.getCarList().contains(car1));
     }
 
     @Test
     void addNullCar() {
-        assertTrue(itemStorage.getCarList().isEmpty()); //
-        itemStorage.addCar(null); //
-        assertTrue(itemStorage.getCarList().isEmpty()); //
+        assertTrue(itemStorage.getCarList().isEmpty());
+        itemStorage.addCar(null);
+        assertTrue(itemStorage.getCarList().isEmpty());
     }
 
     @Test
     void addMultipleCars() {
-        itemStorage.addCar(car1); //
-        itemStorage.addCar(car2); //
-        assertEquals(2, itemStorage.getCarList().size()); //
-        assertTrue(itemStorage.getCarList().contains(car1)); //
-        assertTrue(itemStorage.getCarList().contains(car2)); //
+        itemStorage.addCar(car1);
+        itemStorage.addCar(car2);
+        assertEquals(2, itemStorage.getCarList().size());
+        assertTrue(itemStorage.getCarList().contains(car1));
+        assertTrue(itemStorage.getCarList().contains(car2));
     }
 
     @Test
     void removeCarSuccessfully() {
-        itemStorage.addCar(car1); //
-        itemStorage.addCar(car2); //
-        assertEquals(2, itemStorage.getCarList().size()); //
+        itemStorage.addCar(car1);
+        itemStorage.addCar(car2);
+        assertEquals(2, itemStorage.getCarList().size());
 
-        itemStorage.removeCar(car1); //
-        assertEquals(1, itemStorage.getCarList().size()); //
-        assertFalse(itemStorage.getCarList().contains(car1)); //
-        assertTrue(itemStorage.getCarList().contains(car2)); //
+        itemStorage.removeCar(car1);
+        assertEquals(1, itemStorage.getCarList().size());
+        assertFalse(itemStorage.getCarList().contains(car1));
+        assertTrue(itemStorage.getCarList().contains(car2));
     }
 
     @Test
     void removeNullCar() {
-        itemStorage.addCar(car1); //
-        assertEquals(1, itemStorage.getCarList().size()); //
-        itemStorage.removeCar(null); //
-        assertEquals(1, itemStorage.getCarList().size()); //
+        itemStorage.addCar(car1);
+        assertEquals(1, itemStorage.getCarList().size());
+        itemStorage.removeCar(null);
+        assertEquals(1, itemStorage.getCarList().size());
     }
 
     @Test
     void removeCarNotInList() {
-        itemStorage.addCar(car1); //
-        assertEquals(1, itemStorage.getCarList().size()); //
-        itemStorage.removeCar(car2); // // car2 was not added
-        assertEquals(1, itemStorage.getCarList().size()); //
-        assertTrue(itemStorage.getCarList().contains(car1)); //
+        itemStorage.addCar(car1);
+        assertEquals(1, itemStorage.getCarList().size());
+        itemStorage.removeCar(car2);
+        assertEquals(1, itemStorage.getCarList().size());
+        assertTrue(itemStorage.getCarList().contains(car1));
     }
 
     @Test
     void getCarListReturnsCorrectList() {
-        assertNotNull(itemStorage.getCarList()); //
-        assertTrue(itemStorage.getCarList().isEmpty()); //
-        itemStorage.addCar(car1); //
-        assertEquals(1, itemStorage.getCarList().size()); //
+        assertNotNull(itemStorage.getCarList());
+        assertTrue(itemStorage.getCarList().isEmpty());
+        itemStorage.addCar(car1);
+        assertEquals(1, itemStorage.getCarList().size());
     }
 
     @Test
     void addTuningPartSuccessfully() {
-        assertTrue(itemStorage.getTuningPartList().isEmpty()); //
-        itemStorage.addTuningPart(part1); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
-        assertTrue(itemStorage.getTuningPartList().contains(part1)); //
+        assertTrue(itemStorage.getTuningPartList().isEmpty());
+        itemStorage.addTuningPart(part1);
+        assertEquals(1, itemStorage.getTuningPartList().size());
+        assertTrue(itemStorage.getTuningPartList().contains(part1));
     }
 
     @Test
     void addNullTuningPart() {
-        assertTrue(itemStorage.getTuningPartList().isEmpty()); //
-        itemStorage.addTuningPart(null); //
-        assertTrue(itemStorage.getTuningPartList().isEmpty()); //
+        assertTrue(itemStorage.getTuningPartList().isEmpty());
+        itemStorage.addTuningPart(null);
+        assertTrue(itemStorage.getTuningPartList().isEmpty());
     }
 
     @Test
     void addMultipleTuningParts() {
-        itemStorage.addTuningPart(part1); //
-        itemStorage.addTuningPart(part2); //
-        assertEquals(2, itemStorage.getTuningPartList().size()); //
-        assertTrue(itemStorage.getTuningPartList().contains(part1)); //
-        assertTrue(itemStorage.getTuningPartList().contains(part2)); //
+        itemStorage.addTuningPart(part1);
+        itemStorage.addTuningPart(part2);
+        assertEquals(2, itemStorage.getTuningPartList().size());
+        assertTrue(itemStorage.getTuningPartList().contains(part1));
+        assertTrue(itemStorage.getTuningPartList().contains(part2));
     }
 
     @Test
     void removeTuningPartSuccessfully() {
-        itemStorage.addTuningPart(part1); //
-        itemStorage.addTuningPart(part2); //
-        assertEquals(2, itemStorage.getTuningPartList().size()); //
+        itemStorage.addTuningPart(part1);
+        itemStorage.addTuningPart(part2);
+        assertEquals(2, itemStorage.getTuningPartList().size());
 
-        itemStorage.removeTuningPart(part1); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
-        assertFalse(itemStorage.getTuningPartList().contains(part1)); //
-        assertTrue(itemStorage.getTuningPartList().contains(part2)); //
+        itemStorage.removeTuningPart(part1);
+        assertEquals(1, itemStorage.getTuningPartList().size());
+        assertFalse(itemStorage.getTuningPartList().contains(part1));
+        assertTrue(itemStorage.getTuningPartList().contains(part2));
     }
 
     @Test
     void removeNullTuningPart() {
-        itemStorage.addTuningPart(part1); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
-        itemStorage.removeTuningPart(null); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
+        itemStorage.addTuningPart(part1);
+        assertEquals(1, itemStorage.getTuningPartList().size());
+        itemStorage.removeTuningPart(null);
+        assertEquals(1, itemStorage.getTuningPartList().size());
     }
 
     @Test
     void removeTuningPartNotInList() {
-        itemStorage.addTuningPart(part1); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
-        itemStorage.removeTuningPart(part2); // // part2 was not added
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
-        assertTrue(itemStorage.getTuningPartList().contains(part1)); //
+        itemStorage.addTuningPart(part1);
+        assertEquals(1, itemStorage.getTuningPartList().size());
+        itemStorage.removeTuningPart(part2);
+        assertEquals(1, itemStorage.getTuningPartList().size());
+        assertTrue(itemStorage.getTuningPartList().contains(part1));
     }
 
     @Test
     void getTuningPartListReturnsCorrectList() {
-        assertNotNull(itemStorage.getTuningPartList()); //
-        assertTrue(itemStorage.getTuningPartList().isEmpty()); //
-        itemStorage.addTuningPart(part1); //
-        assertEquals(1, itemStorage.getTuningPartList().size()); //
+        assertNotNull(itemStorage.getTuningPartList());
+        assertTrue(itemStorage.getTuningPartList().isEmpty());
+        itemStorage.addTuningPart(part1);
+        assertEquals(1, itemStorage.getTuningPartList().size());
     }
 }

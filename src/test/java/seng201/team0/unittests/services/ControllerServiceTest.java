@@ -21,46 +21,43 @@ class ControllerServiceTest {
         gameEnvironment = new GameEnvironment();
         controllerService = new ControllerService(gameEnvironment);
         testCar = new Car("Test Model", 0.7, 0.6, 0.8, 25, 2000);
-        // Set this car as the selected car in the player's inventory for label tests
-        gameEnvironment.getPlayerInventory().setStarterCar(new Car(testCar)); // Use copy to avoid direct modification issues
+
+        gameEnvironment.getPlayerInventory().setStarterCar(new Car(testCar));
     }
 
     @Test
     void storeLeftOverCarsMovesCarsToShop() {
         StarterCarInventory starterInventory = gameEnvironment.getStarterCarInventory();
-        starterInventory.setupStarterCarInventory(); // Populates with 3 default starter cars
+        starterInventory.setupStarterCarInventory();
 
-        // Ensure there are cars to move
+
         assertTrue(starterInventory.getCarList().size() > 0);
         int starterCarCount = starterInventory.getCarList().size();
         int initialShopAllAvailableCars = gameEnvironment.getShopInventory().getAllAvailableCars().size();
 
         controllerService.storeLeftOverCars(starterInventory);
 
-        assertEquals(0, starterInventory.getCarList().size(), "Starter inventory should be empty.");
-        // All starter cars should be added to the shop's "allAvailableCars" list
+        assertEquals(0, starterInventory.getCarList().size());
+
         assertEquals(initialShopAllAvailableCars + starterCarCount, gameEnvironment.getShopInventory().getAllAvailableCars().size());
-        // setShopInventory is called, so the shop's display list (getCarList()) should be populated (max 3)
+
         assertTrue(gameEnvironment.getShopInventory().getCarList().size() <= 3);
         if (!gameEnvironment.getShopInventory().getAllAvailableCars().isEmpty()) {
-            assertFalse(gameEnvironment.getShopInventory().getCarList().isEmpty(), "Shop display list should not be empty if cars are available.");
+            assertFalse(gameEnvironment.getShopInventory().getCarList().isEmpty());
         }
     }
 
     @Test
     void storeLeftOverCarsWithEmptyStarterInventory() {
         StarterCarInventory starterInventory = gameEnvironment.getStarterCarInventory();
-        starterInventory.getCarList().clear(); // Ensure it's empty
+        starterInventory.getCarList().clear();
 
         int initialShopAllCarsCount = gameEnvironment.getShopInventory().getAllAvailableCars().size();
-        // Shop's display list (getCarList) is also repopulated by setShopInventory
-        // int initialShopDisplayCarsCount = gameEnvironment.getShopInventory().getCarList().size(); // This might change due to shuffle
 
         controllerService.storeLeftOverCars(starterInventory);
 
         assertEquals(0, starterInventory.getCarList().size());
         assertEquals(initialShopAllCarsCount, gameEnvironment.getShopInventory().getAllAvailableCars().size());
-        // setShopInventory would still be called.
         if (initialShopAllCarsCount > 0) {
             assertTrue(gameEnvironment.getShopInventory().getCarList().size() > 0 && gameEnvironment.getShopInventory().getCarList().size() <= Math.min(3, initialShopAllCarsCount) );
         } else {
@@ -131,7 +128,7 @@ class ControllerServiceTest {
 
     @Test
     void setLabelsWhenNoCarSelected() {
-        GameEnvironment freshGameEnv = new GameEnvironment(); // No car selected by default
+        GameEnvironment freshGameEnv = new GameEnvironment();
         ControllerService freshControllerService = new ControllerService(freshGameEnv);
         assertEquals("-", freshControllerService.setLabels("Speed"));
     }
@@ -158,7 +155,6 @@ class ControllerServiceTest {
 
     @Test
     void nameCheckerInvalidCharactersAndTooShort() {
-        // Length check takes precedence in the current implementation's if-else if structure
         assertEquals("Name must be between 3 and 15 characters", controllerService.nameChecker("P!"));
     }
     @Test

@@ -27,9 +27,8 @@ class GameEnvironmentTest {
     void setUp() {
         gameEnv = new GameEnvironment();
         testCar = new Car("Test Car", 0.5, 0.5, 0.5, 10, 1000);
-        // Use valid Course and Route enum members
         testRace = new Race(Course.CITY, Route.CITY_ALLEYS, Difficulty.EASY);
-        testSeason = new Season(5, null); // Season constructor is (int length, List<Race> races)
+        testSeason = new Season(5, null);
     }
 
     @Test
@@ -47,13 +46,9 @@ class GameEnvironmentTest {
 
     @Test
     void setupShopCalledInConstructor() {
-        // shopInventory.setShopInventory() is called.
-        // Check if shop has items.
         assertFalse(gameEnv.getShopInventory().getAllAvailableCars().isEmpty() ||
                         gameEnv.getShopInventory().getAllAvailableTuningParts().isEmpty(),
                 "Shop master lists should be populated.");
-        // The display lists might be empty if allAvailable is < 3 and then cleared,
-        // but setShopInventory populates them if possible.
         if (!gameEnv.getShopInventory().getAllAvailableCars().isEmpty()) {
             assertTrue(gameEnv.getShopInventory().getCarList().size() <= 3);
         }
@@ -78,16 +73,16 @@ class GameEnvironmentTest {
 
     @Test
     void setAndGetDifficultyAndBalance() {
-        assertNull(gameEnv.getDifficulty()); // Initially null
+        assertNull(gameEnv.getDifficulty());
         gameEnv.setDifficulty(Difficulty.EASY);
         assertEquals(Difficulty.EASY, gameEnv.getDifficulty());
-        gameEnv.setBalance(5000); // Test setBalance(int)
+        gameEnv.setBalance(5000);
         assertEquals(5000, gameEnv.getBalance());
     }
 
     @Test
     void setAndGetRacesRemaining() {
-        assertEquals(0, gameEnv.getRacesRemaining()); // Default
+        assertEquals(0, gameEnv.getRacesRemaining());
         gameEnv.setRacesRemaining(10);
         assertEquals(10, gameEnv.getRacesRemaining());
     }
@@ -96,7 +91,7 @@ class GameEnvironmentTest {
     void getSelectedCourseAndRoute() {
         assertNull(gameEnv.getSelectedCourse());
         assertNull(gameEnv.getSelectedRoute());
-        gameEnv.setCurrentRace(testRace); // testRace uses CITY and CITY_ALLEYS
+        gameEnv.setCurrentRace(testRace);
         assertEquals(Course.CITY, gameEnv.getSelectedCourse());
         assertEquals(Route.CITY_ALLEYS, gameEnv.getSelectedRoute());
     }
@@ -111,8 +106,8 @@ class GameEnvironmentTest {
 
     @Test
     void getSelectedCarDelegatesToPlayerInventory() {
-        assertNull(gameEnv.getSelectedCar()); // Initially null from new Garage()
-        gameEnv.getPlayerInventory().setStarterCar(new Car(testCar)); // Use a copy
+        assertNull(gameEnv.getSelectedCar());
+        gameEnv.getPlayerInventory().setStarterCar(new Car(testCar));
         assertEquals(testCar.getName(), gameEnv.getSelectedCar().getName());
     }
 
@@ -125,17 +120,17 @@ class GameEnvironmentTest {
 
     @Test
     void setAndGetSeasonLength() {
-        assertEquals(0, gameEnv.getSeasonLength()); // Default
+        assertEquals(0, gameEnv.getSeasonLength());
         gameEnv.setSeasonLength(15);
         assertEquals(15, gameEnv.getSeasonLength());
     }
 
     @Test
     void setupStarterCarsPopulatesInventory() {
-        assertTrue(gameEnv.getStarterCarInventory().getCarList().isEmpty(), "Should be empty before setup if not called by constructor implicitly");
+        assertTrue(gameEnv.getStarterCarInventory().getCarList().isEmpty(), "Should be empty");
         gameEnv.setupStarterCars();
         assertFalse(gameEnv.getStarterCarInventory().getCarList().isEmpty());
-        assertEquals(3, gameEnv.getStarterCarInventory().getCarList().size()); // Default 3 starter cars
+        assertEquals(3, gameEnv.getStarterCarInventory().getCarList().size());
     }
 
     @Test
@@ -150,7 +145,7 @@ class GameEnvironmentTest {
     @Test
     void decrementRacesRemainingAtZero() {
         gameEnv.setRacesRemaining(0);
-        gameEnv.decrementRacesRemaining(); // Should not go below 0
+        gameEnv.decrementRacesRemaining();
         assertEquals(0, gameEnv.getRacesRemaining());
     }
 
@@ -164,7 +159,7 @@ class GameEnvironmentTest {
         gameEnv.addRacePlacement(1);
         gameEnv.addRacePlacement(3);
         gameEnv.addRacePlacement(2);
-        assertEquals(2.0, gameEnv.getAveragePlacement(), 0.001); // (1+3+2)/3 = 2
+        assertEquals(2.0, gameEnv.getAveragePlacement(), 0.001);
     }
 
     @Test
@@ -186,18 +181,16 @@ class GameEnvironmentTest {
     @Test
     void updateHasWonCourseAndCheck() {
         assertFalse(gameEnv.hasWonCourse(Course.DESERT));
-        gameEnv.updateHasWonCourse(Course.DESERT, 1); // Win
+        gameEnv.updateHasWonCourse(Course.DESERT, 1);
         assertTrue(gameEnv.hasWonCourse(Course.DESERT));
 
         assertFalse(gameEnv.hasWonCourse(Course.MOUNTAIN));
-        gameEnv.updateHasWonCourse(Course.MOUNTAIN, 2); // Not a win (2nd place)
+        gameEnv.updateHasWonCourse(Course.MOUNTAIN, 2);
         assertFalse(gameEnv.hasWonCourse(Course.MOUNTAIN));
     }
 
     @Test
     void hasWonCourseForUnmappedCourse() {
-        // All enum values of Course are initialized in the map by the constructor loop.
-        // This tests if a course, after initialization to false, remains false if not won.
-        assertFalse(gameEnv.hasWonCourse(Course.COUNTRY)); // Assuming COUNTRY hasn't been "won"
+        assertFalse(gameEnv.hasWonCourse(Course.COUNTRY));
     }
 }

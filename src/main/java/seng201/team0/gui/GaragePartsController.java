@@ -165,7 +165,7 @@ public class GaragePartsController implements Initializable {
         setupTuningPartTable.setupTuningPartTable(
                 installedTuningPartTable,
                 installedPartNameColumn,
-                null, // Price column is not applicable for installed parts display
+                null,
                 installedPartStatColumn,
                 installedPartBoostColumn
         );
@@ -181,7 +181,7 @@ public class GaragePartsController implements Initializable {
         setupTuningPartTable.setupTuningPartTable(
                 reserveTuningPartTable,
                 reservePartNameColumn,
-                null, // Price column is not applicable for reserve parts display in this context
+                null,
                 reservePartStatColumn,
                 reservePartBoostColumn
         );

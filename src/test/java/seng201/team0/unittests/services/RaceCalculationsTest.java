@@ -28,12 +28,12 @@ public class RaceCalculationsTest {
 
     @BeforeEach
     void setUp() {
-        // Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price)
-        testCar = new Car("Test Car", 1.0, 0.8, 0.9, 10, 0); // Speed 1.0 for easier calculations
-        testRoute = Route.DESERT_DRIFT; // Length 20
+//        Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price)
+        testCar = new Car("Test Car", 1.0, 0.8, 0.9, 10, 0);
+        testRoute = Route.DESERT_DRIFT;
         opponents = new ArrayList<>();
-        opponents.add(new OpponentCar(1.0)); // Opponent 0, speed 1.0
-        opponents.add(new OpponentCar(1.1)); // Opponent 1, speed 1.1
+        opponents.add(new OpponentCar(1.0));
+        opponents.add(new OpponentCar(1.1));
 
         testRace = new Race(Course.DESERT, testRoute, Difficulty.EASY);
         testRace.setOpponents(opponents);
@@ -41,9 +41,8 @@ public class RaceCalculationsTest {
 
     @Test
     void testCalculateEffectiveSpeed() {
-        RouteAttributes attr = testRoute.getAttributes(); // DESERT_DRIFT: SpeedAdv 0.5, HandlingAdv 1.5
-        // testCar: Speed 1.0, Handling 0.8
-        // Expected: (1.0 * 0.5) + (0.8 * 1.5) = 0.5 + 1.2 = 1.7
+        RouteAttributes attr = testRoute.getAttributes();
+
         double expectedSpeed = (testCar.getSpeed() * attr.getSpeedAdvantage()) +
                 (testCar.getHandling() * attr.getHandlingAdvantage());
         assertEquals(expectedSpeed, RaceCalculations.calculateEffectiveSpeed(testCar, testRoute), 0.001);
@@ -51,17 +50,13 @@ public class RaceCalculationsTest {
 
     @Test
     void testCalculateEffectiveSpeedWithUpgrades() {
-        // Car base: Speed 1.0, Handling 0.8
-        // SpeedUpgrade: boost 1.2 => Car effective speed = 1.0 * 1.2 = 1.2
-        // HandlingUpgrade: boost 1.1 => Car effective handling = 0.8 * 1.1 = 0.88
-        TuningPart speedBoost = new TuningPart("SpeedUp", 100, "💨", 1.2); // Stat string "💨" for speed
-        TuningPart handlingBoost = new TuningPart("HandleUp", 100, "🎮", 1.1); // Stat string "🎮" for handling
+        TuningPart speedBoost = new TuningPart("SpeedUp", 100, "💨", 1.2);
+        TuningPart handlingBoost = new TuningPart("HandleUp", 100, "🎮", 1.1);
         testCar.addSpeedUpgrade(speedBoost);
         testCar.addHandlingUpgrade(handlingBoost);
 
-        RouteAttributes attr = testRoute.getAttributes(); // DESERT_DRIFT: SpeedAdv 0.5, HandlingAdv 1.5
-        // Upgraded car stats: Speed 1.2, Handling 0.88
-        // Expected: (1.2 * 0.5) + (0.88 * 1.5) = 0.6 + 1.32 = 1.92
+        RouteAttributes attr = testRoute.getAttributes();
+
         double expectedSpeed = (testCar.getSpeed() * attr.getSpeedAdvantage()) +
                 (testCar.getHandling() * attr.getHandlingAdvantage());
         assertEquals(expectedSpeed, RaceCalculations.calculateEffectiveSpeed(testCar, testRoute), 0.001);
@@ -69,15 +64,12 @@ public class RaceCalculationsTest {
 
     @Test
     void testCalculateFuelConsumptionRate() {
-        // testCar fuelEconomy = 10
         double expectedRate = 1.0 / testCar.getFuelEconomy();
         assertEquals(expectedRate, RaceCalculations.calculateFuelConsumptionRate(testCar), 0.001);
     }
 
     @Test
     void testGetFinishedOpponentsNoneFinished() {
-        // Opponent speeds are 1.0 and 1.1. Route length is 20.
-        // Advancing once will result in distances 1.0 and 1.1, both < 20.
         for (OpponentCar op : opponents) {
             op.advanceTick();
         }
@@ -87,14 +79,12 @@ public class RaceCalculationsTest {
 
     @Test
     void testGetFinishedOpponentsSomeFinished() {
-        // Route.DESERT_DRIFT length is 20.
-        // Opponent 0 has speed 1.0. Need to advance 20 times to finish.
         for (int i = 0; i < 20; i++) {
-            opponents.get(0).advanceTick(); // Opponent 0 distance will be 20.0
+            opponents.get(0).advanceTick();
         }
-        // Opponent 1 has speed 1.1. Advance it less than needed to finish.
+
         for (int i = 0; i < 10; i++) {
-            opponents.get(1).advanceTick(); // Opponent 1 distance will be 11.0
+            opponents.get(1).advanceTick();
         }
 
         List<OpponentCar> finished = RaceCalculations.getFinishedOpponents(testRace);
@@ -105,10 +95,6 @@ public class RaceCalculationsTest {
 
     @Test
     void testGetFinishedOpponentsAllFinished() {
-        // Route.DESERT_DRIFT length is 20.
-        // Opponent 0 (speed 1.0) needs 20 ticks.
-        // Opponent 1 (speed 1.1) needs 20 / 1.1 = ~18.18 ticks, so 19 ticks.
-        // Advance both by 20 ticks to ensure both are finished.
         for (int i = 0; i < 20; i++) {
             for (OpponentCar op : opponents) {
                 op.advanceTick();
@@ -127,10 +113,10 @@ public class RaceCalculationsTest {
 
     @Test
     void testCalculateFuelStopDistancesMultipleStops() {
-        List<Double> stops = RaceCalculations.calculateFuelStopDistances(120, 2); // Intervals of 120/3 = 40
+        List<Double> stops = RaceCalculations.calculateFuelStopDistances(120, 2);
         assertEquals(2, stops.size());
-        assertEquals(40.0, stops.get(0), 0.001); // 1st stop at 40
-        assertEquals(80.0, stops.get(1), 0.001); // 2nd stop at 80
+        assertEquals(40.0, stops.get(0), 0.001);
+        assertEquals(80.0, stops.get(1), 0.001);
     }
 
     @Test
@@ -141,22 +127,21 @@ public class RaceCalculationsTest {
 
     @Test
     void testCalculateEffectiveReliability() {
-        // testCar reliability = 0.9
-        RouteAttributes attr = testRoute.getAttributes(); // DESERT_DRIFT: ReliabilityAdv 1.2
-        // Expected: 0.9 * 1.2 = 1.08
+        RouteAttributes attr = testRoute.getAttributes();
+
         double expectedReliability = testCar.getReliability() * attr.getReliabilityAdvantage();
         assertEquals(expectedReliability, RaceCalculations.calculateEffectiveReliability(testCar, testRoute), 0.001);
     }
 
     @Test
     void testCalculateEventTriggerDistance() {
-        double length = testRoute.getLength(); // DESERT_DRIFT length is 20
-        assertEquals(length * 0.4, RaceCalculations.calculateEventTriggerDistance(length), 0.001); // 20 * 0.4 = 8
+        double length = testRoute.getLength();
+        assertEquals(length * 0.4, RaceCalculations.calculateEventTriggerDistance(length), 0.001);
     }
 
     @Test
     void testCalculateBreakdownTriggerDistance() {
-        double length = testRoute.getLength(); // DESERT_DRIFT length is 20
-        assertEquals(length * 0.7, RaceCalculations.calculateBreakdownTriggerDistance(length), 0.001); // 20 * 0.7 = 14
+        double length = testRoute.getLength();
+        assertEquals(length * 0.7, RaceCalculations.calculateBreakdownTriggerDistance(length), 0.001);
     }
 }

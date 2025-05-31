@@ -2,6 +2,10 @@
 This is a racing game of about 5-15 minutes playtime. Enjoy playing!
 
 
+## Notes
+This was designed to run on Linux so emjois may not render correctly on another OS
+
+
 ## Authors
 - Nathan Moran
 - Jamie Wood

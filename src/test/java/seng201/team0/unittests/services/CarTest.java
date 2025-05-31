@@ -17,14 +17,14 @@ class CarTest {
     void setUp() {
         // Car(String name, double speed, double handling, double reliability, int fuelEconomy, int price)
         car = new Car("Test Car", 0.7, 0.6, 0.8, 25, 2000);
-        speedUpgrade = new TuningPart("Speed Boost", 500, "⚡", 1.2); // Assuming "💨" is for speed
-        handlingUpgrade = new TuningPart("Handling Boost", 400, "🎮", 1.1); // Assuming "🎮" is for handling
+        speedUpgrade = new TuningPart("Speed Boost", 500, "⚡", 1.2);
+        handlingUpgrade = new TuningPart("Handling Boost", 400, "🎮", 1.1);
     }
 
     @Test
     void constructorCopiesCorrectly() {
         Car originalCar = new Car("Original", 0.8, 0.7, 0.9, 30, 3000);
-        // Add upgrades to original to ensure they are not copied to the new car's upgrade slots
+
         originalCar.addSpeedUpgrade(new TuningPart("Temp Speed", 100, "⚡", 1.1));
         originalCar.addHandlingUpgrade(new TuningPart("Temp Handling", 100, "🎮", 1.1));
         originalCar.setCustomName("My Ride");
@@ -33,11 +33,11 @@ class CarTest {
 
         assertEquals(originalCar.getName(), copiedCar.getName());
         assertEquals(originalCar.getPrice(), copiedCar.getPrice());
-        // Access base stats through getters which reflect them before upgrades for the new car
-        assertEquals(0.8, copiedCar.getSpeed(), 0.001); // Base speed of original
-        assertEquals(0.7, copiedCar.getHandling(), 0.001); // Base handling of original
-        assertEquals(0.9, copiedCar.getReliability(), 0.001); // Base reliability of original
-        assertEquals(30, copiedCar.getFuelEconomy(), 0.001); // Base fuel economy of original
+
+        assertEquals(0.8, copiedCar.getSpeed(), 0.001);
+        assertEquals(0.7, copiedCar.getHandling(), 0.001);
+        assertEquals(0.9, copiedCar.getReliability(), 0.001);
+        assertEquals(30, copiedCar.getFuelEconomy(), 0.001);
 
         assertNull(copiedCar.getSpeedUpgrade(), "Copied car should not have speed upgrade initially.");
         assertNull(copiedCar.getHandlingUpgrade(), "Copied car should not have handling upgrade initially.");
@@ -110,7 +110,7 @@ class CarTest {
     void addSpeedUpgradeDoesNotReplaceExisting() {
         TuningPart anotherSpeedUpgrade = new TuningPart("Another Speed", 700, "⚡", 1.3);
         car.addSpeedUpgrade(speedUpgrade);
-        car.addSpeedUpgrade(anotherSpeedUpgrade); // This should not change the upgrade
+        car.addSpeedUpgrade(anotherSpeedUpgrade);
         assertEquals(speedUpgrade, car.getSpeedUpgrade());
     }
 
@@ -125,7 +125,7 @@ class CarTest {
     void addHandlingUpgradeDoesNotReplaceExisting() {
         TuningPart anotherHandlingUpgrade = new TuningPart("Another Handling", 600, "🎮", 1.2);
         car.addHandlingUpgrade(handlingUpgrade);
-        car.addHandlingUpgrade(anotherHandlingUpgrade); // This should not change the upgrade
+        car.addHandlingUpgrade(anotherHandlingUpgrade);
         assertEquals(handlingUpgrade, car.getHandlingUpgrade());
     }
 
@@ -140,7 +140,7 @@ class CarTest {
     @Test
     void removeSpeedUpgradeOnEmptySlot() {
         assertNull(car.getSpeedUpgrade());
-        car.removeSpeedUpgrade(); // Should not throw error
+        car.removeSpeedUpgrade();
         assertNull(car.getSpeedUpgrade());
     }
 
@@ -155,7 +155,7 @@ class CarTest {
     @Test
     void removeHandlingUpgradeOnEmptySlot() {
         assertNull(car.getHandlingUpgrade());
-        car.removeHandlingUpgrade(); // Should not throw error
+        car.removeHandlingUpgrade();
         assertNull(car.getHandlingUpgrade());
     }
 

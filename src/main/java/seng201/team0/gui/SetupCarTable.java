@@ -13,16 +13,6 @@ import seng201.team0.models.Car;
 public class SetupCarTable {
 
     /**
-     * Default constructor for SetupCarTable.
-     * This class is typically instantiated to use its setupCarTable method
-     * for configuring JavaFX TableViews.
-     */
-    public SetupCarTable() {
-        // Default constructor logic, if any, goes here.
-        // For a utility class like this, it might be empty or perform basic initialization.
-    }
-
-    /**
      * Configures the columns of a {@link TableView} to display car properties.
      * Each {@link TableColumn} is associated with a corresponding property name from the {@link Car} class.
      * If a column is null, it is skipped, allowing for flexible table configurations where not all car properties are displayed.

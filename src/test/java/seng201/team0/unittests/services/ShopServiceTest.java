@@ -19,20 +19,18 @@ class ShopServiceTest {
 
     @BeforeEach
     void setUp() {
-        gameEnv = new GameEnvironment(); // Initializes ItemCatalogue, Shop, etc.
-        shopService = gameEnv.getShopService(); // ShopService gets gameEnv
+        gameEnv = new GameEnvironment();
+        shopService = gameEnv.getShopService();
 
-        // Car for buying tests (ensure it's in the shop's lists)
         carToBuy = new Car("Shop Special", 0.7, 0.7, 0.7, 20, 1000);
-        gameEnv.getShopInventory().getCarList().add(carToBuy); // Add to display list
-        gameEnv.getShopInventory().getAllAvailableCars().add(carToBuy); // Add to master available list
+        gameEnv.getShopInventory().getCarList().add(carToBuy);
+        gameEnv.getShopInventory().getAllAvailableCars().add(carToBuy);
 
-        // Part for buying tests
         partToBuy = new TuningPart("Shop Part", 200, "💨", 1.1);
         gameEnv.getShopInventory().getTuningPartList().add(partToBuy);
         gameEnv.getShopInventory().getAllAvailableTuningParts().add(partToBuy);
 
-        gameEnv.setBalance(10000); // Sufficient balance for most tests
+        gameEnv.setBalance(10000);
     }
 
     @Test
@@ -61,7 +59,7 @@ class ShopServiceTest {
 
     @Test
     void chooseStarterCarSufficientFunds() {
-        gameEnv.getStarterCarInventory().setupStarterCarInventory(); // Populates with 3 cars
+        gameEnv.getStarterCarInventory().setupStarterCarInventory();
         assertFalse(gameEnv.getStarterCarInventory().getCarList().isEmpty(), "Starter inventory is empty");
         Car starterCar = gameEnv.getStarterCarInventory().getCarList().get(0);
         int carPrice = starterCar.getPrice();
@@ -77,7 +75,7 @@ class ShopServiceTest {
 
     @Test
     void chooseStarterCarAsAdditionalCar() {
-        gameEnv.getPlayerInventory().setStarterCar(new Car("First Car", 0.1,0.1,0.1,1,100)); // Player already has a car
+        gameEnv.getPlayerInventory().setStarterCar(new Car("First Car", 0.1,0.1,0.1,1,100));
         gameEnv.getStarterCarInventory().setupStarterCarInventory();
         Car secondStarterChoice = gameEnv.getStarterCarInventory().getCarList().get(0);
         int carPrice = secondStarterChoice.getPrice();
@@ -86,8 +84,8 @@ class ShopServiceTest {
 
         shopService.chooseStarterCar(secondStarterChoice);
 
-        assertEquals("First Car", gameEnv.getPlayerInventory().getSelectedCar().getName()); // Selected car unchanged
-        assertEquals(initialPlayerGarageSize + 1, gameEnv.getPlayerInventory().getCarList().size()); // Added to garage
+        assertEquals("First Car", gameEnv.getPlayerInventory().getSelectedCar().getName());
+        assertEquals(initialPlayerGarageSize + 1, gameEnv.getPlayerInventory().getCarList().size());
         assertTrue(gameEnv.getPlayerInventory().getCarList().stream().anyMatch(c -> c.getName().equals(secondStarterChoice.getName())));
         assertEquals(initialBalance - carPrice, gameEnv.getBalance());
     }
@@ -97,11 +95,11 @@ class ShopServiceTest {
     void chooseStarterCarInsufficientFunds() {
         gameEnv.getStarterCarInventory().setupStarterCarInventory();
         Car starterCar = gameEnv.getStarterCarInventory().getCarList().get(0);
-        gameEnv.setBalance(starterCar.getPrice() - 1); // Not enough
+        gameEnv.setBalance(starterCar.getPrice() - 1);
 
         shopService.chooseStarterCar(starterCar);
 
-        assertNull(gameEnv.getPlayerInventory().getSelectedCar()); // Assuming no car was selected before
+        assertNull(gameEnv.getPlayerInventory().getSelectedCar());
         assertEquals(starterCar.getPrice() - 1, gameEnv.getBalance());
         assertTrue(gameEnv.getStarterCarInventory().getCarList().contains(starterCar));
     }
@@ -152,7 +150,7 @@ class ShopServiceTest {
     @Test
     void sellSelectedCar() {
         Car carToSell = new Car("Player's Old Car", 0.6, 0.6, 0.6, 15, 800);
-        gameEnv.getPlayerInventory().addCar(carToSell); // Add to player's garage
+        gameEnv.getPlayerInventory().addCar(carToSell);
         int initialBalance = gameEnv.getBalance();
         int carPrice = carToSell.getPrice();
         int initialShopAllAvailableCount = gameEnv.getShopInventory().getAllAvailableCars().size();
@@ -161,8 +159,6 @@ class ShopServiceTest {
 
         assertFalse(gameEnv.getPlayerInventory().getCarList().contains(carToSell));
         assertEquals(initialBalance + carPrice, gameEnv.getBalance());
-        // Shop's display list (getCarList) is refreshed by setShopInventory which might or might not include it
-        // but it MUST be in getAllAvailableCars.
         assertTrue(gameEnv.getShopInventory().getAllAvailableCars().contains(carToSell));
         assertEquals(initialShopAllAvailableCount + 1, gameEnv.getShopInventory().getAllAvailableCars().size());
     }
@@ -185,24 +181,19 @@ class ShopServiceTest {
 
     @Test
     void unlockNewCarsWhenCourseWon() {
-        // "Dune Drifter" is initially in ItemCatalogue's lockedCarListInternal and
-        // Shop's setupLockedItems maps it to Course.DESERT.
         Car duneDrifter = gameEnv.getItemCatalogue().getLockedCarList().stream()
                 .filter(car -> car.getName().equals("Dune Drifter"))
                 .findFirst().orElse(null);
         assertNotNull(duneDrifter, "Dune Drifter not found in item catalogue's locked list for test setup.");
 
-        // Initially, it shouldn't be in the shop's main display list or all available cars from shop list
         assertFalse(gameEnv.getShopInventory().getCarList().contains(duneDrifter));
         assertFalse(gameEnv.getShopInventory().getAllAvailableCars().contains(duneDrifter));
         assertTrue(gameEnv.getShopInventory().getLockedCarsMap().containsKey(Course.DESERT));
         assertEquals(duneDrifter.getName(), gameEnv.getShopInventory().getLockedCarsMap().get(Course.DESERT).getName());
 
-        gameEnv.updateHasWonCourse(Course.DESERT, 1); // Player wins DESERT course
+        gameEnv.updateHasWonCourse(Course.DESERT, 1);
         shopService.unlockNewCars();
 
-        // After unlocking, it should be added to the shop's main car list (which is part of allAvailableCars)
-        // and removed from the locked map.
         assertTrue(gameEnv.getShopInventory().getCarList().contains(duneDrifter) ||
                         gameEnv.getShopInventory().getAllAvailableCars().contains(duneDrifter),
                 "Unlocked car not found in shop's available cars.");
@@ -216,7 +207,7 @@ class ShopServiceTest {
                 .findFirst().orElse(null);
         assertNotNull(duneDrifter);
 
-        gameEnv.updateHasWonCourse(Course.DESERT, 2); // Player does not win
+        gameEnv.updateHasWonCourse(Course.DESERT, 2);
         shopService.unlockNewCars();
 
         assertFalse(gameEnv.getShopInventory().getCarList().contains(duneDrifter));
@@ -226,10 +217,7 @@ class ShopServiceTest {
 
     @Test
     void unlockNewCarsWithNonExistentCourseInMap() {
-        // Simulate winning a course that has no entry in lockedCarsMap
-        // Use a course not in the default lockedCarsMap setup (e.g. MOUNTAIN if only DESERT/CITY are mapped)
-        // The Shop's setupLockedItems only maps DESERT and CITY by default.
-        Course unmappedCourse = Course.MOUNTAIN; // Assuming MOUNTAIN is not mapped for a car unlock
+        Course unmappedCourse = Course.MOUNTAIN;
         assertNull(gameEnv.getShopInventory().getLockedCarsMap().get(unmappedCourse));
 
 

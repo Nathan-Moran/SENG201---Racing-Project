@@ -23,8 +23,6 @@ public class MainWindow extends Application {
      * as the JavaFX runtime handles the creation of the application instance.
      */
     public MainWindow() {
-        // This is an implicitly generated default constructor.
-        // No custom logic is needed here as it's the application's entry point class.
     }
 
     /**
@@ -48,7 +46,7 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.gameEnvironment = new GameEnvironment();
-        this.sceneNavigator = new SceneNavigator(this.gameEnvironment, primaryStage); // Assumes this constructor exists
+        this.sceneNavigator = new SceneNavigator(this.gameEnvironment, primaryStage);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartingScreen.fxml"));
         loader.setControllerFactory(ignoredControllerClass ->

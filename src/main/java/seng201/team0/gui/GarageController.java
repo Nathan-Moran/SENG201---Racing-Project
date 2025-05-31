@@ -183,7 +183,7 @@ public class GarageController implements Initializable {
             setupCarTable.setupCarTable(
                     carTable,
                     modelColumn,
-                    null, // No price column in garage car table
+                    null,
                     speedColumn,
                     handlingColumn,
                     reliabilityColumn,

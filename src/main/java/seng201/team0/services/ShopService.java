@@ -53,7 +53,7 @@ public class ShopService {
                 Car playerOwnedCar = new Car(selectedCarTemplate);
                 gameEnvironment.getPlayerInventory().addCar(playerOwnedCar);
             }
-            // Deduct cost
+
             gameEnvironment.setBalance(gameEnvironment.getBalance() - selectedCarTemplate.getPrice());
         }
     }

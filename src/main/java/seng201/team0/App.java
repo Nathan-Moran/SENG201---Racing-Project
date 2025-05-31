@@ -9,16 +9,6 @@ import seng201.team0.gui.MainWindow;
  */
 public class App {
 
-    /**
-     * Default constructor for the App class.
-     * This constructor is implicitly provided by Java if no other constructors are defined.
-     * As this is a utility class primarily for launching the application,
-     * direct instantiation is typically not intended.
-     */
-    public App() {
-        // This is an implicitly generated default constructor.
-        // No custom logic is needed here as it's just an entry point class.
-    }
 
     /**
      * Entry point which runs the JavaFX application.

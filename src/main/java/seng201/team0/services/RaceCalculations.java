@@ -37,7 +37,7 @@ public final class RaceCalculations {
         double adjustedSpeed = speed * attr.getSpeedAdvantage();
         double adjustedHandling = handling * attr.getHandlingAdvantage();
 
-        return adjustedSpeed + adjustedHandling; // Simple sum for combined effect
+        return adjustedSpeed + adjustedHandling;
     }
 
     /**
