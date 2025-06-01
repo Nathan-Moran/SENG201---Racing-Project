@@ -3,7 +3,7 @@ This is a racing game of about 5-15 minutes playtime. Enjoy playing!
 
 
 ## Notes
-This was designed to run on Linux so emjois may not render correctly on another OS
+This was designed to run on Linux so emojis may not render correctly on another OS
 
 
 ## Authors
@@ -26,8 +26,6 @@ We have also included a basic setup of the Gradle project and Tasks required for
 - Build plugins:
     - JavaFX Gradle plugin for working with (and packaging) JavaFX applications easily
 
-You are expected to understand the content provided and build your application on top of it. If there is anything you
-would like more information about please reach out to the tutors.
 
 ## Importing Project (Using IntelliJ)
 IntelliJ has built-in support for Gradle. To import your project:
@@ -51,4 +49,4 @@ IntelliJ has built-in support for Gradle. To import your project:
 1. Open a command line interface inside the project directory and run `./gradlew test` to run the tests.
 2. Test results should be printed to the command line
 
-**Note:** *This Jar is **NOT** cross-platform, so you **must** build the jar you submit on Linux.* 
+**Note:** *This Jar is **NOT** cross-platform.
